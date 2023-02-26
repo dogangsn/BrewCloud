@@ -1,0 +1,15 @@
+D:\Private\Project\VetSystems\VetSystems\Services\Account\VetSystems.Account.Domain\bin\Debug\net6.0\VetSystems.Account.Domain.deps.json
+D:\Private\Project\VetSystems\VetSystems\Services\Account\VetSystems.Account.Domain\bin\Debug\net6.0\VetSystems.Account.Domain.dll
+D:\Private\Project\VetSystems\VetSystems\Services\Account\VetSystems.Account.Domain\bin\Debug\net6.0\VetSystems.Account.Domain.pdb
+D:\Private\Project\VetSystems\VetSystems\Services\Account\VetSystems.Account.Domain\bin\Debug\net6.0\VetSystems.Shared.dll
+D:\Private\Project\VetSystems\VetSystems\Services\Account\VetSystems.Account.Domain\bin\Debug\net6.0\VetSystems.Shared.pdb
+D:\Private\Project\VetSystems\VetSystems\Services\Account\VetSystems.Account.Domain\obj\Debug\net6.0\VetSystems.Account.Domain.csproj.AssemblyReference.cache
+D:\Private\Project\VetSystems\VetSystems\Services\Account\VetSystems.Account.Domain\obj\Debug\net6.0\VetSystems.Account.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Private\Project\VetSystems\VetSystems\Services\Account\VetSystems.Account.Domain\obj\Debug\net6.0\VetSystems.Account.Domain.AssemblyInfoInputs.cache
+D:\Private\Project\VetSystems\VetSystems\Services\Account\VetSystems.Account.Domain\obj\Debug\net6.0\VetSystems.Account.Domain.AssemblyInfo.cs
+D:\Private\Project\VetSystems\VetSystems\Services\Account\VetSystems.Account.Domain\obj\Debug\net6.0\VetSystems.Account.Domain.csproj.CoreCompileInputs.cache
+D:\Private\Project\VetSystems\VetSystems\Services\Account\VetSystems.Account.Domain\obj\Debug\net6.0\VetSystems.Account.Domain.csproj.CopyComplete
+D:\Private\Project\VetSystems\VetSystems\Services\Account\VetSystems.Account.Domain\obj\Debug\net6.0\VetSystems.Account.Domain.dll
+D:\Private\Project\VetSystems\VetSystems\Services\Account\VetSystems.Account.Domain\obj\Debug\net6.0\refint\VetSystems.Account.Domain.dll
+D:\Private\Project\VetSystems\VetSystems\Services\Account\VetSystems.Account.Domain\obj\Debug\net6.0\VetSystems.Account.Domain.pdb
+D:\Private\Project\VetSystems\VetSystems\Services\Account\VetSystems.Account.Domain\obj\Debug\net6.0\ref\VetSystems.Account.Domain.dll

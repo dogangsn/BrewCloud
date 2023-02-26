@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/VetSystems/Services/IdentityServer/VetSystems.IdentityServer/appsettings.Local.json
+/VetSystems/Services/Account/VetSystems.Account/appsettings.Local.json
+VetSystems/.vs/VetSystems/v17/.suo
+
+ApiGateways/XProject.Gateway/bin/Debug/
+*.vsidx
+*.vsidx

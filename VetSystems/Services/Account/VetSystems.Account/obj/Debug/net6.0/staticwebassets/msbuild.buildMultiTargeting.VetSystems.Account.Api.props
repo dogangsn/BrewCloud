@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\VetSystems.Account.Api.props" />
+</Project>

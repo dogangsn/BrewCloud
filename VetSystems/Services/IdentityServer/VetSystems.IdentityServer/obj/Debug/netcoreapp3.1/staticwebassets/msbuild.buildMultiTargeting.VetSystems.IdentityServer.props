@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\VetSystems.IdentityServer.props" />
+</Project>

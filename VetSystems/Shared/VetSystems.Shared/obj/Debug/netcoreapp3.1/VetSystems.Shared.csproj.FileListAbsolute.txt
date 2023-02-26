@@ -1,0 +1,10 @@
+D:\Private\Project\VetSystems\VetSystems\Shared\VetSystems.Shared\bin\Debug\netcoreapp3.1\VetSystems.Shared.deps.json
+D:\Private\Project\VetSystems\VetSystems\Shared\VetSystems.Shared\bin\Debug\netcoreapp3.1\VetSystems.Shared.dll
+D:\Private\Project\VetSystems\VetSystems\Shared\VetSystems.Shared\bin\Debug\netcoreapp3.1\VetSystems.Shared.pdb
+D:\Private\Project\VetSystems\VetSystems\Shared\VetSystems.Shared\obj\Debug\netcoreapp3.1\VetSystems.Shared.csproj.AssemblyReference.cache
+D:\Private\Project\VetSystems\VetSystems\Shared\VetSystems.Shared\obj\Debug\netcoreapp3.1\VetSystems.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\Private\Project\VetSystems\VetSystems\Shared\VetSystems.Shared\obj\Debug\netcoreapp3.1\VetSystems.Shared.AssemblyInfoInputs.cache
+D:\Private\Project\VetSystems\VetSystems\Shared\VetSystems.Shared\obj\Debug\netcoreapp3.1\VetSystems.Shared.AssemblyInfo.cs
+D:\Private\Project\VetSystems\VetSystems\Shared\VetSystems.Shared\obj\Debug\netcoreapp3.1\VetSystems.Shared.csproj.CoreCompileInputs.cache
+D:\Private\Project\VetSystems\VetSystems\Shared\VetSystems.Shared\obj\Debug\netcoreapp3.1\VetSystems.Shared.dll
+D:\Private\Project\VetSystems\VetSystems\Shared\VetSystems.Shared\obj\Debug\netcoreapp3.1\VetSystems.Shared.pdb

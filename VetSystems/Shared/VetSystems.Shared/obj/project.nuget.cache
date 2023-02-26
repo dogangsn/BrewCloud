@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "TerFBHEwLsV3xE3DEij7b0alCyGzhUVcqmRRi0zmsfN+AV+/eZdPe924gTsISSpDcnfPEA8iEisHU0HPXCV/bQ==",
+  "success": true,
+  "projectFilePath": "D:\\Private\\Project\\VetSystems\\VetSystems\\Shared\\VetSystems.Shared\\VetSystems.Shared.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dogan\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.0.0\\microsoft.aspnetcore.http.abstractions.2.0.0.nupkg.sha512",
+    "C:\\Users\\dogan\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.0.0\\microsoft.aspnetcore.http.features.2.0.0.nupkg.sha512",
+    "C:\\Users\\dogan\\.nuget\\packages\\microsoft.extensions.primitives\\2.0.0\\microsoft.extensions.primitives.2.0.0.nupkg.sha512",
+    "C:\\Users\\dogan\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.4.0\\system.runtime.compilerservices.unsafe.4.4.0.nupkg.sha512",
+    "C:\\Users\\dogan\\.nuget\\packages\\system.text.encodings.web\\4.4.0\\system.text.encodings.web.4.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}

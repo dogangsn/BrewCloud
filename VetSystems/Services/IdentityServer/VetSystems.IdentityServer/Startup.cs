@@ -3,7 +3,6 @@
 
 
 using IdentityServer4;
-using VetSystems.IdentityServer.Data;
 using VetSystems.IdentityServer.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using VetSystems.IdentityServer.Infrastructure.Extentions;
+using VetSystems.IdentityServer.Infrastructure.Persistence;
 
 namespace VetSystems.IdentityServer
 {
@@ -36,6 +37,8 @@ namespace VetSystems.IdentityServer
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddInfrastructureServices(Configuration);
 
             var builder = services.AddIdentityServer(options =>
             {

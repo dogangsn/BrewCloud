@@ -6,12 +6,12 @@ using System;
 using System.Linq;
 using System.Security.Claims;
 using IdentityModel;
-using VetSystems.IdentityServer.Data;
 using VetSystems.IdentityServer.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using VetSystems.IdentityServer.Infrastructure.Persistence;
 
 namespace VetSystems.IdentityServer
 {

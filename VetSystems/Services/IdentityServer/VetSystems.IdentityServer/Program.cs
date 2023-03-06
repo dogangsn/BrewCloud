@@ -3,9 +3,6 @@
 
 
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,11 +10,7 @@ using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
 using System;
-using System.IO;
 using System.Linq;
-using System.Net;
-using VetSystems.Identity.Infrastructure.Entities;
-using VetSystems.Identity.Infrastructure.Persistence;
 
 namespace VetSystems.IdentityServer
 {
@@ -44,40 +37,22 @@ namespace VetSystems.IdentityServer
 
             try
             {
-
-                var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
-                var builder = new ConfigurationBuilder()
-                               .SetBasePath(Directory.GetCurrentDirectory())
-                               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                               .AddJsonFile($"appsettings.{env}.json", optional: true, reloadOnChange: true)
-                               .AddEnvironmentVariables();
-
-                var config = builder.Build();
-                var host = CreateHostBuilder(config, args).Build();
-                //var host = CreateHostBuilder(args).Build();
-
-                using (var scope = host.Services.CreateScope())
+                var seed = args.Contains("/seed");
+                if (seed)
                 {
-                    //var serviceProvider = scope.ServiceProvider;
-                    //var applicationDbContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
-                    //applicationDbContext.Database.Migrate();
-                    //var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-                    //if (userManager.Users.Any())
-                    //{
-                    //    userManager.CreateAsync(new ApplicationUser { UserName = "Deneme", Email = "deneme@deneme.com" }, "123").Wait();
-                    //}
-                    var serviceProvider = scope.ServiceProvider;
-                    var appDbContext = serviceProvider.GetRequiredService<Identity.Infrastructure.Persistence.ApplicationDbContext>();
-                    appDbContext.Database.Migrate();
-                    var userManager = serviceProvider.GetRequiredService<UserManager<Identity.Infrastructure.Entities.ApplicationUser>>();
-                    if (!userManager.Users.Any())
-                    {
-                        userManager.CreateAsync(new Identity.Infrastructure.Entities.ApplicationUser
-                        {
-                            UserName = "dogangns.98@gmail.com",
-                            Email = "dogangns.98@gmail.com"
-                        }, "123D654!").Wait();
-                    }
+                    args = args.Except(new[] { "/seed" }).ToArray();
+                }
+
+                var host = CreateHostBuilder(args).Build();
+
+                if (seed)
+                {
+                    Log.Information("Seeding database...");
+                    var config = host.Services.GetRequiredService<IConfiguration>();
+                    var connectionString = config.GetConnectionString("DefaultConnection");
+                    SeedData.EnsureSeedData(connectionString);
+                    Log.Information("Done seeding database.");
+                    return 0;
                 }
 
                 Log.Information("Starting host...");
@@ -95,45 +70,12 @@ namespace VetSystems.IdentityServer
             }
         }
 
-        public static IHostBuilder CreateHostBuilder(IConfiguration configuration, string[] args) =>
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                //.UseSerilog(SeriLogger.Configure)
+                .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.ConfigureKestrel(options =>
-                    {
-
-                        //TODO: Enverment a göre etirilecek
-                        var ports = GetDefinedPorts(configuration);
-
-                        options.Listen(IPAddress.Any, ports.httpPort, listenOptions =>
-                        {
-                            listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
-                        });
-                        options.Listen(IPAddress.Any, ports.grpcPort, listenOptions =>
-                        {
-                            listenOptions.Protocols = HttpProtocols.Http2;
-                        });
-                        // options.ListenLocalhost(5000, o => o.Protocols = HttpProtocols.Http2);
-
-                    });
                     webBuilder.UseStartup<Startup>();
                 });
-
-        //public static IHostBuilder CreateHostBuilder(string[] args) =>
-        //        Host.CreateDefaultBuilder(args)
-        //             .UseSerilog()
-        //             .ConfigureWebHostDefaults(webBuilder =>
-        //             {
-        //                 webBuilder.UseStartup<Startup>();
-        //             });
-
-
-        static (int httpPort, int grpcPort) GetDefinedPorts(IConfiguration config)
-        {
-            var grpcPort = config.GetValue("GRPC_PORT", 5009);
-            var port = config.GetValue("PORT", 5011);
-            return (port, grpcPort);
-        }
     }
 }

@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\XProject.IdentityServer.props" />
-</Project>

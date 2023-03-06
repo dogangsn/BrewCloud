@@ -25,12 +25,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Account.Domain",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Account.Infrastructure", "Services\Account\VetSystems.Account.Infrastructure\VetSystems.Account.Infrastructure.csproj", "{F375F701-6C4D-4549-A443-158370DA979E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Identity.Application", "Services\IdentityServer\VetSystems.Identity.Application\VetSystems.Identity.Application.csproj", "{0A76BDEF-68BD-469F-9D6F-0D4320EB8DA9}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Identity.Infrastructure", "Services\IdentityServer\VetSystems.Identity.Infrastructure\VetSystems.Identity.Infrastructure.csproj", "{7CFA0FA8-D44C-40B5-BDE6-F31C3BDA8D6F}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.IdentityServer", "Services\IdentityServer\VetSystems.IdentityServer\VetSystems.IdentityServer.csproj", "{0FD89DD1-3D24-45FC-BCCC-1445C6407E71}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Shared", "Shared\VetSystems.Shared\VetSystems.Shared.csproj", "{C7EA6A1F-4BBB-4940-8883-0C209FA1E612}"
 EndProject
 Global
@@ -59,18 +53,6 @@ Global
 		{F375F701-6C4D-4549-A443-158370DA979E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F375F701-6C4D-4549-A443-158370DA979E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F375F701-6C4D-4549-A443-158370DA979E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0A76BDEF-68BD-469F-9D6F-0D4320EB8DA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A76BDEF-68BD-469F-9D6F-0D4320EB8DA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0A76BDEF-68BD-469F-9D6F-0D4320EB8DA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0A76BDEF-68BD-469F-9D6F-0D4320EB8DA9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7CFA0FA8-D44C-40B5-BDE6-F31C3BDA8D6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7CFA0FA8-D44C-40B5-BDE6-F31C3BDA8D6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7CFA0FA8-D44C-40B5-BDE6-F31C3BDA8D6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7CFA0FA8-D44C-40B5-BDE6-F31C3BDA8D6F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0FD89DD1-3D24-45FC-BCCC-1445C6407E71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0FD89DD1-3D24-45FC-BCCC-1445C6407E71}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0FD89DD1-3D24-45FC-BCCC-1445C6407E71}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0FD89DD1-3D24-45FC-BCCC-1445C6407E71}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C7EA6A1F-4BBB-4940-8883-0C209FA1E612}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C7EA6A1F-4BBB-4940-8883-0C209FA1E612}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7EA6A1F-4BBB-4940-8883-0C209FA1E612}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -87,9 +69,6 @@ Global
 		{5898A4F6-D528-4025-ACC2-9EFAE96ED79A} = {96BF185F-019E-4211-B1E9-65B769395E32}
 		{46D55FE5-13F8-4CBC-A597-509C0217BB31} = {96BF185F-019E-4211-B1E9-65B769395E32}
 		{F375F701-6C4D-4549-A443-158370DA979E} = {96BF185F-019E-4211-B1E9-65B769395E32}
-		{0A76BDEF-68BD-469F-9D6F-0D4320EB8DA9} = {C8C65594-A6F5-4D8C-9A40-B257F5A63230}
-		{7CFA0FA8-D44C-40B5-BDE6-F31C3BDA8D6F} = {C8C65594-A6F5-4D8C-9A40-B257F5A63230}
-		{0FD89DD1-3D24-45FC-BCCC-1445C6407E71} = {C8C65594-A6F5-4D8C-9A40-B257F5A63230}
 		{C7EA6A1F-4BBB-4940-8883-0C209FA1E612} = {091B1E7A-0B62-4B98-9AE9-D21CA348777C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

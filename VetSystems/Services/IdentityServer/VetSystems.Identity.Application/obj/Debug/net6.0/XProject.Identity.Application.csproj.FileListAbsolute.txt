@@ -1,4 +1,0 @@
-D:\Dogan\Project\XProject\Services\IdentityServer\XProject.Identity.Application\obj\Debug\net6.0\XProject.Identity.Application.GeneratedMSBuildEditorConfig.editorconfig
-D:\Dogan\Project\XProject\Services\IdentityServer\XProject.Identity.Application\obj\Debug\net6.0\XProject.Identity.Application.AssemblyInfoInputs.cache
-D:\Dogan\Project\XProject\Services\IdentityServer\XProject.Identity.Application\obj\Debug\net6.0\XProject.Identity.Application.AssemblyInfo.cs
-D:\Dogan\Project\XProject\Services\IdentityServer\XProject.Identity.Application\obj\Debug\net6.0\XProject.Identity.Application.csproj.CoreCompileInputs.cache

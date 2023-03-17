@@ -9,3 +9,4 @@ VetSystems/.vs/VetSystems/v17/.suo
 ApiGateways/XProject.Gateway/bin/Debug/
 *.vsidx
 *.vsidx
+/VetSystems/Services/IdentityServer/VetSystems.IdentityServer/appsettings.Local.json

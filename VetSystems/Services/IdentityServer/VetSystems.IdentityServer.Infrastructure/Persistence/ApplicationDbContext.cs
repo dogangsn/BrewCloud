@@ -15,5 +15,10 @@ namespace VetSystems.IdentityServer.Infrastructure.Persistence
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
+
     }
 }

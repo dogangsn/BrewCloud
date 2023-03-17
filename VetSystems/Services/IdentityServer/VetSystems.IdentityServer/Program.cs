@@ -42,11 +42,6 @@ namespace VetSystems.IdentityServer
 
             try
             {
-                var seed = args.Contains("/seed");
-                if (seed)
-                {
-                    args = args.Except(new[] { "/seed" }).ToArray();
-                }
 
                 var host = CreateHostBuilder(args).Build();
 
@@ -56,9 +51,9 @@ namespace VetSystems.IdentityServer
                     var applicationDbContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
                     applicationDbContext.Database.Migrate();
                     var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-                    if (userManager.Users.Any())
+                    if (!userManager.Users.Any())
                     {
-                        userManager.CreateAsync(new ApplicationUser { UserName = "Deneme", Email = "deneme@deneme.com" }, "123").Wait();
+                        userManager.CreateAsync(new ApplicationUser { UserName = "Deneme", Email = "deneme@deneme.com" }, "123D654Dg!").Wait();
                     }
                 }
 

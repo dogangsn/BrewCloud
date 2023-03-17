@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "RCE6FFcerLyaCUMZcib9GcaN8Ig0qtm2T6H1jf5EwHMbUXBJNk6LMYeBLvi/W1BoHXB4bqBh4QjDZXcBsUHwOQ==",
+  "dgSpecHash": "lyTDkPv8euMq1IuUa8kzN0GWjXNX+e8wFjmNTR74TdpLWzsvyDkASUmLFAvZdlljlNZaIy0ZANWkSpHxsMtGZQ==",
   "success": true,
   "projectFilePath": "D:\\Private\\Project\\VetSystems\\VetSystems\\Services\\IdentityServer\\VetSystems.IdentityServer.Infrastructure\\VetSystems.IdentityServer.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "C:\\Users\\dogan\\.nuget\\packages\\identityserver4.entityframework\\4.0.0\\identityserver4.entityframework.4.0.0.nupkg.sha512",
     "C:\\Users\\dogan\\.nuget\\packages\\identityserver4.entityframework.storage\\4.0.0\\identityserver4.entityframework.storage.4.0.0.nupkg.sha512",
     "C:\\Users\\dogan\\.nuget\\packages\\identityserver4.storage\\4.0.0\\identityserver4.storage.4.0.0.nupkg.sha512",
+    "C:\\Users\\dogan\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\3.1.5\\microsoft.aspnetcore.authentication.google.3.1.5.nupkg.sha512",
     "C:\\Users\\dogan\\.nuget\\packages\\microsoft.aspnetcore.authentication.openidconnect\\3.1.0\\microsoft.aspnetcore.authentication.openidconnect.3.1.0.nupkg.sha512",
     "C:\\Users\\dogan\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.5\\microsoft.aspnetcore.cryptography.internal.3.1.5.nupkg.sha512",
     "C:\\Users\\dogan\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.5\\microsoft.aspnetcore.cryptography.keyderivation.3.1.5.nupkg.sha512",

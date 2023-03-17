@@ -7,5 +7,6 @@ namespace VetSystems.IdentityServer.Infrastructure.Entities
 {
     public class ApplicationUser : IdentityUser
     {
+        public string City { get; set; }
     }
 }

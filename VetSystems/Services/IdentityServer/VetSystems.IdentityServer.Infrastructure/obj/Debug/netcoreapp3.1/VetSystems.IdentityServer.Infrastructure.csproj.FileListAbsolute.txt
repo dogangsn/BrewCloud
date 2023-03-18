@@ -11,3 +11,6 @@ D:\Private\Project\VetSystems\VetSystems\Services\IdentityServer\VetSystems.Iden
 D:\Private\Project\VetSystems\VetSystems\Services\IdentityServer\VetSystems.IdentityServer.Infrastructure\obj\Debug\netcoreapp3.1\VetSystems.IdentityServer.Infrastructure.dll
 D:\Private\Project\VetSystems\VetSystems\Services\IdentityServer\VetSystems.IdentityServer.Infrastructure\obj\Debug\netcoreapp3.1\VetSystems.IdentityServer.Infrastructure.pdb
 D:\Private\Project\VetSystems\VetSystems\Services\IdentityServer\VetSystems.IdentityServer.Infrastructure\obj\Debug\netcoreapp3.1\VetSystems.IdentityServer.Infrastructure.genruntimeconfig.cache
+D:\Private\Project\VetSystems\VetSystems\Services\IdentityServer\VetSystems.IdentityServer.Infrastructure\bin\Debug\netcoreapp3.1\VetSystems.Shared.dll
+D:\Private\Project\VetSystems\VetSystems\Services\IdentityServer\VetSystems.IdentityServer.Infrastructure\bin\Debug\netcoreapp3.1\VetSystems.Shared.pdb
+D:\Private\Project\VetSystems\VetSystems\Services\IdentityServer\VetSystems.IdentityServer.Infrastructure\obj\Debug\netcoreapp3.1\VetSystems.IdentityServer.Infrastructure.csproj.CopyComplete

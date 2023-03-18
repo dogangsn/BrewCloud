@@ -1,4 +1,5 @@
 ﻿using IdentityServer4;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +9,9 @@ using System.Collections.Generic;
 using System.Text;
 using VetSystems.IdentityServer.Infrastructure.Entities;
 using VetSystems.IdentityServer.Infrastructure.Persistence;
+using VetSystems.IdentityServer.Infrastructure.Repositories;
+using VetSystems.IdentityServer.Infrastructure.Services.Interface;
+using VetSystems.IdentityServer.Infrastructure.Services;
 
 namespace VetSystems.IdentityServer.Infrastructure.Extentions
 {
@@ -26,9 +30,17 @@ namespace VetSystems.IdentityServer.Infrastructure.Extentions
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddScoped(typeof(IRepository<>), typeof(RepositoryBase<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
+            services.AddTransient<IAccountService, AccountService>();
 
             var builder = services.AddIdentityServer(options =>
             {
@@ -57,6 +69,13 @@ namespace VetSystems.IdentityServer.Infrastructure.Extentions
                     options.ClientId = "copy client ID from Google here";
                     options.ClientSecret = "copy client secret from Google here";
                 });
+
+            builder.AddDeveloperSigningCredential();
+            builder.AddProfileService<ProfileService>();
+            builder.AddResourceOwnerValidator<PasswordValidatorService>();
+            builder.AddExtensionGrantValidator<GrantValidator>();
+
+            services.AddTransient<IProfileService, AdminProfileService>();
 
             return services;
         }

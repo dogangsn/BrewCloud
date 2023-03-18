@@ -150,6 +150,37 @@ namespace VetSystems.IdentityServer.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("VetSystems.IdentityServer.Infrastructure.Entities.Accounts", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccountType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CompanyId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsLicenceAccount")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("Passive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("Accounts");
+                });
+
             modelBuilder.Entity("VetSystems.IdentityServer.Infrastructure.Entities.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -265,6 +296,15 @@ namespace VetSystems.IdentityServer.Infrastructure.Migrations
                     b.HasOne("VetSystems.IdentityServer.Infrastructure.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VetSystems.IdentityServer.Infrastructure.Entities.Accounts", b =>
+                {
+                    b.HasOne("VetSystems.IdentityServer.Infrastructure.Entities.ApplicationUser", "User")
+                        .WithOne("Account")
+                        .HasForeignKey("VetSystems.IdentityServer.Infrastructure.Entities.Accounts", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

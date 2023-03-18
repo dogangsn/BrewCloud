@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "lyTDkPv8euMq1IuUa8kzN0GWjXNX+e8wFjmNTR74TdpLWzsvyDkASUmLFAvZdlljlNZaIy0ZANWkSpHxsMtGZQ==",
+  "dgSpecHash": "L61aHXe40Z/KQWU4NJsJmdpgTV4o2xM2dMQ/mU4m4a/pqcyqNnEjQdzWE8qAd28Xdy5w1kOBhRBn5N90vYDjbw==",
   "success": true,
   "projectFilePath": "D:\\Private\\Project\\VetSystems\\VetSystems\\Services\\IdentityServer\\VetSystems.IdentityServer.Infrastructure\\VetSystems.IdentityServer.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -15,6 +15,8 @@
     "C:\\Users\\dogan\\.nuget\\packages\\microsoft.aspnetcore.authentication.openidconnect\\3.1.0\\microsoft.aspnetcore.authentication.openidconnect.3.1.0.nupkg.sha512",
     "C:\\Users\\dogan\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.5\\microsoft.aspnetcore.cryptography.internal.3.1.5.nupkg.sha512",
     "C:\\Users\\dogan\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.5\\microsoft.aspnetcore.cryptography.keyderivation.3.1.5.nupkg.sha512",
+    "C:\\Users\\dogan\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.0.0\\microsoft.aspnetcore.http.abstractions.2.0.0.nupkg.sha512",
+    "C:\\Users\\dogan\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.0.0\\microsoft.aspnetcore.http.features.2.0.0.nupkg.sha512",
     "C:\\Users\\dogan\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\3.1.5\\microsoft.aspnetcore.identity.entityframeworkcore.3.1.5.nupkg.sha512",
     "C:\\Users\\dogan\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\dogan\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",

@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using VetSystems.IdentityServer.Infrastructure.Persistence;
 using VetSystems.IdentityServer.Infrastructure.Extentions;
+using VetSystems.IdentityServer.Application.Extentions;
 
 namespace VetSystems.IdentityServer
 {
@@ -40,6 +41,7 @@ namespace VetSystems.IdentityServer
             //    .AddDefaultTokenProviders();
 
             services.AddInfrastructureServices(Configuration);
+            services.AddApplicationServices(Configuration);
 
         }
 

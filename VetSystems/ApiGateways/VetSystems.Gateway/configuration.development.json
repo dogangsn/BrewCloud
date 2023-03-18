@@ -19,10 +19,10 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5011
+          "Port": 5001
         }
       ],
-      "UpstreamPathTemplate": "/services/identity/{everything}",
+      "UpstreamPathTemplate": "/services/identityserver/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
       "UpstreamSchema": "http"
     }

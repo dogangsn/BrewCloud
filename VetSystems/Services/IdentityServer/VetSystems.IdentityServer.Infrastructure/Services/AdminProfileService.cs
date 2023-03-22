@@ -69,14 +69,13 @@ namespace VetSystems.IdentityServer.Infrastructure.Services
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
 
         private List<Claim> CreateClaims(SignupDto account)
         {
-            string sql = "Data Source=admin-sql.clrcwaxozgvw.eu-central-1.rds.amazonaws.com;Initial Catalog=MasterDb;User Id=kodmaster;Password=Xi17p!657hg;Persist Security Info = True";
+            string sql = "Server=DG1;Database=VetAdminIdentityDb;User Id=sa;Password=123654Dg;";
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim("CompanyId", account.CompanyId));
             claims.Add(new Claim("FirstName", account.FirstName));

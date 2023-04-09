@@ -1,0 +1,12 @@
+D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Application\VetSystems.Vet.Application\bin\Debug\net6.0\VetSystems.Vet.Application.deps.json
+D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Application\VetSystems.Vet.Application\bin\Debug\net6.0\VetSystems.Vet.Application.dll
+D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Application\VetSystems.Vet.Application\bin\Debug\net6.0\VetSystems.Vet.Application.pdb
+D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Application\VetSystems.Vet.Application\obj\Debug\net6.0\VetSystems.Vet.Application.csproj.AssemblyReference.cache
+D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Application\VetSystems.Vet.Application\obj\Debug\net6.0\VetSystems.Vet.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Application\VetSystems.Vet.Application\obj\Debug\net6.0\VetSystems.Vet.Application.AssemblyInfoInputs.cache
+D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Application\VetSystems.Vet.Application\obj\Debug\net6.0\VetSystems.Vet.Application.AssemblyInfo.cs
+D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Application\VetSystems.Vet.Application\obj\Debug\net6.0\VetSystems.Vet.Application.csproj.CoreCompileInputs.cache
+D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Application\VetSystems.Vet.Application\obj\Debug\net6.0\VetSystems.Vet.Application.dll
+D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Application\VetSystems.Vet.Application\obj\Debug\net6.0\refint\VetSystems.Vet.Application.dll
+D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Application\VetSystems.Vet.Application\obj\Debug\net6.0\VetSystems.Vet.Application.pdb
+D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Application\VetSystems.Vet.Application\obj\Debug\net6.0\ref\VetSystems.Vet.Application.dll

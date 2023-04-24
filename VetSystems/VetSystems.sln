@@ -35,13 +35,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.IdentityServer.A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Vet", "Vet", "{2AF69030-719C-4701-A5D2-B7434A6481A3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mail", "Mail", "{D1442D09-BB0F-4E70-AD37-A02CBE9FBD35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Vet.Api", "Services\Vet\VetSystems.Vet.Api\VetSystems.Vet.Api\VetSystems.Vet.Api.csproj", "{310C5440-BD5C-4421-BF82-9DF8F5309AF2}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{A9A601EB-8AE6-4E9F-8615-0620F899439F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Vet.Application", "Services\Vet\VetSystems.Vet.Application\VetSystems.Vet.Application\VetSystems.Vet.Application.csproj", "{30B54CFF-1925-413A-BCBB-118DAD165C1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Vet.Api", "Services\Vet\VetSystems.Vet.Api\VetSystems.Vet.Api\VetSystems.Vet.Api.csproj", "{310C5440-BD5C-4421-BF82-9DF8F5309AF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Vet.Domain", "Services\Vet\VetSystems.Vet.Domain\VetSystems.Vet.Domain\VetSystems.Vet.Domain.csproj", "{29CF811D-792E-4AC3-A989-25CE1F7B5A32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Vet.Application", "Services\Vet\VetSystems.Vet.Application\VetSystems.Vet.Application\VetSystems.Vet.Application.csproj", "{30B54CFF-1925-413A-BCBB-118DAD165C1E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Vet.Infrastructure", "Services\Vet\VetSystems.Vet.Infrastructure\VetSystems.Vet.Infrastructure\VetSystems.Vet.Infrastructure.csproj", "{96D03F21-E5BA-4CC5-BF44-4CEC7D305923}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +93,14 @@ Global
 		{30B54CFF-1925-413A-BCBB-118DAD165C1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30B54CFF-1925-413A-BCBB-118DAD165C1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30B54CFF-1925-413A-BCBB-118DAD165C1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29CF811D-792E-4AC3-A989-25CE1F7B5A32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29CF811D-792E-4AC3-A989-25CE1F7B5A32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29CF811D-792E-4AC3-A989-25CE1F7B5A32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29CF811D-792E-4AC3-A989-25CE1F7B5A32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96D03F21-E5BA-4CC5-BF44-4CEC7D305923}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96D03F21-E5BA-4CC5-BF44-4CEC7D305923}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96D03F21-E5BA-4CC5-BF44-4CEC7D305923}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96D03F21-E5BA-4CC5-BF44-4CEC7D305923}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,10 +118,10 @@ Global
 		{BCA06A61-C7BC-4866-AB40-8765ACB823E5} = {C8C65594-A6F5-4D8C-9A40-B257F5A63230}
 		{CF249EC9-CE62-46F5-8603-C4A23424D1E5} = {C8C65594-A6F5-4D8C-9A40-B257F5A63230}
 		{2AF69030-719C-4701-A5D2-B7434A6481A3} = {09508787-B726-4595-AA04-FD652D0B4609}
-		{D1442D09-BB0F-4E70-AD37-A02CBE9FBD35} = {09508787-B726-4595-AA04-FD652D0B4609}
-		{A9A601EB-8AE6-4E9F-8615-0620F899439F} = {09508787-B726-4595-AA04-FD652D0B4609}
 		{310C5440-BD5C-4421-BF82-9DF8F5309AF2} = {2AF69030-719C-4701-A5D2-B7434A6481A3}
 		{30B54CFF-1925-413A-BCBB-118DAD165C1E} = {2AF69030-719C-4701-A5D2-B7434A6481A3}
+		{29CF811D-792E-4AC3-A989-25CE1F7B5A32} = {2AF69030-719C-4701-A5D2-B7434A6481A3}
+		{96D03F21-E5BA-4CC5-BF44-4CEC7D305923} = {2AF69030-719C-4701-A5D2-B7434A6481A3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B7E68C2E-293C-48D7-A15C-6681682A0215}

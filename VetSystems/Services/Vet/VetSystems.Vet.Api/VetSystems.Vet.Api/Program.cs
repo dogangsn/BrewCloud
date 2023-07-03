@@ -1,4 +1,4 @@
-using HealthChecks.UI.Client;
+    using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
@@ -18,7 +18,7 @@ builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
     options.Authority = builder.Configuration["IdentityServerUrl"];
-    options.Audience = "resource_account";
+    options.Audience = "resource_vet";
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateAudience = false
@@ -43,10 +43,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseRouting();
-
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();

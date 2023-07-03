@@ -22,6 +22,13 @@ namespace VetSystems.Gateway
                                .WithMethods("GET", "PUT", "POST", "DELETE")
                                .AllowAnyHeader();
                            }));
+            services.AddCors(options => options.AddPolicy("allowLocal", builder =>
+            {
+                builder.WithOrigins("http://localhost:4200")
+                    //.WithOrigins("https://*.veboni.com").SetIsOriginAllowedToAllowWildcardSubdomains()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            }));
             services.AddOcelot();
         }
         public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)

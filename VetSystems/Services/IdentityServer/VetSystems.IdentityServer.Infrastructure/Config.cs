@@ -14,6 +14,7 @@ namespace VetSystems.IdentityServer.Infrastructure
         public static IEnumerable<ApiResource> ApiResources => new[]
              {
             new ApiResource("resource_account"){Scopes = {"accountapi"}},
+            new ApiResource("resource_vet"){Scopes = {"vetapi"}},
             new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
         };
 
@@ -30,6 +31,7 @@ namespace VetSystems.IdentityServer.Infrastructure
             new ApiScope[]
             {
                 new ApiScope("accountapi","Account Api"),
+                new ApiScope("vetapi","Vet Api"),
                 new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
             };
 
@@ -42,7 +44,7 @@ namespace VetSystems.IdentityServer.Infrastructure
                    ClientId = "ClientAPI",
                    ClientSecrets = { new Secret("secret".Sha256()) },
                    AllowedGrantTypes= GrantTypes.ClientCredentials,
-                   AllowedScopes = { "accountapi" , IdentityServerConstants.LocalApi.ScopeName }
+                   AllowedScopes = { "accountapi", "vetapi", IdentityServerConstants.LocalApi.ScopeName }
                },
                new Client
                {
@@ -52,7 +54,7 @@ namespace VetSystems.IdentityServer.Infrastructure
                    AllowOfflineAccess = true,
                    AlwaysIncludeUserClaimsInIdToken =true,
                    AllowedGrantTypes= GrantTypes.ResourceOwnerPassword,
-                   AllowedScopes = { "accountapi" , IdentityServerConstants.StandardScopes.Email, IdentityServerConstants.StandardScopes.OpenId, IdentityServerConstants.StandardScopes.Profile, IdentityServerConstants.StandardScopes.OfflineAccess, IdentityServerConstants.LocalApi.ScopeName },
+                   AllowedScopes = { "accountapi", "vetapi", IdentityServerConstants.StandardScopes.Email, IdentityServerConstants.StandardScopes.OpenId, IdentityServerConstants.StandardScopes.Profile, IdentityServerConstants.StandardScopes.OfflineAccess, IdentityServerConstants.LocalApi.ScopeName },
                    AccessTokenLifetime=43200,
                    UpdateAccessTokenClaimsOnRefresh=true,
                    RefreshTokenExpiration=TokenExpiration.Absolute,

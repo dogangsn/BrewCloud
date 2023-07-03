@@ -1,6 +1,8 @@
 ﻿
 using AutoMapper;
+using MassTransit;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -18,25 +20,27 @@ namespace VetSystems.IdentityServer.Application.Extentions
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddHttpContextAccessor();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IIdentityRepository, IdentityRepository>();
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
             //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
-            //services.AddMassTransit(config =>
-            //{
-            //    config.UsingRabbitMq((ctx, cfg) =>
-            //    {
-            //        cfg.Host(configuration["EventBusSettings:HostAddress"]);
-            //        //cfg.UseHealthCheck(ctx);
-            //    });
-            //});
+            services.AddMassTransit(config =>
+            {
+                config.UsingRabbitMq((ctx, cfg) =>
+                {
+                    cfg.Host(configuration["EventBusSettings:HostAddress"]);
+                    //cfg.UseHealthCheck(ctx);
+                });
+            });
             services.AddHttpClient("account", c =>
             {
                 c.BaseAddress = new Uri(configuration["ApiGatewayUrl"]);
             });
             services.AddSingleton<IAccountDataService, AccountDataService>();
-            //services.AddMassTransitHostedService();
-            services.AddHealthChecks()
-                .AddSqlServer(configuration.GetConnectionString("DefaultConnection"), "SELECT 1;", null);
+            services.AddMassTransitHostedService();
+            services.AddHealthChecks();
+                //.AddSqlServer(configuration.GetConnectionString("DefaultConnection"), "SELECT 1;", null);
 
 
             return services;

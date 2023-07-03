@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "jbmSQVQZNdKdr9y8ppXkcRyyBhkoLcJiuYe7w8kEFDk=",
+  "Source": "VetSystems.Account.Api",
+  "BasePath": "_content/VetSystems.Account.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

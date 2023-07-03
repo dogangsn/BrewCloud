@@ -1,5 +1,7 @@
-﻿using MediatR;
+﻿using Dapper;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,21 +10,27 @@ using System.Threading.Tasks;
 using VetSystems.Account.Domain.Contracts;
 using VetSystems.Account.Infrastructure.Persistence;
 using VetSystems.Shared.Accounts;
+using VetSystems.Shared.Service;
 
 namespace VetSystems.Account.Infrastructure.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
-        protected VetSystemsDbContext _context;
-        private readonly IMediator _mediator;
+        protected VetSystemsDbContext _dbContext;
 
-        public UnitOfWork(VetSystemsDbContext context, IMediator mediator)
+        private IDbContextTransaction _trans;
+        private string _errorMessage = string.Empty;
+        private readonly IIdentityRepository _identityRepository;
+        private readonly IMediator _mediator;
+        public UnitOfWork(VetSystemsDbContext dbContext, IIdentityRepository identityRepository, IMediator mediator)
         {
-            _context = context;
+            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            _identityRepository = identityRepository;
             _mediator = mediator;
         }
 
-        #region Dispose
+        #region IDisposable Members
+        // Burada IUnitOfWork arayüzüne implemente ettiğimiz IDisposable arayüzünün Dispose Patternini implemente ediyoruz.
         private bool disposed = false;
         protected virtual void Dispose(bool disposing)
         {
@@ -30,7 +38,7 @@ namespace VetSystems.Account.Infrastructure.Repositories
             {
                 if (disposing)
                 {
-                    _context.Dispose();
+                    _dbContext.Dispose();
                 }
             }
 
@@ -41,18 +49,135 @@ namespace VetSystems.Account.Infrastructure.Repositories
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
-
         #endregion
 
-        public async Task MigrateDatabase(Tenant _tenant)
+        public void CreateTransaction()
+        {
+            _trans = _dbContext.Database.BeginTransaction();
+        }
+
+        public void Commit()
+        {
+            _trans.Commit();
+        }
+
+        public void Rollback()
+        {
+            _trans.Rollback();
+            _trans.Dispose();
+        }
+
+        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                // Transaction işlemleri burada ele alınabilir veya Identity Map kurumsal tasarım kalıbı kullanılarak
+                // sadece değişen alanları güncellemeyide sağlayabiliriz.
+                return await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                // Burada DbEntityValidationException hatalarını handle edebiliriz.
+
+                //foreach (var validationErrors in dbEx.EntityValidationErrors)
+                //    foreach (var validationError in validationErrors.ValidationErrors)
+                //        _errorMessage += string.Format("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage) + Environment.NewLine;
+                //throw new Exception(_errorMessage, dbEx);
+
+                throw;
+            }
+        }
+
+        public Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<T> Query<T>(string query, object parameters)
+        {
+
+
+            return _dbContext.SQLQuery<T>(query, parameters).ToList();
+        }
+        public List<T> QuerWithDicy<T>(string query, Dictionary<string, object> parameters)
+        {
+            var param = new DynamicParameters();
+            foreach (var item in parameters)
+            {
+                param.Add(item.Key, item.Value, System.Data.DbType.String);
+
+            }
+            return _dbContext.SQLQuery<T>(query, param).ToList();
+        }
+        public List<T> Query<T>(string query)
+        {
+
+            return _dbContext.SQLQuery<T>(query).ToList();
+        }
+
+        public int Execute(string query, object parameters)
+        {
+            return _dbContext.Execute(query, parameters);
+        }
+
+        public async Task MigrateDatabase(string connectionString)
         {
             var builder = new DbContextOptionsBuilder<VetSystemsDbContext>();
-            builder.UseSqlServer(_tenant.ConnectionString);
-            using (var db = new VetSystemsDbContext(builder.Options, _mediator))
+            builder.UseSqlServer(connectionString);
+            using (var db = new VetSystemsDbContext(builder.Options, null, _identityRepository, _mediator))
             {
+
+
                 await db.Database.MigrateAsync();
             }
+        }
+        public async Task MigrateDatabase(string connectionString, string targetMigrationName, string historyTable)
+        {
+            var builder = new DbContextOptionsBuilder<VetSystemsDbContext>();
+            builder.UseSqlServer(connectionString);
+            using (var db = new VetSystemsDbContext(builder.Options, null, _identityRepository, _mediator, historyTable))
+            {
+                if (string.IsNullOrEmpty(targetMigrationName))
+                {
+                    //db.Database.GetAppliedMigrationsAsync()
+                    await db.Database.MigrateAsync();
+                }
+                else
+                {
+                    await db.MigrateAsync(targetMigrationName);
+                }
+
+            }
+        }
+
+        public async Task MoveMigrationTable(string connectionString, string historyTable)
+        {
+            var builder = new DbContextOptionsBuilder<VetSystemsDbContext>();
+            builder.UseSqlServer(connectionString);
+            using (var db = new VetSystemsDbContext(builder.Options, null, _identityRepository, _mediator, ""))
+            {
+                var migrations = await db.Database.GetAppliedMigrationsAsync();
+                foreach (var migration in migrations)
+                {
+                    string query =
+                        $"insert into \"{historyTable}\" (migrationid,productversion) values(@migrationId,@version)";
+                    db.Execute(query,
+                        new
+                        {
+                            migrationId = migration,
+                            version = "7.0.1"
+                        });
+                }
+            }
+        }
+        public void ChangeDbContext(string connectionString)
+        {
+            _dbContext.Database.SetConnectionString(connectionString);
+
+            // var builder = new DbContextOptionsBuilder<VeboniDbContext>();
+            // builder.UseNpgsql(tenant.DatabaseConnectionString);
+            //
+            // _dbContext = new VeboniDbContext(builder.Options, null,_identityRepository, _mediator);
         }
 
     }

@@ -41,7 +41,7 @@ namespace VetSystems.IdentityServer.Infrastructure.Persistence
             // var connectionString = configuration.GetConnectionString("DefaultConnection");
             var dbContextBuilder = new DbContextOptionsBuilder<PersistedGrantDbContext>();
 
-            dbContextBuilder.UseSqlServer("Server=DG;Database=AdminIdentityDb;User Id=sa;Password=123D654!;", postGresOptions => postGresOptions.MigrationsAssembly(typeof(PersistedGrantDataDesignTimeFactory).GetTypeInfo().Assembly.GetName().Name));
+            dbContextBuilder.UseSqlServer("Server=DG1;Database=VetAdminIdentityDb;User Id=sa;Password=123654Dg;", postGresOptions => postGresOptions.MigrationsAssembly(typeof(PersistedGrantDataDesignTimeFactory).GetTypeInfo().Assembly.GetName().Name));
             // DbContextOptions<ConfigurationDbContext> ops = dbContextBuilder.Options;
 
             // dbContextBuilder.UseSqlServer(connectionString);

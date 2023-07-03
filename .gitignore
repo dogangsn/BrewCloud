@@ -10,3 +10,4 @@ ApiGateways/XProject.Gateway/bin/Debug/
 *.vsidx
 *.vsidx
 /VetSystems/Services/IdentityServer/VetSystems.IdentityServer/appsettings.Local.json
+/VetSystems/Services/Vet/VetSystems.Vet.Api/VetSystems.Vet.Api/appsettings.Local.json

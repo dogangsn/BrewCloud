@@ -8,6 +8,10 @@ using VetSystems.IdentityServer.Infrastructure.Services.Interface;
 using VetSystems.Shared.Accounts;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using VetSystems.IdentityServer.Infrastructure.Entities;
+using System.Security.Principal;
+using VetSystems.Shared.Dtos;
+using VetSystems.IdentityServer.Infrastructure.Models;
 
 namespace VetSystems.IdentityServer.Infrastructure.Services
 {
@@ -22,6 +26,41 @@ namespace VetSystems.IdentityServer.Infrastructure.Services
             _configuration = configuration;
         }
 
+        public Task<Response<bool>> CheckSafeList(string companyId, string address)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response<bool>> CreateAccountDomain(AccountDomainDto model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response<bool>> CreateSafeList(SafeListDto model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response<bool>> DeleteAccounDomain(string recId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response<bool>> DeleteSafeList(string recId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Accounts> GetAccountByEmail(string email)
+        {
+            var result = await _dbContext.Accounts.FirstOrDefaultAsync(r => r.User.Email == email);
+            return result;
+        }
+
+        public Task<Accounts> GetAccountById(string id)
+        {
+            throw new NotImplementedException();
+        }
 
         public async Task<SignupDto> GetAccountByIdForClaims(string id)
         {
@@ -30,17 +69,17 @@ namespace VetSystems.IdentityServer.Infrastructure.Services
                                 select new SignupDto
                                 {
                                     Email = ac.User.Email,
-                                    FirstName = ac.FirstName,
-                                    LastName = ac.LastName,
                                     Id = ac.UserId,
                                     IsLicenceAccount = ac.IsLicenceAccount,
                                     CompanyId = ac.CompanyId,
                                     RoleId = ac.RoleId,
-                                    //TenantId = ac.TenantId,
-                                    //AccountType = ac.AccountType,
-                                    //AuthorizeEnterprise = ac.AuthorizeEnterprise,
-                                    //ConnectionDb = sb.ConnectionString,
+                                    TenantId = ac.TenantId,
+                                    AuthorizeEnterprise = ac.AuthorizeEnterprise,
+                                    FirstName = ac.FirstName,
+                                    LastName = ac.LastName,
                                     //Host = sb.Host ?? "",
+                                    //AccountType = ac.AccountType,
+                                    //ConnectionDb = sb.ConnectionString,
                                     //UseSafeListControl = sb.UseSafeListControl,
                                     //SubscriptionType = sb.SubscriptionType
                                 }).FirstOrDefaultAsync();
@@ -51,6 +90,41 @@ namespace VetSystems.IdentityServer.Infrastructure.Services
             }
 
             return result;
+        }
+
+        public Task<Response<List<AccountDomainDto>>> GetAccountDomains(string companyId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<SignupDto>> GetCompanyUsersAsync(string companyId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response<List<SafeListDto>>> GetSafeList(string companyId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<SignupDto> GetSubscriptionApp(string appKey)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response<bool>> UpdateAccountDomain(AccountDomainDto model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response<bool>> UpdateSafeList(SafeListDto model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Response<bool>> UpdateTenantAsync(string recId, bool useSafeList)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\VetSystems.Vet.Api.props" />
+</Project>

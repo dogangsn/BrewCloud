@@ -19,3 +19,5 @@ D:\Private\Project\VetSystems\VetSystems\Services\Account\VetSystems.Account.Inf
 D:\Private\Project\VetSystems\VetSystems\Services\Account\VetSystems.Account.Infrastructure\obj\Debug\net6.0\VetSystems.Account.Infrastructure.pdb
 D:\Private\Project\VetSystems\VetSystems\Services\Account\VetSystems.Account.Infrastructure\obj\Debug\net6.0\VetSystems.Account.Infrastructure.genruntimeconfig.cache
 D:\Private\Project\VetSystems\VetSystems\Services\Account\VetSystems.Account.Infrastructure\obj\Debug\net6.0\ref\VetSystems.Account.Infrastructure.dll
+D:\Private\Project\VetSystems\VetSystems\Services\Account\VetSystems.Account.Infrastructure\bin\Debug\net6.0\VetSystems.IdentityServer.Infrastructure.dll
+D:\Private\Project\VetSystems\VetSystems\Services\Account\VetSystems.Account.Infrastructure\bin\Debug\net6.0\VetSystems.IdentityServer.Infrastructure.pdb

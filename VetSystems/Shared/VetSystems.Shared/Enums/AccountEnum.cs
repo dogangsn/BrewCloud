@@ -10,11 +10,6 @@ namespace VetSystems.Shared.Enums
     {
     }
 
-    public enum AccountType : int
-    {
-        None = 0,
-        Admin = 1,
-        User = 2,
-    }
+
 
 }

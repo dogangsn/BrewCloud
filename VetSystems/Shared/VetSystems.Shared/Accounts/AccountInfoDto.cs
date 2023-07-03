@@ -29,6 +29,12 @@ namespace VetSystems.Shared.Accounts
         None = 0,
         CompanyAdmin = 1,
         User = 2,
-        Admin = 3
+        Admin = 3,
+        B2BSale = 4,
+        B2BAgency = 5,
+        B2BPerson = 6,
+        B2BOperator = 7,
+        B2BHotel = 8,
+        B2BCustomer = 9
     }
 }

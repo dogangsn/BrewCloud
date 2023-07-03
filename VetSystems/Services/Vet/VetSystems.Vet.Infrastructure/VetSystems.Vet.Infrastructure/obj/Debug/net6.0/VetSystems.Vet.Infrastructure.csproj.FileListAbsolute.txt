@@ -10,3 +10,10 @@ D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Infrastruct
 D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Infrastructure\VetSystems.Vet.Infrastructure\obj\Debug\net6.0\refint\VetSystems.Vet.Infrastructure.dll
 D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Infrastructure\VetSystems.Vet.Infrastructure\obj\Debug\net6.0\VetSystems.Vet.Infrastructure.pdb
 D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Infrastructure\VetSystems.Vet.Infrastructure\obj\Debug\net6.0\ref\VetSystems.Vet.Infrastructure.dll
+D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Infrastructure\VetSystems.Vet.Infrastructure\bin\Debug\net6.0\VetSystems.Vet.Infrastructure.runtimeconfig.json
+D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Infrastructure\VetSystems.Vet.Infrastructure\bin\Debug\net6.0\VetSystems.Shared.dll
+D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Infrastructure\VetSystems.Vet.Infrastructure\bin\Debug\net6.0\VetSystems.Vet.Domain.dll
+D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Infrastructure\VetSystems.Vet.Infrastructure\bin\Debug\net6.0\VetSystems.Shared.pdb
+D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Infrastructure\VetSystems.Vet.Infrastructure\bin\Debug\net6.0\VetSystems.Vet.Domain.pdb
+D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Infrastructure\VetSystems.Vet.Infrastructure\obj\Debug\net6.0\VetSystems.Vet.Infrastructure.csproj.CopyComplete
+D:\Private\Project\VetSystems\VetSystems\Services\Vet\VetSystems.Vet.Infrastructure\VetSystems.Vet.Infrastructure\obj\Debug\net6.0\VetSystems.Vet.Infrastructure.genruntimeconfig.cache

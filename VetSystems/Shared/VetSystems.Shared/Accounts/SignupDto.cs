@@ -8,6 +8,8 @@ namespace VetSystems.Shared.Accounts
 {
     public class SignupDto
     {
+        public string UserId { get; set; }
+        public string UserName { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -24,5 +26,12 @@ namespace VetSystems.Shared.Accounts
         //public SubscriptionType SubscriptionType { get; set; }
         public string CurrencyCode { get; set; }
         public string DefaultLanguage { get; set; }
+        public string ContactEmail { get; set; }
+        public string VknNumber { get; set; }
+        public bool? IsComplate { get; set; }
+        public string AppKey { get; set; }
+        public string UserAppKey { get; set; }
+        public string DashboardPath { get; set; }
+        public string Password { get; set; }
     }
 }

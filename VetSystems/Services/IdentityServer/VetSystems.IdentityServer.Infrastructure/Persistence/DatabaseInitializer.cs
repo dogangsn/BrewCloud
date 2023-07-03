@@ -58,6 +58,19 @@ namespace VetSystems.IdentityServer.Infrastructure.Persistence
                     }
                     context.SaveChanges();
                 }
+                else
+                {
+                    var identityResource = context.IdentityResources.ToList();
+                    var newResource = Config.IdentityResources.Where(r => !identityResource.Any(x => x.Name == r.Name)).ToList();
+                    if (newResource.Any())
+                    {
+                        foreach (var resource in newResource)
+                        {
+                            context.IdentityResources.Add(resource.ToEntity());
+                        }
+                        context.SaveChanges();
+                    }
+                }
 
                 if (!context.ApiResources.Any())
                 {
@@ -66,6 +79,19 @@ namespace VetSystems.IdentityServer.Infrastructure.Persistence
                         context.ApiResources.Add(resource.ToEntity());
                     }
                     context.SaveChanges();
+                }
+                else
+                {
+                    var apiResources = context.ApiResources.ToList();
+                    var newApiResources = Config.ApiResources.Where(r => !apiResources.Any(x => x.Name == r.Name)).ToList();
+                    if (newApiResources.Any())
+                    {
+                        foreach (var resource in newApiResources)
+                        {
+                            context.ApiResources.Add(resource.ToEntity());
+                        }
+                        context.SaveChanges();
+                    }
                 }
             }
         }

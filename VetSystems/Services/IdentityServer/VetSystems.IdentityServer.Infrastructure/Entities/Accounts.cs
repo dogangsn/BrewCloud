@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using VetSystems.Shared.Enums;
+using VetSystems.Shared.Accounts;
 
 namespace VetSystems.IdentityServer.Infrastructure.Entities
 {
@@ -11,6 +12,7 @@ namespace VetSystems.IdentityServer.Infrastructure.Entities
     {
         [Key]
         public string UserId { get; set; }
+        public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public AccountType AccountType { get; set; }
@@ -18,7 +20,15 @@ namespace VetSystems.IdentityServer.Infrastructure.Entities
         public string RoleId { get; set; }
         public bool? Passive { get; set; }
         public bool IsLicenceAccount { get; set; }
-        //public Guid TenantId { get; set; }
+        public Guid TenantId { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public string ModifiedBy { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+        public bool? AuthorizeEnterprise { get; set; }
+        public string ContactEmail { get; set; }
+        public string VknNumber { get; set; }
+        public string AppKey { get; set; }
 
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }

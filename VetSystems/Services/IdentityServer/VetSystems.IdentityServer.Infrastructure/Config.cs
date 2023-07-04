@@ -40,9 +40,10 @@ namespace VetSystems.IdentityServer.Infrastructure
            {
                new Client
                {
-                   ClientName = "XProject",
-                   ClientId = "ClientAPI",
+                   ClientName = "Api Client",
+                   ClientId = "ApiClient",
                    ClientSecrets = { new Secret("secret".Sha256()) },
+                   UpdateAccessTokenClaimsOnRefresh=true,
                    AllowedGrantTypes= GrantTypes.ClientCredentials,
                    AllowedScopes = { "accountapi", "vetapi", IdentityServerConstants.LocalApi.ScopeName }
                },

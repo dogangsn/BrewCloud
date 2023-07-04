@@ -18,8 +18,9 @@ namespace VetSystems.Vet.Api.Controllers
         }
 
         [HttpGet(Name = "CustomersList")]
-        public async Task<IActionResult> CustomersList(CustomersListQuery command)
+        public async Task<IActionResult> CustomersList()
         {
+            var command = new CustomersListQuery();
             var result = await _mediator.Send(command);
             return Ok(result);
         }

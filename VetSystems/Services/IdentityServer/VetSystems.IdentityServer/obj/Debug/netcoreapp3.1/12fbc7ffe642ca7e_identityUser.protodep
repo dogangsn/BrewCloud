@@ -1,2 +1,0 @@
-obj\Debug\netcoreapp3.1\Protos/IdentityUser.cs \
-obj\Debug\netcoreapp3.1\Protos/IdentityUserGrpc.cs: Protos/identityUser.proto

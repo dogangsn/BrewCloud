@@ -34,3 +34,15 @@ VetSystems/Services/Account/VetSystems.Account/bin/Debug/net7.0/VetSystems.Share
 VetSystems/Services/Account/VetSystems.Account/bin/Debug/net7.0/VetSystems.Shared.pdb
 VetSystems/Services/Account/VetSystems.Account/bin/Debug/net7.0/VetSystems.Account.Api.dll
 VetSystems/Services/Account/VetSystems.Account/bin/Debug/net7.0/VetSystems.Account.Api.pdb
+/VetSystems/ApiGateways/VetSystems.Gateway/obj
+/VetSystems/Services/Account/VetSystems.Account/obj
+/VetSystems/Services/Account/VetSystems.Account.Application/obj
+/VetSystems/Services/Account/VetSystems.Account.Infrastructure/obj
+/VetSystems/Services/IdentityServer/VetSystems.IdentityServer/obj
+/VetSystems/Services/IdentityServer/VetSystems.IdentityServer.Application/obj
+/VetSystems/Services/IdentityServer/VetSystems.IdentityServer.Infrastructure/obj
+/VetSystems/Services/Vet/VetSystems.Vet.Api/VetSystems.Vet.Api/obj
+/VetSystems/Services/Vet/VetSystems.Vet.Application/VetSystems.Vet.Application/obj
+/VetSystems/Services/Vet/VetSystems.Vet.Domain/VetSystems.Vet.Domain/obj
+/VetSystems/Services/Vet/VetSystems.Vet.Infrastructure/VetSystems.Vet.Infrastructure/obj
+/VetSystems/Shared/VetSystems.Shared/obj

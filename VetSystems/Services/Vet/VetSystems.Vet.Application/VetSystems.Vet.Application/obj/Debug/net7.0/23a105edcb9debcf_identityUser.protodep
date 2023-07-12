@@ -1,2 +1,0 @@
-obj\Debug\net7.0/IdentityUser.cs \
-obj\Debug\net7.0/IdentityUserGrpc.cs: ../../../IdentityServer/VetSystems.IdentityServer/Protos/identityUser.proto

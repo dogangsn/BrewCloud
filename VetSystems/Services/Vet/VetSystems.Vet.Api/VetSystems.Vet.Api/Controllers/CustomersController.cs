@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VetSystems.Vet.Application.Features.Account.Commands;
+using VetSystems.Vet.Application.Features.Customers.Commands;
 using VetSystems.Vet.Application.Features.Customers.Queries;
 
 namespace VetSystems.Vet.Api.Controllers
@@ -21,6 +22,13 @@ namespace VetSystems.Vet.Api.Controllers
         public async Task<IActionResult> CustomersList()
         {
             var command = new CustomersListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "CreateCustomer")]
+        public async Task<IActionResult> CreateCustomer([FromBody] CreateCustomerCommand command)
+        {
             var result = await _mediator.Send(command);
             return Ok(result);
         }

@@ -11,7 +11,7 @@ namespace VetSystems.Vet.Domain.Entities
     public class Products : BaseEntity, IAggregateRoot
     {
         public string Name { get; set; }
-        public Guid UnitId { get; set; }
+        public Guid? UnitId { get; set; }
         public Guid? CategoryId { get; set; }
         public Guid? ProductTypeId { get; set; }
         public Guid? SupplierId { get; set; }

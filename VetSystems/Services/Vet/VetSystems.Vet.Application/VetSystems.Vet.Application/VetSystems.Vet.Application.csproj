@@ -27,8 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Definition\UnitDefinitions\Commands\" />
+    <Folder Include="Features\Definition\UnitDefinitions\Queries\" />
     <Folder Include="Mappings\" />
-    <Folder Include="Models\" />
     <Folder Include="Protos\" />
   </ItemGroup>
 

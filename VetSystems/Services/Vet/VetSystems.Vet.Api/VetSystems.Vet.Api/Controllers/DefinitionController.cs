@@ -1,7 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using VetSystems.Vet.Application.Features.Customers.Commands;
 using VetSystems.Vet.Application.Features.Customers.Queries;
+using VetSystems.Vet.Application.Features.Definition.ProductCategory.Commands;
+using VetSystems.Vet.Application.Features.Definition.ProductCategory.Queries;
 using VetSystems.Vet.Application.Features.Definition.ProductDescription.Queries;
 
 namespace VetSystems.Vet.Api.Controllers
@@ -24,7 +27,26 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        #region ProductCategory
 
+
+        [HttpGet(Name = "ProductCategoryList")]
+        public async Task<IActionResult> ProductCategoryList()
+        {
+            var command = new ProductCategoryListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "CreateProductCategories")]
+        public async Task<IActionResult> CreateProductCategories([FromBody] CreateProductCategoriesCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+
+        #endregion
 
 
 

@@ -228,12 +228,17 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                     b.ToTable("patients", (string)null);
                 });
 
-            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.Products", b =>
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.ProductCategories", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("id");
+
+                    b.Property<string>("CategoryCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("categorycode");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2")
@@ -247,6 +252,98 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("name");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("updatedate");
+
+                    b.HasKey("Id")
+                        .HasName("ProductCategories_pkey");
+
+                    b.ToTable("productcategories", (string)null);
+                });
+
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.Products", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("id");
+
+                    b.Property<bool?>("Active")
+                        .HasColumnType("bit")
+                        .HasColumnName("active");
+
+                    b.Property<bool?>("BuyingIncludeKDV")
+                        .HasColumnType("bit")
+                        .HasColumnName("buyingincludekdv");
+
+                    b.Property<decimal>("BuyingPrice")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("buyingprice");
+
+                    b.Property<Guid?>("CategoryId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("categoryid");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("createdate");
+
+                    b.Property<decimal>("CriticalAmount")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("criticalamount");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("deleted");
+
+                    b.Property<bool?>("FixPrice")
+                        .HasColumnType("bit")
+                        .HasColumnName("fixprice");
+
+                    b.Property<bool?>("IsExpirationDate")
+                        .HasColumnType("bit")
+                        .HasColumnName("isexpirationdate");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("name");
+
+                    b.Property<string>("ProductBarcode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("productbarcode");
+
+                    b.Property<string>("ProductCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("productcode");
+
+                    b.Property<Guid?>("ProductTypeId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("producttypeid");
+
+                    b.Property<decimal>("Ratio")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("ratio");
+
+                    b.Property<bool?>("SellingIncludeKDV")
+                        .HasColumnType("bit")
+                        .HasColumnName("sellingincludekdv");
+
+                    b.Property<decimal>("SellingPrice")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("sellingprice");
+
+                    b.Property<Guid?>("SupplierId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("supplierid");
+
+                    b.Property<Guid?>("UnitId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("unitid");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2")

@@ -12,58 +12,53 @@ using VetSystems.Vet.Application.Features.Customers.Commands;
 using VetSystems.Vet.Domain.Contracts;
 using VetSystems.Vet.Domain.Entities;
 
-namespace VetSystems.Vet.Application.Features.Definition.ProductCategory.Commands
+namespace VetSystems.Vet.Application.Features.Definition.UnitDefinitions.Commands
 {
-    public class CreateProductCategoriesCommand : IRequest<Response<bool>>
+    public class CreateUnitsCommand : IRequest<Response<bool>>
     {
-        public string Name { get; set; } = string.Empty;
-
-        public string CategoryCode { get; set; } = string.Empty;
+        public string UnitCode { get; set; } = string.Empty;
+        public string UnitName { get; set; } = string.Empty;
     }
 
-    public class CreateProductCategoriesCommandHandler : IRequestHandler<CreateProductCategoriesCommand, Response<bool>>
+    public class CreateUnitsCommandHandler : IRequestHandler<CreateUnitsCommand, Response<bool>>
     {
         private readonly IUnitOfWork _uow;
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
         private readonly ILogger<CreateCustomerHandler> _logger;
-        private readonly IRepository<Vet.Domain.Entities.ProductCategories> _productcategoryRepository;
+        private readonly IRepository<Vet.Domain.Entities.Units> _unitsRepositoryy;
 
-        public CreateProductCategoriesCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<Domain.Entities.ProductCategories> productcategoryRepository)
+        public CreateUnitsCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<Domain.Entities.Units> unitsRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _productcategoryRepository = productcategoryRepository ?? throw new ArgumentNullException(nameof(productcategoryRepository));
+            _unitsRepositoryy = unitsRepository ?? throw new ArgumentNullException(nameof(unitsRepository));
         }
-
-        public async Task<Response<bool>> Handle(CreateProductCategoriesCommand request, CancellationToken cancellationToken)
+        public async Task<Response<bool>> Handle(CreateUnitsCommand request, CancellationToken cancellationToken)
         {
             var response = new Response<bool>
             {
                 ResponseType = ResponseType.Ok,
-                Data = true,
-                IsSuccessful = true
+                IsSuccessful = true,
             };
             try
             {
-                Vet.Domain.Entities.ProductCategories productCategory = new()
+                Units units = new()
                 {
                     Id = Guid.NewGuid(),
-                    Name = request.Name,
-                    CategoryCode = request.CategoryCode,
-                    CreateDate = DateTime.Now,
+                    UnitCode = request.UnitCode,
+                    UnitName = request.UnitName,
+                    CreateDate = DateTime.Now
                 };
-                await _productcategoryRepository.AddAsync(productCategory);
+                await _unitsRepositoryy.AddAsync(units);
                 await _uow.SaveChangesAsync(cancellationToken);
             }
             catch (Exception ex)
             {
             }
-
             return response;
-
         }
     }
 }

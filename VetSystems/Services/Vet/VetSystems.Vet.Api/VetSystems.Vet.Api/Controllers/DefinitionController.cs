@@ -6,6 +6,8 @@ using VetSystems.Vet.Application.Features.Customers.Queries;
 using VetSystems.Vet.Application.Features.Definition.ProductCategory.Commands;
 using VetSystems.Vet.Application.Features.Definition.ProductCategory.Queries;
 using VetSystems.Vet.Application.Features.Definition.ProductDescription.Queries;
+using VetSystems.Vet.Application.Features.Definition.UnitDefinitions.Commands;
+using VetSystems.Vet.Application.Features.Definition.UnitDefinitions.Queries;
 
 namespace VetSystems.Vet.Api.Controllers
 {
@@ -48,7 +50,23 @@ namespace VetSystems.Vet.Api.Controllers
 
         #endregion
 
+        #region UnitDefinitions
 
+        [HttpGet(Name = "UnitsList")]
+        public async Task<IActionResult> UnitsList()
+        {
+            var command = new UnitsListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+        [HttpPost(Name = "CreateUnits")]
+        public async Task<IActionResult> CreateUnits([FromBody] CreateUnitsCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        #endregion
 
     }
 }

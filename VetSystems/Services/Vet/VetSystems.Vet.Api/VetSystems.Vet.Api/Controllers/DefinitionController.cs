@@ -31,7 +31,6 @@ namespace VetSystems.Vet.Api.Controllers
 
         #region ProductCategory
 
-
         [HttpGet(Name = "ProductCategoryList")]
         public async Task<IActionResult> ProductCategoryList()
         {
@@ -46,6 +45,21 @@ namespace VetSystems.Vet.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
+        [HttpPost(Name = "UpdateProductCategories")]
+        public async Task<IActionResult> UpdateProductCategories([FromBody] UpdateProductCategoriesCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "DeleteProductCategories")]
+        public async Task<IActionResult> DeleteProductCategories([FromBody] DeleteProductCategoriesCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
 
 
         #endregion

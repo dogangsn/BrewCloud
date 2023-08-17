@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VetSystems.Vet.Application.Features.Customers.Commands;
 using VetSystems.Vet.Application.Features.Customers.Queries;
+using VetSystems.Vet.Application.Features.Definition.CustomerGroup.Commands;
+using VetSystems.Vet.Application.Features.Definition.CustomerGroup.Queries;
 using VetSystems.Vet.Application.Features.Definition.ProductCategory.Commands;
 using VetSystems.Vet.Application.Features.Definition.ProductCategory.Queries;
 using VetSystems.Vet.Application.Features.Definition.ProductDescription.Queries;
@@ -79,6 +81,27 @@ namespace VetSystems.Vet.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
+        #endregion
+
+        #region CustomerGroupDef
+
+        [HttpGet(Name = "CustomerGroupList")]
+        public async Task<IActionResult> CustomerGroupList()
+        {
+            var command = new CustomerGroupListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "CreateCustomerGroupDef")]
+        public async Task<IActionResult> CreateCustomerGroupDef([FromBody] CreateCustomerGroupDefCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+
 
         #endregion
 

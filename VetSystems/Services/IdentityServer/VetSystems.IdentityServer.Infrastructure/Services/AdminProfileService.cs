@@ -75,7 +75,7 @@ namespace VetSystems.IdentityServer.Infrastructure.Services
 
         private List<Claim> CreateClaims(SignupDto account)
         {
-            string sql = "Server=DG1;Database=VetAdminIdentityDb;User Id=sa;Password=123654Dg;";
+            string sql = "Server=DENIZCANCASPER;Database=VetAdminIdentityDb;User Id=sa;Password=Deniz.07;";
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim("CompanyId", account.CompanyId));
             claims.Add(new Claim("FirstName", account.FirstName));

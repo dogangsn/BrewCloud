@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VetSystems.Vet.Infrastructure.Persistence;
 
@@ -11,9 +12,10 @@ using VetSystems.Vet.Infrastructure.Persistence;
 namespace VetSystems.Vet.Infrastructure.Migrations
 {
     [DbContext(typeof(VetDbContext))]
-    partial class VetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230818084142_updatedata_11")]
+    partial class updatedata_11
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -613,69 +615,6 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasName("Stores_pkey");
 
                     b.ToTable("stores", (string)null);
-                });
-
-            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.Suppliers", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("id");
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit")
-                        .HasColumnName("active");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("createdate");
-
-                    b.Property<string>("CreateUsers")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("createusers");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasColumnName("deleted");
-
-                    b.Property<DateTime>("DeletedDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("deleteddate");
-
-                    b.Property<string>("DeletedUsers")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("deletedusers");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("email");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("phone");
-
-                    b.Property<string>("SupplierName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("suppliername");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("updatedate");
-
-                    b.Property<string>("UpdateUsers")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("updateusers");
-
-                    b.HasKey("Id")
-                        .HasName("Suppliers_pkey");
-
-                    b.ToTable("suppliers", (string)null);
                 });
 
             modelBuilder.Entity("VetSystems.Vet.Domain.Entities.Units", b =>

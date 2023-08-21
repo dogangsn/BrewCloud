@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VetSystems.Vet.Application.Features.Customers.Commands;
 using VetSystems.Vet.Application.Features.Customers.Queries;
+using VetSystems.Vet.Application.Features.Definition.CasingDefinition.Commands;
+using VetSystems.Vet.Application.Features.Definition.CasingDefinition.Queries;
 using VetSystems.Vet.Application.Features.Definition.CustomerGroup.Commands;
 using VetSystems.Vet.Application.Features.Definition.CustomerGroup.Queries;
 using VetSystems.Vet.Application.Features.Definition.ProductCategory.Commands;
@@ -104,6 +106,39 @@ namespace VetSystems.Vet.Api.Controllers
 
 
         #endregion
+        #region CasingDefinitions
 
+        [HttpGet(Name = "CasingDefinitionList")]
+        public async Task<IActionResult> CasingDefinitionList()
+        {
+            var command = new CasingDefinitionListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "CreateCasingDefinition")]
+        public async Task<IActionResult> CreateCasingDefinition([FromBody] CreateCasingDefinitionCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "UpdateCasingDefinition")]
+        public async Task<IActionResult> UpdateCasingDefinition([FromBody] UpdateCasingDefinitionCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "DeleteCasingDefinition")]
+        public async Task<IActionResult> DeleteCasingDefinition([FromBody] DeleteCasingDefinitionCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+
+
+        #endregion
     }
 }

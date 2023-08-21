@@ -56,7 +56,7 @@ namespace VetSystems.Vet.Application.Features.Store.Commands
 
                 stores.Deleted = true;
                 stores.DeletedDate = DateTime.Now;
-                stores.DeletedUsers = _identityRepository.Account.Email;
+                stores.DeletedUsers = _identityRepository.Account.UserName;
 
                 await _uow.SaveChangesAsync(cancellationToken);
             }

@@ -59,6 +59,7 @@ namespace VetSystems.Vet.Application.Features.Store.Commands
                 stores.DepotName = request.DepotName;
                 stores.DepotCode = request.DepotCode;
                 stores.UpdateDate = DateTime.Now;
+                stores.UpdateUsers = _identity.Account.UserName;
                 await _uow.SaveChangesAsync(cancellationToken);
             }
             catch (Exception ex)

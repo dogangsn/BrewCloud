@@ -8,16 +8,28 @@ using System.Text;
 using System.Threading.Tasks;
 using VetSystems.Shared.Dtos;
 using VetSystems.Shared.Service;
+<<<<<<< Updated upstream
+=======
+using VetSystems.Vet.Application.Features.Customers.Commands;
+>>>>>>> Stashed changes
 using VetSystems.Vet.Domain.Contracts;
 
 namespace VetSystems.Vet.Application.Features.Definition.CasingDefinition.Commands
 {
+<<<<<<< Updated upstream
 
     public class CreateCasingDefinitionCommand : IRequest<Response<bool>>
     {
         public string CaseName { get; set; } = string.Empty;
 
         public bool Active { get; set; }
+=======
+    public class CreateCasingDefinitionCommand : IRequest<Response<bool>>
+    {
+        public Guid Id { get; set; }
+        public string Kasa { get; set; }
+        public bool? Durumu { get; set; }
+>>>>>>> Stashed changes
     }
 
     public class CreateCasingDefinitionCommandHandler : IRequestHandler<CreateCasingDefinitionCommand, Response<bool>>
@@ -50,8 +62,13 @@ namespace VetSystems.Vet.Application.Features.Definition.CasingDefinition.Comman
                 Vet.Domain.Entities.CasingDefinition casingDefinition = new()
                 {
                     Id = Guid.NewGuid(),
+<<<<<<< Updated upstream
                     CaseName = request.CaseName,
                     Active = request.Active,
+=======
+                    Kasa = request.Kasa,
+                    Durumu = request.Durumu,
+>>>>>>> Stashed changes
                     CreateDate = DateTime.Now,
                 };
                 await _casingdefinitionRepository.AddAsync(casingDefinition);
@@ -59,7 +76,10 @@ namespace VetSystems.Vet.Application.Features.Definition.CasingDefinition.Comman
             }
             catch (Exception ex)
             {
+<<<<<<< Updated upstream
                 response.IsSuccessful = false;
+=======
+>>>>>>> Stashed changes
             }
 
             return response;

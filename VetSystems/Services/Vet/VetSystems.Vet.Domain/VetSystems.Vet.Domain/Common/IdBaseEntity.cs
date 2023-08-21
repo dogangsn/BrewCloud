@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VetSystems.Vet.Application.Features.Customers.Queries
+namespace VetSystems.Vet.Domain.Common
 {
-    public class AnimalBreedsDefListQuery 
+    public class IdBaseEntity
     {
-
+        public int Id { get; set; }
     }
 }

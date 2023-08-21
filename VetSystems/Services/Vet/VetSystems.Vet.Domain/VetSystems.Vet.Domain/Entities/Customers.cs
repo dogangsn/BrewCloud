@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,10 @@ namespace VetSystems.Vet.Domain.Entities
 {
     public class Customers : BaseEntity, IAggregateRoot
     {
+        public Customers()
+        {
+            Patients = new HashSet<Patients>();
+        }
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
@@ -22,7 +27,7 @@ namespace VetSystems.Vet.Domain.Entities
         public bool? IsEmail { get; set; } = true;
         public bool? IsPhone { get; set; } = true;
         public Adress Adress { get; set; }
-        public virtual List<Patients> Patients { get; set; }
+        public virtual ICollection<Patients> Patients { get; set; }
 
     }
 }

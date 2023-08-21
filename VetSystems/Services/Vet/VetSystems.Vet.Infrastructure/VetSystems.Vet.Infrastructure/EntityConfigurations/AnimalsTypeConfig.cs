@@ -16,6 +16,9 @@ namespace VetSystems.Vet.Infrastructure.EntityConfigurations
             entity.HasKey(e => e.Id)
                     .HasName("AnimalsType_pkey");
 
+            entity.Property(e => e.Id)
+                    .HasColumnName("Id")
+                    .UseIdentityColumn();
 
         }
     }

@@ -7,6 +7,7 @@ using VetSystems.Vet.Application.Features.Definition.CustomerGroup.Commands;
 using VetSystems.Vet.Application.Features.Definition.CustomerGroup.Queries;
 using VetSystems.Vet.Application.Features.Definition.ProductCategory.Commands;
 using VetSystems.Vet.Application.Features.Definition.ProductCategory.Queries;
+using VetSystems.Vet.Application.Features.Definition.ProductDescription.Commands;
 using VetSystems.Vet.Application.Features.Definition.ProductDescription.Queries;
 using VetSystems.Vet.Application.Features.Definition.UnitDefinitions.Commands;
 using VetSystems.Vet.Application.Features.Definition.UnitDefinitions.Queries;
@@ -23,6 +24,8 @@ namespace VetSystems.Vet.Api.Controllers
             _mediator = mediator;
         }
 
+        #region ProductDescription
+
         [HttpGet(Name = "ProductDescriptionList")]
         public async Task<IActionResult> ProductDescriptionList()
         {
@@ -30,6 +33,32 @@ namespace VetSystems.Vet.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
+        [HttpPost(Name = "CreateProductDescription")]
+        public async Task<IActionResult> CreateProductDescription([FromBody] CreateProductDescriptionCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "UpdateProductDescription")]
+        public async Task<IActionResult> UpdateProductDescription([FromBody] UpdateProductDescriptionCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "DeleteProductDescription")]
+        public async Task<IActionResult> DeleteProductDescription([FromBody] DeleteProductDescriptionCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        #endregion
+
+
+
 
         #region ProductCategory
 

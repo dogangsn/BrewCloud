@@ -1,0 +1,20 @@
+﻿/*Hayvan tipleri*/
+ALTER TABLE   IF EXISTS   ONLY   AnimalsType    
+ALTER   COLUMN   Id DROP IDENTITY  IF EXISTS;
+	
+	
+INSERT INTO AnimalsType (Id,Name, Description) VALUES
+( 1,'Köpek', 'Evcil köpeklerin çeşitli ırkları.'),
+( 2,'Kedi', 'Ev kedilerinin farklı türleri.'),
+( 3,'At', 'Farklı amaçlar için kullanılan at türleri.'),
+( 4,'Küçük Kemirgenler', 'Hamster, sıçan gibi küçük kemirgenler.'),
+( 5,'Kanatlılar', 'Tavuk, ördek gibi kümes hayvanları.'),
+( 6,'Sığır', 'İnek, düve gibi tarım amaçlı hayvanlar.'),
+( 7,'Koyun ve Keçi', 'Yün ve et üretimi amaçlı hayvanlar.'),
+( 8,'Sürüngen', 'Kertenkele, yılan gibi sürüngenler.'),
+( 9,'Balık', 'Süs balıkları ve akvaryum balıkları.'),
+( 10,'Tavşan', 'Evcil tavşan türleri.');
+ 
+	
+ALTER TABLE   IF EXISTS   ONLY   AnimalsType 
+ALTER   COLUMN  Id ADD GENERATED  ALWAYS  AS IDENTITY (INCREMENT 1 START 8 MINVALUE 0 MAXVALUE 2147483647 CACHE 1 );

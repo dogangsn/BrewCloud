@@ -12,21 +12,11 @@ using VetSystems.Vet.Domain.Contracts;
 
 namespace VetSystems.Vet.Application.Features.Definition.CasingDefinition.Commands
 {
-<<<<<<< Updated upstream
     public class UpdateCasingDefinitionCommand : IRequest<Response<bool>>
     {
         public Guid Id { get; set; }
         public string CaseName { get; set; } = string.Empty;
-
         public bool Durumu { get; set; }
-=======
-
-    public class UpdateCasingDefinitionCommand : IRequest<Response<bool>>
-    {
-        public Guid Id { get; set; }
-        public string Kasa { get; set; }
-        public bool? Durumu { get; set; }
->>>>>>> Stashed changes
     }
 
     public class UpdateCasingDefinitionCommandHandler : IRequestHandler<UpdateCasingDefinitionCommand, Response<bool>>
@@ -47,11 +37,7 @@ namespace VetSystems.Vet.Application.Features.Definition.CasingDefinition.Comman
         }
 
         public async Task<Response<bool>> Handle(UpdateCasingDefinitionCommand request, CancellationToken cancellationToken)
-<<<<<<< Updated upstream
-         {
-=======
         {
->>>>>>> Stashed changes
             var response = new Response<bool>
             {
                 ResponseType = ResponseType.Ok,
@@ -60,27 +46,16 @@ namespace VetSystems.Vet.Application.Features.Definition.CasingDefinition.Comman
             };
             try
             {
-<<<<<<< Updated upstream
                 var casingDefinitions = await _casingdefinitionRepository.GetByIdAsync(request.Id);
                 if (casingDefinitions == null)
-=======
-                var casingDefinition = await _casingdefinitionRepository.GetByIdAsync(request.Id);
-                if (casingDefinition == null)
->>>>>>> Stashed changes
                 {
                     _logger.LogWarning($"Casing update failed. Id number: {request.Id}");
                     return Response<bool>.Fail("Property update failed", 404);
                 }
 
-<<<<<<< Updated upstream
                 casingDefinitions.CaseName = request.CaseName;
                 casingDefinitions.Active = request.Durumu;
                 casingDefinitions.UpdateDate = DateTime.Now;
-=======
-                casingDefinition.Kasa = request.Kasa;
-                casingDefinition.Durumu = request.Durumu;
-                casingDefinition.UpdateDate = DateTime.Now;
->>>>>>> Stashed changes
                 await _uow.SaveChangesAsync(cancellationToken);
             }
             catch (Exception ex)

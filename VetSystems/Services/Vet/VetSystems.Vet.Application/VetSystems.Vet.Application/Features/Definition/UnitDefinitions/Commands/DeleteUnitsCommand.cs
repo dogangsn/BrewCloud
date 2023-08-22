@@ -10,33 +10,33 @@ using VetSystems.Shared.Dtos;
 using VetSystems.Shared.Service;
 using VetSystems.Vet.Domain.Contracts;
 
-namespace VetSystems.Vet.Application.Features.Definition.CasingDefinition.Commands
+namespace VetSystems.Vet.Application.Features.Definition.UnitDefinitions.Commands
 {
-    public class DeleteCasingDefinitionCommand : IRequest<Response<bool>>
+    public class DeleteUnitsCommand : IRequest<Response<bool>>
     {
         public Guid Id { get; set; }
     }
 
-    public class DeleteCasingDefinitionCommandHandler : IRequestHandler<DeleteCasingDefinitionCommand, Response<bool>>
+    public class DeleteUnitsCommandHandler : IRequestHandler<DeleteUnitsCommand, Response<bool>>
     {
         private readonly IUnitOfWork _uow;
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
-        private readonly ILogger<DeleteCasingDefinitionCommandHandler> _logger;
-        private readonly IRepository<Vet.Domain.Entities.CasingDefinition> _casingdefinitionRepository;
+        private readonly ILogger<DeleteUnitsCommandHandler> _logger;
+        private readonly IRepository<Vet.Domain.Entities.Units> _unitsRepository;
         private readonly IIdentityRepository _identityRepository;
 
-        public DeleteCasingDefinitionCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<DeleteCasingDefinitionCommandHandler> logger, IRepository<Domain.Entities.CasingDefinition> casingdefinitionRepository, IIdentityRepository identityRepository)
+        public DeleteUnitsCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<DeleteUnitsCommandHandler> logger, IRepository<Domain.Entities.Units> unitsRepository, IIdentityRepository identityRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _casingdefinitionRepository = casingdefinitionRepository ?? throw new ArgumentNullException(nameof(casingdefinitionRepository));
+            _unitsRepository = unitsRepository ?? throw new ArgumentNullException(nameof(unitsRepository));
             _identityRepository = identityRepository ?? throw new ArgumentNullException(nameof(identityRepository));
         }
 
-        public async Task<Response<bool>> Handle(DeleteCasingDefinitionCommand request, CancellationToken cancellationToken)
+        public async Task<Response<bool>> Handle(DeleteUnitsCommand request, CancellationToken cancellationToken)
         {
             var response = new Response<bool>
             {
@@ -46,16 +46,17 @@ namespace VetSystems.Vet.Application.Features.Definition.CasingDefinition.Comman
             };
             try
             {
-                var casingdefinition = await _casingdefinitionRepository.GetByIdAsync(request.Id);
-                if (casingdefinition == null)
+                var units = await _unitsRepository.GetByIdAsync(request.Id);
+                if (units == null)
                 {
-                    _logger.LogWarning($"Casing update failed. Id number: {request.Id}");
+                    _logger.LogWarning($"Untis update failed. Id number: {request.Id}");
                     return Response<bool>.Fail("Property update failed", 404);
                 }
 
-                casingdefinition.Deleted = true;
-                casingdefinition.DeletedDate = DateTime.Now;
-                casingdefinition.DeletedUsers = _identityRepository.Account.UserName;
+                units.Deleted = true;
+                units.DeletedDate = DateTime.Now;
+                units.DeletedUsers = _identityRepository.Account.UserName;
+
                 await _uow.SaveChangesAsync(cancellationToken);
             }
             catch (Exception ex)
@@ -63,7 +64,6 @@ namespace VetSystems.Vet.Application.Features.Definition.CasingDefinition.Comman
             }
 
             return response;
-
         }
     }
 }

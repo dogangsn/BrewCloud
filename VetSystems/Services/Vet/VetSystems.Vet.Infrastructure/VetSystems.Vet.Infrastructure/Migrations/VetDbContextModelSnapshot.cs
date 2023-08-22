@@ -86,6 +86,75 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                     b.ToTable("adress", (string)null);
                 });
 
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.AnimalBreedsDef", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AnimalType")
+                        .HasColumnType("int")
+                        .HasColumnName("animaltype");
+
+                    b.Property<string>("BreedName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("breedname");
+
+                    b.HasKey("Id")
+                        .HasName("AnimalBreedsDef_pkey");
+
+                    b.ToTable("animalbreedsdef", (string)null);
+                });
+
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.AnimalColorsDef", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id")
+                        .HasName("AnimalColorsDef_pkey");
+
+                    b.ToTable("animalcolorsdef", (string)null);
+                });
+
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.AnimalsType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("description");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id")
+                        .HasName("AnimalsType_pkey");
+
+                    b.ToTable("animalstype", (string)null);
+                });
+
             modelBuilder.Entity("VetSystems.Vet.Domain.Entities.CasingDefinition", b =>
                 {
                     b.Property<Guid>("Id")
@@ -123,6 +192,15 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("deletedusers");
+
+                    b.Property<bool?>("Durumu")
+                        .HasColumnType("bit")
+                        .HasColumnName("durumu");
+
+                    b.Property<string>("Kasa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("kasa");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2")
@@ -307,7 +385,11 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("id");
 
-                    b.Property<int>("AnimalBreed")
+                    b.Property<bool?>("Active")
+                        .HasColumnType("bit")
+                        .HasColumnName("active");
+
+                    b.Property<int?>("AnimalBreed")
                         .HasColumnType("int")
                         .HasColumnName("animalbreed");
 
@@ -315,7 +397,7 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasColumnName("animalcolor");
 
-                    b.Property<int>("AnimalType")
+                    b.Property<int?>("AnimalType")
                         .HasColumnType("int")
                         .HasColumnName("animaltype");
 
@@ -336,6 +418,10 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("createusers");
 
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("customerid");
+
                     b.Property<Guid>("CustomersId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("customersid");
@@ -352,6 +438,10 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("deletedusers");
+
+                    b.Property<byte?>("Images")
+                        .HasColumnType("tinyint")
+                        .HasColumnName("images");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -384,7 +474,7 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnName("updateusers");
 
                     b.HasKey("Id")
-                        .HasName("pk_patients");
+                        .HasName("Patients_pkey");
 
                     b.HasIndex("CustomersId")
                         .HasDatabaseName("ix_patients_customersid");

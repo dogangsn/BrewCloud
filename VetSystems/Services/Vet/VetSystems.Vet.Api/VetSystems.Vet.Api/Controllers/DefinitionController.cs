@@ -5,11 +5,8 @@ using VetSystems.Vet.Application.Features.Customers.Commands;
 using VetSystems.Vet.Application.Features.Customers.Queries;
 using VetSystems.Vet.Application.Features.Definition.CasingDefinition.Commands;
 using VetSystems.Vet.Application.Features.Definition.CasingDefinition.Queries;
-<<<<<<< Updated upstream
 using VetSystems.Vet.Application.Features.Definition.CustomerGroup.Commands;
 using VetSystems.Vet.Application.Features.Definition.CustomerGroup.Queries;
-=======
->>>>>>> Stashed changes
 using VetSystems.Vet.Application.Features.Definition.ProductCategory.Commands;
 using VetSystems.Vet.Application.Features.Definition.ProductCategory.Queries;
 using VetSystems.Vet.Application.Features.Definition.ProductDescription.Commands;
@@ -109,6 +106,7 @@ namespace VetSystems.Vet.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
         [HttpPost(Name = "CreateUnits")]
         public async Task<IActionResult> CreateUnits([FromBody] CreateUnitsCommand command)
         {
@@ -116,9 +114,22 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "UpdateUnits")]
+        public async Task<IActionResult> UpdateUnits([FromBody] UpdateUnitsCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "DeleteUnits")]
+        public async Task<IActionResult> DeleteUnits([FromBody] DeleteUnitsCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
         #endregion
 
-<<<<<<< Updated upstream
         #region CustomerGroupDef
 
         [HttpGet(Name = "CustomerGroupList")]
@@ -136,14 +147,24 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "UpdateCustomerGroupDef")]
+        public async Task<IActionResult> UpdateCustomerGroupDef([FromBody] UpdateCustomerGroupDefCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "DeleteCustomerGroupDef")]
+        public async Task<IActionResult> DeleteCustomerGroupDef([FromBody] DeleteCustomerGroupDefCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
 
         #endregion
-        #region CasingDefinitions
-=======
 
         #region CasingDefinition
->>>>>>> Stashed changes
 
         [HttpGet(Name = "CasingDefinitionList")]
         public async Task<IActionResult> CasingDefinitionList()

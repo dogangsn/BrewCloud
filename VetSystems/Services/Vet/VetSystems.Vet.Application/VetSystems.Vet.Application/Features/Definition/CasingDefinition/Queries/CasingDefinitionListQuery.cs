@@ -12,10 +12,6 @@ using VetSystems.Vet.Domain.Contracts;
 
 namespace VetSystems.Vet.Application.Features.Definition.CasingDefinition.Queries
 {
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
     public class CasingDefinitionListQuery : IRequest<Response<List<CasingDefinitionListDto>>>
     {
     }
@@ -38,11 +34,7 @@ namespace VetSystems.Vet.Application.Features.Definition.CasingDefinition.Querie
             var response = new Response<List<CasingDefinitionListDto>>();
             try
             {
-<<<<<<< Updated upstream
-                string query = "Select * from casingdefinition where Deleted = 0";
-=======
                 string query = "Select * from CasingDefinition where Deleted = 0";
->>>>>>> Stashed changes
                 var _data = _uow.Query<CasingDefinitionListDto>(query).ToList();
                 response = new Response<List<CasingDefinitionListDto>>
                 {

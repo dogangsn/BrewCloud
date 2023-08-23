@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace VetSystems.IdentityServer.Infrastructure.Persistence
 {
@@ -34,14 +36,14 @@ namespace VetSystems.IdentityServer.Infrastructure.Persistence
     {
         public PersistedGrantDataContext CreateDbContext(string[] args)
         {
-            // var configuration = new ConfigurationBuilder()
-            //.SetBasePath(Directory.GetCurrentDirectory())
-            //.AddJsonFile("appsettings.json")
-            //.Build();
-            // var connectionString = configuration.GetConnectionString("DefaultConnection");
+            var configuration = new ConfigurationBuilder()
+           .SetBasePath(Directory.GetCurrentDirectory())
+           .AddJsonFile("appsettings.json")
+           .Build();
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
             var dbContextBuilder = new DbContextOptionsBuilder<PersistedGrantDbContext>();
 
-            dbContextBuilder.UseSqlServer("Server=DG1;Database=VetAdminIdentityDb;User Id=sa;Password=123654Dg;", postGresOptions => postGresOptions.MigrationsAssembly(typeof(PersistedGrantDataDesignTimeFactory).GetTypeInfo().Assembly.GetName().Name));
+            dbContextBuilder.UseSqlServer(connectionString, postGresOptions => postGresOptions.MigrationsAssembly(typeof(PersistedGrantDataDesignTimeFactory).GetTypeInfo().Assembly.GetName().Name));
             // DbContextOptions<ConfigurationDbContext> ops = dbContextBuilder.Options;
 
             // dbContextBuilder.UseSqlServer(connectionString);

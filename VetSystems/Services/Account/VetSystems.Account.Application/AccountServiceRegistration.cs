@@ -12,7 +12,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using VetSystems.Account.Application.Attributes;
+using VetSystems.Account.Application.Features.Consumers;
 using VetSystems.Account.Application.GrpServices;
+using VetSystems.Shared.Common;
 using VetSystems.Shared.Service;
 
 namespace VetSystems.Account.Application
@@ -46,22 +48,17 @@ namespace VetSystems.Account.Application
                     identityGrpService);
             });
 
-            //services.AddMassTransit(config =>
-            //{
-            //    config.AddConsumer<CreateAccountConsumer>();
-            //    config.AddConsumer<RunScriptConsumer>();
+            services.AddMassTransit(config =>
+            {
+                config.AddConsumer<CreateAccountConsumer>();
+                config.UsingRabbitMq((ctx, cfg) =>
+                {
+                    cfg.Host(configuration["EventBusSettings:HostAddress"]);
 
-            //    config.UsingRabbitMq((ctx, cfg) =>
-            //    {
-            //        cfg.Host(configuration["EventBusSettings:HostAddress"]);
-
-            //        cfg.ReceiveEndpoint(EventBusConstants.MigrateDatabaseQueue,
-            //            c => { c.ConfigureConsumer<CreateAccountConsumer>(ctx); });
-            //        cfg.ReceiveEndpoint(EventBusConstants.ScriptQueue,
-            //            c => { c.ConfigureConsumer<RunScriptConsumer>(ctx); });
-
-            //    });
-            //});
+                    cfg.ReceiveEndpoint(EventBusConstants.MigrateDatabaseQueue,
+                        c => { c.ConfigureConsumer<CreateAccountConsumer>(ctx); });
+                });
+            });
 
             services.AddHealthChecks();
               //.AddSqlServer(configuration.GetConnectionString("ConnectionString") + " Trust Server Certificate=true;", "SELECT 1;", null);

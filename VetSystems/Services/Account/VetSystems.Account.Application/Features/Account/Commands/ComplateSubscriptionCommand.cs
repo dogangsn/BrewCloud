@@ -63,12 +63,11 @@ namespace VetSystems.Account.Application.Features.Account.Commands
                                                                   request.Password,
                                                                   request.Username,
                                                                   entity.Id.ToString(),
-                                                                  /*request.Firstname*/"DG",
-                                                                  "DG",
+                                                                  request.Username,
+                                                                  "",
                                                                   adminSetting.Id.ToString(),
                                                                   request.RecId.ToString(),
                                                                   Identity.Api.SignupRequest.Types.AccountType.Admin, request.IsFirstCreate);
-
 
                 if (!userResult.IsSuccess)
                 {

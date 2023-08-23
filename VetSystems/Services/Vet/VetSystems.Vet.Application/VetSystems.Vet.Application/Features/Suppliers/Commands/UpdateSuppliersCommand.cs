@@ -64,6 +64,8 @@ namespace VetSystems.Vet.Application.Features.Suppliers.Commands
             }
             catch (Exception ex)
             {
+                response.IsSuccessful = false;
+
             }
 
             return response;

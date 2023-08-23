@@ -30,7 +30,7 @@ namespace VetSystems.Vet.Application.Features.Suppliers.Queries
             _mapper = mapper;
         }
         public async Task<Response<List<SuppliersListDto>>> Handle(SuppliersListQuery request, CancellationToken cancellationToken)
-        {
+         {
             var response = new Response<List<SuppliersListDto>>();
             try
             {

@@ -7,6 +7,7 @@ namespace VetSystems.IdentityServer.Infrastructure.Entities
 {
     public class SubscriptionAccount :  BaseEntity
     {
+
         public string Username { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }

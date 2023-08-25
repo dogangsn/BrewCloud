@@ -25,10 +25,12 @@ namespace VetSystems.Account.Application.Features.Account.Commands
         public string ActivationCode { get; set; }
         public string ConnectionString { get; set; }
         public bool IsFirstCreate { get; set; }
+        public string FirstLastName { get; set; }
     }
     public class ComplateSubscriptionCommandHandler : IRequestHandler<ComplateSubscriptionCommand, Shared.Dtos.Response<bool>>
     {
         private readonly IUnitOfWork _uow;
+        private readonly IRepository<Enterprise> _enterPriseRepository;
         private readonly IRepository<User> _userRepository;
         private readonly IRepository<Customer> _customerRepository;
         private readonly ILogger<ComplateSubscriptionCommandHandler> _logger;
@@ -36,7 +38,7 @@ namespace VetSystems.Account.Application.Features.Account.Commands
         private readonly IMediator _mediatR;
 
         public ComplateSubscriptionCommandHandler(IUnitOfWork uow, ILogger<ComplateSubscriptionCommandHandler> logger, IdentityGrpService identityGrpService, 
-            IRepository<Customer> customerRepository, IMediator mediatR, IRepository<User> userRepository)
+            IRepository<Customer> customerRepository, IMediator mediatR, IRepository<User> userRepository, IRepository<Enterprise> enterPriseRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -44,6 +46,7 @@ namespace VetSystems.Account.Application.Features.Account.Commands
             _customerRepository = customerRepository;
             _mediatR = mediatR;
             _userRepository = userRepository;
+            _enterPriseRepository = enterPriseRepository;
         }
 
 
@@ -74,24 +77,22 @@ namespace VetSystems.Account.Application.Features.Account.Commands
                     return Shared.Dtos.Response<bool>.Fail(userResult.Message, (int)ResponseType.Error);
                 }
 
-                //await _userRepository.AddAsync(new User
-                //{
-                //    Firstname = "DG",
-                //    Lastname = "DG",
-                //    Id = Guid.Parse(userResult.Id),
-                //    RoleId = adminSetting.Id,
-                //    Email = request.Email,
-                //    EnterprisesId = property.EnterprisesId,
-                //    Authorizeenterprise = true
-                //});
+                await _userRepository.AddAsync(new User
+                {
+                    FirstLastName = request.FirstLastName,
+                    Id = Guid.Parse(userResult.Id),
+                    RoleId = adminSetting.Id,
+                    Email = request.Email,
+                    EnterprisesId = property.EnterprisesId,
+                    Authorizeenterprise = true
+                });
                 //var user = new Userauthorization
                 //{
-                //    CreatedBy = "veboni",
-                //    CreatedDate = DateTime.Now,
-                //    EnterprisesId = entity.Recid,
-                //    PropertyId = property.Recid,
+                //    CreateDate = DateTime.Now,
+                //    EnterprisesId = entity.Id,
+                //    PropertyId = property.Id,
                 //    UsersId = Guid.Parse(userResult.Id),
-                //    RoleId = adminSetting.Recid
+                //    RoleId = adminSetting.Id
                 //};
                 //entity.Userauthorizations.Add(user);
                 //_enterPriseRepository.Update(entity);

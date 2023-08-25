@@ -7,12 +7,14 @@ using VetSystems.Account.Domain.Common;
 
 namespace VetSystems.Account.Domain.Entities
 {
-    public class User : BaseEntity
+    public class Userauthorization : BaseEntity
     {
-        public string FirstLastName { get; set; }
-        public string Email { get; set; }
+        public Guid Recid { get; set; }
+        public Guid UsersId { get; set; }
+        public Guid PropertyId { get; set; }
         public Guid RoleId { get; set; }
         public Guid EnterprisesId { get; set; }
-        public bool Authorizeenterprise { get; set; }
+
+        public virtual Enterprise Enterprises { get; set; }
     }
 }

@@ -15,10 +15,13 @@ namespace VetSystems.Vet.Application.Models.Customers
         public string EMail { get; set; } = string.Empty;
         public string TaxOffice { get; set; } = string.Empty;
         public string VKNTCNo { get; set; } = string.Empty;
-        public Guid CustomerGroup { get; set; }
         public string Note { get; set; } = string.Empty;
         public decimal DiscountRate { get; set; } = 0;
         public bool? IsEmail { get; set; } = true;
         public bool? IsPhone { get; set; } = true;
+        public string Province { get; set; } = string.Empty;
+        public string District { get; set; } = string.Empty;
+        public string LongAdress { get; set; } = string.Empty;
+        public List<PatientsDetailsDto> PatientDetails { get; set; }
     }
 }

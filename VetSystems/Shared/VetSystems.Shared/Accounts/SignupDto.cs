@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VetSystems.Shared.Enums;
 
 namespace VetSystems.Shared.Accounts
 {
@@ -33,5 +34,6 @@ namespace VetSystems.Shared.Accounts
         public string UserAppKey { get; set; }
         public string DashboardPath { get; set; }
         public string Password { get; set; }
+        public SubscriptionType SubscriptionType { get; set; }
     }
 }

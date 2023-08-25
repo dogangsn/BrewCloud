@@ -9,6 +9,13 @@ namespace VetSystems.Account.Domain.Entities
 {
     public class Enterprise : BaseEntity
     {
+        public Enterprise()
+        {
+            Userauthorizations = new HashSet<Userauthorization>();
+            Properties = new HashSet<Property>();
+            Reasons = new HashSet<Reason>();
+            Abilitygroups = new HashSet<Abilitygroup>();
+        }
         public string Enterprisename { get; set; } = "";
         public string Phone { get; set; } = "";
         public string Currencycode { get; set; } = "";
@@ -22,7 +29,9 @@ namespace VetSystems.Account.Domain.Entities
         public bool CustomerSearchStatus { get; set; }
         public bool MoneyChange { get; set; } = false;
 
+        public virtual ICollection<Property> Properties { get; set; }
         public virtual ICollection<Reason> Reasons { get; set; }
         public virtual ICollection<Abilitygroup> Abilitygroups { get; set; }
+        public virtual ICollection<Userauthorization> Userauthorizations { get; set; }
     }
 }

@@ -51,6 +51,7 @@ namespace VetSystems.IdentityServer.Application.Events
                 Email = temp.Email,
                 ConnectionString = temp.ConnectionString,
                 IsFirstCreate = false,
+                FirstLastName = temp.Username
             };
             var resultData = await _accountService.SeedData(eventMessage);
             if (resultData.ResponseType != ResponseType.Ok)

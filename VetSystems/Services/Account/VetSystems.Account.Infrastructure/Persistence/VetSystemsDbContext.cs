@@ -35,9 +35,64 @@ namespace VetSystems.Account.Infrastructure.Persistence
             _historyTable = historyTable;
         }
 
-        public DbSet<Products> Products { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Customer> Customer { get; set; }
+        public virtual DbSet<Enterprise> Enterprise { get; set; }
+        public virtual DbSet<RoleSettingDetail> RoleSettingDetail { get; set; }
+        public virtual DbSet<TempAccount> TempAccount { get; set; }
+        public virtual DbSet<Reason> Reason { get; set; }
+        public virtual DbSet<Property> Property { get; set; }
+        public virtual DbSet<Abilitygroup> Abilitygroup { get; set; }
+        public virtual DbSet<Rolesetting> Rolesetting { get; set; }
+        public virtual DbSet<ReasonProperties> ReasonProperties { get; set; }
+        public virtual DbSet<Userauthorization> Userauthorization { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (_tenant == null)
+            {
+                if (!string.IsNullOrEmpty(_historyTable))
+                    optionsBuilder.UseSqlServer(x => x.MigrationsHistoryTable("__AccountMigrationHistory"))
+                        .UseLowerCaseNamingConvention();
+                else
+                {
+                    optionsBuilder.UseSqlServer(x => x.MigrationsHistoryTable("__AccountMigrationHistory")).UseLowerCaseNamingConvention();
+                }
+            }
 
 
+            if (_tenant != null)
+                optionsBuilder
+                    .UseSqlServer(_tenant.DatabaseConnectionString, x => x.MigrationsHistoryTable("__AccountMigrationHistory")).UseLowerCaseNamingConvention();
+
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+            base.OnConfiguring(optionsBuilder);
+        }
+
+
+        public Tenant GetTenant()
+        {
+            return _tenant;
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                var modifiedAuditedEntities = ChangeTracker.Entries().Where(x => x.State == EntityState.Modified)
+                    .Select(s => new { s.Entity, s.OriginalValues, s.CurrentValues });
+                foreach (var item in modifiedAuditedEntities)
+                {
+                    //SaveLog(item.Entity, item.OriginalValues.ToObject(), item.CurrentValues.ToObject());
+                }
+            }
+            catch (Exception)
+            {
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
+        }
 
 
         public async Task MigrateAsync(string name)

@@ -16,6 +16,7 @@ namespace VetSystems.Shared.Events
         public string ActivationCode { get; set; }
         public string ConnectionString { get; set; }
         public bool IsFirstCreate { get; set; }
+        public string FirstLastName { get; set; }
         //public string TargetMigration { get; set; }
         //public string HistoryTable { get; set; }
         //public bool MoveHistoryTable { get; set; }

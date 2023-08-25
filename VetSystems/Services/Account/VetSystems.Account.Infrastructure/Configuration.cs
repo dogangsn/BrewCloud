@@ -13,9 +13,12 @@ namespace VetSystems.Account.Infrastructure
         {
             get
             {
+                var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
                 ConfigurationManager configurationManager = new();
                 configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../VetSystems.Account/VetSystems.Account.Api"));
                 configurationManager.AddJsonFile("appsettings.json");
+                configurationManager.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                configurationManager.AddJsonFile($"appsettings.{env}.json", optional: true, reloadOnChange: true);
                 return configurationManager.GetConnectionString("ConnectionString");
             }
         }

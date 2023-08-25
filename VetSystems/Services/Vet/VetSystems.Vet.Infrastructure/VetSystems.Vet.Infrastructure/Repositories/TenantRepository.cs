@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using VetSystems.Shared.Accounts;
+using VetSystems.Shared.Service;
+using Microsoft.Extensions.Configuration;
+using VetSystems.Shared.Extensions;
 
-namespace VetSystems.Shared.Service
+namespace VetSystems.Vet.Infrastructure.Repositories
 {
     public class TenantRepository : ITenantRepository
     {
@@ -11,6 +17,12 @@ namespace VetSystems.Shared.Service
         public Guid TenantId { get; set; }
 
         public string ConnectionDb { get; set; }
+
+        public TenantRepository(IIdentityRepository identity, IConfiguration configuration)
+        {
+            TenantId = identity.TenantId;
+            ConnectionDb = identity.Connection.DecryptString() + " Trust Server Certificate=true;";
+        }
 
         public Tenant GetTenantById()
         {

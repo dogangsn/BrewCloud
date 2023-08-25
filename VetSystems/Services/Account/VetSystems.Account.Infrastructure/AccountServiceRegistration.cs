@@ -10,7 +10,6 @@ using VetSystems.Account.Domain.Contracts;
 using VetSystems.Account.Infrastructure.Persistence;
 using VetSystems.Account.Infrastructure.Repositories;
 using VetSystems.Shared.Accounts;
-using VetSystems.Shared.Service;
 
 namespace VetSystems.Account.Infrastructure
 {
@@ -18,8 +17,8 @@ namespace VetSystems.Account.Infrastructure
     {
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<ITenantRepository, TenantRepository>();
-            services.AddScoped<IIdentityRepository, IdentityRepository>();
+            services.AddScoped<Shared.Service.ITenantRepository, TenantRepository>();
+            services.AddScoped<Shared.Service.IIdentityRepository, Shared.Service.IdentityRepository>();
             services.AddDbContext<VetSystemsDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("ConnectionString")));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();

@@ -75,6 +75,9 @@ namespace VetSystems.IdentityServer.Infrastructure.Services
 
         private List<Claim> CreateClaims(SignupDto account)
         {
+
+            string connection = account.ConnectionDb;
+
             string sql = "Server=DENIZCANCASPER;Database=VetAdminIdentityDb;User Id=sa;Password=Deniz.07;";
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim("CompanyId", account.CompanyId));
@@ -82,19 +85,13 @@ namespace VetSystems.IdentityServer.Infrastructure.Services
             claims.Add(new Claim("LastName", account.LastName));
             claims.Add(new Claim("AccountType", account.AccountType.ToString()));
             claims.Add(new Claim("TenantId", account.TenantId.ToString()));
-            claims.Add(new Claim("ConnectionDb", sql));
+            claims.Add(new Claim("ConnectionDb", connection));
             claims.Add(new Claim("UseSafeListControl", account.UseSafeListControl ? "1" : "0"));
             claims.Add(new Claim("RoleId", account.RoleId.ToString()));
-            //claims.Add(new Claim("Host", account.Host.ToString()));
+            claims.Add(new Claim("Host", account.Host.ToString()));
             //claims.Add(new Claim("SubscriptionType", Convert.ToInt32(account.SubscriptionType).ToString()));
             //claims.Add(new Claim("CurrencyCode", account.CurrencyCode));
             //claims.Add(new Claim("DefaultLanguage", account.DefaultLanguage));
-            //string module = string.Empty;
-            //if (account.Modules.Any())
-            //{
-            //    module = JsonConvert.SerializeObject(account.Modules);
-            //}
-            //claims.Add(new Claim("Modules", module));
             return claims;
         }
 

@@ -15,10 +15,10 @@ namespace VetSystems.Account.Domain.Entities
         public Guid EnterprisesId { get; set; }
 
 
-        public virtual Enterprise Enterprises { get; set; }
+        //public virtual Enterprise Enterprises { get; set; }
 
-        public virtual Reason Reason { get; set; }
+        //public virtual Reason Reason { get; set; }
 
-        public virtual Property Property { get; set; }
+        //public virtual Property Property { get; set; }
     }
 }

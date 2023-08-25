@@ -65,6 +65,7 @@ namespace VetSystems.IdentityServer.Infrastructure.Services
         public async Task<SignupDto> GetAccountByIdForClaims(string id)
         {
             var result = await (from ac in _dbContext.Accounts
+                                join sb in _dbContext.SubscriptionAccounts on ac.TenantId equals sb.Recid
                                 where ac.UserId == id
                                 select new SignupDto
                                 {
@@ -77,18 +78,15 @@ namespace VetSystems.IdentityServer.Infrastructure.Services
                                     AuthorizeEnterprise = ac.AuthorizeEnterprise,
                                     FirstName = ac.FirstName,
                                     LastName = ac.LastName,
-                                    //Host = sb.Host ?? "",
-                                    //AccountType = ac.AccountType,
-                                    //ConnectionDb = sb.ConnectionString,
-                                    //UseSafeListControl = sb.UseSafeListControl,
+                                    Host = sb.Host ?? "",
+                                    AccountType = ac.AccountType,
+                                    ConnectionDb = sb.ConnectionString,
+                                    UseSafeListControl = sb.UseSafeListControl,
                                     //SubscriptionType = sb.SubscriptionType
                                 }).FirstOrDefaultAsync();
-
-            //var result = await _dbContext.Accounts.FirstOrDefaultAsync(r => r.UserId == id);
             if (result != null)
             {
             }
-
             return result;
         }
 

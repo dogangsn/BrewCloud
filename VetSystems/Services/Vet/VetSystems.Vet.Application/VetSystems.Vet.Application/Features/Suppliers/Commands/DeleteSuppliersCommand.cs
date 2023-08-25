@@ -55,12 +55,14 @@ namespace VetSystems.Vet.Application.Features.Suppliers.Commands
 
                 casingdefinition.Deleted = true;
                 casingdefinition.DeletedDate = DateTime.Now;
-                casingdefinition.DeletedUsers = _identityRepository.Account.Email;
+                casingdefinition.DeletedUsers = _identityRepository.Account.UserName;
 
                 await _uow.SaveChangesAsync(cancellationToken);
             }
             catch (Exception ex)
             {
+                response.IsSuccessful = false;
+
             }
 
             return response;

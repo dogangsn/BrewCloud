@@ -60,6 +60,7 @@ namespace VetSystems.Vet.Application.Features.Definition.CasingDefinition.Comman
             }
             catch (Exception ex)
             {
+                response.IsSuccessful = false;
             }
 
             return response;

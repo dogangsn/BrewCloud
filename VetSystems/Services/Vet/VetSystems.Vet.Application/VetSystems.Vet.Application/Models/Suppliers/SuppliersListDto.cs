@@ -8,6 +8,7 @@ namespace VetSystems.Vet.Application.Models.Definition.Suppliers
 {
     public class SuppliersListDto
     {
+        public Guid id{ get; set; }
         public string suppliername { get; set; }
         public string email { get; set; }
         public string phone { get; set; }

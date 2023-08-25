@@ -36,9 +36,10 @@ namespace VetSystems.IdentityServer.Infrastructure.Persistence
     {
         public PersistedGrantDataContext CreateDbContext(string[] args)
         {
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
             var configuration = new ConfigurationBuilder()
            .SetBasePath(Directory.GetCurrentDirectory())
-           .AddJsonFile("appsettings.json")
+           .AddJsonFile($"appsettings.{env}.json")
            .Build();
             var connectionString = configuration.GetConnectionString("DefaultConnection");
             var dbContextBuilder = new DbContextOptionsBuilder<PersistedGrantDbContext>();

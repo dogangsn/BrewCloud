@@ -142,7 +142,7 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     unitid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     categoryid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    producttypeid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    producttypeid = table.Column<int>(type: "int", nullable: true),
                     supplierid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     productbarcode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     productcode = table.Column<string>(type: "nvarchar(max)", nullable: false),

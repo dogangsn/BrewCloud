@@ -14,6 +14,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{091B1E7A-0B62-4B98-9AE9-D21CA348777C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{49D68E31-5E5F-4676-92D3-4DC125DBC4A2}"
+	ProjectSection(SolutionItems) = preProject
+		Solution Items\Note.txt = Solution Items\Note.txt
+		Solution Items\Port.txt = Solution Items\Port.txt
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Gateway", "ApiGateways\VetSystems.Gateway\VetSystems.Gateway.csproj", "{73D7A5C8-6745-45C4-86B3-94BC7D68CB18}"
 EndProject
@@ -41,7 +45,27 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Vet.Application"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Vet.Domain", "Services\Vet\VetSystems.Vet.Domain\VetSystems.Vet.Domain\VetSystems.Vet.Domain.csproj", "{29CF811D-792E-4AC3-A989-25CE1F7B5A32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Vet.Infrastructure", "Services\Vet\VetSystems.Vet.Infrastructure\VetSystems.Vet.Infrastructure\VetSystems.Vet.Infrastructure.csproj", "{96D03F21-E5BA-4CC5-BF44-4CEC7D305923}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Vet.Infrastructure", "Services\Vet\VetSystems.Vet.Infrastructure\VetSystems.Vet.Infrastructure\VetSystems.Vet.Infrastructure.csproj", "{96D03F21-E5BA-4CC5-BF44-4CEC7D305923}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integrations", "Integrations", "{DA716BB0-2E04-4079-88D3-8EE4C7FAA4B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Integrations.Application", "Services\Integrations\VetSystems.Integrations.Application\VetSystems.Integrations.Application.csproj", "{7F56FA02-CABE-4C1E-A603-DB586E472D5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Integrations.Domain", "Services\Integrations\VetSystems.Integrations.Domain\VetSystems.Integrations.Domain.csproj", "{60A556B2-55E2-42E6-A77F-0DEF38E6E67A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Integrations.Infrastructure", "Services\Integrations\VetSystems.Integrations.Infrastructure\VetSystems.Integrations.Infrastructure.csproj", "{37C5614F-6DB3-4CA3-8C70-48E82507140F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Integrations.Api", "Services\Integrations\VetSystems.Integrations.Api\VetSystems.Integrations.Api.csproj", "{B9FC8E9F-6945-4E30-84BC-533BCBCB5B8B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mobile", "Mobile", "{3DBE97D1-7A22-4B3B-B55A-856EF7DA09E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Mobile.Application", "Services\Mobile\VetSystems.Mobile.Application\VetSystems.Mobile.Application.csproj", "{5A33439A-4AE1-4B5C-BEAD-E19377317E83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Mobile.Domain", "Services\Mobile\VetSystems.Mobile.Domain\VetSystems.Mobile.Domain.csproj", "{C846CB2B-3D0C-407F-B495-40E80DA25B05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Mobile.Infrastructure", "Services\Mobile\VetSystems.Mobile.Infrastructure\VetSystems.Mobile.Infrastructure.csproj", "{473B7358-B846-47A4-92A1-3D238EF50F19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Mobile.Api", "Services\Mobile\VetSystems.Mobile.Api\VetSystems.Mobile.Api.csproj", "{1C3C135F-F67F-4E1D-9FAB-381BD2993990}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +125,38 @@ Global
 		{96D03F21-E5BA-4CC5-BF44-4CEC7D305923}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96D03F21-E5BA-4CC5-BF44-4CEC7D305923}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96D03F21-E5BA-4CC5-BF44-4CEC7D305923}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F56FA02-CABE-4C1E-A603-DB586E472D5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F56FA02-CABE-4C1E-A603-DB586E472D5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F56FA02-CABE-4C1E-A603-DB586E472D5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F56FA02-CABE-4C1E-A603-DB586E472D5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60A556B2-55E2-42E6-A77F-0DEF38E6E67A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60A556B2-55E2-42E6-A77F-0DEF38E6E67A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60A556B2-55E2-42E6-A77F-0DEF38E6E67A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60A556B2-55E2-42E6-A77F-0DEF38E6E67A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37C5614F-6DB3-4CA3-8C70-48E82507140F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37C5614F-6DB3-4CA3-8C70-48E82507140F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37C5614F-6DB3-4CA3-8C70-48E82507140F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37C5614F-6DB3-4CA3-8C70-48E82507140F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9FC8E9F-6945-4E30-84BC-533BCBCB5B8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9FC8E9F-6945-4E30-84BC-533BCBCB5B8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9FC8E9F-6945-4E30-84BC-533BCBCB5B8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9FC8E9F-6945-4E30-84BC-533BCBCB5B8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A33439A-4AE1-4B5C-BEAD-E19377317E83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A33439A-4AE1-4B5C-BEAD-E19377317E83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A33439A-4AE1-4B5C-BEAD-E19377317E83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A33439A-4AE1-4B5C-BEAD-E19377317E83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C846CB2B-3D0C-407F-B495-40E80DA25B05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C846CB2B-3D0C-407F-B495-40E80DA25B05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C846CB2B-3D0C-407F-B495-40E80DA25B05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C846CB2B-3D0C-407F-B495-40E80DA25B05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{473B7358-B846-47A4-92A1-3D238EF50F19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{473B7358-B846-47A4-92A1-3D238EF50F19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{473B7358-B846-47A4-92A1-3D238EF50F19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{473B7358-B846-47A4-92A1-3D238EF50F19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C3C135F-F67F-4E1D-9FAB-381BD2993990}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C3C135F-F67F-4E1D-9FAB-381BD2993990}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C3C135F-F67F-4E1D-9FAB-381BD2993990}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C3C135F-F67F-4E1D-9FAB-381BD2993990}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,6 +178,16 @@ Global
 		{30B54CFF-1925-413A-BCBB-118DAD165C1E} = {2AF69030-719C-4701-A5D2-B7434A6481A3}
 		{29CF811D-792E-4AC3-A989-25CE1F7B5A32} = {2AF69030-719C-4701-A5D2-B7434A6481A3}
 		{96D03F21-E5BA-4CC5-BF44-4CEC7D305923} = {2AF69030-719C-4701-A5D2-B7434A6481A3}
+		{DA716BB0-2E04-4079-88D3-8EE4C7FAA4B5} = {09508787-B726-4595-AA04-FD652D0B4609}
+		{7F56FA02-CABE-4C1E-A603-DB586E472D5B} = {DA716BB0-2E04-4079-88D3-8EE4C7FAA4B5}
+		{60A556B2-55E2-42E6-A77F-0DEF38E6E67A} = {DA716BB0-2E04-4079-88D3-8EE4C7FAA4B5}
+		{37C5614F-6DB3-4CA3-8C70-48E82507140F} = {DA716BB0-2E04-4079-88D3-8EE4C7FAA4B5}
+		{B9FC8E9F-6945-4E30-84BC-533BCBCB5B8B} = {DA716BB0-2E04-4079-88D3-8EE4C7FAA4B5}
+		{3DBE97D1-7A22-4B3B-B55A-856EF7DA09E7} = {09508787-B726-4595-AA04-FD652D0B4609}
+		{5A33439A-4AE1-4B5C-BEAD-E19377317E83} = {3DBE97D1-7A22-4B3B-B55A-856EF7DA09E7}
+		{C846CB2B-3D0C-407F-B495-40E80DA25B05} = {3DBE97D1-7A22-4B3B-B55A-856EF7DA09E7}
+		{473B7358-B846-47A4-92A1-3D238EF50F19} = {3DBE97D1-7A22-4B3B-B55A-856EF7DA09E7}
+		{1C3C135F-F67F-4E1D-9FAB-381BD2993990} = {3DBE97D1-7A22-4B3B-B55A-856EF7DA09E7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B7E68C2E-293C-48D7-A15C-6681682A0215}

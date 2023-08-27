@@ -11,9 +11,9 @@ namespace VetSystems.Vet.Domain.Entities
     public class VetProducts : BaseEntity, IAggregateRoot
     {
         public string Name { get; set; }
+        public int ProductTypeId { get; set; }
         public Guid? UnitId { get; set; }
         public Guid? CategoryId { get; set; }
-        public Guid? ProductTypeId { get; set; }
         public Guid? SupplierId { get; set; }
         public string ProductBarcode { get; set; } = string.Empty;
         public string ProductCode { get; set; } = string.Empty;
@@ -26,6 +26,8 @@ namespace VetSystems.Vet.Domain.Entities
         public bool? BuyingIncludeKDV { get; set; } = false;
         public bool? FixPrice { get; set; } = false;
         public bool? IsExpirationDate { get; set; } = false;
+        public int? AnimalType { get; set; }
+        public int? NumberRepetitions { get; set; }
 
 
     }

@@ -6,7 +6,7 @@ using VetSystems.Shared.Data;
 
 namespace VetSystems.Vet.Infrastructure.Migrations
 {
-    public partial class updatedata_2 : Migration
+    public partial class updatedata_3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

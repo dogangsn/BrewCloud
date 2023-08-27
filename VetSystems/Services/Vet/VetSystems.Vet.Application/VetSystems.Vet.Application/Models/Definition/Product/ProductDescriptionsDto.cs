@@ -9,6 +9,7 @@ namespace VetSystems.Vet.Application.Models.Definition.Product
     public class ProductDescriptionsDto
     {
         public Guid Id { get; set; }
+        public int ProductTypeId { get; set; }
         public string Name { get; set; }
         public string ProductBarcode { get; set; }
         public string ProductCode { get; set; }

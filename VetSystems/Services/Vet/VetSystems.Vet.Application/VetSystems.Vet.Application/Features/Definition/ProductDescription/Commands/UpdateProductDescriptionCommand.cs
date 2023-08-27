@@ -18,7 +18,7 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductDescription.Comm
         public string Name { get; set; }
         public Guid UnitId { get; set; }
         public Guid? CategoryId { get; set; }
-        public Guid? ProductTypeId { get; set; }
+        public int? ProductTypeId { get; set; }
         public Guid? SupplierId { get; set; }
         public string ProductBarcode { get; set; } = string.Empty;
         public string ProductCode { get; set; } = string.Empty;
@@ -79,7 +79,7 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductDescription.Comm
                 product.Name = request.Name;
                 product.ProductBarcode = request.ProductBarcode;
                 request.SupplierId = request.SupplierId;
-                product.ProductTypeId = request.ProductTypeId;
+                product.ProductTypeId = request.ProductTypeId.GetValueOrDefault();
                 product.UnitId = request.UnitId;
                 product.Ratio = request.Ratio;
                 product.UpdateDate = DateTime.Now;

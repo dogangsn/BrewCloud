@@ -12,8 +12,8 @@ using VetSystems.Vet.Infrastructure.Persistence;
 namespace VetSystems.Vet.Infrastructure.Migrations
 {
     [DbContext(typeof(VetDbContext))]
-    [Migration("20230825205654_updatedata_2")]
-    partial class updatedata_2
+    [Migration("20230827225742_updatedata_3")]
+    partial class updatedata_3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -380,6 +380,54 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                     b.ToTable("vetcustomers", (string)null);
                 });
 
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetParameters", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("id");
+
+                    b.Property<bool?>("AutoSms")
+                        .HasColumnType("bit")
+                        .HasColumnName("autosms");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("createdate");
+
+                    b.Property<string>("CreateUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("createusers");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("deleted");
+
+                    b.Property<DateTime>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("deleteddate");
+
+                    b.Property<string>("DeletedUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("deletedusers");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("updatedate");
+
+                    b.Property<string>("UpdateUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("updateusers");
+
+                    b.HasKey("Id")
+                        .HasName("VetParameters_pkey");
+
+                    b.ToTable("vetparameters", (string)null);
+                });
+
             modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetPatients", b =>
                 {
                     b.Property<Guid>("Id")
@@ -549,6 +597,10 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("active");
 
+                    b.Property<int?>("AnimalType")
+                        .HasColumnType("int")
+                        .HasColumnName("animaltype");
+
                     b.Property<bool?>("BuyingIncludeKDV")
                         .HasColumnType("bit")
                         .HasColumnName("buyingincludekdv");
@@ -600,6 +652,10 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("name");
 
+                    b.Property<int?>("NumberRepetitions")
+                        .HasColumnType("int")
+                        .HasColumnName("numberrepetitions");
+
                     b.Property<string>("ProductBarcode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -610,8 +666,8 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("productcode");
 
-                    b.Property<Guid?>("ProductTypeId")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<int>("ProductTypeId")
+                        .HasColumnType("int")
                         .HasColumnName("producttypeid");
 
                     b.Property<decimal>("Ratio")

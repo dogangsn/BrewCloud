@@ -25,9 +25,9 @@ namespace VetSystems.Vet.Application.Features.Definition.CasingDefinition.Comman
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
         private readonly ILogger<UpdateCasingDefinitionCommandHandler> _logger;
-        private readonly IRepository<Vet.Domain.Entities.CasingDefinition> _casingdefinitionRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetCasingDefinition> _casingdefinitionRepository;
 
-        public UpdateCasingDefinitionCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<UpdateCasingDefinitionCommandHandler> logger, IRepository<Domain.Entities.CasingDefinition> casingdefinitionRepository)
+        public UpdateCasingDefinitionCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<UpdateCasingDefinitionCommandHandler> logger, IRepository<Domain.Entities.VetCasingDefinition> casingdefinitionRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));

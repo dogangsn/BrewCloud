@@ -8,11 +8,11 @@ using VetSystems.Vet.Domain.Common;
 
 namespace VetSystems.Vet.Domain.Entities
 {
-    public class Customers : BaseEntity, IAggregateRoot
+    public class VetCustomers : BaseEntity, IAggregateRoot
     {
-        public Customers()
+        public VetCustomers()
         {
-            Patients = new HashSet<Patients>();
+            Patients = new HashSet<VetPatients>();
         }
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
@@ -26,8 +26,8 @@ namespace VetSystems.Vet.Domain.Entities
         public decimal DiscountRate { get; set; } = 0;
         public bool? IsEmail { get; set; } = true;
         public bool? IsPhone { get; set; } = true;
-        public Adress Adress { get; set; }
-        public virtual ICollection<Patients> Patients { get; set; }
+        public VetAdress Adress { get; set; }
+        public virtual ICollection<VetPatients> Patients { get; set; }
 
     }
 }

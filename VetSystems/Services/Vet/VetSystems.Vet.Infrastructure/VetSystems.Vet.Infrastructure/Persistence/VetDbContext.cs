@@ -55,7 +55,7 @@ namespace VetSystems.Vet.Infrastructure.Persistence
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
-        public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<VetProducts> VetProducts { get; set; }
 
         public async Task MigrateAsync(string name)
         {

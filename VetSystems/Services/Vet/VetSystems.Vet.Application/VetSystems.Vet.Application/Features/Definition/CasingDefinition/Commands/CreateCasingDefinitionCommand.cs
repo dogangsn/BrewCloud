@@ -28,9 +28,9 @@ namespace VetSystems.Vet.Application.Features.Definition.CasingDefinition.Comman
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
         private readonly ILogger<CreateCasingDefinitionCommandHandler> _logger;
-        private readonly IRepository<Vet.Domain.Entities.CasingDefinition> _casingdefinitionRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetCasingDefinition> _casingdefinitionRepository;
 
-        public CreateCasingDefinitionCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCasingDefinitionCommandHandler> logger, IRepository<Domain.Entities.CasingDefinition> casingdefinitionRepository)
+        public CreateCasingDefinitionCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCasingDefinitionCommandHandler> logger, IRepository<Domain.Entities.VetCasingDefinition> casingdefinitionRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
@@ -49,7 +49,7 @@ namespace VetSystems.Vet.Application.Features.Definition.CasingDefinition.Comman
             };
             try
             {
-                Vet.Domain.Entities.CasingDefinition casingDefinition = new()
+                Vet.Domain.Entities.VetCasingDefinition casingDefinition = new()
                 {
                     Id = Guid.NewGuid(),
                     CaseName = request.CaseName,

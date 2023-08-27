@@ -34,7 +34,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
             var response = new Response<List<CustomersDto>>();
             try
             {
-                string query = "Select * from Customers where Deleted = 0";
+                string query = "Select * from VetCustomers where Deleted = 0";
                 var _data = _uow.Query<CustomersDto>(query).ToList();
                 response = new Response<List<CustomersDto>>
                 {

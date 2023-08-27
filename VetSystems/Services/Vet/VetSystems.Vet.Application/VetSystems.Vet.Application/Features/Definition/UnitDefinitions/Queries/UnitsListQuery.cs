@@ -34,7 +34,7 @@ namespace VetSystems.Vet.Application.Features.Definition.UnitDefinitions.Queries
             var response = new Response<List<UnitsListDto>>();
             try
             {
-                string query = "Select * from units where Deleted = 0";
+                string query = "Select * from vetunits where Deleted = 0";
                 var _data = _uow.Query<UnitsListDto>(query).ToList();
                 response = new Response<List<UnitsListDto>>
                 {

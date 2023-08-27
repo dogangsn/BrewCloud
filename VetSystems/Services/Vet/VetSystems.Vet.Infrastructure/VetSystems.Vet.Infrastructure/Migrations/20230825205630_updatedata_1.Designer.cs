@@ -12,7 +12,7 @@ using VetSystems.Vet.Infrastructure.Persistence;
 namespace VetSystems.Vet.Infrastructure.Migrations
 {
     [DbContext(typeof(VetDbContext))]
-    [Migration("20230821191628_updatedata_1")]
+    [Migration("20230825205630_updatedata_1")]
     partial class updatedata_1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace VetSystems.Vet.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.Adress", b =>
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetAdress", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -83,12 +83,12 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnName("updateusers");
 
                     b.HasKey("Id")
-                        .HasName("pk_adress");
+                        .HasName("pk_vetadress");
 
-                    b.ToTable("adress", (string)null);
+                    b.ToTable("vetadress", (string)null);
                 });
 
-            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.AnimalBreedsDef", b =>
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetAnimalBreedsDef", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -107,12 +107,12 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnName("breedname");
 
                     b.HasKey("Id")
-                        .HasName("AnimalBreedsDef_pkey");
+                        .HasName("VetAnimalBreedsDef_pkey");
 
-                    b.ToTable("animalbreedsdef", (string)null);
+                    b.ToTable("vetanimalbreedsdef", (string)null);
                 });
 
-            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.AnimalColorsDef", b =>
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetAnimalColorsDef", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -127,12 +127,12 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnName("name");
 
                     b.HasKey("Id")
-                        .HasName("AnimalColorsDef_pkey");
+                        .HasName("VetAnimalColorsDef_pkey");
 
-                    b.ToTable("animalcolorsdef", (string)null);
+                    b.ToTable("vetanimalcolorsdef", (string)null);
                 });
 
-            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.AnimalsType", b =>
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetAnimalsType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -152,12 +152,12 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnName("name");
 
                     b.HasKey("Id")
-                        .HasName("AnimalsType_pkey");
+                        .HasName("VetAnimalsType_pkey");
 
-                    b.ToTable("animalstype", (string)null);
+                    b.ToTable("vetanimalstype", (string)null);
                 });
 
-            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.CasingDefinition", b =>
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetCasingDefinition", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -214,12 +214,12 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnName("updateusers");
 
                     b.HasKey("Id")
-                        .HasName("CasingDefinition_pkey");
+                        .HasName("VetCasingDefinition_pkey");
 
-                    b.ToTable("casingdefinition", (string)null);
+                    b.ToTable("vetcasingdefinition", (string)null);
                 });
 
-            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.CustomerGroupDef", b =>
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetCustomerGroupDef", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -268,12 +268,12 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnName("updateusers");
 
                     b.HasKey("Id")
-                        .HasName("CustomerGroupDef_pkey");
+                        .HasName("VetCustomerGroupDef_pkey");
 
-                    b.ToTable("customergroupdef", (string)null);
+                    b.ToTable("vetcustomergroupdef", (string)null);
                 });
 
-            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.Customers", b =>
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetCustomers", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -372,15 +372,15 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnName("vkntcno");
 
                     b.HasKey("Id")
-                        .HasName("customers_pkey");
+                        .HasName("VetCustomers_pkey");
 
                     b.HasIndex("AdressId")
-                        .HasDatabaseName("ix_customers_adressid");
+                        .HasDatabaseName("ix_vetcustomers_adressid");
 
-                    b.ToTable("customers", (string)null);
+                    b.ToTable("vetcustomers", (string)null);
                 });
 
-            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.Patients", b =>
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetPatients", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -476,15 +476,15 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnName("updateusers");
 
                     b.HasKey("Id")
-                        .HasName("Patients_pkey");
+                        .HasName("VetPatients_pkey");
 
                     b.HasIndex("CustomersId")
-                        .HasDatabaseName("ix_patients_customersid");
+                        .HasDatabaseName("ix_vetpatients_customersid");
 
-                    b.ToTable("patients", (string)null);
+                    b.ToTable("vetpatients", (string)null);
                 });
 
-            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.ProductCategories", b =>
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetProductCategories", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -533,12 +533,12 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnName("updateusers");
 
                     b.HasKey("Id")
-                        .HasName("ProductCategories_pkey");
+                        .HasName("VetProductCategories_pkey");
 
-                    b.ToTable("productcategories", (string)null);
+                    b.ToTable("vetproductcategories", (string)null);
                 });
 
-            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.Products", b =>
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetProducts", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -644,12 +644,12 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnName("updateusers");
 
                     b.HasKey("Id")
-                        .HasName("products_pkey");
+                        .HasName("Vetproducts_pkey");
 
-                    b.ToTable("products", (string)null);
+                    b.ToTable("vetproducts", (string)null);
                 });
 
-            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.Stores", b =>
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetStores", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -702,12 +702,12 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnName("updateusers");
 
                     b.HasKey("Id")
-                        .HasName("Stores_pkey");
+                        .HasName("VetStores_pkey");
 
-                    b.ToTable("stores", (string)null);
+                    b.ToTable("vetstores", (string)null);
                 });
 
-            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.Suppliers", b =>
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetSuppliers", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -765,12 +765,12 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnName("updateusers");
 
                     b.HasKey("Id")
-                        .HasName("Suppliers_pkey");
+                        .HasName("VetSuppliers_pkey");
 
-                    b.ToTable("suppliers", (string)null);
+                    b.ToTable("vetsuppliers", (string)null);
                 });
 
-            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.Units", b =>
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetUnits", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -819,36 +819,36 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnName("updateusers");
 
                     b.HasKey("Id")
-                        .HasName("Units_pkey");
+                        .HasName("VetUnits_pkey");
 
-                    b.ToTable("units", (string)null);
+                    b.ToTable("vetunits", (string)null);
                 });
 
-            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.Customers", b =>
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetCustomers", b =>
                 {
-                    b.HasOne("VetSystems.Vet.Domain.Entities.Adress", "Adress")
+                    b.HasOne("VetSystems.Vet.Domain.Entities.VetAdress", "Adress")
                         .WithMany()
                         .HasForeignKey("AdressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_customers_adress_adressid");
+                        .HasConstraintName("fk_vetcustomers_vetadress_adressid");
 
                     b.Navigation("Adress");
                 });
 
-            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.Patients", b =>
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetPatients", b =>
                 {
-                    b.HasOne("VetSystems.Vet.Domain.Entities.Customers", "Customers")
+                    b.HasOne("VetSystems.Vet.Domain.Entities.VetCustomers", "Customers")
                         .WithMany("Patients")
                         .HasForeignKey("CustomersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_patients_customers_customersid");
+                        .HasConstraintName("fk_vetpatients_vetcustomers_customersid");
 
                     b.Navigation("Customers");
                 });
 
-            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.Customers", b =>
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetCustomers", b =>
                 {
                     b.Navigation("Patients");
                 });

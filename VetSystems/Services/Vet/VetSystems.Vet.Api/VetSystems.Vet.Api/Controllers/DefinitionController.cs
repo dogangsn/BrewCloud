@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VetSystems.Vet.Application.Features.Customers.Commands;
 using VetSystems.Vet.Application.Features.Customers.Queries;
+using VetSystems.Vet.Application.Features.Definition.AnimalColorsDef.Queries;
 using VetSystems.Vet.Application.Features.Definition.CasingDefinition.Commands;
 using VetSystems.Vet.Application.Features.Definition.CasingDefinition.Queries;
 using VetSystems.Vet.Application.Features.Definition.CustomerGroup.Commands;
@@ -198,5 +199,18 @@ namespace VetSystems.Vet.Api.Controllers
 
 
         #endregion
+
+        #region AnimalColorsDef
+
+        [HttpGet(Name = "AnimalColorsDefList")]
+        public async Task<IActionResult> AnimalColorsDefList()
+        {
+            var command = new AnimalColorsDefListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        #endregion
+
     }
 }

@@ -10,12 +10,12 @@ using static Dapper.SqlMapper;
 
 namespace VetSystems.Vet.Infrastructure.EntityConfigurations
 {
-    public class AnimalColorsDefConfig : IEntityTypeConfiguration<AnimalColorsDef>
+    public class AnimalColorsDefConfig : IEntityTypeConfiguration<VetAnimalColorsDef>
     {
-        public void Configure(EntityTypeBuilder<AnimalColorsDef> entity)
+        public void Configure(EntityTypeBuilder<VetAnimalColorsDef> entity)
         {
             entity.HasKey(e => e.Id)
-                .HasName("AnimalColorsDef_pkey");
+                .HasName("VetAnimalColorsDef_pkey");
 
             entity.Property(e => e.Id)
                     .HasColumnName("Id")

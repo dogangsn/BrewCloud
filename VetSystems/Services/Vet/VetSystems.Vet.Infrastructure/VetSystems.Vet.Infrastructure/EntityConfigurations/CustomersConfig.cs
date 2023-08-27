@@ -9,12 +9,12 @@ using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Infrastructure.EntityConfigurations
 {
-    public class CustomersConfig : IEntityTypeConfiguration<Customers>
+    public class CustomersConfig : IEntityTypeConfiguration<VetCustomers>
     {
-        public void Configure(EntityTypeBuilder<Customers> entity)
+        public void Configure(EntityTypeBuilder<VetCustomers> entity)
         {
             entity.HasKey(e => e.Id)
-                           .HasName("customers_pkey");
+                           .HasName("VetCustomers_pkey");
         }
     }
 }

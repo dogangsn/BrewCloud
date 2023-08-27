@@ -7,7 +7,7 @@ using VetSystems.Vet.Domain.Common;
 
 namespace VetSystems.Vet.Domain.Entities
 {
-    public class Patients : BaseEntity, IAggregateRoot
+    public class VetPatients : BaseEntity, IAggregateRoot
     {
         public Guid CustomerId { get; set; }
         public string Name { get; set; } = string.Empty;
@@ -22,6 +22,6 @@ namespace VetSystems.Vet.Domain.Entities
         public bool Sterilization { get; set; }
         public byte? Images { get; set; }
         public bool? Active { get; set; } = true;
-        public Customers Customers { get; set; }
+        public VetCustomers Customers { get; set; }
     }
 }

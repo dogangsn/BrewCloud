@@ -27,9 +27,9 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductCategory.Command
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
         private readonly ILogger<CreateCustomerHandler> _logger;
-        private readonly IRepository<Vet.Domain.Entities.ProductCategories> _productcategoryRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetProductCategories> _productcategoryRepository;
 
-        public CreateProductCategoriesCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<Domain.Entities.ProductCategories> productcategoryRepository)
+        public CreateProductCategoriesCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<Domain.Entities.VetProductCategories> productcategoryRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
@@ -48,7 +48,7 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductCategory.Command
             };
             try
             {
-                Vet.Domain.Entities.ProductCategories productCategory = new()
+                Vet.Domain.Entities.VetProductCategories productCategory = new()
                 {
                     Id = Guid.NewGuid(),
                     Name = request.Name,

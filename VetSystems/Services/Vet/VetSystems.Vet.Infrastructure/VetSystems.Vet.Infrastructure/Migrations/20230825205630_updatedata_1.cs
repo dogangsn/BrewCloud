@@ -10,7 +10,7 @@ namespace VetSystems.Vet.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "adress",
+                name: "vetadress",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -28,11 +28,11 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_adress", x => x.id);
+                    table.PrimaryKey("pk_vetadress", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "animalbreedsdef",
+                name: "vetanimalbreedsdef",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -42,11 +42,11 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("AnimalBreedsDef_pkey", x => x.Id);
+                    table.PrimaryKey("VetAnimalBreedsDef_pkey", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "animalcolorsdef",
+                name: "vetanimalcolorsdef",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -55,11 +55,11 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("AnimalColorsDef_pkey", x => x.Id);
+                    table.PrimaryKey("VetAnimalColorsDef_pkey", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "animalstype",
+                name: "vetanimalstype",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -69,11 +69,11 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("AnimalsType_pkey", x => x.Id);
+                    table.PrimaryKey("VetAnimalsType_pkey", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "casingdefinition",
+                name: "vetcasingdefinition",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -91,11 +91,11 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("CasingDefinition_pkey", x => x.id);
+                    table.PrimaryKey("VetCasingDefinition_pkey", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "customergroupdef",
+                name: "vetcustomergroupdef",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -111,11 +111,11 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("CustomerGroupDef_pkey", x => x.id);
+                    table.PrimaryKey("VetCustomerGroupDef_pkey", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "productcategories",
+                name: "vetproductcategories",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -131,11 +131,11 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("ProductCategories_pkey", x => x.id);
+                    table.PrimaryKey("VetProductCategories_pkey", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "products",
+                name: "vetproducts",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -165,11 +165,11 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("products_pkey", x => x.id);
+                    table.PrimaryKey("Vetproducts_pkey", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "stores",
+                name: "vetstores",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -186,11 +186,11 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("Stores_pkey", x => x.id);
+                    table.PrimaryKey("VetStores_pkey", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "suppliers",
+                name: "vetsuppliers",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -208,11 +208,11 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("Suppliers_pkey", x => x.id);
+                    table.PrimaryKey("VetSuppliers_pkey", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "units",
+                name: "vetunits",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -228,11 +228,11 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("Units_pkey", x => x.id);
+                    table.PrimaryKey("VetUnits_pkey", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "customers",
+                name: "vetcustomers",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -259,17 +259,17 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("customers_pkey", x => x.id);
+                    table.PrimaryKey("VetCustomers_pkey", x => x.id);
                     table.ForeignKey(
-                        name: "fk_customers_adress_adressid",
+                        name: "fk_vetcustomers_vetadress_adressid",
                         column: x => x.adressid,
-                        principalTable: "adress",
+                        principalTable: "vetadress",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "patients",
+                name: "vetpatients",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -297,66 +297,66 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("Patients_pkey", x => x.id);
+                    table.PrimaryKey("VetPatients_pkey", x => x.id);
                     table.ForeignKey(
-                        name: "fk_patients_customers_customersid",
+                        name: "fk_vetpatients_vetcustomers_customersid",
                         column: x => x.customersid,
-                        principalTable: "customers",
+                        principalTable: "vetcustomers",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "ix_customers_adressid",
-                table: "customers",
+                name: "ix_vetcustomers_adressid",
+                table: "vetcustomers",
                 column: "adressid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_patients_customersid",
-                table: "patients",
+                name: "ix_vetpatients_customersid",
+                table: "vetpatients",
                 column: "customersid");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "animalbreedsdef");
+                name: "vetanimalbreedsdef");
 
             migrationBuilder.DropTable(
-                name: "animalcolorsdef");
+                name: "vetanimalcolorsdef");
 
             migrationBuilder.DropTable(
-                name: "animalstype");
+                name: "vetanimalstype");
 
             migrationBuilder.DropTable(
-                name: "casingdefinition");
+                name: "vetcasingdefinition");
 
             migrationBuilder.DropTable(
-                name: "customergroupdef");
+                name: "vetcustomergroupdef");
 
             migrationBuilder.DropTable(
-                name: "patients");
+                name: "vetpatients");
 
             migrationBuilder.DropTable(
-                name: "productcategories");
+                name: "vetproductcategories");
 
             migrationBuilder.DropTable(
-                name: "products");
+                name: "vetproducts");
 
             migrationBuilder.DropTable(
-                name: "stores");
+                name: "vetstores");
 
             migrationBuilder.DropTable(
-                name: "suppliers");
+                name: "vetsuppliers");
 
             migrationBuilder.DropTable(
-                name: "units");
+                name: "vetunits");
 
             migrationBuilder.DropTable(
-                name: "customers");
+                name: "vetcustomers");
 
             migrationBuilder.DropTable(
-                name: "adress");
+                name: "vetadress");
         }
     }
 }

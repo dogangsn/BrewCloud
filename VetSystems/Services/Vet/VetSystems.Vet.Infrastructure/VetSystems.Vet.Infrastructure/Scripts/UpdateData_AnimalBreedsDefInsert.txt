@@ -1,11 +1,7 @@
 ﻿/*Hayvan türleri*/
 
-ALTER TABLE   IF EXISTS   ONLY   AnimalBreedsDef    
-ALTER   COLUMN   Id DROP IDENTITY  IF EXISTS;
+SET IDENTITY_INSERT vetanimalbreedsdef ON;
 
+INSERT INTO VetAnimalBreedsDef (Id,AnimalType, BreedName) VALUES (1, 2, 'Abyssinian');
 
-INSERT INTO AnimalBreedsDef (Id,AnimalType, BreedName) VALUES
-(1, 2, 'Abyssinian');
-
-ALTER TABLE   IF EXISTS   ONLY   AnimalBreedsDef 
-ALTER   COLUMN  Id ADD GENERATED  ALWAYS  AS IDENTITY (INCREMENT 1 START 8 MINVALUE 0 MAXVALUE 2147483647 CACHE 1 );
+SET IDENTITY_INSERT vetanimalbreedsdef OFF;

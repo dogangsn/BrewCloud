@@ -23,10 +23,10 @@ namespace VetSystems.Vet.Application.Features.Suppliers.Commands
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
         private readonly ILogger<DeleteSuppliersCommandHandler> _logger;
-        private readonly IRepository<Domain.Entities.Suppliers> _suppliersRepository;
+        private readonly IRepository<Domain.Entities.VetSuppliers> _suppliersRepository;
         private readonly IIdentityRepository _identityRepository;
 
-        public DeleteSuppliersCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<DeleteSuppliersCommandHandler> logger, IRepository<Domain.Entities.Suppliers> suppliersRepository, IIdentityRepository identityRepository)
+        public DeleteSuppliersCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<DeleteSuppliersCommandHandler> logger, IRepository<Domain.Entities.VetSuppliers> suppliersRepository, IIdentityRepository identityRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));

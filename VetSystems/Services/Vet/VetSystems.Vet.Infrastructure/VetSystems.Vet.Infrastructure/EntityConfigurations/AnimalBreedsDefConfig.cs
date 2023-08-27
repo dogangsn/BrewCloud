@@ -9,12 +9,12 @@ using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Infrastructure.EntityConfigurations
 {
-    public class AnimalBreedsDefConfig : IEntityTypeConfiguration<AnimalBreedsDef>
+    public class AnimalBreedsDefConfig : IEntityTypeConfiguration<VetAnimalBreedsDef>
     {
-        public void Configure(EntityTypeBuilder<AnimalBreedsDef> entity)
+        public void Configure(EntityTypeBuilder<VetAnimalBreedsDef> entity)
         {
             entity.HasKey(e => e.Id)
-                    .HasName("AnimalBreedsDef_pkey");
+                    .HasName("VetAnimalBreedsDef_pkey");
 
             entity.Property(e => e.Id)
                 .HasColumnName("Id")

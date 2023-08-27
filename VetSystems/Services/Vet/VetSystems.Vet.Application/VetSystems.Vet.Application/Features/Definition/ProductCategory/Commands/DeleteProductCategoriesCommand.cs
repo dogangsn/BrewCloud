@@ -25,10 +25,10 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductCategory.Command
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
         private readonly ILogger<DeleteProductCategoriesCommanddHandler> _logger;
-        private readonly IRepository<Vet.Domain.Entities.ProductCategories> _productcategoryRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetProductCategories> _productcategoryRepository;
         private readonly IIdentityRepository _identityRepository;
 
-        public DeleteProductCategoriesCommanddHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<DeleteProductCategoriesCommanddHandler> logger, IRepository<Domain.Entities.ProductCategories> productcategoryRepository, IIdentityRepository identityRepository)
+        public DeleteProductCategoriesCommanddHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<DeleteProductCategoriesCommanddHandler> logger, IRepository<Domain.Entities.VetProductCategories> productcategoryRepository, IIdentityRepository identityRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));

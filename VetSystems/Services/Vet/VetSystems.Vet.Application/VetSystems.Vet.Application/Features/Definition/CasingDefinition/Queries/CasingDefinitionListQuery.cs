@@ -34,7 +34,7 @@ namespace VetSystems.Vet.Application.Features.Definition.CasingDefinition.Querie
             var response = new Response<List<CasingDefinitionListDto>>();
             try
             {
-                string query = "Select * from CasingDefinition where Deleted = 0";
+                string query = "Select * from vetCasingDefinition where Deleted = 0";
                 var _data = _uow.Query<CasingDefinitionListDto>(query).ToList();
                 response = new Response<List<CasingDefinitionListDto>>
                 {

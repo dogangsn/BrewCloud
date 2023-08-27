@@ -28,9 +28,9 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductCategory.Command
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
         private readonly ILogger<CreateCustomerHandler> _logger;
-        private readonly IRepository<Vet.Domain.Entities.ProductCategories> _productcategoryRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetProductCategories> _productcategoryRepository;
 
-        public UpdateProductCategoriesCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<Domain.Entities.ProductCategories> productcategoryRepository)
+        public UpdateProductCategoriesCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<Domain.Entities.VetProductCategories> productcategoryRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));

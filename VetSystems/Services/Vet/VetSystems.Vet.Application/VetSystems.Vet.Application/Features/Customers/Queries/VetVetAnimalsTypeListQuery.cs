@@ -8,36 +8,35 @@ using System.Threading.Tasks;
 using VetSystems.Shared.Dtos;
 using VetSystems.Shared.Service;
 using VetSystems.Vet.Application.Models.Customers;
-using VetSystems.Vet.Application.Models.Definition.Product;
 using VetSystems.Vet.Domain.Contracts;
 
-namespace VetSystems.Vet.Application.Features.Definition.ProductDescription.Queries
+namespace VetSystems.Vet.Application.Features.Customers.Queries
 {
-    public class ProductDescriptionListQuery : IRequest<Response<List<ProductDescriptionsDto>>>
+    public class VetVetAnimalsTypeListQuery : IRequest<Response<List<VetVetAnimalsTypeListDto>>>
     {
     }
 
-    public class ProductDescriptionListQueryHandler : IRequestHandler<ProductDescriptionListQuery, Response<List<ProductDescriptionsDto>>>
+    public class VetVetAnimalsTypeListQueryHandler : IRequestHandler<VetVetAnimalsTypeListQuery, Response<List<VetVetAnimalsTypeListDto>>>
     {
         private readonly IIdentityRepository _identityRepository;
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
 
-        public ProductDescriptionListQueryHandler(IIdentityRepository identityRepository, IUnitOfWork uow, IMapper mapper)
+        public VetVetAnimalsTypeListQueryHandler(IIdentityRepository identityRepository, IUnitOfWork uow, IMapper mapper)
         {
             _identityRepository = identityRepository;
             _uow = uow;
             _mapper = mapper;
         }
 
-        public async Task<Response<List<ProductDescriptionsDto>>> Handle(ProductDescriptionListQuery request, CancellationToken cancellationToken)
+        public async Task<Response<List<VetVetAnimalsTypeListDto>>> Handle(VetVetAnimalsTypeListQuery request, CancellationToken cancellationToken)
         {
-            var response = new Response<List<ProductDescriptionsDto>>();
+            var response = new Response<List<VetVetAnimalsTypeListDto>>();
             try
             {
-                string query = "Select * from VetProducts where Deleted = 0";
-                var _data = _uow.Query<ProductDescriptionsDto>(query).ToList();
-                response = new Response<List<ProductDescriptionsDto>>
+                string query = "Select * from Vetanimalstype  With(NOLOCK)";
+                var _data = _uow.Query<VetVetAnimalsTypeListDto>(query).ToList();
+                response = new Response<List<VetVetAnimalsTypeListDto>>
                 {
                     Data = _data,
                     IsSuccessful = true,
@@ -50,8 +49,6 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductDescription.Quer
             }
 
             return response;
-
-
         }
     }
 }

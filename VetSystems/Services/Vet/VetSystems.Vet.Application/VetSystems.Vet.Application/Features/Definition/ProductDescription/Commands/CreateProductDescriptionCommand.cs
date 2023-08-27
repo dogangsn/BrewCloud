@@ -40,20 +40,59 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductDescription.Comm
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
         private readonly ILogger<CreateCustomerHandler> _logger;
-        private readonly IRepository<Vet.Domain.Entities.Products> _customerRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetProducts> _productRepository;
 
-        public CreateProductDescriptionCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<Products> customerRepository)
+        public CreateProductDescriptionCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<VetProducts> productRepository)
         {
             _uow = uow;
             _identity = identity;
             _mapper = mapper;
             _logger = logger;
-            _customerRepository = customerRepository;
+            _productRepository = productRepository;
         }
 
-        public Task<Response<bool>> Handle(CreateProductDescriptionCommand request, CancellationToken cancellationToken)
+        public async Task<Response<bool>> Handle(CreateProductDescriptionCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var response = new Response<bool>
+            {
+                ResponseType = ResponseType.Ok,
+                Data = true,
+                IsSuccessful = true
+            };
+            try
+            {
+                VetProducts _product = new()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = request.Name,
+                    UnitId = request.UnitId,
+                    CategoryId = request.CategoryId,
+                    ProductTypeId = request.ProductTypeId,
+                    SupplierId = request.SupplierId,
+                    ProductCode = request.ProductCode,
+                    ProductBarcode = request.ProductBarcode,
+                    Ratio = request.Ratio,
+                    Active = request.Active,
+                    BuyingPrice = request.BuyingPrice,
+                    CriticalAmount = request.CriticalAmount,
+                    FixPrice = request.FixPrice,
+                    IsExpirationDate = request.IsExpirationDate,
+                    SellingIncludeKDV = request.SellingIncludeKDV,
+                    SellingPrice = request.SellingPrice,
+                    BuyingIncludeKDV= request.BuyingIncludeKDV,
+                    CreateDate = DateTime.Now,
+                    CreateUsers = _identity.Account.UserName,
+                };
+                await _productRepository.AddAsync(_product);
+                await _uow.SaveChangesAsync(cancellationToken);
+
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccessful = false;
+            }
+            return response;
+
         }
     }
 }

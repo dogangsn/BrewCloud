@@ -25,9 +25,9 @@ namespace VetSystems.Vet.Application.Features.Definition.CustomerGroup.Commands
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
         private readonly ILogger<CreateCustomerGroupDefCommandHandler> _logger;
-        private readonly IRepository<Vet.Domain.Entities.CustomerGroupDef> _customergroupdefRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetCustomerGroupDef> _customergroupdefRepository;
 
-        public CreateCustomerGroupDefCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerGroupDefCommandHandler> logger, IRepository<Domain.Entities.CustomerGroupDef> customergroupdefRepository)
+        public CreateCustomerGroupDefCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerGroupDefCommandHandler> logger, IRepository<Domain.Entities.VetCustomerGroupDef> customergroupdefRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
@@ -46,7 +46,7 @@ namespace VetSystems.Vet.Application.Features.Definition.CustomerGroup.Commands
             };
             try
             {
-                Vet.Domain.Entities.CustomerGroupDef customerGroupDef = new()
+                Vet.Domain.Entities.VetCustomerGroupDef customerGroupDef = new()
                 {
                     Id = Guid.NewGuid(),
                     Code = request.Code,

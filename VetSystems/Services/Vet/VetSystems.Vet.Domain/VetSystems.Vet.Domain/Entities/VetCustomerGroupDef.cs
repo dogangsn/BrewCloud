@@ -7,7 +7,7 @@ using VetSystems.Vet.Domain.Common;
 
 namespace VetSystems.Vet.Domain.Entities
 {
-    public class CustomerGroupDef : BaseEntity, IAggregateRoot
+    public class VetCustomerGroupDef : BaseEntity, IAggregateRoot
     {
         public string Code { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;

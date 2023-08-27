@@ -24,10 +24,10 @@ namespace VetSystems.Vet.Application.Features.Store.Commands
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
         private readonly ILogger<DeleteStoreCommandHandler> _logger;
-        private readonly IRepository<Vet.Domain.Entities.Stores> _storesRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetStores> _storesRepository;
         private readonly IIdentityRepository _identityRepository;
 
-        public DeleteStoreCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<DeleteStoreCommandHandler> logger, IRepository<Domain.Entities.Stores> storesRepository, IIdentityRepository identityRepository)
+        public DeleteStoreCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<DeleteStoreCommandHandler> logger, IRepository<Domain.Entities.VetStores> storesRepository, IIdentityRepository identityRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));

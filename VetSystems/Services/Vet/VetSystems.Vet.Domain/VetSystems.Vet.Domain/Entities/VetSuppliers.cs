@@ -7,7 +7,7 @@ using VetSystems.Vet.Domain.Common;
 
 namespace VetSystems.Vet.Domain.Entities
 {
-    public class Suppliers : BaseEntity, IAggregateRoot
+    public class VetSuppliers : BaseEntity, IAggregateRoot
     {
         public string SupplierName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;

@@ -27,9 +27,9 @@ namespace VetSystems.Vet.Application.Features.Suppliers.Commands
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
         private readonly ILogger<UpdateSuppliersCommandHandler> _logger;
-        private readonly IRepository<Domain.Entities.Suppliers> _suppliersRepository;
+        private readonly IRepository<Domain.Entities.VetSuppliers> _suppliersRepository;
 
-        public UpdateSuppliersCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<UpdateSuppliersCommandHandler> logger, IRepository<Domain.Entities.Suppliers> suppliersRepository)
+        public UpdateSuppliersCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<UpdateSuppliersCommandHandler> logger, IRepository<Domain.Entities.VetSuppliers> suppliersRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));

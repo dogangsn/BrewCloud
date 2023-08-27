@@ -26,9 +26,9 @@ namespace VetSystems.Vet.Application.Features.Suppliers.Commands
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
         private readonly ILogger<CreateSuppliersCommandHandler> _logger;
-        private readonly IRepository<Domain.Entities.Suppliers> _suppliersRepository;
+        private readonly IRepository<Domain.Entities.VetSuppliers> _suppliersRepository;
 
-        public CreateSuppliersCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateSuppliersCommandHandler> logger, IRepository<Domain.Entities.Suppliers> suppliersRepository)
+        public CreateSuppliersCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateSuppliersCommandHandler> logger, IRepository<Domain.Entities.VetSuppliers> suppliersRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
@@ -47,7 +47,7 @@ namespace VetSystems.Vet.Application.Features.Suppliers.Commands
             };
             try
             {
-                Domain.Entities.Suppliers suppliers = new()
+                Domain.Entities.VetSuppliers suppliers = new()
                 {
                     Id = Guid.NewGuid(),
                     SupplierName = request.SupplierName,

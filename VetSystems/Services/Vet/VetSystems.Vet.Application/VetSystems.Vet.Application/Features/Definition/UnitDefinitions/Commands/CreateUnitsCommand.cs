@@ -26,9 +26,9 @@ namespace VetSystems.Vet.Application.Features.Definition.UnitDefinitions.Command
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
         private readonly ILogger<CreateCustomerHandler> _logger;
-        private readonly IRepository<Vet.Domain.Entities.Units> _unitsRepositoryy;
+        private readonly IRepository<Vet.Domain.Entities.VetUnits> _unitsRepositoryy;
 
-        public CreateUnitsCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<Domain.Entities.Units> unitsRepository)
+        public CreateUnitsCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<Domain.Entities.VetUnits> unitsRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
@@ -45,7 +45,7 @@ namespace VetSystems.Vet.Application.Features.Definition.UnitDefinitions.Command
             };
             try
             {
-                Units units = new()
+                VetUnits units = new()
                 {
                     Id = Guid.NewGuid(),
                     UnitCode = request.UnitCode,

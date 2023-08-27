@@ -24,10 +24,10 @@ namespace VetSystems.Vet.Application.Features.Definition.CustomerGroup.Commands
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
         private readonly ILogger<CreateCustomerHandler> _logger;
-        private readonly IRepository<Vet.Domain.Entities.CustomerGroupDef> _customergroupdefRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetCustomerGroupDef> _customergroupdefRepository;
         private readonly IIdentityRepository _identityRepository;
 
-        public DeleteCustomerGroupDefCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<Domain.Entities.CustomerGroupDef> customergroupdefRepository, IIdentityRepository identityRepository)
+        public DeleteCustomerGroupDefCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<Domain.Entities.VetCustomerGroupDef> customergroupdefRepository, IIdentityRepository identityRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));

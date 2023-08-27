@@ -25,9 +25,9 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
         private readonly ILogger<CreateCustomerHandler> _logger;
-        private readonly IRepository<Vet.Domain.Entities.Customers> _customerRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetCustomers> _customerRepository;
 
-        public CreateCustomerHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<Domain.Entities.Customers> customerRepository)
+        public CreateCustomerHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<Domain.Entities.VetCustomers> customerRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
@@ -47,7 +47,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
             try
             {
 
-                Vet.Domain.Entities.Adress adress = new()
+                Vet.Domain.Entities.VetAdress adress = new()
                 {
                     Id = Guid.NewGuid(),
                     Province = request.CreateCustomers.Province,
@@ -57,7 +57,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                     County = "TR"
                 };
 
-                Vet.Domain.Entities.Customers customers = new()
+                Vet.Domain.Entities.VetCustomers customers = new()
                 {
                     Id = Guid.NewGuid(),
                     FirstName = request.CreateCustomers.FirstName,

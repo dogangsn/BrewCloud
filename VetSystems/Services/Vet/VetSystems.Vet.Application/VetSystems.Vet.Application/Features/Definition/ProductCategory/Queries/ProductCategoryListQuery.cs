@@ -35,7 +35,7 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductCategory.Queries
             var response = new Response<List<ProductCategoriesListDto>>();
             try
             {
-                string query = "Select * from productcategories where Deleted = 0";
+                string query = "Select * from vetproductcategories where Deleted = 0";
                 var _data = _uow.Query<ProductCategoriesListDto>(query).ToList();
                 response = new Response<List<ProductCategoriesListDto>>
                 {

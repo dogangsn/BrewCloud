@@ -23,10 +23,10 @@ namespace VetSystems.Vet.Application.Features.Definition.CasingDefinition.Comman
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
         private readonly ILogger<DeleteCasingDefinitionCommandHandler> _logger;
-        private readonly IRepository<Vet.Domain.Entities.CasingDefinition> _casingdefinitionRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetCasingDefinition> _casingdefinitionRepository;
         private readonly IIdentityRepository _identityRepository;
 
-        public DeleteCasingDefinitionCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<DeleteCasingDefinitionCommandHandler> logger, IRepository<Domain.Entities.CasingDefinition> casingdefinitionRepository, IIdentityRepository identityRepository)
+        public DeleteCasingDefinitionCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<DeleteCasingDefinitionCommandHandler> logger, IRepository<Domain.Entities.VetCasingDefinition> casingdefinitionRepository, IIdentityRepository identityRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));

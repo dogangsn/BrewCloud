@@ -26,9 +26,9 @@ namespace VetSystems.Vet.Application.Features.Store.Commands
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
         private readonly ILogger<CreateCustomerHandler> _logger;
-        private readonly IRepository<Vet.Domain.Entities.Stores> _storesRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetStores> _storesRepository;
 
-        public CreateStoreCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<Domain.Entities.Stores> storesRepository)
+        public CreateStoreCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<Domain.Entities.VetStores> storesRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
@@ -47,7 +47,7 @@ namespace VetSystems.Vet.Application.Features.Store.Commands
             };
             try
             {
-                Vet.Domain.Entities.Stores stores = new()
+                Vet.Domain.Entities.VetStores stores = new()
                 {
                     Id = Guid.NewGuid(),
                     DepotCode = request.DepotCode,

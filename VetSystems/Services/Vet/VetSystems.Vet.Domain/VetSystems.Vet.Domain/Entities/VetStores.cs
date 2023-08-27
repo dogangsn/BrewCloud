@@ -7,11 +7,10 @@ using VetSystems.Vet.Domain.Common;
 
 namespace VetSystems.Vet.Domain.Entities
 {
-    public class CasingDefinition : BaseEntity, IAggregateRoot
+    public class VetStores : BaseEntity, IAggregateRoot
     {
-        public string CaseName { get; set; } = string.Empty;
         public bool Active { get; set; } = true;
-        public string Kasa { get; set; } = string.Empty;
-        public bool? Durumu { get; set; }
+        public string DepotCode { get; set; } = string.Empty;
+        public string DepotName { get; set; } = string.Empty;
     }
 }

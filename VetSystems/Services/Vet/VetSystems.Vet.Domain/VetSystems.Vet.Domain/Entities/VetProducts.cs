@@ -8,7 +8,7 @@ using VetSystems.Vet.Domain.Common;
 
 namespace VetSystems.Vet.Domain.Entities
 {
-    public class Products : BaseEntity, IAggregateRoot
+    public class VetProducts : BaseEntity, IAggregateRoot
     {
         public string Name { get; set; }
         public Guid? UnitId { get; set; }

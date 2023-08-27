@@ -34,7 +34,7 @@ namespace VetSystems.Vet.Application.Features.Store.Queries
             var response = new Response<List<StoreListDto>>();
             try
             {
-                string query = "Select * from Stores where Deleted = 0";
+                string query = "Select * from vetStores where Deleted = 0";
                 var _data = _uow.Query<StoreListDto>(query).ToList();
                 response = new Response<List<StoreListDto>>
                 {

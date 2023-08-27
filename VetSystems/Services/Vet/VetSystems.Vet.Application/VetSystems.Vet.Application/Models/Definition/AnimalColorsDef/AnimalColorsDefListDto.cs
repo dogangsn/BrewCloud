@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VetSystems.Account.Domain.Common;
 
-namespace VetSystems.Account.Domain.Entities
+namespace VetSystems.Vet.Application.Models.Definition.AnimalColorsDef
 {
-    public class Products : BaseEntity
+    public class AnimalColorsDefListDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

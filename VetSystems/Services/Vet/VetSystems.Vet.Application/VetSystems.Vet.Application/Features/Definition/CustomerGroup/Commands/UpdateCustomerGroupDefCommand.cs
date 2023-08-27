@@ -26,9 +26,9 @@ namespace VetSystems.Vet.Application.Features.Definition.CustomerGroup.Commands
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
         private readonly ILogger<UpdateCustomerGroupDefCommandHandler> _logger;
-        private readonly IRepository<Vet.Domain.Entities.CustomerGroupDef> _customerGroupDefRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetCustomerGroupDef> _customerGroupDefRepository;
 
-        public UpdateCustomerGroupDefCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<UpdateCustomerGroupDefCommandHandler> logger, IRepository<Domain.Entities.CustomerGroupDef> customerGroupDefRepository)
+        public UpdateCustomerGroupDefCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<UpdateCustomerGroupDefCommandHandler> logger, IRepository<Domain.Entities.VetCustomerGroupDef> customerGroupDefRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));

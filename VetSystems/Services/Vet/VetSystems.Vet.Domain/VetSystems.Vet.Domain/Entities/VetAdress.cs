@@ -7,7 +7,7 @@ using VetSystems.Vet.Domain.Common;
 
 namespace VetSystems.Vet.Domain.Entities
 {
-    public class Adress : BaseEntity, IAggregateRoot
+    public class VetAdress : BaseEntity, IAggregateRoot
     {
         public string Province { get; set; } = string.Empty;
         public string District { get; set; } = string.Empty;

@@ -7,10 +7,9 @@ using VetSystems.Vet.Domain.Common;
 
 namespace VetSystems.Vet.Domain.Entities
 {
-    public class Units : BaseEntity
+    public class VetAnimalBreedsDef : IdBaseEntity, IAggregateRoot
     {
-        public string UnitCode { get; set; } = string.Empty;
-        public string UnitName { get; set; } = string.Empty;
-   
+        public int AnimalType { get; set; }
+        public string BreedName { get; set; } = string.Empty;
     }
 }

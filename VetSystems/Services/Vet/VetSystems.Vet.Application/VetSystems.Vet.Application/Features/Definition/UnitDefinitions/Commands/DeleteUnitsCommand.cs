@@ -23,10 +23,10 @@ namespace VetSystems.Vet.Application.Features.Definition.UnitDefinitions.Command
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
         private readonly ILogger<DeleteUnitsCommandHandler> _logger;
-        private readonly IRepository<Vet.Domain.Entities.Units> _unitsRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetUnits> _unitsRepository;
         private readonly IIdentityRepository _identityRepository;
 
-        public DeleteUnitsCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<DeleteUnitsCommandHandler> logger, IRepository<Domain.Entities.Units> unitsRepository, IIdentityRepository identityRepository)
+        public DeleteUnitsCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<DeleteUnitsCommandHandler> logger, IRepository<Domain.Entities.VetUnits> unitsRepository, IIdentityRepository identityRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));

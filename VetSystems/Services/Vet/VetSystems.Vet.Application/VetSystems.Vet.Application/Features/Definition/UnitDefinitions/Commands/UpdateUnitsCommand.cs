@@ -25,9 +25,9 @@ namespace VetSystems.Vet.Application.Features.Definition.UnitDefinitions.Command
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
         private readonly ILogger<UpdateUnitsCommandHandler> _logger;
-        private readonly IRepository<Vet.Domain.Entities.Units> _unitsRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetUnits> _unitsRepository;
 
-        public UpdateUnitsCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<UpdateUnitsCommandHandler> logger, IRepository<Domain.Entities.Units> unitsRepository)
+        public UpdateUnitsCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<UpdateUnitsCommandHandler> logger, IRepository<Domain.Entities.VetUnits> unitsRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));

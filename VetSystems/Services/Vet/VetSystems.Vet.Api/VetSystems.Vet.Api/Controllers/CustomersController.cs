@@ -33,6 +33,22 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpGet(Name = "AnimalBreedsDefList")]
+        public async Task<IActionResult> AnimalBreedsDefList()
+        {
+            var command = new AnimalBreedsDefListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpGet(Name = "VetAnimalsTypeList")]
+        public async Task<IActionResult> VetAnimalsTypeList()
+        {
+            var command = new VetVetAnimalsTypeListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
 
     }
 }

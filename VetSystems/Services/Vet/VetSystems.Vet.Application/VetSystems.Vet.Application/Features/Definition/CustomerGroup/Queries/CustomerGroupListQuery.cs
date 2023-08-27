@@ -35,7 +35,7 @@ namespace VetSystems.Vet.Application.Features.Definition.CustomerGroup.Queries
             var response = new Response<List<CustomerGroupDefDto>>();
             try
             {
-                string query = "Select * from CustomerGroupDef where Deleted = 0";
+                string query = "Select * from vetCustomerGroupDef where Deleted = 0";
                 var _data = _uow.Query<CustomerGroupDefDto>(query).ToList();
                 response = new Response<List<CustomerGroupDefDto>>
                 {

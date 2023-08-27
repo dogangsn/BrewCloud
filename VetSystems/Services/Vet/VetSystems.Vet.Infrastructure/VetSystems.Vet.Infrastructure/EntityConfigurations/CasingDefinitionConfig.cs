@@ -9,12 +9,12 @@ using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Infrastructure.EntityConfigurations
 {
-    internal class CasingDefinitionConfig : IEntityTypeConfiguration<CasingDefinition>
+    internal class CasingDefinitionConfig : IEntityTypeConfiguration<VetCasingDefinition>
     {
-        public void Configure(EntityTypeBuilder<CasingDefinition> entity)
+        public void Configure(EntityTypeBuilder<VetCasingDefinition> entity)
         {
             entity.HasKey(e => e.Id)
-                      .HasName("CasingDefinition_pkey");
+                      .HasName("VetCasingDefinition_pkey");
         }
     }
 }

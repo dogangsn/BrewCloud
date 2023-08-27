@@ -23,10 +23,10 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductDescription.Comm
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
         private readonly ILogger<DeleteProductDescriptionCommandHandler> _logger;
-        private readonly IRepository<Vet.Domain.Entities.Products> _productRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetProducts> _productRepository;
         private readonly IIdentityRepository _identityRepository;
 
-        public DeleteProductDescriptionCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<DeleteProductDescriptionCommandHandler> logger, IRepository<Domain.Entities.Products> productRepository, IIdentityRepository identityRepository)
+        public DeleteProductDescriptionCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<DeleteProductDescriptionCommandHandler> logger, IRepository<Domain.Entities.VetProducts> productRepository, IIdentityRepository identityRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));

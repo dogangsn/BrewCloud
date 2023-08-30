@@ -31,6 +31,9 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductDescription.Comm
         public bool? BuyingIncludeKDV { get; set; } = false;
         public bool? FixPrice { get; set; } = false;
         public bool? IsExpirationDate { get; set; } = false;
+        public int? AnimalType { get; set; }
+        public int? NumberRepetitions { get; set; }
+
 
     }
 

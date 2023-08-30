@@ -58,6 +58,13 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "ProductDescriptionFilters")]
+        public async Task<IActionResult> ProductDescriptionFilters([FromBody] ProductDescriptionFiltersQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
         #endregion
 
 

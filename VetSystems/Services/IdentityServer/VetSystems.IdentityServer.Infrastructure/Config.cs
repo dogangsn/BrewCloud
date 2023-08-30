@@ -15,6 +15,8 @@ namespace VetSystems.IdentityServer.Infrastructure
              {
             new ApiResource("resource_account"){Scopes = {"accountapi"}},
             new ApiResource("resource_vet"){Scopes = {"vetapi"}},
+            new ApiResource("resource_integration"){Scopes={"integrationapi"}},
+            new ApiResource("resource_mobile"){Scopes={"mobile"}},
             new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
         };
 
@@ -32,6 +34,8 @@ namespace VetSystems.IdentityServer.Infrastructure
             {
                 new ApiScope("accountapi","Account Api"),
                 new ApiScope("vetapi","Vet Api"),
+                new ApiScope("integrationapi","Integration Api"),
+                new ApiScope("mobile","Mobile Api"),
                 new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
             };
 
@@ -45,7 +49,7 @@ namespace VetSystems.IdentityServer.Infrastructure
                    ClientSecrets = { new Secret("secret".Sha256()) },
                    UpdateAccessTokenClaimsOnRefresh=true,
                    AllowedGrantTypes= GrantTypes.ClientCredentials,
-                   AllowedScopes = { "accountapi", "vetapi", IdentityServerConstants.LocalApi.ScopeName }
+                   AllowedScopes = { "accountapi", "vetapi", "integrationapi", IdentityServerConstants.LocalApi.ScopeName }
                },
                new Client
                {
@@ -55,13 +59,28 @@ namespace VetSystems.IdentityServer.Infrastructure
                    AllowOfflineAccess = true,
                    AlwaysIncludeUserClaimsInIdToken =true,
                    AllowedGrantTypes= GrantTypes.ResourceOwnerPassword,
-                   AllowedScopes = { "accountapi", "vetapi", IdentityServerConstants.StandardScopes.Email, IdentityServerConstants.StandardScopes.OpenId, IdentityServerConstants.StandardScopes.Profile, IdentityServerConstants.StandardScopes.OfflineAccess, IdentityServerConstants.LocalApi.ScopeName },
+                   AllowedScopes = { "accountapi", "vetapi", "integrationapi", IdentityServerConstants.StandardScopes.Email, IdentityServerConstants.StandardScopes.OpenId, IdentityServerConstants.StandardScopes.Profile, IdentityServerConstants.StandardScopes.OfflineAccess, IdentityServerConstants.LocalApi.ScopeName },
                    AccessTokenLifetime=43200,
                    UpdateAccessTokenClaimsOnRefresh=true,
                    RefreshTokenExpiration=TokenExpiration.Absolute,
                    AbsoluteRefreshTokenLifetime= (int) (DateTime.Now.AddDays(30)- DateTime.Now).TotalSeconds,
                    RefreshTokenUsage= TokenUsage.ReUse
-               }
+               },
+               new Client
+               {
+                    ClientName="VetMobile",
+                    ClientId="vetmobile",
+                    ClientSecrets= {new Secret("secret".Sha256())},
+                    AllowOfflineAccess=true,
+                    AlwaysIncludeUserClaimsInIdToken =true,
+                    UpdateAccessTokenClaimsOnRefresh=true,
+                    AllowedGrantTypes={ "delegation" },
+                    AllowedScopes={ "accountapi", "vetapi", "integrationapi", "mobile", IdentityServerConstants.LocalApi.ScopeName},
+                    AccessTokenLifetime=43200,
+                    RefreshTokenExpiration=TokenExpiration.Absolute,
+                    AbsoluteRefreshTokenLifetime= (int) (DateTime.Now.AddDays(30)- DateTime.Now).TotalSeconds,
+                    RefreshTokenUsage= TokenUsage.ReUse
+                },
            };
 
     }

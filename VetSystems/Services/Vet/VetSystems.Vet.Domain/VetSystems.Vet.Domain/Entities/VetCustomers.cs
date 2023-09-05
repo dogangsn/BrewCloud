@@ -14,6 +14,9 @@ namespace VetSystems.Vet.Domain.Entities
         {
             Patients = new HashSet<VetPatients>();
         }
+
+        [NotMapped]
+        public int RecId { get; set; }
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;

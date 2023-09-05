@@ -8,6 +8,8 @@ using VetSystems.Vet.Application.Features.Definition.CasingDefinition.Commands;
 using VetSystems.Vet.Application.Features.Definition.CasingDefinition.Queries;
 using VetSystems.Vet.Application.Features.Definition.CustomerGroup.Commands;
 using VetSystems.Vet.Application.Features.Definition.CustomerGroup.Queries;
+using VetSystems.Vet.Application.Features.Definition.PaymentMethods.Commands;
+using VetSystems.Vet.Application.Features.Definition.PaymentMethods.Queries;
 using VetSystems.Vet.Application.Features.Definition.ProductCategory.Commands;
 using VetSystems.Vet.Application.Features.Definition.ProductCategory.Queries;
 using VetSystems.Vet.Application.Features.Definition.ProductDescription.Commands;
@@ -213,6 +215,41 @@ namespace VetSystems.Vet.Api.Controllers
         public async Task<IActionResult> AnimalColorsDefList()
         {
             var command = new AnimalColorsDefListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        #endregion
+
+
+        #region PaymentMethods
+
+
+        [HttpGet(Name = "PaymentMethodList")]
+        public async Task<IActionResult> PaymentMethodList()
+        {
+            var command = new PaymentMethodListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "CreatePaymentMethods")]
+        public async Task<IActionResult> CreatePaymentMethods([FromBody] CreatePaymentMethodsCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "UpdatePaymentMethods")]
+        public async Task<IActionResult> UpdatePaymentMethods([FromBody] UpdatePaymentMethodsCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "DeletePaymentMethods")]
+        public async Task<IActionResult> DeletePaymentMethods([FromBody] DeletePaymentMethodsCommand command)
+        {
             var result = await _mediator.Send(command);
             return Ok(result);
         }

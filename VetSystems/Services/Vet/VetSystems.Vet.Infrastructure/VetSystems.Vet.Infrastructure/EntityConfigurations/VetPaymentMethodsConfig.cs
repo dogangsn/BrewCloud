@@ -9,17 +9,16 @@ using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Infrastructure.EntityConfigurations
 {
-    public class AnimalsTypeConfig : IEntityTypeConfiguration<VetAnimalsType>
+    public class VetPaymentMethodsConfig : IEntityTypeConfiguration<VetPaymentMethods>
     {
-        public void Configure(EntityTypeBuilder<VetAnimalsType> entity)
+        public void Configure(EntityTypeBuilder<VetPaymentMethods> entity)
         {
             entity.HasKey(e => e.RecId)
-                    .HasName("VetAnimalsType_pkey");
+         .HasName("VetPaymentMethods_pkey");
 
             entity.Property(e => e.RecId)
-                    .HasColumnName("RecId")
-                    .UseIdentityColumn();
-
+                .HasColumnName("RecId")
+                .UseIdentityColumn();
         }
     }
 }

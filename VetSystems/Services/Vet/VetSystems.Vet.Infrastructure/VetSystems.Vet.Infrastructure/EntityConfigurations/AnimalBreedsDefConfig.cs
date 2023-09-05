@@ -13,11 +13,11 @@ namespace VetSystems.Vet.Infrastructure.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<VetAnimalBreedsDef> entity)
         {
-            entity.HasKey(e => e.Id)
+            entity.HasKey(e => e.RecId)
                     .HasName("VetAnimalBreedsDef_pkey");
 
-            entity.Property(e => e.Id)
-                .HasColumnName("Id")
+            entity.Property(e => e.RecId)
+                .HasColumnName("RecId")
                 .UseIdentityColumn();
         }
     }

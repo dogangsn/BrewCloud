@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VetSystems.Vet.Domain.Common
 {
-    public class BaseEntity
+    public class BaseEntity : IdBaseEntity
     {
         public Guid Id { get; set; }
         public DateTime CreateDate { get; set; }

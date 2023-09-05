@@ -8,6 +8,6 @@ namespace VetSystems.Vet.Domain.Common
 {
     public class IdBaseEntity
     {
-        public int Id { get; set; }
+        public int RecId { get; set; }
     }
 }

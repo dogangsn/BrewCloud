@@ -8,14 +8,11 @@ using VetSystems.Vet.Domain.Common;
 
 namespace VetSystems.Vet.Domain.Entities
 {
-    public class VetProductCategories : BaseEntity, IAggregateRoot
+    public class VetPaymentMethods : BaseEntity
     {
-
         [NotMapped]
-        public int RecId { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
-
-        public string CategoryCode { get; set; } = string.Empty;
-
+        public string Remark { get; set; } = string.Empty;
     }
 }

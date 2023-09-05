@@ -88,12 +88,12 @@ namespace VetSystems.Vet.Infrastructure.Migrations
 
             modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetAnimalBreedsDef", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("RecId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("Id");
+                        .HasColumnName("RecId");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RecId"), 1L, 1);
 
                     b.Property<int>("AnimalType")
                         .HasColumnType("int")
@@ -104,7 +104,38 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("breedname");
 
-                    b.HasKey("Id")
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("createdate");
+
+                    b.Property<string>("CreateUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("createusers");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("deleted");
+
+                    b.Property<DateTime>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("deleteddate");
+
+                    b.Property<string>("DeletedUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("deletedusers");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("updatedate");
+
+                    b.Property<string>("UpdateUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("updateusers");
+
+                    b.HasKey("RecId")
                         .HasName("VetAnimalBreedsDef_pkey");
 
                     b.ToTable("vetanimalbreedsdef", (string)null);
@@ -112,19 +143,50 @@ namespace VetSystems.Vet.Infrastructure.Migrations
 
             modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetAnimalColorsDef", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("RecId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("Id");
+                        .HasColumnName("RecId");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RecId"), 1L, 1);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("createdate");
+
+                    b.Property<string>("CreateUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("createusers");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("deleted");
+
+                    b.Property<DateTime>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("deleteddate");
+
+                    b.Property<string>("DeletedUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("deletedusers");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("name");
 
-                    b.HasKey("Id")
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("updatedate");
+
+                    b.Property<string>("UpdateUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("updateusers");
+
+                    b.HasKey("RecId")
                         .HasName("VetAnimalColorsDef_pkey");
 
                     b.ToTable("vetanimalcolorsdef", (string)null);
@@ -132,12 +194,34 @@ namespace VetSystems.Vet.Infrastructure.Migrations
 
             modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetAnimalsType", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("RecId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("Id");
+                        .HasColumnName("RecId");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RecId"), 1L, 1);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("createdate");
+
+                    b.Property<string>("CreateUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("createusers");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("deleted");
+
+                    b.Property<DateTime>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("deleteddate");
+
+                    b.Property<string>("DeletedUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("deletedusers");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -149,7 +233,20 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("name");
 
-                    b.HasKey("Id")
+                    b.Property<int>("Type")
+                        .HasColumnType("int")
+                        .HasColumnName("type");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("updatedate");
+
+                    b.Property<string>("UpdateUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("updateusers");
+
+                    b.HasKey("RecId")
                         .HasName("VetAnimalsType_pkey");
 
                     b.ToTable("vetanimalstype", (string)null);
@@ -530,24 +627,60 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                     b.ToTable("vetpatients", (string)null);
                 });
 
-            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetPaymentTypes", b =>
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetPaymentMethods", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("RecId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("id");
+                        .HasColumnName("RecId");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RecId"), 1L, 1);
 
-                    b.Property<string>("Value")
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("createdate");
+
+                    b.Property<string>("CreateUsers")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("value");
+                        .HasColumnName("createusers");
 
-                    b.HasKey("Id")
-                        .HasName("VetPaymentTypes_pkey");
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("deleted");
 
-                    b.ToTable("vetpaymenttypes", (string)null);
+                    b.Property<DateTime>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("deleteddate");
+
+                    b.Property<string>("DeletedUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("deletedusers");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("name");
+
+                    b.Property<string>("Remark")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("remark");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("updatedate");
+
+                    b.Property<string>("UpdateUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("updateusers");
+
+                    b.HasKey("RecId")
+                        .HasName("VetPaymentMethods_pkey");
+
+                    b.ToTable("vetpaymentmethods", (string)null);
                 });
 
             modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetProductCategories", b =>
@@ -781,6 +914,10 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasColumnName("paymenttype");
 
+                    b.Property<int>("RecId")
+                        .HasColumnType("int")
+                        .HasColumnName("recid");
+
                     b.Property<string>("Remark")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -875,6 +1012,10 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("ratio");
 
+                    b.Property<int>("RecId")
+                        .HasColumnType("int")
+                        .HasColumnName("recid");
+
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("updatedate");
@@ -884,7 +1025,7 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("updateusers");
 
-                    b.Property<Guid?>("VetSaleBuyOwnerId")
+                    b.Property<Guid>("VetSaleBuyOwnerId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("vetsalebuyownerid");
 
@@ -1098,10 +1239,14 @@ namespace VetSystems.Vet.Infrastructure.Migrations
 
             modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetSaleBuyTrans", b =>
                 {
-                    b.HasOne("VetSystems.Vet.Domain.Entities.VetSaleBuyOwner", null)
+                    b.HasOne("VetSystems.Vet.Domain.Entities.VetSaleBuyOwner", "VetSaleBuyOwner")
                         .WithMany("VetSaleBuyTrans")
                         .HasForeignKey("VetSaleBuyOwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("fk_vetsalebuytrans_vetsalebuyowner_vetsalebuyownerid");
+
+                    b.Navigation("VetSaleBuyOwner");
                 });
 
             modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetCustomers", b =>

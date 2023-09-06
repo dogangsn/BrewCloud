@@ -83,6 +83,7 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Commands
                 ProductId = request.ProductId.GetValueOrDefault(),
                 CreateDate = DateTime.Now,
                 CreateUsers = _identity.Account.UserName
+                
             });
 
             try

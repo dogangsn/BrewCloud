@@ -17,7 +17,14 @@ namespace VetSystems.Vet.Application.Features.Agenda.Commands
 
     public class CreateAgendaCommand : IRequest<Response<bool>>
     {
-        public AgendaDto CreateAgenda { get; set; }
+        public int? AgendaNo { get; set; }
+        public int? AgendaType { get; set; }
+        public int? IsActive { get; set; }
+        public string AgendaTitle { get; set; } = string.Empty;
+        public int? Priority { get; set; } 
+        public DateTime? DueDate { get; set; }
+        public string Notes { get; set; } = string.Empty;
+        public virtual List<AgendaTagsDto> AgendaTags { get; set; }
     }
 
     public class CreateAgendaHandler : IRequestHandler<CreateAgendaCommand, Response<bool>>
@@ -55,13 +62,13 @@ namespace VetSystems.Vet.Application.Features.Agenda.Commands
                 Vet.Domain.Entities.VetAgenda agenda = new()
                 {
                     Id = Guid.NewGuid(),
-                    AgendaTitle = request.CreateAgenda.AgendaTitle,
-                    AgendaType = request.CreateAgenda.AgendaType,
-                    AgendaNo = request.CreateAgenda.AgendaNo,
-                    IsActive = request.CreateAgenda.IsActive,
-                    Priority = request.CreateAgenda.Priority,
-                    DueDate = request.CreateAgenda.DueDate,
-                    Notes = request.CreateAgenda.Notes,
+                    AgendaTitle = request.AgendaTitle,
+                    AgendaType = request.AgendaType,
+                    AgendaNo = request.AgendaNo,
+                    IsActive = request.IsActive,
+                    Priority = request.Priority,
+                    DueDate = request.DueDate,
+                    Notes = request.Notes,
                     //AgendaTags = request.CreateAgenda.AgendaTags.Select(dto => new VetAgendaTags{
                     //    AgendaId=dto.Id,
                     //    Tags = dto.Tags
@@ -73,7 +80,7 @@ namespace VetSystems.Vet.Application.Features.Agenda.Commands
                     CreateDate = DateTime.UtcNow,
 
                 };
-                foreach (var item in request.CreateAgenda.AgendaTags)
+                foreach (var item in request.AgendaTags)
                 {
                     Vet.Domain.Entities.VetAgendaTags agendatags = new()
                     {

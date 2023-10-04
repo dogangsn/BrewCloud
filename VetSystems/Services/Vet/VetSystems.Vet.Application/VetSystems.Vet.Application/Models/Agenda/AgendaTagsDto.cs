@@ -10,6 +10,7 @@ namespace VetSystems.Vet.Application.Models.Agenda
     {
         public Guid Id { get; set; }
         public Guid AgendaId { get; set; }
-        public int? Tags { get; set; }
+        public Guid? TagsId { get; set; }
+        public string Tags { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace VetSystems.Vet.Domain.Entities
         public int? AgendaType { get; set; } 
         public int? IsActive { get; set; } 
         public string AgendaTitle { get; set; } = string.Empty;
-        public string Priority { get; set; } = string.Empty;
+        public int? Priority { get; set; }
         public DateTime? DueDate { get; set; }
         public string Notes { get; set; } = string.Empty;
         //public virtual ICollection<VetAgendaTags> AgendaTags { get; set; }

@@ -39,7 +39,7 @@ namespace VetSystems.Vet.Application.Features.Agenda.Queries
             {
                 string query = "Select * from vetAgenda where Deleted = 0";
                 var _data = _uow.Query<AgendaDto>(query).ToList();
-                string tagsQuery = "Select * fron vetAgendaTags where Deleted = 0";
+                string tagsQuery = "Select * from vetAgendaTags where Deleted = 0";
                 var _datatags = _uow.Query<AgendaTagsDto>(tagsQuery).ToList();
                 foreach (var item in _data)
                 {

@@ -33,6 +33,13 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "DeleteCustomer")]
+        public async Task<IActionResult> DeleteCustomer([FromBody] DeleteCustomerCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
         [HttpGet(Name = "AnimalBreedsDefList")]
         public async Task<IActionResult> AnimalBreedsDefList()
         {

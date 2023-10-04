@@ -49,23 +49,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Vet.Infrastructu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integrations", "Integrations", "{DA716BB0-2E04-4079-88D3-8EE4C7FAA4B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Integrations.Application", "Services\Integrations\VetSystems.Integrations.Application\VetSystems.Integrations.Application.csproj", "{7F56FA02-CABE-4C1E-A603-DB586E472D5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Integrations.Application", "Services\Integrations\VetSystems.Integrations.Application\VetSystems.Integrations.Application.csproj", "{7F56FA02-CABE-4C1E-A603-DB586E472D5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Integrations.Domain", "Services\Integrations\VetSystems.Integrations.Domain\VetSystems.Integrations.Domain.csproj", "{60A556B2-55E2-42E6-A77F-0DEF38E6E67A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Integrations.Domain", "Services\Integrations\VetSystems.Integrations.Domain\VetSystems.Integrations.Domain.csproj", "{60A556B2-55E2-42E6-A77F-0DEF38E6E67A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Integrations.Infrastructure", "Services\Integrations\VetSystems.Integrations.Infrastructure\VetSystems.Integrations.Infrastructure.csproj", "{37C5614F-6DB3-4CA3-8C70-48E82507140F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Integrations.Infrastructure", "Services\Integrations\VetSystems.Integrations.Infrastructure\VetSystems.Integrations.Infrastructure.csproj", "{37C5614F-6DB3-4CA3-8C70-48E82507140F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Integrations.Api", "Services\Integrations\VetSystems.Integrations.Api\VetSystems.Integrations.Api.csproj", "{B9FC8E9F-6945-4E30-84BC-533BCBCB5B8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Integrations.Api", "Services\Integrations\VetSystems.Integrations.Api\VetSystems.Integrations.Api.csproj", "{B9FC8E9F-6945-4E30-84BC-533BCBCB5B8B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mobile", "Mobile", "{3DBE97D1-7A22-4B3B-B55A-856EF7DA09E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Mobile.Application", "Services\Mobile\VetSystems.Mobile.Application\VetSystems.Mobile.Application.csproj", "{5A33439A-4AE1-4B5C-BEAD-E19377317E83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Mobile.Application", "Services\Mobile\VetSystems.Mobile.Application\VetSystems.Mobile.Application.csproj", "{5A33439A-4AE1-4B5C-BEAD-E19377317E83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Mobile.Domain", "Services\Mobile\VetSystems.Mobile.Domain\VetSystems.Mobile.Domain.csproj", "{C846CB2B-3D0C-407F-B495-40E80DA25B05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Mobile.Domain", "Services\Mobile\VetSystems.Mobile.Domain\VetSystems.Mobile.Domain.csproj", "{C846CB2B-3D0C-407F-B495-40E80DA25B05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Mobile.Infrastructure", "Services\Mobile\VetSystems.Mobile.Infrastructure\VetSystems.Mobile.Infrastructure.csproj", "{473B7358-B846-47A4-92A1-3D238EF50F19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Mobile.Infrastructure", "Services\Mobile\VetSystems.Mobile.Infrastructure\VetSystems.Mobile.Infrastructure.csproj", "{473B7358-B846-47A4-92A1-3D238EF50F19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Mobile.Api", "Services\Mobile\VetSystems.Mobile.Api\VetSystems.Mobile.Api.csproj", "{1C3C135F-F67F-4E1D-9FAB-381BD2993990}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Mobile.Api", "Services\Mobile\VetSystems.Mobile.Api\VetSystems.Mobile.Api.csproj", "{1C3C135F-F67F-4E1D-9FAB-381BD2993990}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

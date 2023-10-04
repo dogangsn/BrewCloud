@@ -35,41 +35,63 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                 name: "vetanimalbreedsdef",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    RecId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     animaltype = table.Column<int>(type: "int", nullable: false),
-                    breedname = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    breedname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    createdate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    updatedate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    deleteddate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    deleted = table.Column<bool>(type: "bit", nullable: false),
+                    deletedusers = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    updateusers = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    createusers = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("VetAnimalBreedsDef_pkey", x => x.Id);
+                    table.PrimaryKey("VetAnimalBreedsDef_pkey", x => x.RecId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "vetanimalcolorsdef",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    RecId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    createdate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    updatedate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    deleteddate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    deleted = table.Column<bool>(type: "bit", nullable: false),
+                    deletedusers = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    updateusers = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    createusers = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("VetAnimalColorsDef_pkey", x => x.Id);
+                    table.PrimaryKey("VetAnimalColorsDef_pkey", x => x.RecId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "vetanimalstype",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    RecId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    type = table.Column<int>(type: "int", nullable: false),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    createdate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    updatedate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    deleteddate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    deleted = table.Column<bool>(type: "bit", nullable: false),
+                    deletedusers = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    updateusers = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    createusers = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("VetAnimalsType_pkey", x => x.Id);
+                    table.PrimaryKey("VetAnimalsType_pkey", x => x.RecId);
                 });
 
             migrationBuilder.CreateTable(
@@ -115,6 +137,46 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "vetparameters",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    autosms = table.Column<bool>(type: "bit", nullable: true),
+                    createdate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    updatedate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    deleteddate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    deleted = table.Column<bool>(type: "bit", nullable: false),
+                    deletedusers = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    updateusers = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    createusers = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("VetParameters_pkey", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "vetpaymentmethods",
+                columns: table => new
+                {
+                    RecId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    remark = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    createdate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    updatedate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    deleteddate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    deleted = table.Column<bool>(type: "bit", nullable: false),
+                    deletedusers = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    updateusers = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    createusers = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("VetPaymentMethods_pkey", x => x.RecId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "vetproductcategories",
                 columns: table => new
                 {
@@ -140,9 +202,9 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    producttypeid = table.Column<int>(type: "int", nullable: false),
                     unitid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     categoryid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    producttypeid = table.Column<int>(type: "int", nullable: true),
                     supplierid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     productbarcode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     productcode = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -155,6 +217,8 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                     buyingincludekdv = table.Column<bool>(type: "bit", nullable: true),
                     fixprice = table.Column<bool>(type: "bit", nullable: true),
                     isexpirationdate = table.Column<bool>(type: "bit", nullable: true),
+                    animaltype = table.Column<int>(type: "int", nullable: true),
+                    numberrepetitions = table.Column<int>(type: "int", nullable: true),
                     createdate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     updatedate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     deleteddate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -166,6 +230,36 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("Vetproducts_pkey", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "vetsalebuyowner",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    type = table.Column<int>(type: "int", nullable: false),
+                    customerid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    invoiceno = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    paymenttype = table.Column<int>(type: "int", nullable: false),
+                    total = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    discount = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    kdv = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    netprice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    supplierid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    remark = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    recid = table.Column<int>(type: "int", nullable: false),
+                    createdate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    updatedate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    deleteddate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    deleted = table.Column<bool>(type: "bit", nullable: false),
+                    deletedusers = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    updateusers = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    createusers = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("VetSaleBuyOwner_pkey", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -269,6 +363,40 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "vetsalebuytrans",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ownerid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    productid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ratio = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    amount = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    discount = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    price = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    netprice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    invoiceno = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    vetsalebuyownerid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    recid = table.Column<int>(type: "int", nullable: false),
+                    createdate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    updatedate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    deleteddate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    deleted = table.Column<bool>(type: "bit", nullable: false),
+                    deletedusers = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    updateusers = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    createusers = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("VetSaleBuyTrans_pkey", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_vetsalebuytrans_vetsalebuyowner_vetsalebuyownerid",
+                        column: x => x.vetsalebuyownerid,
+                        principalTable: "vetsalebuyowner",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "vetpatients",
                 columns: table => new
                 {
@@ -315,6 +443,11 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                 name: "ix_vetpatients_customersid",
                 table: "vetpatients",
                 column: "customersid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vetsalebuytrans_vetsalebuyownerid",
+                table: "vetsalebuytrans",
+                column: "vetsalebuyownerid");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -335,13 +468,22 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                 name: "vetcustomergroupdef");
 
             migrationBuilder.DropTable(
+                name: "vetparameters");
+
+            migrationBuilder.DropTable(
                 name: "vetpatients");
+
+            migrationBuilder.DropTable(
+                name: "vetpaymentmethods");
 
             migrationBuilder.DropTable(
                 name: "vetproductcategories");
 
             migrationBuilder.DropTable(
                 name: "vetproducts");
+
+            migrationBuilder.DropTable(
+                name: "vetsalebuytrans");
 
             migrationBuilder.DropTable(
                 name: "vetstores");
@@ -354,6 +496,9 @@ namespace VetSystems.Vet.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "vetcustomers");
+
+            migrationBuilder.DropTable(
+                name: "vetsalebuyowner");
 
             migrationBuilder.DropTable(
                 name: "vetadress");

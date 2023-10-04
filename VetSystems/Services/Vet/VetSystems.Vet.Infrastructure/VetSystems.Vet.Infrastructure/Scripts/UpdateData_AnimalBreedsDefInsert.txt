@@ -1,7 +1,3 @@
 ﻿/*Hayvan türleri*/
 
-SET IDENTITY_INSERT vetanimalbreedsdef ON;
-
-INSERT INTO VetAnimalBreedsDef (Id,AnimalType, BreedName) VALUES (1, 2, 'Abyssinian');
-
-SET IDENTITY_INSERT vetanimalbreedsdef OFF;
+INSERT INTO VetAnimalBreedsDef (AnimalType, BreedName, createusers, createdate, updatedate, deleteddate, deleted, deletedusers, updateusers) VALUES (2, 'Abyssinian', '', GETDATE(), '1900-01-01', '1900-01-01', 0, '', '');

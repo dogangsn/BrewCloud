@@ -1,0 +1,6 @@
+﻿
+
+
+INSERT INTO Vetpaymentmethods (name, remark , createusers, createdate, updatedate, deleteddate, deleted, deletedusers, updateusers)  VALUES ('NAKİT', 'Elden ödeme, Kağıt Para' , '', GETDATE(), '1900-01-01', '1900-01-01', 0, '', '')
+INSERT INTO Vetpaymentmethods (name, remark, createusers, createdate, updatedate, deleteddate, deleted, deletedusers, updateusers)  VALUES ('KREDİ KARTI', 'Kredi kartı, bankaların ve bazı finans kuruluşlarının müşterilerine verdiği, anlaşmalı POS ', '', GETDATE(), '1900-01-01', '1900-01-01', 0, '', '')
+INSERT INTO Vetpaymentmethods (name, remark, createusers, createdate, updatedate, deleteddate, deleted, deletedusers, updateusers)  VALUES ('HAVALE', 'IBAN/Kolay Hesap Transferleri',  '', GETDATE(), '1900-01-01', '1900-01-01', 0, '', '')

@@ -46,6 +46,7 @@ namespace VetSystems.Account.Infrastructure.Persistence
         public virtual DbSet<Rolesetting> Rolesetting { get; set; }
         public virtual DbSet<ReasonProperties> ReasonProperties { get; set; }
         public virtual DbSet<Userauthorization> Userauthorization { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -29,7 +29,6 @@
   <ItemGroup>
     <Folder Include="Features\Account\Queries\" />
 	<Folder Include="GrpServices\" />
-    <Folder Include="Mappings\" />
   </ItemGroup>
 
   <ItemGroup>

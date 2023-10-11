@@ -11,5 +11,8 @@ namespace VetSystems.Account.Domain.Common
         public Guid Id { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime UpdateDate { get; set; }
+        public string CreateUser { get; set; } = string.Empty;
+        public string UpdateUser { get; set; } = string.Empty;
+        public bool Deleted { get; set; }
     }
 }

@@ -82,6 +82,7 @@ namespace VetSystems.IdentityServer.Infrastructure.Services
                                     AccountType = ac.AccountType,
                                     ConnectionDb = sb.ConnectionString,
                                     UseSafeListControl = sb.UseSafeListControl,
+                                    UserName = ac.User.UserName,
                                     //SubscriptionType = sb.SubscriptionType
                                 }).FirstOrDefaultAsync();
             if (result != null)
@@ -105,6 +106,7 @@ namespace VetSystems.IdentityServer.Infrastructure.Services
                                select new SignupDto
                                {
                                    Email = ac.User.Email,
+                                   UserName = ac.User.UserName,
                                    FirstName = ac.FirstName,
                                    LastName = ac.LastName,
                                    Id = ac.UserId,

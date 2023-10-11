@@ -12,12 +12,9 @@ namespace VetSystems.Account.Domain.Entities
         public string Name { get; set; }
         public KindType Kind { get; set; }
         public ReasonType Type { get; set; }
-
         public Guid EnterprisesId { get; set; }
         public virtual Enterprise Enterprises { get; set; }
-
         public virtual ICollection<ReasonProperties> ReasonProperties { get; set; }
-
     }
     public enum ReasonType
     {

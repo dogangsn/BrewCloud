@@ -244,6 +244,7 @@ namespace VetSystems.IdentityServer.Grpc
             {
                 UserName = request.UserName,
                 Email = request.Email,
+
                 Account = new Accounts
                 {
                     CompanyId = request.CompanyId,//Guid.NewGuid().ToString(),
@@ -261,10 +262,11 @@ namespace VetSystems.IdentityServer.Grpc
                     IsLicenceAccount = request.IsLicenceAccount,
                     AppKey = request.AppKey
                 }
+
             };
 
 
-            var result = await _userManager.CreateAsync(user);
+            var result = await _userManager.CreateAsync(user, request.Password);
             if (result.Succeeded)
             {
                 identityResponse.IsSuccess = result.Succeeded;

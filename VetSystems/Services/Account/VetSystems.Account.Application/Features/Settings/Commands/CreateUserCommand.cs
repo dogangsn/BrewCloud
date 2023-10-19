@@ -56,7 +56,7 @@ namespace VetSystems.Account.Application.Features.Settings.Commands
 
                 var userRequest = new SignupRequestDto
                 {
-                    Password = "1",
+                    Password = "123654Dg",
                     Email = request.Email,
                     CompanyId = _identity.Account.EnterpriseId.ToString(),
                     FirtsName = request.FirstName,

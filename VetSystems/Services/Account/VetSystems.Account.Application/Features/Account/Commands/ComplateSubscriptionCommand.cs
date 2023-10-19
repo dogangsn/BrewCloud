@@ -38,6 +38,7 @@ namespace VetSystems.Account.Application.Features.Account.Commands
         private readonly ILogger<ComplateSubscriptionCommandHandler> _logger;
         private readonly IdentityGrpService _identityGrpService;
         private readonly IMediator _mediatR;
+        private readonly IRepository<Rolesetting> _roleSettingRepository;
 
         public ComplateSubscriptionCommandHandler(IUnitOfWork uow, 
                                                   ILogger<ComplateSubscriptionCommandHandler> logger, 
@@ -46,7 +47,8 @@ namespace VetSystems.Account.Application.Features.Account.Commands
                                                   IMediator mediatR, 
                                                   IRepository<User> userRepository, 
                                                   IRepository<Enterprise> enterPriseRepository,
-                                                  IRepository<Company> companyRepository)        
+                                                  IRepository<Company> companyRepository,
+                                                  IRepository<Rolesetting> roleSettingRepository)        
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -56,6 +58,7 @@ namespace VetSystems.Account.Application.Features.Account.Commands
             _userRepository = userRepository;
             _enterPriseRepository = enterPriseRepository;
             _companyRepository = companyRepository;
+            _roleSettingRepository = roleSettingRepository;
         }
 
 
@@ -68,11 +71,16 @@ namespace VetSystems.Account.Application.Features.Account.Commands
             try
             {
                 var entity = CreateEnterprise(request);
+
                 var property = CreateProperty(request, entity);
+
                 var adminSetting = CreateDefaultRole(entity, "Admin", true);
+
                 var company = CreateCompany(request);
 
                 var companyResult = await _companyRepository.AddAsync(company);
+
+                var roleSettingResult = await _roleSettingRepository.AddAsync(adminSetting);
 
                 await _uow.SaveChangesAsync(cancellationToken);
 
@@ -141,6 +149,10 @@ namespace VetSystems.Account.Application.Features.Account.Commands
                 Rolecode = code,//"Standart",
                 EnterprisesId = entity.Id,
                 IsEnterpriseAdmin = isAdmin,
+                CreateDate = DateTime.Now,
+                DashboardPath = "",
+                CreateUser = "",
+
             };
         }
 

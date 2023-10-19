@@ -49,5 +49,41 @@ namespace VetSystems.Account.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "CreateRoleSetting")]
+        public async Task<IActionResult> CreateRoleSetting([FromBody] CreateRoleSettingCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpGet(Name = "GetRoleSettingList")]
+        public async Task<IActionResult> GetRoleSettingList()
+        {
+            var command = new GetRoleSettingListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "DeleteRoleSetting")]
+        public async Task<IActionResult> DeleteRoleSetting([FromBody] DeleteRoleSettingCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "UpdateRoleSetting")]
+        public async Task<IActionResult> UpdateRoleSetting([FromBody] UpdateRoleSettingCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+
+        [HttpPost(Name = "GetNavigation")]
+        public async Task<IActionResult> GetNavigation([FromBody] GetNavigationQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
     }
 }

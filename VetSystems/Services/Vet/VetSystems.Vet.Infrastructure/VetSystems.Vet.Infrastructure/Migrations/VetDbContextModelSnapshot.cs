@@ -453,7 +453,6 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                     b.ToTable("vetcasingdefinition", (string)null);
                 });
 
-           
             modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetCustomerGroupDef", b =>
                 {
                     b.Property<Guid>("Id")

@@ -85,7 +85,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                             AnimalBreed = string.IsNullOrEmpty(item.AnimalBreed) ? 0 : Convert.ToInt32(item.AnimalBreed),
                             AnimalColor = string.IsNullOrEmpty(item.AnimalColor) ? 0 : Convert.ToInt32(item.AnimalColor),
                             AnimalType = Convert.ToInt32(item.AnimalType),
-                            BirthDate = Convert.ToDateTime(item.BirthDate),
+                            BirthDate = string.IsNullOrEmpty(item.BirthDate) ? DateTime.Now : Convert.ToDateTime(item.BirthDate),
                             ChipNumber = item.ChipNumber,
                             Name = item.Name ,
                             ReportNumber = item.ReportNumber,

@@ -33,12 +33,22 @@ namespace VetSystems.Account.Application.Features.Account.Commands
         private readonly IRepository<Enterprise> _enterPriseRepository;
         private readonly IRepository<User> _userRepository;
         private readonly IRepository<Customer> _customerRepository;
+        private readonly IRepository<Company> _companyRepository;
+
         private readonly ILogger<ComplateSubscriptionCommandHandler> _logger;
         private readonly IdentityGrpService _identityGrpService;
         private readonly IMediator _mediatR;
+        private readonly IRepository<Rolesetting> _roleSettingRepository;
 
-        public ComplateSubscriptionCommandHandler(IUnitOfWork uow, ILogger<ComplateSubscriptionCommandHandler> logger, IdentityGrpService identityGrpService, 
-            IRepository<Customer> customerRepository, IMediator mediatR, IRepository<User> userRepository, IRepository<Enterprise> enterPriseRepository)
+        public ComplateSubscriptionCommandHandler(IUnitOfWork uow, 
+                                                  ILogger<ComplateSubscriptionCommandHandler> logger, 
+                                                  IdentityGrpService identityGrpService, 
+                                                  IRepository<Customer> customerRepository, 
+                                                  IMediator mediatR, 
+                                                  IRepository<User> userRepository, 
+                                                  IRepository<Enterprise> enterPriseRepository,
+                                                  IRepository<Company> companyRepository,
+                                                  IRepository<Rolesetting> roleSettingRepository)        
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -47,6 +57,8 @@ namespace VetSystems.Account.Application.Features.Account.Commands
             _mediatR = mediatR;
             _userRepository = userRepository;
             _enterPriseRepository = enterPriseRepository;
+            _companyRepository = companyRepository;
+            _roleSettingRepository = roleSettingRepository;
         }
 
 
@@ -59,18 +71,29 @@ namespace VetSystems.Account.Application.Features.Account.Commands
             try
             {
                 var entity = CreateEnterprise(request);
+
                 var property = CreateProperty(request, entity);
+
                 var adminSetting = CreateDefaultRole(entity, "Admin", true);
+
+                var company = CreateCompany(request);
+
+                var companyResult = await _companyRepository.AddAsync(company);
+
+                var roleSettingResult = await _roleSettingRepository.AddAsync(adminSetting);
+
+                await _uow.SaveChangesAsync(cancellationToken);
 
                 var userResult = await _identityGrpService.CreateUserAsync(request.Username,
                                                                   request.Password,
                                                                   request.Username,
                                                                   entity.Id.ToString(),
-                                                                  request.Username,
+                                                                  request.FirstLastName,
                                                                   "",
                                                                   adminSetting.Id.ToString(),
                                                                   request.RecId.ToString(),
                                                                   Identity.Api.SignupRequest.Types.AccountType.Admin, request.IsFirstCreate);
+
 
                 if (!userResult.IsSuccess)
                 {
@@ -79,7 +102,7 @@ namespace VetSystems.Account.Application.Features.Account.Commands
 
                 await _userRepository.AddAsync(new User
                 {
-                    FirstLastName = request.FirstLastName,
+                    Lastname = request.FirstLastName,
                     Id = Guid.Parse(userResult.Id),
                     RoleId = adminSetting.Id,
                     Email = request.Email,
@@ -126,6 +149,10 @@ namespace VetSystems.Account.Application.Features.Account.Commands
                 Rolecode = code,//"Standart",
                 EnterprisesId = entity.Id,
                 IsEnterpriseAdmin = isAdmin,
+                CreateDate = DateTime.Now,
+                DashboardPath = "",
+                CreateUser = "",
+
             };
         }
 
@@ -199,7 +226,20 @@ namespace VetSystems.Account.Application.Features.Account.Commands
             return property;
         }
 
-
+        private Company CreateCompany(ComplateSubscriptionCommand request)
+        {
+            var company = new Company()
+            {
+                Id = Guid.NewGuid(),
+                CompanyName = request.Company,
+                CreateUser = request.Email,
+                CreateDate= DateTime.Today.Date,
+                CompanyTitle = request.Company,
+                Deleted = false,
+                UpdateDate = new DateTime(1900,1,1)
+            };
+            return company;
+        }
 
     }
 }

@@ -82,6 +82,7 @@ namespace VetSystems.IdentityServer.Infrastructure.Services
                                     AccountType = ac.AccountType,
                                     ConnectionDb = sb.ConnectionString,
                                     UseSafeListControl = sb.UseSafeListControl,
+                                    UserName = ac.User.UserName,
                                     //SubscriptionType = sb.SubscriptionType
                                 }).FirstOrDefaultAsync();
             if (result != null)
@@ -95,9 +96,35 @@ namespace VetSystems.IdentityServer.Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<SignupDto>> GetCompanyUsersAsync(string companyId)
+        public async Task<List<SignupDto>> GetCompanyUsersAsync(string companyId)
         {
-            throw new NotImplementedException();
+            var result = await (from ac in _dbContext.Accounts
+                               join sb in _dbContext.SubscriptionAccounts on ac.TenantId equals sb.Recid
+                               //join app in _dbContext.SubscriptionApps on new { ac.UserId, Deleted = false } equals new { app.UserId, app.Deleted } into sapp
+                               //from userApp in sapp.DefaultIfEmpty()
+                               where ac.CompanyId == companyId
+                               select new SignupDto
+                               {
+                                   Email = ac.User.Email,
+                                   UserName = ac.User.UserName,
+                                   FirstName = ac.FirstName,
+                                   LastName = ac.LastName,
+                                   Id = ac.UserId,
+                                   AccountType = ac.AccountType,
+                                   CompanyId = ac.CompanyId,
+                                   RoleId = ac.RoleId,
+                                   AuthorizeEnterprise = ac.AuthorizeEnterprise,
+                                   TenantId = ac.TenantId,
+                                   ConnectionDb = sb.ConnectionString,
+                                   IsLicenceAccount = ac.IsLicenceAccount,
+                                   UseSafeListControl = sb.UseSafeListControl,
+                                   ContactEmail = ac.ContactEmail ?? "",
+                                   VknNumber = ac.VknNumber ?? "",
+                                   //SubscriptionType = sb.SubscriptionType,
+                                   //UserAppKey = userApp.AppKey,
+                                   AppKey = ac.AppKey
+                               }).ToListAsync();
+            return result;
         }
 
         public Task<Response<List<SafeListDto>>> GetSafeList(string companyId)

@@ -74,15 +74,41 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                     Adress = adress,
                     Deleted = false,
                     CreateDate = DateTime.UtcNow,
-                    
                 };
+                if (request.CreateCustomers.PatientDetails.Any())
+                {
+                    foreach (var item in request.CreateCustomers.PatientDetails)
+                    {
+                        VetPatients patients = new()
+                        {
+                            Active= item.Active,
+                            AnimalBreed = string.IsNullOrEmpty(item.AnimalBreed) ? 0 : Convert.ToInt32(item.AnimalBreed),
+                            AnimalColor = string.IsNullOrEmpty(item.AnimalColor) ? 0 : Convert.ToInt32(item.AnimalColor),
+                            AnimalType = Convert.ToInt32(item.AnimalType),
+                            BirthDate = Convert.ToDateTime(item.BirthDate),
+                            ChipNumber = item.ChipNumber,
+                            Name = item.Name ,
+                            ReportNumber = item.ReportNumber,
+                            Sex  = item.Sex,
+                            SpecialNote = item.SpecialNote,
+                            Sterilization = item.Sterilization,
+                            Id = Guid.NewGuid(),
+                            CustomerId = customers.Id,
+                            CreateUsers = _identity.Account.UserName,
+                            CreateDate = DateTime.Now,
+                        };
+                        customers.Patients.Add(patients);
+                    }
+                }
+
                 await _customerRepository.AddAsync(customers);
                 await _uow.SaveChangesAsync(cancellationToken);
 
             }
             catch (Exception ex)
             {
-
+                response.IsSuccessful = false;
+                response.ResponseType = ResponseType.Error;
             }
             return response;
 

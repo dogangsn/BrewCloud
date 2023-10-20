@@ -137,13 +137,13 @@ namespace VetSystems.Account.Application.GrpServices
                 UserName = signupRequest.UserName,
                 FirtsName = signupRequest.FirtsName,
                 Roleid = signupRequest.Roleid,
-                AccountType = ConvertAccountType(signupRequest.AccountType),
+                AccountType = SignupRequest.Types.AccountType.User,//ConvertAccountType(signupRequest.AccountType),
                 LastName = signupRequest.LastName,
                 AuthorizeEnterprise = signupRequest.AuthorizeEnterprise,
                 TenantId = signupRequest.TenantId,
                 IsLicenceAccount = signupRequest.IsLicenceAccount,
-                ContactEmail = signupRequest.ContactEmail,
-                VknNumber = signupRequest.VknNumber,
+                //ContactEmail = signupRequest.ContactEmail,
+                //VknNumber = signupRequest.VknNumber,
                 AppKey = signupRequest.AppKey
             };
             return await _identityProtoService.RegisterUserAsync(request);

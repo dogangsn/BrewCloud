@@ -6,13 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using VetSystems.Shared.Dtos;
 
-namespace VetSystems.Vet.Application.Features.Customers.Commands
+namespace VetSystems.Account.Application.Features.Settings.Commands
 {
-    public class UpdateCustomerCommand : IRequest<Response<bool>>
+    public class UpdateRoleSettingCommand : IRequest<Response<bool>>
     {
     }
-
-    
-
-
 }

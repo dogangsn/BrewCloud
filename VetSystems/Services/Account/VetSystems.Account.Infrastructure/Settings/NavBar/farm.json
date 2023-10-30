@@ -1,3 +1,17 @@
 {
-
+  "id": "farm",
+  "title": "Çiftlik",
+  "type": "collapsable",
+  "icon": "pets",
+  "targetname": "farm",
+  "actionname": null,
+  "children": [
+    {
+      "id": "farmdashboards",
+      "title": "DashBoard",
+      "type": "basic",
+      "icon": "heroicons_outline:chart-pie",
+      "link": "/farmdashboards"
+    }
+  ]
 }

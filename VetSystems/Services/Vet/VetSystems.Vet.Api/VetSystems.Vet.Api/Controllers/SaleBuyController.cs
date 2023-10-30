@@ -33,6 +33,19 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "DeleteSaleBuy")]
+        public async Task<IActionResult> DeleteSaleBuy([FromBody] DeleteSaleBuyCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "SaleBuyListFilter")]
+        public async Task<IActionResult> SaleBuyListFilter([FromBody] SaleBuyListFilterQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
 
     }

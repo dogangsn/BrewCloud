@@ -16,6 +16,7 @@ using VetSystems.Account.Application.Features.Consumers;
 using VetSystems.Account.Application.GrpServices;
 using VetSystems.Shared.Common;
 using VetSystems.Shared.Service;
+using VetSystems.Shared.Service.Nav;
 
 namespace VetSystems.Account.Application
 {
@@ -33,7 +34,7 @@ namespace VetSystems.Account.Application
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IIdentityRepository, IdentityRepository>();
             services.AddScoped<IdentityGrpService>();
-
+            services.AddScoped<ModuleService>();
 
             services.AddScoped<ClientIpCheckActionFilter>(container =>
             {

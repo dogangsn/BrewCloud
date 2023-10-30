@@ -12,6 +12,7 @@ using VetSystems.Account.Domain.Contracts;
 using VetSystems.Shared.Dtos;
 using VetSystems.Shared.Dtos.Settings;
 using VetSystems.Shared.Service;
+using VetSystems.Shared.Service.Nav;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace VetSystems.Account.Application.Features.Settings.Queries
@@ -26,11 +27,13 @@ namespace VetSystems.Account.Application.Features.Settings.Queries
     {
         private readonly IIdentityRepository _identity;
         private readonly IUnitOfWork _uow;
+        private readonly ModuleService _moduleService;
 
-        public GetNavigationQueryHandler(IIdentityRepository identity, IUnitOfWork uow)
+        public GetNavigationQueryHandler(IIdentityRepository identity, IUnitOfWork uow, ModuleService moduleService)
         {
             _identity = identity;
             _uow = uow;
+            _moduleService = moduleService;
         }
 
         public async Task<Response<Navigation>> Handle(GetNavigationQuery request, CancellationToken cancellationToken)
@@ -45,33 +48,38 @@ namespace VetSystems.Account.Application.Features.Settings.Queries
 
             try
             {
+
+                var modules = _moduleService.GetModule();
+
                 string query = @"select id,action,target,roleSettingid  from rolesettingdetail r 
                                         where r.rolesettingid =@rolesettingid ";
                 var roleDetails = _uow.Query<RoleSettingDetailDto>(query, new { rolesettingid = request.All ? request.RoleId : account.RoleId }).ToList();
 
                 if (!request.All)
                 {
-
-                    var navigations = GetData("vet");
-                    if (navigations != null)
+                    foreach (var item in modules)
                     {
-                        if (account.AccountType != Shared.Accounts.AccountType.CompanyAdmin
-                                && account.AccountType != VetSystems.Shared.Accounts.AccountType.Admin)
+                        var navigations = GetData(item);
+                        if (navigations != null)
                         {
+                            if (account.AccountType != Shared.Accounts.AccountType.CompanyAdmin
+                                    && account.AccountType != VetSystems.Shared.Accounts.AccountType.Admin)
+                            {
 
+                                if (navigations.Children.Any())
+                                {
+                                    foreach (var it in navigations.Children)
+                                    {
+                                        RemoveChild(it, roleDetails);
+                                    }
+                                }
+                                navigations.Children.RemoveAll(r => (r.Children == null || !r.Children.Any()) && !roleDetails.Any(x => x.Target == r.Id));
+                            }
                             if (navigations.Children.Any())
                             {
-                                foreach (var it in navigations.Children)
-                                {
-                                    RemoveChild(it, roleDetails);
-                                }
+                                response.Data.Default.Add(navigations);
                             }
-                            navigations.Children.RemoveAll(r => (r.Children == null || !r.Children.Any()) && !roleDetails.Any(x => x.Target == r.Id));
-                        }
-                        if (navigations.Children.Any())
-                        {
-                            response.Data.Default.Add(navigations);
-                        }
+                        } 
                     }
                 }
                 else
@@ -88,7 +96,7 @@ namespace VetSystems.Account.Application.Features.Settings.Queries
 
         private RootNavigationItem GetData(string name)
         {
-            var path = Path.Combine(AppDomain.CurrentDomain.RelativeSearchPath ?? AppDomain.CurrentDomain.BaseDirectory, $"Settings/NavBar/vet.json");
+            var path = Path.Combine(AppDomain.CurrentDomain.RelativeSearchPath ?? AppDomain.CurrentDomain.BaseDirectory, $"Settings/NavBar/{name}.json");
             if (!File.Exists(path))
             {
                 return null;

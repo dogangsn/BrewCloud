@@ -2,7 +2,7 @@
   "id": "farm",
   "title": "Çiftlik",
   "type": "collapsable",
-  "icon": "pets",
+  "icon": "mat_outline:gite",
   "targetname": "farm",
   "actionname": null,
   "children": [
@@ -12,6 +12,22 @@
       "type": "basic",
       "icon": "heroicons_outline:chart-pie",
       "link": "/farmdashboards"
+    },
+    {
+      "id": "farmdefinition",
+      "title": "Tanımlamalar",
+      "type": "collapsable",
+      "icon": "heroicons_outline:collection",
+      "children": [
+        {
+          "id": "casingdefinition",
+          "title": "Kasa",
+          "type": "basic",
+          "icon": "mat_outline:cases",
+          "link": "/farmcasingdefinition"
+        }
+      ]
+
     }
   ]
 }

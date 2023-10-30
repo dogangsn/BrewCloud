@@ -24,6 +24,7 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Commands
         public string Remark { get; set; }
         public string InvoiceNo { get; set; }
         public int PaymentType { get; set; }
+        public decimal Amount { get; set; }
     }
 
     public class CreateSaleBuyCommandHandler : IRequestHandler<CreateSaleBuyCommand, Response<bool>>
@@ -75,6 +76,8 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Commands
                 PaymentType = request.PaymentType,
             };
 
+            decimal vatAmaount = CalculateVatAmount((request.Type == (int)BuySaleType.Selling ? _product.SellingPrice : _product.BuyingPrice), request.Amount, _product.Ratio, (request.Type == (int)BuySaleType.Selling ? _product.SellingIncludeKDV.GetValueOrDefault() : _product.BuyingIncludeKDV.GetValueOrDefault()));
+
             saleBuyOwner.addSaleBuyTrans(new Vet.Domain.Entities.VetSaleBuyTrans
             {
                 Id = Guid.NewGuid(),
@@ -82,9 +85,24 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Commands
                 Ratio = _product.Ratio,
                 ProductId = request.ProductId.GetValueOrDefault(),
                 CreateDate = DateTime.Now,
-                CreateUsers = _identity.Account.UserName
-                
+                CreateUsers = _identity.Account.UserName,
+                Amount = request.Amount,
+                VatIncluded = request.Type == (int)BuySaleType.Selling ? _product.SellingIncludeKDV : _product.BuyingIncludeKDV,
+                VatAmount = vatAmaount,
+                Price = request.Type == (int)BuySaleType.Selling ? _product.SellingPrice : _product.BuyingPrice,
+                OwnerId = saleBuyOwner.Id,
+                NetPrice = (_product.SellingIncludeKDV.GetValueOrDefault() || _product.BuyingIncludeKDV.GetValueOrDefault())  ? (Math.Round((request.Type == (int)BuySaleType.Selling ? _product.SellingPrice : _product.BuyingPrice) * request.Amount, 2, MidpointRounding.ToEven) - vatAmaount) : Math.Round((request.Type == (int)BuySaleType.Selling ? _product.SellingPrice : _product.BuyingPrice) * request.Amount, 2, MidpointRounding.ToEven),
+                                
             });
+
+            saleBuyOwner.KDV = Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.VatAmount.GetValueOrDefault()), 2, MidpointRounding.ToEven);
+            saleBuyOwner.NetPrice = Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.NetPrice.GetValueOrDefault()), 2, MidpointRounding.ToEven);
+
+            saleBuyOwner.Total = Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.NetPrice.GetValueOrDefault()), 2, MidpointRounding.ToEven)
+                                        + Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.VatAmount.GetValueOrDefault()), 2, MidpointRounding.ToEven); 
+              
+
+            saleBuyOwner.Discount = Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.Discount.GetValueOrDefault()), 2, MidpointRounding.ToEven);
 
             try
             {
@@ -97,5 +115,34 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Commands
             }
             return response;
         }
+
+
+        private decimal CalculateVatAmount(decimal _amount, decimal _quentity, decimal _ratio, bool _vatInclude)
+        {
+            decimal vatAmount = 0;
+            try
+            {
+                //_vatInclude isaretli(true) ise KDV Dahil islemlerin yapılması gerekiyor
+                if (_ratio != 0)
+                {
+                    decimal basePrice = 0;
+                    if (_vatInclude)
+                    {
+                        basePrice = (_amount * _quentity) / (1 + (Convert.ToDecimal(_ratio) / 100));
+                        vatAmount =  Math.Round(_amount - basePrice, 2, MidpointRounding.ToZero);
+                    }
+                    else
+                    {
+                        vatAmount = _ratio * (_amount * _quentity) / 100;
+                    }
+                }
+            }
+            catch (Exception )
+            {
+            }
+            return vatAmount;
+        }
+
     }
+
 }

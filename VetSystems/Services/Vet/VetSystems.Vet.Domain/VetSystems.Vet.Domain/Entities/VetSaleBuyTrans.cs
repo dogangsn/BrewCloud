@@ -17,6 +17,9 @@ namespace VetSystems.Vet.Domain.Entities
         public decimal? Price { get; set; } = 0;
         public decimal? NetPrice { get; set; } = 0;
         public string InvoiceNo { get; set; } = string.Empty;
+        public bool? VatIncluded { get; set; } = true;
+        public decimal? VatAmount { get; set; }
+        public Guid? OrderId { get; set; }
 
         public virtual VetSaleBuyOwner VetSaleBuyOwner { get; set; }
     }

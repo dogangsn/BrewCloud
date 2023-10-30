@@ -16,6 +16,12 @@ namespace VetSystems.Vet.Application.Models.Definition.Product
         public decimal BuyingPrice { get; set; }
         public decimal SellingPrice { get; set; }
         public bool Active { get; set; }
+        public bool? SellingIncludeKDV { get; set; } 
+        public bool? BuyingIncludeKDV { get; set; } 
+        public bool? FixPrice { get; set; } 
+        public bool? IsExpirationDate { get; set; }
+        public decimal? Ratio { get; set; } 
+
 
     }
 }

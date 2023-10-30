@@ -49,7 +49,7 @@ namespace VetSystems.Vet.Application.Features.Demands.DemandProducts.Commands
                 var demandProducts = await _demandProductsRepository.GetByIdAsync(request.Id);
                 if (demandProducts == null)
                 {
-                    _logger.LogWarning($"Casing update failed. Id number: {request.Id}");
+                    _logger.LogWarning($"DemandProduct update failed. Id number: {request.Id}");
                     return Response<bool>.Fail("Property update failed", 404);
                 }
 

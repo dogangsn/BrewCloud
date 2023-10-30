@@ -16,7 +16,8 @@ namespace VetSystems.Vet.Application.Features.Demands.DemandProducts.Commands
     public class UpdateDemandProductsCommand : IRequest<Response<bool>>
     {
         public Guid Id { get; set; }
-        public string Remark { get; set; } = string.Empty;
+        public Guid? OwnerId { get; set; }
+        public Guid ProductId { get; set; }
         public decimal? Quantity { get; set; }
         public decimal? UnitPrice { get; set; }
         public decimal? Amount { get; set; }
@@ -60,7 +61,7 @@ namespace VetSystems.Vet.Application.Features.Demands.DemandProducts.Commands
                     return Response<bool>.Fail("Property update failed", 404);
                 }
 
-                demandProducts.Remark = request.Remark;
+                demandProducts.ProductId = request.ProductId;
                 demandProducts.Quantity = request.Quantity;
                 demandProducts.UnitPrice = request.UnitPrice;
                 demandProducts.Amount = request.Amount;

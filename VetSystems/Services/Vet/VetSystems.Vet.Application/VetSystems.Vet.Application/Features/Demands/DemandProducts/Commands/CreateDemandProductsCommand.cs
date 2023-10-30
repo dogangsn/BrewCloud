@@ -9,13 +9,15 @@ using System.Threading.Tasks;
 using VetSystems.Shared.Dtos;
 using VetSystems.Shared.Service;
 using VetSystems.Vet.Domain.Contracts;
+using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Features.Demands.DemandProducts.Commands
 {
-    public class CreateDemandProductsCommand : IRequest<Response<bool>>
+    public class CreateDemandProductsCommand : IRequest<Response<VetDemandProducts>>
     {
         public Guid id { get; set; }
-        public string Remark { get; set; } = string.Empty;
+        public Guid? OwnerId { get; set; }
+        public Guid ProductId { get; set; }
         public decimal? Quantity { get; set; }
         public decimal? UnitPrice { get; set; }
         public decimal? Amount { get; set; }
@@ -25,7 +27,7 @@ namespace VetSystems.Vet.Application.Features.Demands.DemandProducts.Commands
         public string Barcode { get; set; } = string.Empty;
     }
 
-    public class CreateDemandProductsCommandHandler : IRequestHandler<CreateDemandProductsCommand, Response<bool>>
+    public class CreateDemandProductsCommandHandler : IRequestHandler<CreateDemandProductsCommand, Response<VetDemandProducts>>
     {
         private readonly IUnitOfWork _uow;
         private readonly IIdentityRepository _identity;
@@ -42,9 +44,9 @@ namespace VetSystems.Vet.Application.Features.Demands.DemandProducts.Commands
             _demandProductsRepository = demandProductsRepository ?? throw new ArgumentNullException(nameof(demandProductsRepository));
         }
 
-        public async Task<Response<bool>> Handle(CreateDemandProductsCommand request, CancellationToken cancellationToken)
-        {
-            var response = new Response<bool>
+        public async Task<Response<VetDemandProducts>> Handle(CreateDemandProductsCommand request, CancellationToken cancellationToken)
+         {
+            var response = new Response<VetDemandProducts>
             {
                 ResponseType = ResponseType.Ok,
                 IsSuccessful = true,
@@ -54,8 +56,9 @@ namespace VetSystems.Vet.Application.Features.Demands.DemandProducts.Commands
             {
                 Vet.Domain.Entities.VetDemandProducts demandProducts = new()
                 {
-                    id = Guid.NewGuid(),
-                    Remark = request.Remark,
+                    Id = Guid.NewGuid(),
+                    OwnerId = null,
+                    ProductId = request.ProductId,
                     Quantity = request.Quantity,
                     UnitPrice = request.UnitPrice,
                     Amount = request.Amount,
@@ -67,11 +70,13 @@ namespace VetSystems.Vet.Application.Features.Demands.DemandProducts.Commands
                 };
                 await _demandProductsRepository.AddAsync(demandProducts);
                 await _uow.SaveChangesAsync(cancellationToken);
+                response.Data = demandProducts;
             }
             catch (Exception ex)
             {
                 response.IsSuccessful = false;
             }
+           
             return response;
 
         }

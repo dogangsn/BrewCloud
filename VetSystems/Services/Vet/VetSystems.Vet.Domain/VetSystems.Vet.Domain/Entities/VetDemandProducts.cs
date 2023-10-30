@@ -9,8 +9,8 @@ namespace VetSystems.Vet.Domain.Entities
 {
     public class VetDemandProducts : BaseEntity, IAggregateRoot
     {
-        public Guid id { get; set; }
-        public string Remark{ get; set; } 
+        public Guid? OwnerId { get; set; }
+        public Guid ProductId { get; set; } 
         public decimal? Quantity{ get; set; } 
         public decimal? UnitPrice { get; set; } 
         public decimal? Amount { get; set; }

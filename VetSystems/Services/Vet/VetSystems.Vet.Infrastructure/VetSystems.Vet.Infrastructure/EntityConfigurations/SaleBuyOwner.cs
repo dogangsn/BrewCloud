@@ -16,6 +16,11 @@ namespace VetSystems.Vet.Infrastructure.EntityConfigurations
             entity.HasKey(e => e.Id)
                   .HasName("VetSaleBuyOwner_pkey");
 
+            entity.Property(x => x.RecId)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("recid")
+                .UseIdentityColumn(1000,1);
+               
             //entity.Property<decimal>("Total")
             // .HasPrecision(18, 2)
             // .HasColumnType("numeric(18,2)")

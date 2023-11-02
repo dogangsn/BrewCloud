@@ -1,4 +1,11 @@
 Identity => 5001
+Account => 5012
+Vet => 5013
+Mobile => 5014
+Integration => 5015
+Farm => 5016
+Chat => 5017
+
 
 
 GateWay => 5000

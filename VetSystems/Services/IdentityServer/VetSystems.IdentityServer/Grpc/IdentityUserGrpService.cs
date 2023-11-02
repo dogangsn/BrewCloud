@@ -260,7 +260,8 @@ namespace VetSystems.IdentityServer.Grpc
                     ContactEmail = request.ContactEmail,
                     VknNumber = request.VknNumber,
                     IsLicenceAccount = request.IsLicenceAccount,
-                    AppKey = request.AppKey
+                    AppKey = request.AppKey,
+                    UserName = request.Email,
                 }
 
             };

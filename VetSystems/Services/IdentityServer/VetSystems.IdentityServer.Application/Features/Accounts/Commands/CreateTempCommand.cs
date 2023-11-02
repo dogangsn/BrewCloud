@@ -49,7 +49,7 @@ namespace VetSystems.IdentityServer.Application.Features.Accounts.Commands
         {
             try
             {
-                var user = await _accountService.GetAccountByEmail(request.Username.Trim());
+                var user = await _accountService.GetAccountByEmail(request.Email.Trim());
                 if (user != null)
                 {
                     return Response<bool>.Fail("e-mail address is already taken ", 404);
@@ -57,6 +57,7 @@ namespace VetSystems.IdentityServer.Application.Features.Accounts.Commands
             }
             catch (Exception ex)
             {
+                _logger.LogError($"Exception: {ex.Message}");
             }
 
             var entity = await _tempRepository.FirstOrDefaultAsync(r => r.Username == request.Username && r.IsComplate == false);

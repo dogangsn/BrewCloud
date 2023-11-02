@@ -49,5 +49,13 @@ namespace VetSystems.IdentityServer.Controller
             return Ok(result);
         }
 
+        [HttpPost(Name = "RefreshActivation")]
+        [AllowAnonymous]
+        public async Task<IActionResult> RefreshActivation([FromBody] RefreshActivationCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
     }
 }

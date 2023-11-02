@@ -54,7 +54,10 @@ namespace VetSystems.IdentityServer.Controller
                     CompanyId = signupDto.CompanyId,
                     AccountType = AccountType.User,
                     FirstName = signupDto.FirstName,
-                    LastName = signupDto.LastName
+                    LastName = signupDto.LastName,
+                    ContactEmail = "",
+                    UserName = signupDto.Email
+
                 }
             };
 

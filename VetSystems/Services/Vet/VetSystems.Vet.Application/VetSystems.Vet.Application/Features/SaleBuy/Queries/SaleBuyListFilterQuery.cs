@@ -13,6 +13,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 using VetSystems.Vet.Domain.Entities;
 using VetSystems.Vet.Application.Models.Definition.PaymentMethods;
 using Microsoft.VisualBasic;
+using Microsoft.Extensions.Logging;
 
 namespace VetSystems.Vet.Application.Features.SaleBuy.Queries
 {
@@ -30,13 +31,15 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Queries
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
         private readonly IRepository<Vet.Domain.Entities.VetPaymentMethods> _paymentMethodsRepository;
+        private readonly ILogger<SaleBuyListFilterQueryHandler> _logger;
 
-        public SaleBuyListFilterQueryHandler(IIdentityRepository identityRepository, IUnitOfWork uow, IMapper mapper, IRepository<Vet.Domain.Entities.VetPaymentMethods> paymentMethodsRepository)
+        public SaleBuyListFilterQueryHandler(IIdentityRepository identityRepository, IUnitOfWork uow, IMapper mapper, IRepository<Vet.Domain.Entities.VetPaymentMethods> paymentMethodsRepository, ILogger<SaleBuyListFilterQueryHandler> logger)
         {
             _identityRepository = identityRepository;
             _uow = uow;
             _mapper = mapper;
             _paymentMethodsRepository = paymentMethodsRepository;
+            _logger = logger;
         }
 
         public async Task<Response<List<SaleBuyListDto>>> Handle(SaleBuyListFilterQuery request, CancellationToken cancellationToken)
@@ -88,7 +91,7 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Queries
             catch (Exception ex)
             {
                 response.IsSuccessful = false;
-                //response.Errors = ex.ToString();
+                _logger.LogError($"Exception: {ex.Message}");
             }
 
             return response;

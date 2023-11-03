@@ -15,6 +15,7 @@ using VetSystems.IdentityServer.Infrastructure.Repositories;
 using Microsoft.Extensions.Configuration;
 using VetSystems.IdentityServer.Application.Events;
 using VetSystems.Shared.Events;
+using Microsoft.Identity.Client;
 
 namespace VetSystems.IdentityServer.Application.Features.Accounts.Commands
 {
@@ -39,9 +40,10 @@ namespace VetSystems.IdentityServer.Application.Features.Accounts.Commands
         private readonly IAccountDataService _accountService;
         private readonly MediatR.IMediator _mediator;
         private readonly ISendEndpointProvider _sendEndpointProvider;
+        private readonly ILogger<ComplateActivationCommandHandler> _logger;
 
         public ComplateActivationCommandHandler(IUnitOfWork uow, IRepository<SubscriptionAccount> tempRepository, 
-            IConfiguration configuration, IIdentityRepository identity, IAccountDataService accountService, MediatR.IMediator mediator, ISendEndpointProvider sendEndpointProvider)
+            IConfiguration configuration, IIdentityRepository identity, IAccountDataService accountService, MediatR.IMediator mediator, ISendEndpointProvider sendEndpointProvider, ILogger<ComplateActivationCommandHandler> logger)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _tempRepository = tempRepository ?? throw new ArgumentNullException(nameof(tempRepository));
@@ -50,6 +52,7 @@ namespace VetSystems.IdentityServer.Application.Features.Accounts.Commands
             _accountService = accountService;
             _mediator = mediator;
             _sendEndpointProvider = sendEndpointProvider;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public async Task<Shared.Dtos.Response<bool>> Handle(ComplateActivationCommand request, CancellationToken cancellationToken)
@@ -104,7 +107,7 @@ namespace VetSystems.IdentityServer.Application.Features.Accounts.Commands
             }
             catch (Exception ex)
             {
-
+                _logger.LogError($"Exception: {ex.Message}");
             }
             return Shared.Dtos.Response<bool>.Success(200);
 

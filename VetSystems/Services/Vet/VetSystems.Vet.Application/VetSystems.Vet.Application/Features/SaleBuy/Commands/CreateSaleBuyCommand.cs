@@ -69,7 +69,7 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Commands
                 CustomerId = request.CustomerId,
                 Type = request.Type,
                 SupplierId = request.SupplierId,
-                InvoiceNo = "#",
+                InvoiceNo = string.IsNullOrEmpty(request.InvoiceNo) ? "#" : request.InvoiceNo,
                 Total = request.Type == (int)BuySaleType.Selling ? _product.SellingPrice : _product.BuyingPrice,
                 CreateDate = DateTime.Now,
                 CreateUsers = _identity.Account.UserName,

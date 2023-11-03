@@ -26,9 +26,9 @@ namespace VetSystems.IdentityServer.Infrastructure.Entities
         public string ModifiedBy { get; set; }
         public DateTime? ModifiedDate { get; set; }
         public bool? AuthorizeEnterprise { get; set; }
-        public string ContactEmail { get; set; }
-        public string VknNumber { get; set; }
-        public string AppKey { get; set; }
+        public string ContactEmail { get; set; } = string.Empty;
+        public string VknNumber { get; set; } = string.Empty;
+        public string AppKey { get; set; } = string.Empty;
 
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }

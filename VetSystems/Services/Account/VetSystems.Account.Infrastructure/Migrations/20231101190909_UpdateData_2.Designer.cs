@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VetSystems.Account.Infrastructure.Persistence;
 
@@ -11,9 +12,10 @@ using VetSystems.Account.Infrastructure.Persistence;
 namespace VetSystems.Account.Infrastructure.Migrations
 {
     [DbContext(typeof(VetSystemsDbContext))]
-    partial class VetSystemsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231101190909_UpdateData_2")]
+    partial class UpdateData_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

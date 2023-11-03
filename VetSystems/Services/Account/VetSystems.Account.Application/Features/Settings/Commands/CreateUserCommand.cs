@@ -65,10 +65,10 @@ namespace VetSystems.Account.Application.Features.Settings.Commands
                     TenantId = _identity.Account.TenantId.ToString(),
                     UserName = request.UserName,
                     AppKey = request.AppKey,
+                    VknNumber = string.Empty,
                     //AuthorizeEnterprise = request.AuthorizeEnterprise.GetValueOrDefault(),
                     //IsLicenceAccount = request.IsLicenceAccount,
                     //ContactEmail = request.ContactEmail,
-                    //VknNumber = request.VknNumber,
                     //AccountType = request.AccountType,
                 };
                 var userResult = await _identityGrpService.RegisterUserAsync(userRequest);

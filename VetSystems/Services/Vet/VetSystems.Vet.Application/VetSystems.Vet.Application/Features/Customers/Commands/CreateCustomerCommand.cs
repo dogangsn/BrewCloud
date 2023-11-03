@@ -109,6 +109,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
             {
                 response.IsSuccessful = false;
                 response.ResponseType = ResponseType.Error;
+                _logger.LogError($"Exception: {ex.Message}");
             }
             return response;
 

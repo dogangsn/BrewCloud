@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <Folder Include="Features\Definition\AnimalColorsDef\Commands\" />
+    <Folder Include="Features\Demands\DemandTrans\Commands\" />
     <Folder Include="Features\GeneralSettings\SystemsLog\Commands\" />
     <Folder Include="Features\GeneralSettings\SystemsLog\Queries\" />
     <Folder Include="Models\GeneralSettings\" />

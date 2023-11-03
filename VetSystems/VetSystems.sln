@@ -79,7 +79,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Farm.Infrastruct
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chat", "Chat", "{8A670B04-DBA6-47C2-B064-0227708971BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Chat.Api", "Services\Chat\VetSystems.Chat.Api\VetSystems.Chat.Api.csproj", "{3A566902-2A53-46D5-B56B-A093809E4ADB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Chat.Api", "Services\Chat\VetSystems.Chat.Api\VetSystems.Chat.Api.csproj", "{3A566902-2A53-46D5-B56B-A093809E4ADB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Chat.Infrastructure", "Services\Chat\VetSystems.Chat.Infrastructure\VetSystems.Chat.Infrastructure.csproj", "{65DAD2BC-6946-4FBB-BC9C-4B05A98226A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Chat.Application", "Services\Chat\VetSystems.Chat.Application\VetSystems.Chat.Application.csproj", "{D0709862-9529-477B-921D-6B0894474E7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -191,6 +195,14 @@ Global
 		{3A566902-2A53-46D5-B56B-A093809E4ADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A566902-2A53-46D5-B56B-A093809E4ADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A566902-2A53-46D5-B56B-A093809E4ADB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65DAD2BC-6946-4FBB-BC9C-4B05A98226A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65DAD2BC-6946-4FBB-BC9C-4B05A98226A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65DAD2BC-6946-4FBB-BC9C-4B05A98226A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65DAD2BC-6946-4FBB-BC9C-4B05A98226A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0709862-9529-477B-921D-6B0894474E7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0709862-9529-477B-921D-6B0894474E7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0709862-9529-477B-921D-6B0894474E7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0709862-9529-477B-921D-6B0894474E7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -229,6 +241,8 @@ Global
 		{6B3EA3E7-AC63-4AEB-9BBC-D0C6026052DB} = {DCCE0E80-94FD-497E-B590-8BC844B7BA2B}
 		{8A670B04-DBA6-47C2-B064-0227708971BC} = {09508787-B726-4595-AA04-FD652D0B4609}
 		{3A566902-2A53-46D5-B56B-A093809E4ADB} = {8A670B04-DBA6-47C2-B064-0227708971BC}
+		{65DAD2BC-6946-4FBB-BC9C-4B05A98226A9} = {8A670B04-DBA6-47C2-B064-0227708971BC}
+		{D0709862-9529-477B-921D-6B0894474E7F} = {8A670B04-DBA6-47C2-B064-0227708971BC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B7E68C2E-293C-48D7-A15C-6681682A0215}

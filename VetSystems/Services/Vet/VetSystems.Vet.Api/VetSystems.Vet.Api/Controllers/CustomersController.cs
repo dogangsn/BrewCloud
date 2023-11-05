@@ -56,6 +56,12 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "GetCustomersFindById")]
+        public async Task<IActionResult> GetCustomersFindById([FromBody] CustomersFindByIdQuery model)
+        {
+            var result = await _mediator.Send(model);
+            return Ok(result);
+        }
 
     }
 }

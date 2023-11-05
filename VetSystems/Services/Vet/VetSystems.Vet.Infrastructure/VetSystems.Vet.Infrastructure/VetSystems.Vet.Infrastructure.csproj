@@ -9,13 +9,19 @@
   <ItemGroup>
     <None Remove="Scripts\UpdateData_AnimalBreedsDefInsert.txt" />
     <None Remove="Scripts\UpdateData_AnimalTypeDefInsert.txt" />
+    <None Remove="Scripts\UpdateData_CustomerGroupdef.txt" />
     <None Remove="Scripts\UpdateData_PaymentMethods.txt" />
+    <None Remove="Scripts\UpdateData_ProductCategories.txt" />
+    <None Remove="Scripts\UpdateData_Units.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Scripts\UpdateData_AnimalBreedsDefInsert.txt" />
     <EmbeddedResource Include="Scripts\UpdateData_AnimalTypeDefInsert.txt" />
+    <EmbeddedResource Include="Scripts\UpdateData_CustomerGroupdef.txt" />
     <EmbeddedResource Include="Scripts\UpdateData_PaymentMethods.txt" />
+    <EmbeddedResource Include="Scripts\UpdateData_ProductCategories.txt" />
+    <EmbeddedResource Include="Scripts\UpdateData_Units.txt" />
   </ItemGroup>
 
   <ItemGroup>

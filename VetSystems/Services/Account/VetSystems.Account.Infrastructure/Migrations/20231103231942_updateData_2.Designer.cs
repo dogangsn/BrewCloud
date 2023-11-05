@@ -12,8 +12,8 @@ using VetSystems.Account.Infrastructure.Persistence;
 namespace VetSystems.Account.Infrastructure.Migrations
 {
     [DbContext(typeof(VetSystemsDbContext))]
-    [Migration("20231101190909_UpdateData_2")]
-    partial class UpdateData_2
+    [Migration("20231103231942_updateData_2")]
+    partial class updateData_2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -406,21 +406,32 @@ namespace VetSystems.Account.Infrastructure.Migrations
 
             modelBuilder.Entity("VetSystems.Account.Domain.Entities.Message", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("content");
 
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("createdate");
+
+                    b.Property<string>("CreateUser")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("createuser");
+
                     b.Property<DateTime?>("DateRead")
                         .HasColumnType("datetime2")
                         .HasColumnName("dateread");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("deleted");
 
                     b.Property<bool>("IsRead")
                         .HasColumnType("bit")
@@ -434,34 +445,29 @@ namespace VetSystems.Account.Infrastructure.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("recipientdeleted");
 
-                    b.Property<int>("RecipientId")
-                        .HasColumnType("int")
-                        .HasColumnName("recipientid");
-
-                    b.Property<Guid>("RecipientId1")
+                    b.Property<Guid?>("RecipientId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("recipientid1");
+                        .HasColumnName("recipientid");
 
                     b.Property<bool>("SenderDeleted")
                         .HasColumnType("bit")
                         .HasColumnName("senderdeleted");
 
-                    b.Property<int>("SenderId")
-                        .HasColumnType("int")
+                    b.Property<Guid?>("SenderId")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("senderid");
 
-                    b.Property<Guid>("SenderId1")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("senderid1");
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("updatedate");
+
+                    b.Property<string>("UpdateUser")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("updateuser");
 
                     b.HasKey("Id")
                         .HasName("pk_message");
-
-                    b.HasIndex("RecipientId1")
-                        .HasDatabaseName("ix_message_recipientid1");
-
-                    b.HasIndex("SenderId1")
-                        .HasDatabaseName("ix_message_senderid1");
 
                     b.ToTable("message", (string)null);
                 });
@@ -1166,27 +1172,6 @@ namespace VetSystems.Account.Infrastructure.Migrations
                         .HasConstraintName("fk_abilitygroup_enterprise_enterprisesid");
 
                     b.Navigation("Enterprises");
-                });
-
-            modelBuilder.Entity("VetSystems.Account.Domain.Entities.Message", b =>
-                {
-                    b.HasOne("VetSystems.Account.Domain.Entities.User", "Recipient")
-                        .WithMany()
-                        .HasForeignKey("RecipientId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_message_users_recipientid1");
-
-                    b.HasOne("VetSystems.Account.Domain.Entities.User", "Sender")
-                        .WithMany()
-                        .HasForeignKey("SenderId1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_message_users_senderid1");
-
-                    b.Navigation("Recipient");
-
-                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("VetSystems.Account.Domain.Entities.Property", b =>

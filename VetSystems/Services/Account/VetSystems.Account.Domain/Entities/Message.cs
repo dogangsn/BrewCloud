@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VetSystems.Account.Domain.Common;
 
 namespace VetSystems.Account.Domain.Entities
 {
-    public class Message
+    public class Message : BaseEntity
     {
-        public int Id { get; set; }
-        public int SenderId { get; set; }
-        public User Sender { get; set; }
-        public int RecipientId { get; set; }
-        public User Recipient { get; set; }
+        public Guid? SenderId { get; set; }
+        public Guid? RecipientId { get; set; }
         [Required]
         public string Content { get; set; } = string.Empty;
         public bool IsRead { get; set; }
@@ -21,5 +20,6 @@ namespace VetSystems.Account.Domain.Entities
         public DateTime MessageSent { get; set; }
         public bool SenderDeleted { get; set; }
         public bool RecipientDeleted { get; set; }
+        
     }
 }

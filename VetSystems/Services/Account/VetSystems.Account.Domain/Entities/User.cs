@@ -16,5 +16,6 @@ namespace VetSystems.Account.Domain.Entities
         public Guid RoleId { get; set; }
         public Guid EnterprisesId { get; set; }
         public bool Authorizeenterprise { get; set; }
+
     }
 }

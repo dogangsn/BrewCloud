@@ -1,0 +1,3 @@
+﻿INSERT INTO vetcustomergroupdef (id,code, name , createusers, createdate, updatedate, deleteddate, deleted, deletedusers, updateusers)  VALUES (NEWID(),'EVH01', 'Evcil Hayvan Sahipleri' , '', GETDATE(), '1900-01-01', '1900-01-01', 0, '', '')
+INSERT INTO vetcustomergroupdef (id,code, name , createusers, createdate, updatedate, deleteddate, deleted, deletedusers, updateusers)  VALUES (NEWID(),'EHB02', 'Evcil Hayvan Bakımı ve Barınakları' , '', GETDATE(), '1900-01-01', '1900-01-01', 0, '', '')
+INSERT INTO vetcustomergroupdef (id,code, name , createusers, createdate, updatedate, deleteddate, deleted, deletedusers, updateusers)  VALUES (NEWID(),'CTH03', 'Çiftlik ve Tarım Hayvanı Sahipleri' , '', GETDATE(), '1900-01-01', '1900-01-01', 0, '', '')

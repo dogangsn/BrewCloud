@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VetSystems.Account.Infrastructure.Migrations
 {
-    public partial class UpdateData_2 : Migration
+    public partial class updateData_2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -109,45 +109,25 @@ namespace VetSystems.Account.Infrastructure.Migrations
                 name: "message",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    senderid = table.Column<int>(type: "int", nullable: false),
-                    senderid1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    recipientid = table.Column<int>(type: "int", nullable: false),
-                    recipientid1 = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    senderid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    recipientid = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     isread = table.Column<bool>(type: "bit", nullable: false),
                     dateread = table.Column<DateTime>(type: "datetime2", nullable: true),
                     messagesent = table.Column<DateTime>(type: "datetime2", nullable: false),
                     senderdeleted = table.Column<bool>(type: "bit", nullable: false),
-                    recipientdeleted = table.Column<bool>(type: "bit", nullable: false)
+                    recipientdeleted = table.Column<bool>(type: "bit", nullable: false),
+                    createdate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    updatedate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    createuser = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    updateuser = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    deleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_message", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_message_users_recipientid1",
-                        column: x => x.recipientid1,
-                        principalTable: "users",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_message_users_senderid1",
-                        column: x => x.senderid1,
-                        principalTable: "users",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "ix_message_recipientid1",
-                table: "message",
-                column: "recipientid1");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_message_senderid1",
-                table: "message",
-                column: "senderid1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

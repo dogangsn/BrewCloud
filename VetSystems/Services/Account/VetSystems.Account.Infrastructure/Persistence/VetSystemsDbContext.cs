@@ -96,6 +96,10 @@ namespace VetSystems.Account.Infrastructure.Persistence
             return base.SaveChangesAsync(cancellationToken);
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+  
+        }
 
         public async Task MigrateAsync(string name)
         {

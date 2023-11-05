@@ -24,6 +24,7 @@ namespace VetSystems.Vet.Domain.Entities
         public decimal? NetPrice { get; set; } = 0;
         public Guid? SupplierId { get; set; }
         public string Remark { get; set; } = string.Empty;
+        public int RecordId { get; set; }
 
         public void addSaleBuyTrans(VetSaleBuyTrans trans)
         {

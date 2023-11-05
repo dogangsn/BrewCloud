@@ -80,7 +80,7 @@ namespace VetSystems.Account.Application.Features.Settings.Commands
                 company.DefaultInvoiceType = request.DefaultInvoiceType;
                 company.TaxOffice = request.TaxOffice;
                 company.UpdateDate = DateTime.Now;
-                company.UpdateUser = _identity.Account.Email;
+                company.UpdateUser = _identity.Account.UserName;
                 company.InvoiceAmountNotes = request.InvoiceAmountNotes;
 
                 await _uow.SaveChangesAsync(cancellationToken);

@@ -11,6 +11,7 @@ using VetSystems.Shared.Service;
 using VetSystems.Vet.Application.Models.Customers;
 using VetSystems.Vet.Application.Models.SaleBuy;
 using VetSystems.Vet.Domain.Contracts;
+using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Features.Customers.Queries
 {
@@ -47,18 +48,33 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                                     vc.email, 
                                     vc.taxoffice, 
                                     vc.vkntcno, 
-                                    vc.customergroup, 
+                                    vc.customergroup,
+                                    vc.note,
                                     vc.discountrate,
                                     vc.isemail, 
                                     vc.isphone,
-                                    vc.adressid, 
-                                    vc.createdate 
+                                    vc.adressid,
+                                    FORMAT(vc.createdate, 'yyyy-MM-dd') AS createdate
                                     from vetcustomers as vc where vc.deleted = 0 and id = @id";
 
                 CustomerDetailsDto? customerDetail = _uow.Query<CustomerDetailsDto>(query, new { id = request.Id }).FirstOrDefault();
 
+                
+
                 if (customerDetail != null)
                 {
+
+                    if (customerDetail.adressid != null)
+                    {
+                        string addressQuery = @"select province, district, longadress from vetadress where id = @id";
+
+                        var address = _uow.Query<VetAdress>(addressQuery, new { id = customerDetail.adressid }).FirstOrDefault();
+
+                        customerDetail.city = address.Province;
+                        customerDetail.district = address.District;
+                        customerDetail.longadress = address.LongAdress;
+                    }
+
                     response = new Response<CustomerDetailsDto>
                     {
                         IsSuccessful = true,
@@ -84,7 +100,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                 response.Data = null;
             }
 
-            return response;
+             return response;
         }
     }
 }

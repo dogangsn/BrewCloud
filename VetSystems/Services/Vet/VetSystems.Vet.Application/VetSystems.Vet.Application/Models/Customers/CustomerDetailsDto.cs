@@ -22,8 +22,9 @@ namespace VetSystems.Vet.Application.Models.Customers
         public bool isemail { get; set; }
         public bool isphone { get; set; }
         public Guid adressid { get; set; }
-        public DateTime createdate { get; set; }
-
-
+        public string createdate { get; set; }
+        public string city { get; set; }
+        public string district { get; set; }
+        public string longadress { get; set; }
     }
 }

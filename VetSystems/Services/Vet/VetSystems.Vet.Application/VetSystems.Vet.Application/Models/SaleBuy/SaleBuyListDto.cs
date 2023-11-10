@@ -10,6 +10,7 @@ namespace VetSystems.Vet.Application.Models.SaleBuy
     {
         public Guid Id { get; set; }
         public DateTime Date { get; set; }
+        public int Type { get; set; }
         public string InvoiceNo { get; set; }
         public string CustomerName { get; set; }
         public string SupplierName { get; set; }

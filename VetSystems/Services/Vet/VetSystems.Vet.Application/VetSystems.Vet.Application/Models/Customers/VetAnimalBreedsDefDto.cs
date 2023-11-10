@@ -8,7 +8,7 @@ namespace VetSystems.Vet.Application.Models.Customers
 {
     public class VetAnimalBreedsDefDto
     {
-        public int Id { get; set; }
+        public int RecId { get; set; }
         public int Animaltype { get; set; }
         public string BreedName { get; set; }
     }

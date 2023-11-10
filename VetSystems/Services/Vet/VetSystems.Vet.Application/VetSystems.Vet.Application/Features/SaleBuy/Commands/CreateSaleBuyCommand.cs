@@ -101,8 +101,8 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Commands
             saleBuyOwner.Total = Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.NetPrice.GetValueOrDefault()), 2, MidpointRounding.ToEven)
                                         + Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.VatAmount.GetValueOrDefault()), 2, MidpointRounding.ToEven); 
               
-
             saleBuyOwner.Discount = Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.Discount.GetValueOrDefault()), 2, MidpointRounding.ToEven);
+            saleBuyOwner.InvoiceNo = string.IsNullOrEmpty(request.InvoiceNo) ? "#" + Convert.ToString(saleBuyOwner.RecordId) : request.InvoiceNo;
 
             try
             {

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using VetSystems.Shared.Dtos;
 using VetSystems.Shared.Service;
 using VetSystems.Vet.Application.Models.Customers;
+using VetSystems.Vet.Application.Models.Patients;
 using VetSystems.Vet.Application.Models.SaleBuy;
 using VetSystems.Vet.Domain.Contracts;
 using VetSystems.Vet.Domain.Entities;
@@ -74,6 +75,27 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                         customerDetail.district = address.District;
                         customerDetail.longadress = address.LongAdress;
                     }
+
+                    var patientQuery = @"select
+                                            vp.id as RecId,
+                                            vp.customerid as CustomerId,
+                                            vp.name as Name,
+                                            vp.birthdate as Birthdate,
+                                            vp.chipnumber as ChipNumber,
+                                            vp.sex as Sex,
+                                            vat.name as AnimalType,
+                                            vabd.breedname as BreedType,
+                                            vacd.name as AnimalColor from vetpatients as vp
+                                                left outer join vetanimalstype as vat on vp.animaltype = vat.type
+                                                left outer join vetanimalbreedsdef as vabd on vp.animalbreed = vabd.RecId
+                                                left outer join vetanimalcolorsdef as vacd on vp.animalcolor = vacd.RecId
+                                                                          where vp.customerid = @customerId
+                                                                            and vp.deleted = 0";
+
+
+                    List<PatientDetailsDto> patientList = _uow.Query<PatientDetailsDto>(patientQuery, new { customerId = customerDetail.id }).ToList();
+
+                    customerDetail.PatientDetails = patientList;
 
                     response = new Response<CustomerDetailsDto>
                     {

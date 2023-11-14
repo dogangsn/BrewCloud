@@ -80,7 +80,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                                             vp.id as RecId,
                                             vp.customerid as CustomerId,
                                             vp.name as Name,
-                                            vp.birthdate as Birthdate,
+                                            FORMAT(vp.birthdate, 'yyyy-MM-dd') AS BirthDate,
                                             vp.chipnumber as ChipNumber,
                                             vp.sex as Sex,
                                             vat.name as AnimalType,

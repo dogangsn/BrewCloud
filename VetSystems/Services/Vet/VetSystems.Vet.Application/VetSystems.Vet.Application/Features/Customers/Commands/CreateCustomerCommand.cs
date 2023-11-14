@@ -82,7 +82,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                     IsPhone = request.CreateCustomers.IsPhone,
                     Adress = adress,
                     Deleted = false,
-                    CreateDate = DateTime.UtcNow,
+                    CreateDate = DateTime.Now,
                 };
 
                 if (request.CreateCustomers.PatientDetails.Any())

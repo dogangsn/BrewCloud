@@ -18,8 +18,8 @@ namespace VetSystems.Vet.Application.Models.Customers
         public string VKNTCNo { get; set; } = string.Empty;
         public string Note { get; set; } = string.Empty;
         public decimal DiscountRate { get; set; } = 0;
-        public bool? IsEmail { get; set; } = true;
-        public bool? IsPhone { get; set; } = true;
+        public bool? IsEmail { get; set; } = false;
+        public bool? IsPhone { get; set; } = false;
         public string Province { get; set; } = string.Empty;
         public string District { get; set; } = string.Empty;
         public string LongAdress { get; set; } = string.Empty;

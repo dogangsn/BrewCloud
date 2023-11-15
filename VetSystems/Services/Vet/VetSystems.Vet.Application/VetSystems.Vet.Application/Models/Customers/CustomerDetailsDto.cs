@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VetSystems.Vet.Application.Models.Patients;
 
 namespace VetSystems.Vet.Application.Models.Customers
 {
@@ -22,8 +23,10 @@ namespace VetSystems.Vet.Application.Models.Customers
         public bool isemail { get; set; }
         public bool isphone { get; set; }
         public Guid adressid { get; set; }
-        public DateTime createdate { get; set; }
-
-
+        public string createdate { get; set; }
+        public string city { get; set; }
+        public string district { get; set; }
+        public string longadress { get; set; }
+        public List<PatientDetailsDto> PatientDetails { get; set; }
     }
 }

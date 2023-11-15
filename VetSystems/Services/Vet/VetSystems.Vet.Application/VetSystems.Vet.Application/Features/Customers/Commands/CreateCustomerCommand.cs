@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,12 +15,12 @@ using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Features.Customers.Commands
 {
-    public class CreateCustomerCommand : IRequest<Response<bool>>
+    public class CreateCustomerCommand : IRequest<Response<string>>
     {
         public CustomersDto CreateCustomers { get; set; }
     }
 
-    public class CreateCustomerHandler : IRequestHandler<CreateCustomerCommand, Response<bool>>
+    public class CreateCustomerHandler : IRequestHandler<CreateCustomerCommand, Response<string>>
     {
         private readonly IUnitOfWork _uow;
         private readonly IIdentityRepository _identity;
@@ -36,16 +37,23 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
             _customerRepository = customerRepository ?? throw new ArgumentNullException(nameof(customerRepository));
         }
 
-        public async Task<Response<bool>> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
+        public async Task<Response<string>> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
         {
-            var response = new Response<bool>
+            var response = new Response<string>
             {
                 ResponseType = ResponseType.Ok,
                 IsSuccessful = true,
+                Data = string.Empty
             };
-
+            _uow.CreateTransaction(IsolationLevel.ReadCommitted);
             try
             {
+
+                var recordControl = await _customerRepository.FirstOrDefaultAsync(x=>x.PhoneNumber.Trim() == request.CreateCustomers.PhoneNumber.Trim());
+                if (recordControl != null)
+                {
+                    return Response<string>.Fail("Sistem Üzerinde Aynı Müşteri Bilgileri ile Kayıt Vardır.", 404);
+                }
 
                 Vet.Domain.Entities.VetAdress adress = new()
                 {
@@ -54,7 +62,8 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                     Deleted = false,
                     CreateDate = DateTime.UtcNow,
                     LongAdress = request.CreateCustomers.LongAdress,
-                    County = "TR"
+                    County = "TR",
+                    District = request.CreateCustomers.District,
                 };
 
                 Vet.Domain.Entities.VetCustomers customers = new()
@@ -73,8 +82,9 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                     IsPhone = request.CreateCustomers.IsPhone,
                     Adress = adress,
                     Deleted = false,
-                    CreateDate = DateTime.UtcNow,
+                    CreateDate = DateTime.Now,
                 };
+
                 if (request.CreateCustomers.PatientDetails.Any())
                 {
                     foreach (var item in request.CreateCustomers.PatientDetails)
@@ -103,10 +113,14 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
 
                 await _customerRepository.AddAsync(customers);
                 await _uow.SaveChangesAsync(cancellationToken);
+                _uow.Commit();
+
+                response.Data = customers.Id.ToString();
 
             }
             catch (Exception ex)
             {
+                _uow.Rollback();
                 response.IsSuccessful = false;
                 response.ResponseType = ResponseType.Error;
                 _logger.LogError($"Exception: {ex.Message}");

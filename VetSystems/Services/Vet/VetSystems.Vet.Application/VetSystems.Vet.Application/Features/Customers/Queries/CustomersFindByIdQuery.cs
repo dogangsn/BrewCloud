@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 using VetSystems.Shared.Dtos;
 using VetSystems.Shared.Service;
 using VetSystems.Vet.Application.Models.Customers;
+using VetSystems.Vet.Application.Models.Patients;
 using VetSystems.Vet.Application.Models.SaleBuy;
 using VetSystems.Vet.Domain.Contracts;
+using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Features.Customers.Queries
 {
@@ -47,18 +49,54 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                                     vc.email, 
                                     vc.taxoffice, 
                                     vc.vkntcno, 
-                                    vc.customergroup, 
+                                    vc.customergroup,
+                                    vc.note,
                                     vc.discountrate,
                                     vc.isemail, 
                                     vc.isphone,
-                                    vc.adressid, 
-                                    vc.createdate 
+                                    vc.adressid,
+                                    FORMAT(vc.createdate, 'yyyy-MM-dd') AS createdate
                                     from vetcustomers as vc where vc.deleted = 0 and id = @id";
 
                 CustomerDetailsDto? customerDetail = _uow.Query<CustomerDetailsDto>(query, new { id = request.Id }).FirstOrDefault();
 
+                
+
                 if (customerDetail != null)
                 {
+
+                    if (customerDetail.adressid != null)
+                    {
+                        string addressQuery = @"select province, district, longadress from vetadress where id = @id";
+
+                        var address = _uow.Query<VetAdress>(addressQuery, new { id = customerDetail.adressid }).FirstOrDefault();
+
+                        customerDetail.city = address.Province;
+                        customerDetail.district = address.District;
+                        customerDetail.longadress = address.LongAdress;
+                    }
+
+                    var patientQuery = @"select
+                                            vp.id as RecId,
+                                            vp.customerid as CustomerId,
+                                            vp.name as Name,
+                                            FORMAT(vp.birthdate, 'yyyy-MM-dd') AS BirthDate,
+                                            vp.chipnumber as ChipNumber,
+                                            vp.sex as Sex,
+                                            vat.name as AnimalType,
+                                            vabd.breedname as BreedType,
+                                            vacd.name as AnimalColor from vetpatients as vp
+                                                left outer join vetanimalstype as vat on vp.animaltype = vat.type
+                                                left outer join vetanimalbreedsdef as vabd on vp.animalbreed = vabd.RecId
+                                                left outer join vetanimalcolorsdef as vacd on vp.animalcolor = vacd.RecId
+                                                                          where vp.customerid = @customerId
+                                                                            and vp.deleted = 0";
+
+
+                    List<PatientDetailsDto> patientList = _uow.Query<PatientDetailsDto>(patientQuery, new { customerId = customerDetail.id }).ToList();
+
+                    customerDetail.PatientDetails = patientList;
+
                     response = new Response<CustomerDetailsDto>
                     {
                         IsSuccessful = true,
@@ -84,7 +122,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                 response.Data = null;
             }
 
-            return response;
+             return response;
         }
     }
 }

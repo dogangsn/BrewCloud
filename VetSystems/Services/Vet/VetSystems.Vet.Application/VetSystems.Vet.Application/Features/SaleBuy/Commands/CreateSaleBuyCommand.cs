@@ -129,7 +129,7 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Commands
                     if (_vatInclude)
                     {
                         basePrice = (_amount * _quentity) / (1 + (Convert.ToDecimal(_ratio) / 100));
-                        vatAmount =  Math.Round(_amount - basePrice, 2, MidpointRounding.ToZero);
+                        vatAmount =  Math.Round((_amount * _quentity)- basePrice, 2, MidpointRounding.ToZero);
                     }
                     else
                     {

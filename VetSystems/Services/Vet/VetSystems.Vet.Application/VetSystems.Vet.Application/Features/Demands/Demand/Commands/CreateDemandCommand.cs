@@ -72,6 +72,8 @@ namespace VetSystems.Vet.Application.Features.Demands.Demand.Commands
                     note = request.note,
                     state = request.state,
                     iscomplated = false,
+                    isBuying = false,
+                    isAccounting = false,
                     CreateDate = DateTime.Now,
                 };
                 await _demandsRepository.AddAsync(demands);

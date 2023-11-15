@@ -6,7 +6,7 @@ using VetSystems.Vet.Application.Features.Agenda.Queries;
 using VetSystems.Vet.Application.Features.Definition.ProductDescription.Queries;
 using VetSystems.Vet.Application.Features.Demands.Demand.Commands;
 using VetSystems.Vet.Application.Features.Demands.Demand.Queries;
-using VetSystems.Vet.Application.Features.Demands.DemandComplated.Commands.Queries;
+using VetSystems.Vet.Application.Features.Demands.DemandComplated.Queries;
 using VetSystems.Vet.Application.Features.Demands.DemandProducts.Commands;
 using VetSystems.Vet.Application.Features.Demands.DemandProducts.Queries;
 using VetSystems.Vet.Application.Features.Demands.DemandTrans.Queries;
@@ -69,13 +69,19 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "UpdateDemandIsBuying")]
+        public async Task<IActionResult> UpdateDemandIsBuying([FromBody] UpdateDemandIsBuyingCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
         [HttpPost(Name = "UpdateDemand")]
         public async Task<IActionResult> UpdateDemand([FromBody] UpdateDemandCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
         }
-
         [HttpPost(Name = "DeleteDemand")]
         public async Task<IActionResult> DeleteDemand([FromBody] DeleteDemandCommand command)
         {

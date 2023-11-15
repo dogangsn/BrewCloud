@@ -10,7 +10,7 @@ using VetSystems.Shared.Service;
 using VetSystems.Vet.Application.Models.Demands.Demands;
 using VetSystems.Vet.Domain.Contracts;
 
-namespace VetSystems.Vet.Application.Features.Demands.DemandComplated.Commands.Queries
+namespace VetSystems.Vet.Application.Features.Demands.DemandComplated.Queries
 {
 
     public class DemandComplatedListQuery : IRequest<Response<List<DemandsDto>>>

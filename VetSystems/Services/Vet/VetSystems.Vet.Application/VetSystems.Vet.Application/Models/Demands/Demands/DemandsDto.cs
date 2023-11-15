@@ -15,6 +15,8 @@ namespace VetSystems.Vet.Application.Models.Demands.Demands
         public DateTime? deliverydate { get; set; } 
         public string note { get; set; } = string.Empty;
         public int? state { get; set; }
+        public bool?  isBuying{ get; set; }
+        public bool?  isAccounting{ get; set; }
         public bool? iscomplated { get; set; } = false;
     }
 }

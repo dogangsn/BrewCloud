@@ -48,7 +48,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
             _uow.CreateTransaction(IsolationLevel.ReadCommitted);
             try
             {
-
+                //Silinen kayitlarin uzerinde islem yapılması
                 var recordControl = await _customerRepository.FirstOrDefaultAsync(x=>x.PhoneNumber.Trim() == request.CreateCustomers.PhoneNumber.Trim());
                 if (recordControl != null)
                 {

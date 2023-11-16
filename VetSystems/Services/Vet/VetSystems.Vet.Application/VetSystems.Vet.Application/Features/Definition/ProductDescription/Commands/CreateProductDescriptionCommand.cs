@@ -85,6 +85,8 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductDescription.Comm
                     BuyingIncludeKDV= request.BuyingIncludeKDV,
                     CreateDate = DateTime.Now,
                     CreateUsers = _identity.Account.UserName,
+                    AnimalType = request.AnimalType,
+                    NumberRepetitions = request.NumberRepetitions,
                 };
                 await _productRepository.AddAsync(_product);
                 await _uow.SaveChangesAsync(cancellationToken);

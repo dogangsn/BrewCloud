@@ -59,7 +59,16 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Commands
                 salebuyOwner.DeletedDate = DateTime.Now;
                 salebuyOwner.DeletedUsers = _identityRepository.Account.UserName;
 
-                //Trans satırların silinmesi gerekmektedir.
+                List<Vet.Domain.Entities.VetSaleBuyTrans> trans = (await _saleBuyTransRepository.GetAsync(x => x.OwnerId == request.Id)).ToList();
+                if (trans != null)
+                {
+                    foreach (var item in trans)
+                    {
+                        item.Deleted = true;
+                        salebuyOwner.DeletedDate = DateTime.Now;
+                        salebuyOwner.DeletedUsers = _identityRepository.Account.UserName;
+                    }
+                }
 
                 await _uow.SaveChangesAsync(cancellationToken);
             }

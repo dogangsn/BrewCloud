@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using VetSystems.Account.Application.GrpServices;
+using VetSystems.Account.Domain.Contracts;
 using VetSystems.Shared.Accounts;
 using VetSystems.Shared.Dtos;
 using VetSystems.Shared.Service;
@@ -22,15 +23,14 @@ namespace VetSystems.Account.Application.Features.Settings.Queries
         private readonly IdentityGrpService _identityGrpService;
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
-        //private readonly IRepository<Domain.Entities.Rolesetting> _roleSettingRepository;
+        private readonly IRepository<Domain.Entities.Rolesetting> _roleSettingRepository;
 
-        public GetUsersListQueryHandler(IdentityGrpService identityGrpService, /*IRepository<Domain.Entities.Rolesetting> roleSettingRepository,*/ IIdentityRepository identity, IMapper mapper)
+        public GetUsersListQueryHandler(IdentityGrpService identityGrpService, IRepository<Domain.Entities.Rolesetting> roleSettingRepository, IIdentityRepository identity, IMapper mapper)
         {
             _identityGrpService = identityGrpService ?? throw new ArgumentNullException(nameof(identityGrpService));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            //_roleSettingRepository = roleSettingRepository ?? throw new ArgumentNullException(nameof(roleSettingRepository));
-
+            _roleSettingRepository = roleSettingRepository ?? throw new ArgumentNullException(nameof(roleSettingRepository));
         }
 
         public async Task<Response<List<SignupDto>>> Handle(GetUsersListQuery request, CancellationToken cancellationToken)
@@ -52,7 +52,7 @@ namespace VetSystems.Account.Application.Features.Settings.Queries
             //    response.RemoveAll(r => r.AccountType > 3);
             //}
 
-            //var roleList = await _roleSettingRepository.GetAllAsync();
+            var roleList = await _roleSettingRepository.GetAllAsync();
             var result = response.Select(r => new SignupDto
             {
                 Id = r.Id,
@@ -61,8 +61,8 @@ namespace VetSystems.Account.Application.Features.Settings.Queries
                 Email = r.Email,
                 AppKey = r.AppKey,
                 UserAppKey = r.UserAppKey,
+                RoleName = r.Roleid != "" ? roleList.Where(x => x.Id == Guid.Parse(r.Roleid)).Select(x => x.Rolecode).FirstOrDefault() : ""
                 //AccountType = r.AccountType,
-                //RoleName = r.Roleid != "" ? roleList.Where(x => x.Recid == Guid.Parse(r.Roleid)).Select(x => x.Rolecode).FirstOrDefault() : ""
             }).ToList();
 
             return Response<List<SignupDto>>.Success(result, 200);

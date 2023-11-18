@@ -81,9 +81,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chat", "Chat", "{8A670B04-D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Chat.Api", "Services\Chat\VetSystems.Chat.Api\VetSystems.Chat.Api.csproj", "{3A566902-2A53-46D5-B56B-A093809E4ADB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Chat.Infrastructure", "Services\Chat\VetSystems.Chat.Infrastructure\VetSystems.Chat.Infrastructure.csproj", "{65DAD2BC-6946-4FBB-BC9C-4B05A98226A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Chat.Infrastructure", "Services\Chat\VetSystems.Chat.Infrastructure\VetSystems.Chat.Infrastructure.csproj", "{65DAD2BC-6946-4FBB-BC9C-4B05A98226A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Chat.Application", "Services\Chat\VetSystems.Chat.Application\VetSystems.Chat.Application.csproj", "{D0709862-9529-477B-921D-6B0894474E7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Chat.Application", "Services\Chat\VetSystems.Chat.Application\VetSystems.Chat.Application.csproj", "{D0709862-9529-477B-921D-6B0894474E7F}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{AD335B7F-DE9D-4292-922D-3AF7DB32433F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -203,6 +205,10 @@ Global
 		{D0709862-9529-477B-921D-6B0894474E7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0709862-9529-477B-921D-6B0894474E7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0709862-9529-477B-921D-6B0894474E7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD335B7F-DE9D-4292-922D-3AF7DB32433F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD335B7F-DE9D-4292-922D-3AF7DB32433F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD335B7F-DE9D-4292-922D-3AF7DB32433F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD335B7F-DE9D-4292-922D-3AF7DB32433F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

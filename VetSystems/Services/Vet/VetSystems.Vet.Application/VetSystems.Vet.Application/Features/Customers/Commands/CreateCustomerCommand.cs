@@ -49,7 +49,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
             try
             {
                 //Silinen kayitlarin uzerinde islem yapılması
-                var recordControl = await _customerRepository.FirstOrDefaultAsync(x=>x.PhoneNumber.Trim() == request.CreateCustomers.PhoneNumber.Trim());
+                var recordControl = await _customerRepository.FirstOrDefaultAsync(x=>x.PhoneNumber.Trim() == request.CreateCustomers.PhoneNumber.Trim() && x.Deleted == false);
                 if (recordControl != null)
                 {
                     return Response<string>.Fail("Sistem Üzerinde Aynı Müşteri Bilgileri ile Kayıt Vardır.", 404);

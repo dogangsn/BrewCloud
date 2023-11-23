@@ -24,9 +24,16 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductDescription.Comm
         private readonly IMapper _mapper;
         private readonly ILogger<DeleteProductDescriptionCommandHandler> _logger;
         private readonly IRepository<Vet.Domain.Entities.VetProducts> _productRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetSaleBuyTrans> _saleBuyTransRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetDemandTrans> _demandTransRepository;
         private readonly IIdentityRepository _identityRepository;
 
-        public DeleteProductDescriptionCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<DeleteProductDescriptionCommandHandler> logger, IRepository<Domain.Entities.VetProducts> productRepository, IIdentityRepository identityRepository)
+        public DeleteProductDescriptionCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, 
+                                                      ILogger<DeleteProductDescriptionCommandHandler> logger, 
+                                                      IRepository<Domain.Entities.VetProducts> productRepository, 
+                                                      IIdentityRepository identityRepository,
+                                                      IRepository<Domain.Entities.VetSaleBuyTrans> saleBuyTransRepository,
+                                                      IRepository<Domain.Entities.VetDemandTrans> demandTransRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
@@ -34,6 +41,8 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductDescription.Comm
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
             _identityRepository = identityRepository ?? throw new ArgumentNullException(nameof(identityRepository));
+            _saleBuyTransRepository = saleBuyTransRepository ?? throw new ArgumentNullException(nameof(saleBuyTransRepository));
+            _demandTransRepository = demandTransRepository ?? throw new ArgumentNullException(nameof(demandTransRepository));
         }
         public async Task<Response<bool>> Handle(DeleteProductDescriptionCommand request, CancellationToken cancellationToken)
         {
@@ -51,6 +60,19 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductDescription.Comm
                     _logger.LogWarning($"Product update failed. Id number: {request.Id}");
                     return Response<bool>.Fail("Property update failed", 404);
                 }
+                var IsBuySaleRecord = await _saleBuyTransRepository.FirstOrDefaultAsync(x=>x.ProductId == request.Id && x.Deleted == false);
+                if (IsBuySaleRecord != null)
+                {
+                    _logger.LogWarning($"Hareket Görmüş Kayıt : {IsBuySaleRecord.Id}");
+                    return Response<bool>.Fail("Hareket Görmüş Kayıt Silinemez", 404);
+                }
+                var IsDemandRecord = await _demandTransRepository.FirstOrDefaultAsync(x => x.ProductId == request.Id && x.Deleted == false);
+                if (IsBuySaleRecord != null)
+                {
+                    _logger.LogWarning($"Sipariş Hareketi Görmüş Kayıt : {IsDemandRecord.Id}");
+                    return Response<bool>.Fail("Sipariş Hareketi Mevcut Silinemez", 404);
+                }
+
                 product.Deleted = true;
                 product.DeletedDate = DateTime.Now;
                 product.DeletedUsers = _identityRepository.Account.UserName;

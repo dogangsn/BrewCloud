@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.SqlServer" Version="6.0.2" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="Google.Protobuf" Version="3.21.12" />
     <PackageReference Include="Grpc.Net.ClientFactory" Version="2.50.0" />
     <PackageReference Include="Grpc.Tools" Version="2.51.0">
@@ -27,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Appointment\Queries\" />
     <Folder Include="Features\Definition\AnimalColorsDef\Commands\" />
     <Folder Include="Features\Demands\DemandComplated\Commands\" />
     <Folder Include="Features\Demands\DemandTrans\Commands\" />

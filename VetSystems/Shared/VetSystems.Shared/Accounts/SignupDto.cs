@@ -24,7 +24,6 @@ namespace VetSystems.Shared.Accounts
         public string Host { get; set; }
         public bool IsLicenceAccount { get; set; }
         public bool UseSafeListControl { get; set; }
-        //public SubscriptionType SubscriptionType { get; set; }
         public string CurrencyCode { get; set; }
         public string DefaultLanguage { get; set; }
         public string ContactEmail { get; set; }
@@ -34,6 +33,7 @@ namespace VetSystems.Shared.Accounts
         public string UserAppKey { get; set; }
         public string DashboardPath { get; set; }
         public string Password { get; set; }
+        public string RoleName { get; set; }
         public SubscriptionType SubscriptionType { get; set; }
     }
 }

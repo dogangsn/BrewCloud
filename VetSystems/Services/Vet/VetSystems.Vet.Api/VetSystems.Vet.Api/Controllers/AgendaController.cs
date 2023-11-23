@@ -23,6 +23,13 @@ namespace VetSystems.Vet.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+        [HttpPost(Name = "AgendaListById")]
+        public async Task<IActionResult> AgendaListById([FromBody] AgendaListByIdQuery command)
+        {
+            //var command = new AgendaListByIdQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
         [HttpPost(Name = "CreateAgenda")]
         public async Task<IActionResult> CreateAgenda([FromBody] CreateAgendaCommand command)

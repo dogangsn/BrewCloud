@@ -13,7 +13,7 @@ namespace VetSystems.Vet.Application.Models.Customers
         public string ChipNumber { get; set; } = string.Empty;
         public int Sex { get; set; }
         public int? AnimalType { get; set; }
-        public string AnimalBreed { get; set; } = string.Empty;
+        public int? AnimalBreed { get; set; }
         public string AnimalColor { get; set; } = string.Empty;
         public string MyProperty { get; set; } = string.Empty;
         public string ReportNumber { get; set; } = string.Empty;
@@ -21,8 +21,5 @@ namespace VetSystems.Vet.Application.Models.Customers
         public bool Sterilization { get; set; }
         public bool Active { get; set; }
         public string Thumbnail { get; set; } = string.Empty;
-
-        //tags?: string[];
-        //images: string[];
     }
 }

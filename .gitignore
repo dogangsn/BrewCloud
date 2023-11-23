@@ -410,3 +410,4 @@ VetSystems/.vs/VetSystems/v17/.futdcache.v2
 VetSystems/.vs/VetSystems/FileContentIndex/write.lock
 /VetSystems/Services/Integrations/VetSystems.Integrations.Api/appsettings.Local.json
 /VetSystems/Services/Chat/VetSystems.Chat.Api/appsettings.Local.json
+/VetSystems/Services/Mail/VetSystems.Mail.Api/appsettings.Local.json

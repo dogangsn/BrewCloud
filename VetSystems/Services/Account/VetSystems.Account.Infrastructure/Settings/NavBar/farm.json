@@ -27,7 +27,41 @@
           "link": "/farmcasingdefinition"
         }
       ]
-
+    },
+    {
+      "id": "animals",
+      "title": "Hayvanlar",
+      "type": "basic",
+      "icon": "heroicons_outline:chart-pie",
+      "link": "/animals"
+    },
+    {
+      "id": "animalsmovement",
+      "title": "Hayvan Hareketleri",
+      "type": "basic",
+      "icon": "heroicons_outline:chart-pie",
+      "link": "/animalsmovement"
+    },
+    {
+      "id": "animals",
+      "title": "Hamile Hayvanlar",
+      "type": "basic",
+      "icon": "heroicons_outline:chart-pie",
+      "link": "/animals"
+    },
+    {
+      "id": "animals",
+      "title": "Çiftleşmeler",
+      "type": "basic",
+      "icon": "heroicons_outline:chart-pie",
+      "link": "/animals"
+    },
+    {
+      "id": "animals",
+      "title": "Sayımlar",
+      "type": "basic",
+      "icon": "heroicons_outline:chart-pie",
+      "link": "/animals"
     }
   ]
 }

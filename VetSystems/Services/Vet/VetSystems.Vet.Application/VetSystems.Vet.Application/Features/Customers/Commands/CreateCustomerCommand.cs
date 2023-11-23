@@ -92,7 +92,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                         VetPatients patients = new()
                         {
                             Active= item.Active,
-                            AnimalBreed = string.IsNullOrEmpty(item.AnimalBreed) ? 0 : Convert.ToInt32(item.AnimalBreed),
+                            AnimalBreed =  item.AnimalBreed.GetValueOrDefault(),
                             AnimalColor = string.IsNullOrEmpty(item.AnimalColor) ? 0 : Convert.ToInt32(item.AnimalColor),
                             AnimalType = Convert.ToInt32(item.AnimalType),
                             BirthDate = string.IsNullOrEmpty(item.BirthDate) ? DateTime.Now : Convert.ToDateTime(item.BirthDate),

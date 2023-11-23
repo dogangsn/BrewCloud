@@ -48,6 +48,7 @@ namespace VetSystems.Account.Infrastructure.Persistence
         public virtual DbSet<Userauthorization> Userauthorization { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<Message> Message { get; set; }
+        public virtual DbSet<TitleDefinitions> TitleDefinitions { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

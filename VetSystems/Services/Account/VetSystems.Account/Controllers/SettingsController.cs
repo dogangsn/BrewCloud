@@ -85,5 +85,34 @@ namespace VetSystems.Account.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
+        [HttpGet(Name = "GetTitleDefination")]
+        public async Task<IActionResult> GetTitleDefination()
+        {
+            var command = new GetTitleDefinationQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "CreateTitleDefination")]
+        public async Task<IActionResult> CreateTitleDefination([FromBody] CreateTitleDefinationCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "UpdateTitleDefination")]
+        public async Task<IActionResult> UpdateTitleDefination([FromBody] UpdateTitleDefinationCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "DeleteTileDefination")]
+        public async Task<IActionResult> DeleteTileDefination([FromBody] DeleteTileDefinationCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
     }
 }

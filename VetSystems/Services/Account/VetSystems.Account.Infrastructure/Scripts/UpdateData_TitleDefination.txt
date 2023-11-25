@@ -1,0 +1,8 @@
+﻿INSERT INTO titledefinitions (id,name, remark, createdate, createuser,updatedate, updateuser, deleted) VALUES (NEWID(),'Yönetici', 'İşletme Sahibi/Sistem Yetkilisi', GETDATE(), '', '1900-01-01', '', 0);
+INSERT INTO titledefinitions (id,name, remark, createdate, createuser,updatedate, updateuser, deleted) VALUES (NEWID(),'Doc.', 'Doktor', GETDATE(), '', '1900-01-01', '', 0);
+INSERT INTO titledefinitions (id,name, remark, createdate, createuser,updatedate, updateuser, deleted) VALUES (NEWID(),'Prof..', 'Doktor', GETDATE(), '', '1900-01-01', '', 0);
+INSERT INTO titledefinitions (id,name, remark, createdate, createuser,updatedate, updateuser, deleted) VALUES (NEWID(),'Dr.', 'Doktor', GETDATE(), '', '1900-01-01', '', 0);
+INSERT INTO titledefinitions (id,name, remark, createdate, createuser,updatedate, updateuser, deleted) VALUES (NEWID(),'Uzman.', 'Doktor', GETDATE(), '', '1900-01-01', '', 0);
+INSERT INTO titledefinitions (id,name, remark, createdate, createuser,updatedate, updateuser, deleted) VALUES (NEWID(),'Asistan', 'Doktor Yardımcısı', GETDATE(), '', '1900-01-01', '', 0);
+INSERT INTO titledefinitions (id,name, remark, createdate, createuser,updatedate, updateuser, deleted) VALUES (NEWID(),'Sekreter', 'Ofis Karşılama', GETDATE(), '', '1900-01-01', '', 0);
+INSERT INTO titledefinitions (id,name, remark, createdate, createuser,updatedate, updateuser, deleted) VALUES (NEWID(),'Stajyer', 'Öğrenci/Yeni Başlangıç', GETDATE(), '', '1900-01-01', '', 0);

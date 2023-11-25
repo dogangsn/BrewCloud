@@ -16,6 +16,7 @@ namespace VetSystems.Account.Application.Mappings
             CreateMap<Company, CompanyDto>().ReverseMap();
             CreateMap<Rolesetting, RoleSettingDto>().ReverseMap();
             CreateMap<RoleSettingDetail, RoleSettingDetailDto>().ReverseMap();
+            CreateMap<TitleDefinitions, TitleDefinationDto>().ReverseMap();
 
         }
     }

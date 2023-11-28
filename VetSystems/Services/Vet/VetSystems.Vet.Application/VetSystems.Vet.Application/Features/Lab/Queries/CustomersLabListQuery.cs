@@ -35,7 +35,7 @@ namespace VetSystems.Vet.Application.Features.Lab.Queries
             var response = new Response<List<CustomersDto>>();
             try
             {
-                string query = "Select * from VetCustomers where Deleted = 0 and CAST(createdate AS DATE) = CAST(GETDATE() AS DATE) ";
+                string query = "Select * from VetCustomers where Deleted = 0 and CAST(createdate AS DATE) = CAST(GETDATE() AS DATE)  order by CreateDate ";
                 var _data = _uow.Query<CustomersDto>(query).ToList();
                 response = new Response<List<CustomersDto>>
                 {

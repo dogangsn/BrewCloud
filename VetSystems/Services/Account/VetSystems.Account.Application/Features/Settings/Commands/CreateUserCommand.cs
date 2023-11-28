@@ -26,6 +26,7 @@ namespace VetSystems.Account.Application.Features.Settings.Commands
         public string RoleId { get; set; }
         public string AppKey { get; set; }
         public string UserName { get; set; }
+        public Guid? TitleId { get; set; }
         public string[] Properties { get; set; }
     }
 
@@ -84,6 +85,7 @@ namespace VetSystems.Account.Application.Features.Settings.Commands
                         Firstname = request.FirstName,
                         Lastname = request.LastName ?? "",
                         Id = Guid.Parse(userResult.Id),
+                        Title = request.TitleId,
                         //Authorizeenterprise = request.AuthorizeEnterprise.GetValueOrDefault()
                     });
                     if (!String.IsNullOrEmpty(userResult.Id) && userResult.IsSuccess == true)

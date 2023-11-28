@@ -35,7 +35,7 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductDescription.Quer
             var response = new Response<List<ProductDescriptionsDto>>();
             try
             {
-                string query = "Select * from VetProducts where Deleted = 0 and ProductTypeId = @ProductTypeId";
+                string query = "Select * from VetProducts where Deleted = 0 and ProductTypeId = @ProductTypeId order by CreateDate ";
                 var _data =  _uow.Query<ProductDescriptionsDto>(query, new { ProductTypeId= request.ProductType }).ToList();
                 response = new Response<List<ProductDescriptionsDto>>
                 {

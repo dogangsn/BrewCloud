@@ -34,7 +34,7 @@ namespace VetSystems.Vet.Application.Features.Suppliers.Queries
             var response = new Response<List<SuppliersListDto>>();
             try
             {
-                string query = "Select * from vetSuppliers where Deleted = 0";
+                string query = "Select * from vetSuppliers where Deleted = 0 order by CreateDate ";
                 var _data = _uow.Query<SuppliersListDto>(query).ToList();
                 response = new Response<List<SuppliersListDto>>
                 {

@@ -34,6 +34,10 @@ namespace VetSystems.Shared.Accounts
         public string DashboardPath { get; set; }
         public string Password { get; set; }
         public string RoleName { get; set; }
+        public bool? Active { get; set; }
+        public string FirstLastName { get; set; }
+        public string Phone { get; set; }
+        public Guid? TitleId { get; set; }
         public SubscriptionType SubscriptionType { get; set; }
     }
 }

@@ -11,5 +11,6 @@ namespace VetSystems.Account.Application.Models.Settings
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Remark { get; set; }
+        public bool? IsAppointmentShow { get; set; } = false;
     }
 }

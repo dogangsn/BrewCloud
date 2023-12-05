@@ -71,5 +71,12 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "CreatePatient")]
+        public async Task<IActionResult> CreatePatient([FromBody] CreatePatientCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
     }
 }

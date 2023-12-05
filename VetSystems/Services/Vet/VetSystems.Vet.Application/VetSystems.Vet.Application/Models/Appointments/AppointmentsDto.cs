@@ -16,8 +16,8 @@ namespace VetSystems.Vet.Application.Models.Appointments
         public DateTime beginDate { get; set; }
         public DateTime endDate { get; set; }
         public string note { get; set; } = string.Empty;
-        public string doctorId { get; set; } = string.Empty;
-        public string customerId { get; set; }
+        public Guid? doctorId { get; set; } 
+        public Guid? customerId { get; set; }
 
     }
 }

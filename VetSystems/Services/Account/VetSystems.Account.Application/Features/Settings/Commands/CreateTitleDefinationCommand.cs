@@ -19,6 +19,7 @@ namespace VetSystems.Account.Application.Features.Settings.Commands
     {
         public string Name { get; set; } = string.Empty;
         public string Remark { get; set; } = string.Empty;
+        public bool? IsAppointmentShow { get; set; } = false;
     }
     public class CreateTitleDefinationCommandHandler : IRequestHandler<CreateTitleDefinationCommand, Response<bool>>
     {
@@ -52,6 +53,7 @@ namespace VetSystems.Account.Application.Features.Settings.Commands
                     Id = Guid.NewGuid(),
                     Name = request.Name,
                     Remark = request.Remark,
+                    IsAppointmentShow = request.IsAppointmentShow.GetValueOrDefault(),
                     CreateDate = DateTime.Now,
                     CreateUser = _identity.Account.UserName
                 };

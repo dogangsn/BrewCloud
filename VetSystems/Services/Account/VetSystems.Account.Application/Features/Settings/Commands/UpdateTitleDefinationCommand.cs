@@ -20,6 +20,7 @@ namespace VetSystems.Account.Application.Features.Settings.Commands
         public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Remark { get; set; } = string.Empty;
+        public bool? IsAppointmentShow { get; set; }
     }
 
     public class UpdateTitleDefinationCommandHandler : IRequestHandler<UpdateTitleDefinationCommand, Response<bool>>
@@ -58,6 +59,7 @@ namespace VetSystems.Account.Application.Features.Settings.Commands
 
                 title.Name = request.Name;
                 title.Remark = request.Remark;
+                title.IsAppointmentShow = request.IsAppointmentShow.GetValueOrDefault();
                 title.UpdateDate = DateTime.Now;
                 title.UpdateUser = _identity.Account.UserName;
                 await _uow.SaveChangesAsync(cancellationToken);

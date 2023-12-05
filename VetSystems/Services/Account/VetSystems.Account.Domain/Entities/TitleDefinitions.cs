@@ -11,6 +11,7 @@ namespace VetSystems.Account.Domain.Entities
     {
         public string Name { get; set; }
         public string Remark { get; set; }
+        public bool? IsAppointmentShow { get; set; }
 
     }
 }

@@ -11,12 +11,27 @@ using VetSystems.Shared.Service;
 using VetSystems.Vet.Application.Features.Definition.CustomerGroup.Commands;
 using VetSystems.Vet.Application.Models.Customers;
 using VetSystems.Vet.Domain.Contracts;
+using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Features.Customers.Commands
 {
     public class UpdateCustomerCommand : IRequest<Response<bool>>
     {
-        public CustomerDetailsDto CustomerDetailsDto { get; set; }
+        public Guid Id { get; set; }
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public string PhoneNumber { get; set; } = string.Empty;
+        public string PhoneNumber2 { get; set; } = string.Empty;
+        public string EMail { get; set; } = string.Empty;
+        public string TaxOffice { get; set; } = string.Empty;
+        public string VKNTCNo { get; set; } = string.Empty;
+        public string Note { get; set; } = string.Empty;
+        public decimal DiscountRate { get; set; } = 0;
+        public bool? IsEmail { get; set; } = false;
+        public bool? IsPhone { get; set; } = false;
+        public string Province { get; set; } = string.Empty;
+        public string District { get; set; } = string.Empty;
+        public string LongAdress { get; set; } = string.Empty;
     }
 
     public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, Response<bool>>
@@ -46,17 +61,26 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
             };
             try
             {
-                //var customerGroupDef = await _customerGroupDefRepository.GetByIdAsync(request.Id);
-                //if (customerGroupDef == null)
-                //{
-                //    _logger.LogWarning($"customerGroupDef update failed. Id number: {request.Id}");
-                //    return Response<bool>.Fail("Store update failed", 404);
-                //}
-                //customerGroupDef.Code = request.Code;
-                //customerGroupDef.Name = request.Name;
-                //customerGroupDef.UpdateDate = DateTime.Now;
-                //customerGroupDef.UpdateUsers = _identity.Account.UserName;
-                //await _uow.SaveChangesAsync(cancellationToken);
+                VetCustomers customers = await _customersRepository.GetByIdAsync(request.Id);
+                if (customers == null)
+                {
+                    _logger.LogWarning($"Not Foun number: {request.Id}");
+                    return Response<bool>.Fail("Property update failed", 404);
+                }
+
+                customers.IsEmail = request.IsEmail;
+                customers.IsPhone = request.IsPhone;
+                customers.DiscountRate = request.DiscountRate;
+                customers.FirstName = request.FirstName;
+                customers.LastName = request.LastName;
+                customers.Note = request.Note;
+                customers.PhoneNumber = request.PhoneNumber;
+                customers.PhoneNumber2 = request.PhoneNumber2;
+                customers.VKNTCNo = request.VKNTCNo;
+                customers.TaxOffice = request.TaxOffice;
+                customers.UpdateDate = DateTime.Now;
+                customers.UpdateUsers = _identity.Account.UserName;
+                await _uow.SaveChangesAsync(cancellationToken);
             }
             catch (Exception ex)
             {

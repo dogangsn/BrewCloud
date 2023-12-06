@@ -8,7 +8,7 @@ using VetSystems.Mail.Domain.Common;
 
 namespace VetSystems.Mail.Domain.Contracts
 {
-    public interface IRepository<T> where T : EntityIdBase
+    public interface IRepository<T> where T : BaseEntity
     {
         IUnitOfWork UnitOfWork { get; }
 

@@ -11,7 +11,7 @@ using VetSystems.Mail.Infrastructure.Persistance;
 
 namespace VetSystems.Mail.Infrastructure.Repositories
 {
-    public class RepositoryBase<T> : IRepository<T> where T : EntityIdBase
+    public class RepositoryBase<T> : IRepository<T> where T : BaseEntity
     {
         protected MailDbContext _dbContext;
 

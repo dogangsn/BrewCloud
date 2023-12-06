@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using VetSystems.Mail.Domain.Entities;
 using VetSystems.Shared.Accounts;
 using VetSystems.Shared.Service;
 
@@ -74,5 +75,8 @@ namespace VetSystems.Mail.Infrastructure.Persistance
         {
             return Database.GetDbConnection().Query<T>(query).ToList();
         }
+
+        public virtual DbSet<SmtpSetting> SmtpSettings { get; set; }
+
     }
 }

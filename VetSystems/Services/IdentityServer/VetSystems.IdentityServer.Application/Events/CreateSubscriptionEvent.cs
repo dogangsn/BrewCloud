@@ -59,11 +59,9 @@ namespace VetSystems.IdentityServer.Application.Events
                 _logger.LogError($"SeedData Err: {resultData.Errors.ToArray()}");
             }
 
-            //Pms, Erp, Hr  Default Data
-            var dim = new string[] { "vet" };
+            var dim = new string[] { "vet", "mail" };
             foreach (var item in dim)
             {
-
                 var hrResultData = await _accountService.SendAsync($"{item}/account/UpdateDatabase", eventMessage);
                 if (hrResultData.ResponseType != ResponseType.Ok)
                 {

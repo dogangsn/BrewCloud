@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace VetSystems.Vet.Application.Mappings
 {
-    internal class MappingProfile : Profile
+    public class MappingProfile : Profile
     {
     }
 }

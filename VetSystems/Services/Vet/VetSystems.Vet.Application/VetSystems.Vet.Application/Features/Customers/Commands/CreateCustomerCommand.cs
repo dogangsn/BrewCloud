@@ -8,8 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VetSystems.Shared.Dtos;
+using VetSystems.Shared.Dtos.MailKit;
+using VetSystems.Shared.Events;
 using VetSystems.Shared.Service;
+using VetSystems.Vet.Application.Event;
 using VetSystems.Vet.Application.Models.Customers;
+using VetSystems.Vet.Application.Models.Mail;
+using VetSystems.Vet.Application.Services.Mails;
 using VetSystems.Vet.Domain.Contracts;
 using VetSystems.Vet.Domain.Entities;
 
@@ -27,14 +32,20 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
         private readonly IMapper _mapper;
         private readonly ILogger<CreateCustomerHandler> _logger;
         private readonly IRepository<Vet.Domain.Entities.VetCustomers> _customerRepository;
+        private readonly IRepository<VetParameters> _parametersRepository;
+        private readonly IMediator _mediator;
+        private readonly IMailService _mailService;
 
-        public CreateCustomerHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<Domain.Entities.VetCustomers> customerRepository)
+        public CreateCustomerHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<Domain.Entities.VetCustomers> customerRepository, IRepository<VetParameters> parametersRepository, IMediator mediator, IMailService mailService)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _customerRepository = customerRepository ?? throw new ArgumentNullException(nameof(customerRepository));
+            _parametersRepository = parametersRepository ?? throw new ArgumentNullException(nameof(parametersRepository));
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+            _mailService = mailService;
         }
 
         public async Task<Response<string>> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
@@ -53,6 +64,12 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                 if (recordControl != null)
                 {
                     return Response<string>.Fail("Sistem Üzerinde Aynı Müşteri Bilgileri ile Kayıt Vardır.", 404);
+                }
+
+                VetParameters _param = (await _parametersRepository.GetAllAsync()).FirstOrDefault();
+                if (_param == null)
+                {
+                    return Response<string>.Fail("Şirket Parametlerini Tamamlayınız.", 404);
                 }
 
                 Vet.Domain.Entities.VetAdress adress = new()
@@ -114,8 +131,11 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                 await _customerRepository.AddAsync(customers);
                 await _uow.SaveChangesAsync(cancellationToken);
                 _uow.Commit();
-
                 response.Data = customers.Id.ToString();
+
+                if (_param.IsOtoCustomerWelcomeMessage.GetValueOrDefault() && !string.IsNullOrEmpty(request.CreateCustomers.EMail) && request.CreateCustomers.IsEmail.GetValueOrDefault())
+                    SendMail(customers.EMail);
+
 
             }
             catch (Exception ex)
@@ -128,5 +148,27 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
             return response;
 
         }
+
+        
+        public void SendMail(string emailToId)
+        {
+            try
+            {
+                var eventMessage = new SendMailRequestEvent()
+                {
+                    EmailToId = emailToId,
+                    EmailBody = "TEST",
+                    EmailSubject = "TEST",
+                    EmailToName = "TEST",
+                    ConnectionString = _identity.Connection,
+                    RecId = _identity.TenantId
+                };
+                _mailService.SendMail("mail/mailing/SendMail", eventMessage);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
     }
 }

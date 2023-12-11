@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace VetSystems.Mail.Application.Models.SmtpSettings
+namespace VetSystems.Shared.Dtos.MailKit
 {
-    public class SmtpSettingsDto
+    public class MailSenderDto
     {
-        public Guid Id { get; set; }
-        public bool Defaults { get; set; } = false;
-        public string DisplayName { get; set; } = string.Empty;
+        public string DisplayName { get; set; }
         public string EmailId { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string Host { get; set; } = string.Empty;

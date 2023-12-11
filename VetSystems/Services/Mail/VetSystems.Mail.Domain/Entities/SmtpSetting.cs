@@ -9,6 +9,7 @@ namespace VetSystems.Mail.Domain.Entities
 {
     public class SmtpSetting : BaseEntity
     {
+        public bool Defaults { get; set; } = false;
         public string DisplayName { get; set; } = string.Empty;
         public string EmailId { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty; 

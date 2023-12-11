@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VetSystems.Mail.Infrastructure.Persistance;
 
@@ -11,9 +12,10 @@ using VetSystems.Mail.Infrastructure.Persistance;
 namespace VetSystems.Mail.Infrastructure.Migrations
 {
     [DbContext(typeof(MailDbContext))]
-    partial class MailDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231206172256_updateData_2")]
+    partial class updateData_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

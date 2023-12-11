@@ -12,5 +12,6 @@ namespace VetSystems.Shared.Service
         Guid TenantId { get; }
         string Connection { get; set; }
         string ClientIp { get; }
+        string Token { get; }
     }
 }

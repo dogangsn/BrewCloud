@@ -4,9 +4,8 @@ using System.Text;
 
 namespace VetSystems.Shared.Enums
 {
-    public enum SubscriptionType
+    public enum MailType
     {
-        Vet,
-        Farm,
+        WelcomeMail = 0,
     }
 }

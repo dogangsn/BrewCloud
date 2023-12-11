@@ -27,4 +27,8 @@
     <ProjectReference Include="..\VetSystems.Mail.Domain\VetSystems.Mail.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\SmtpMails\Queries\" />
+  </ItemGroup>
+
 </Project>

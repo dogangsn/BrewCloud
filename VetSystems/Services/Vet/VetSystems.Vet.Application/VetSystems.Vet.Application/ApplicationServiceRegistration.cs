@@ -15,6 +15,7 @@ using VetSystems.Shared.Accounts;
 using VetSystems.Shared.Service;
 using VetSystems.Vet.Application.Features.Account.Commands;
 using VetSystems.Vet.Application.GrpServices;
+using VetSystems.Vet.Application.Services.Mails;
 
 namespace VetSystems.Vet.Application
 {
@@ -24,15 +25,8 @@ namespace VetSystems.Vet.Application
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            //services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            //services.AddHttpContextAccessor();
-            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IIdentityRepository, IdentityRepository>();
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
-            //services.AddScoped<ExceptionHandlingMiddleware>();
-            //services.Configure<DatabaseSettings>(configuration["GrpcSettings:IdentityUrl"]);
 
+            services.AddScoped<IIdentityRepository, IdentityRepository>();
             services.AddGrpcClient<IdentityUserProtoService.IdentityUserProtoServiceClient>
                 (o => o.Address = new Uri(configuration["GrpcSettings:IdentityUrl"]));
       
@@ -41,16 +35,22 @@ namespace VetSystems.Vet.Application
             {
                 return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
             });
-            //services.AddMassTransit(config =>
-            //{
-            //    config.AddConsumer<UpdateDatabaseConsumer>();
-            //    config.UsingRabbitMq((ctx, cfg) =>
-            //    {
-            //        cfg.Host(configuration["EventBusSettings:HostAddress"]);
-            //        cfg.ReceiveEndpoint(EventBusConstants.MigrateDatabaseQueueErp,
-            //            c => { c.ConfigureConsumer<UpdateDatabaseConsumer>(ctx); });
-            //    });
-            //});
+
+            services.AddHttpClient("mail", c =>
+            {
+                c.BaseAddress = new Uri(configuration["ApiGatewayUrl"]);
+            });
+            services.AddSingleton<IMailService, MailService>();
+
+            services.AddMassTransit(config =>
+            {
+                //config.UsingRabbitMq((ctx, cfg) =>
+                //{
+                //    cfg.Host(configuration["EventBusSettings:HostAddress"]);
+                //    //cfg.UseHealthCheck(ctx);
+                //});
+            });
+            services.AddMassTransitHostedService();
 
             services.AddHealthChecks()
                 .AddSqlServer(configuration.GetConnectionString("ConnectionString") + " Trust Server Certificate=true;");

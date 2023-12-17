@@ -20,7 +20,7 @@ namespace VetSystems.Account.Application.Features.Settings.Commands
         public Guid Id { get; set; }
     }
 
-    public class DeleteTileDefinationCommandHandler : IRequestHandler<DeleteRoleSettingCommand, Response<bool>>
+    public class DeleteTileDefinationCommandHandler : IRequestHandler<DeleteTileDefinationCommand, Response<bool>>
     {
         private readonly IUnitOfWork _uow;
         private readonly IIdentityRepository _identity;
@@ -39,7 +39,7 @@ namespace VetSystems.Account.Application.Features.Settings.Commands
             _titleRepository = titleRepository ?? throw new ArgumentNullException(nameof(titleRepository));
         }
 
-        public async Task<Response<bool>> Handle(DeleteRoleSettingCommand request, CancellationToken cancellationToken)
+        public async Task<Response<bool>> Handle(DeleteTileDefinationCommand request, CancellationToken cancellationToken)
         {
             var response = new Response<bool>
             {

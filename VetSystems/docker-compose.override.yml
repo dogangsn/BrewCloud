@@ -1,0 +1,80 @@
+version: '3.8'
+services:
+    gateway.api:
+        container_name: gateway.api
+        restart: on-failure
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - IdentityServerURL=http://identityserver.api"
+        ports:
+            - "5000:80"    
+    identityserver.api:
+        container_name: identityserver.api
+        restart: on-failure
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Local
+            - ConnectionStrings:DefaultConnection=Server=identitydb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+        ports:
+            - "5001:80"
+    account.api:
+        container_name: account.api
+        restart: on-failure
+        environment: 
+            - ASPNETCORE_ENVIRONMENT=Local
+            - ConnectionStrings:DefaultConnection=Server=identitydb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+        ports:
+            - "5012:80" 
+    vet.api:
+        container_name: vet.api
+        restart: on-failure
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Local
+            - ConnectionStrings:DefaultConnection=Server=identitydb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+        ports:
+            -  "5013:80"
+    farm.api:
+        container_name: farm.api
+        restart: on-failure
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Local
+            - ConnectionStrings:DefaultConnection=Server=identitydb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+        ports:
+            -  "5016:80"
+    mail.api:
+        container_name: mail.api
+        restart: on-failure
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Local
+            - ConnectionStrings:DefaultConnection=Server=identitydb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+        ports:
+            - "5018:80"
+    chat.api:
+        container_name: chat.api
+        restart: on-failure
+        environment: 
+            - ASPNETCORE_ENVIRONMENT=Local
+            - ConnectionStrings:DefaultConnection=Server=identitydb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+        ports:
+            - "5017:80"  
+    integrations.api:
+        container_name: integrations.api
+        restart: on-failure
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Local
+            - ConnectionStrings:DefaultConnection=Server=identitydb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+        ports:
+            - "5015:80"  
+    mobile.api:
+        container_name: mobile.api
+        restart: on-failure
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Local
+            - ConnectionStrings:DefaultConnection=Server=identitydb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+        ports:
+            - "5014:80" 
+
+            
+
+ 
+
+    

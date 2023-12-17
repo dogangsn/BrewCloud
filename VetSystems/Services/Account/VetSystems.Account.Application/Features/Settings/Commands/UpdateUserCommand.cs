@@ -26,7 +26,7 @@ namespace VetSystems.Account.Application.Features.Settings.Commands
         public string AppKey { get; set; }
         public bool? AuthorizeEnterprise { get; set; }
         public bool IsLicenceAccount { get; set; }
-        public Guid? TitleId { get; set; }
+        public string TitleId { get; set; }
         public bool? Active { get; set; }
     }
 
@@ -59,8 +59,8 @@ namespace VetSystems.Account.Application.Features.Settings.Commands
                                                   "1",
                                                   request.UserName,
                                                   enterpriseId.ToString(),
-                                                  "",
-                                                  "",
+                                                  request.FirstName,
+                                                  request.FirstName,
                                                   request.RoleId,
                                                   request.AuthorizeEnterprise.GetValueOrDefault(), request.IsLicenceAccount, "", request.AppKey);
 
@@ -70,11 +70,14 @@ namespace VetSystems.Account.Application.Features.Settings.Commands
                     if (user != null)
                     {
                         user.Firstname = request.FirstName;
-                        user.Lastname = request.LastName;
+                        user.Lastname = request.LastName ?? "";
                         user.RoleId = Guid.Parse(request.RoleId);
                         user.Authorizeenterprise = request.AuthorizeEnterprise.GetValueOrDefault();
-                        user.Title = request.TitleId;
+                        user.Title = Guid.Parse(request.TitleId);
                         user.Active = request.Active.GetValueOrDefault();
+                        user.UpdateDate = DateTime.UtcNow;
+                        user.UpdateUser = _identity.Account.UserName;
+
                     }
                     else
                     {
@@ -89,7 +92,7 @@ namespace VetSystems.Account.Application.Features.Settings.Commands
                             CreateUser = _identity.Account.UserName,
                             CreateDate = DateTime.Now,
                             Id = Guid.Parse(request.UserId),
-                            Title = request.TitleId,
+                            Title = Guid.Parse(request.TitleId),
                             Active = request.Active.GetValueOrDefault(),
                         });
                     }

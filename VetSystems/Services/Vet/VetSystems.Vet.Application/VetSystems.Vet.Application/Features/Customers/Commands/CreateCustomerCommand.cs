@@ -9,9 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using VetSystems.Shared.Dtos;
 using VetSystems.Shared.Dtos.MailKit;
+using VetSystems.Shared.Enums;
 using VetSystems.Shared.Events;
 using VetSystems.Shared.Service;
 using VetSystems.Vet.Application.Event;
+using VetSystems.Vet.Application.Features.Appointment.Commands;
 using VetSystems.Vet.Application.Models.Customers;
 using VetSystems.Vet.Application.Models.Mail;
 using VetSystems.Vet.Application.Services.Mails;
@@ -128,6 +130,16 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                     }
                 }
 
+                var appointmentRecord = new CreateAppointmentCommand()
+                {
+                    AppointmentType = (int)AppointmentType.ilkKayit,
+                    BeginDate = customers.CreateDate,
+                    CustomerId = Convert.ToString(customers.Id) ?? "",
+                    Note = customers.Note,
+                    DoctorId = "00000000-0000-0000-0000-000000000000"
+                };
+                var appointmentResponse = _mediator.Send(appointmentRecord);
+          
                 await _customerRepository.AddAsync(customers);
                 await _uow.SaveChangesAsync(cancellationToken);
                 _uow.Commit();

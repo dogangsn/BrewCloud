@@ -17,7 +17,11 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
 {
     public class CreateAppointmentCommand : IRequest<Response<bool>>
     {
-        public AppointmentsDto CreateAppointments { get; set; }
+        public DateTime BeginDate { get; set; }
+        public string Note { get; set; } = string.Empty;
+        public string DoctorId { get; set; }
+        public string CustomerId { get; set; }
+        public int AppointmentType { get; set; }
     }
 
     public class CreateAppointmentHandler : IRequestHandler<CreateAppointmentCommand, Response<bool>>
@@ -51,12 +55,12 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
                 Vet.Domain.Entities.VetAppointments Appointments = new()
                 {
                     RecId = Guid.NewGuid(),
-                    BeginDate = request.CreateAppointments.beginDate,
-                    EndDate = request.CreateAppointments.endDate,
-                    CustomerId = request.CreateAppointments.customerId,
-                    DoctorId = request.CreateAppointments.doctorId,
-                    Note= request.CreateAppointments.note,
-                    
+                    BeginDate = request.BeginDate,
+                    EndDate = request.BeginDate,
+                    CustomerId = Guid.Parse(request.CustomerId),
+                    DoctorId = Guid.Parse(request.DoctorId),
+                    Note = request.Note,
+                    AppointmentType = request.AppointmentType,
                     Deleted = false,
                     CreateDate = DateTime.UtcNow,
                 };

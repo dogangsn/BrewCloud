@@ -49,6 +49,14 @@ namespace VetSystems.Account.Api.Controllers
             return Ok(result);
         }
 
+
+        [HttpPost(Name = "UpdateUser")]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
         [HttpPost(Name = "CreateRoleSetting")]
         public async Task<IActionResult> CreateRoleSetting([FromBody] CreateRoleSettingCommand command)
         {

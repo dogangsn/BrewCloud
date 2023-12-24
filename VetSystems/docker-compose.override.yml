@@ -1,11 +1,22 @@
 version: '3.8'
 services:
+    identitydb:
+        container_name: identitydb
+        restart: always
+        ports:
+            - "1433:1433"
+        volumes:
+            - identitydb_volume:/var/opt/mssql/data
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=123654Dg  
     gateway.api:
         container_name: gateway.api
         restart: on-failure
         environment:
-            - ASPNETCORE_ENVIRONMENT=Development
-            - IdentityServerURL=http://identityserver.api"
+            - ASPNETCORE_ENVIRONMENT=Production
+        depends_on:
+            - identityserver.api
         ports:
             - "5000:80"    
     identityserver.api:
@@ -13,7 +24,12 @@ services:
         restart: on-failure
         environment:
             - ASPNETCORE_ENVIRONMENT=Local
-            - ConnectionStrings:DefaultConnection=Server=identitydb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+            - ConnectionStrings:DefaultConnection=Server=DG1; Database=VetAdminIdentityDb; User=sa; Password=123654Dg,
+            - VetDbSettings:ServerName=DG1
+            - VetDbSettings:User=sa
+            - VetDbSettings:Password=123654Dg
+            - GRPC_PORT=5010
+            - PORT=5001 
         ports:
             - "5001:80"
     account.api:

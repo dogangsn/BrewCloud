@@ -40,7 +40,15 @@ namespace VetSystems.Vet.Api.Controllers
         {
             var result = await _mediator.Send(command);
             return Ok(result);
-        } 
+        }
+
+
+        [HttpPost(Name = "DeleteAppointment")]
+        public async Task<IActionResult> DeleteAppointment([FromBody] DeleteAppointmentCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
     }
 }

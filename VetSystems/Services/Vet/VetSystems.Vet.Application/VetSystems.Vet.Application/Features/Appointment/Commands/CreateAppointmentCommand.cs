@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VetSystems.Shared.Dtos;
+using VetSystems.Shared.Enums;
 using VetSystems.Shared.Service;
 using VetSystems.Vet.Application.Models.Appointments;
 using VetSystems.Vet.Application.Models.Customers;
@@ -19,9 +20,10 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
     {
         public DateTime BeginDate { get; set; }
         public string Note { get; set; } = string.Empty;
-        public string DoctorId { get; set; }
-        public string CustomerId { get; set; }
+        public string? DoctorId { get; set; }
+        public string? CustomerId { get; set; }
         public int AppointmentType { get; set; }
+        public List<VaccineListDto>? VaccineItems { get; set; } 
     }
 
     public class CreateAppointmentHandler : IRequestHandler<CreateAppointmentCommand, Response<bool>>
@@ -51,21 +53,41 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
 
             try
             {
-
-                Vet.Domain.Entities.VetAppointments Appointments = new()
+                if (request.AppointmentType == (int)AppointmentType.AsiRandevusu)
                 {
-                    RecId = Guid.NewGuid(),
-                    BeginDate = request.BeginDate,
-                    EndDate = request.BeginDate,
-                    CustomerId = Guid.Parse(request.CustomerId),
-                    DoctorId = Guid.Parse(request.DoctorId),
-                    Note = request.Note,
-                    AppointmentType = request.AppointmentType,
-                    Deleted = false,
-                    CreateDate = DateTime.UtcNow,
-                };
+                    foreach (var item in request.VaccineItems)
+                    {
+                        Vet.Domain.Entities.VetAppointments Appointments = new()
+                        {
+                            BeginDate = item.Date,
+                            EndDate = item.Date,
+                            CustomerId = Guid.Parse(request.CustomerId),
+                            DoctorId = Guid.Parse(request.DoctorId),
+                            Note = request.Note,
+                            AppointmentType = request.AppointmentType,
+                            Deleted = false,
+                            CreateDate = DateTime.UtcNow,
+                            VaccineId = item.ProductId
+                        };
+                        await _AppointmentRepository.AddAsync(Appointments);
+                    }
+                }
+                else
+                {
+                    Vet.Domain.Entities.VetAppointments Appointments = new()
+                    {
+                        BeginDate = request.BeginDate,
+                        EndDate = request.BeginDate,
+                        CustomerId = Guid.Parse(request.CustomerId),
+                        DoctorId = Guid.Parse(request.DoctorId),
+                        Note = request.Note,
+                        AppointmentType = request.AppointmentType,
+                        Deleted = false,
+                        CreateDate = DateTime.UtcNow,
+                    };
+                    await _AppointmentRepository.AddAsync(Appointments);
 
-                await _AppointmentRepository.AddAsync(Appointments);
+                }
                 await _uow.SaveChangesAsync(cancellationToken);
 
             }

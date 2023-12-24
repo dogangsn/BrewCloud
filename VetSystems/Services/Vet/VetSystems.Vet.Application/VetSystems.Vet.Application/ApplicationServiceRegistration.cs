@@ -40,7 +40,7 @@ namespace VetSystems.Vet.Application
             {
                 c.BaseAddress = new Uri(configuration["ApiGatewayUrl"]);
             });
-            services.AddSingleton<IMailService, MailService>();
+            services.AddScoped<IMailService, MailService>();
 
             services.AddMassTransit(config =>
             {

@@ -26,12 +26,16 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
         private readonly IIdentityRepository _identityRepository;
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
+        private readonly IRepository<Vet.Domain.Entities.VetSaleBuyOwner> _saleBuyOwnerRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetAppointments> _AppointmentRepository;
 
-        public CustomersFindByIdQueryHandler(IIdentityRepository identityRepository, IUnitOfWork uow, IMapper mapper)
+        public CustomersFindByIdQueryHandler(IIdentityRepository identityRepository, IUnitOfWork uow, IMapper mapper, IRepository<Domain.Entities.VetSaleBuyOwner> salebuyownerRepository, IRepository<Domain.Entities.VetAppointments> AppointmentRepository)
         {
             _identityRepository = identityRepository;
             _uow = uow;
             _mapper = mapper;
+            _saleBuyOwnerRepository = salebuyownerRepository ?? throw new ArgumentNullException(nameof(salebuyownerRepository));
+            _AppointmentRepository = AppointmentRepository ?? throw new ArgumentNullException(nameof(AppointmentRepository));
         }
 
 
@@ -40,6 +44,10 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
             var response = new Response<CustomerDetailsDto>();
             try
             {
+
+
+
+
                 string query = @"select 
                                     vc.id, 
                                     vc.firstname, 
@@ -94,8 +102,10 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
 
 
                     List<PatientDetailsDto> patientList = _uow.Query<PatientDetailsDto>(patientQuery, new { customerId = customerDetail.id }).ToList();
-
                     customerDetail.PatientDetails = patientList;
+
+                    customerDetail.TotalData.TotalSaleBuyCount = (await _saleBuyOwnerRepository.GetAsync(x => x.CustomerId == customerDetail.id)).Count();
+                    customerDetail.TotalData.TotalVisitCount = (await _AppointmentRepository.GetAsync(x => x.CustomerId == customerDetail.id)).Count();
 
                     response = new Response<CustomerDetailsDto>
                     {

@@ -30,6 +30,7 @@ namespace VetSystems.Vet.Application.Features.Settings.Parameters.Queries
         public bool? isOtoCustomerWelcomeMessage { get; set; }
         public bool? displayVetNo { get; set; }
         public bool? autoSms { get; set; }
+        public bool? IsAnimalsBreeds { get; set; }
     }
 
     public class ParametersListQueryHandler : IRequestHandler<ParametersListQuery, Response<List<ParametersDto>>>

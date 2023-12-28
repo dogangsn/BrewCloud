@@ -57,7 +57,7 @@ namespace VetSystems.Mail.Application.Features.SmtpMails.Commands
                 {
                     MailDetailDto mail = _mapper.Map<MailDetailDto>(request);
                     SendMailService mailService = new SendMailService(_mapper.Map<MailSenderDto>(smtpSetting));
-                    var senderResponse = mailService.SendMail(mail);
+                    var senderResponse = mailService.SendMailWelcome(mail);
 
                     _logger.LogInformation("smtpmail succesfully saved");
                     response.IsSuccessful = true;

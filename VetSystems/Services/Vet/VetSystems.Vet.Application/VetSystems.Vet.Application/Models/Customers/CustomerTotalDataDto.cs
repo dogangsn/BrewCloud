@@ -10,6 +10,6 @@ namespace VetSystems.Vet.Application.Models.Customers
     {
         public int TotalSaleBuyCount { get; set; }
         public int TotalVisitCount { get; set; }
-        public int TotalEarnings { get; set; }
+        public decimal? TotalEarnings { get; set; }
     }
 }

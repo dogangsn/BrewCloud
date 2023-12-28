@@ -68,10 +68,23 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                     return Response<string>.Fail("Sistem Üzerinde Aynı Müşteri Bilgileri ile Kayıt Vardır.", 404);
                 }
 
-                VetParameters _param = (await _parametersRepository.GetAllAsync()).FirstOrDefault();
+                VetParameters? _param = (await _parametersRepository.GetAllAsync()).FirstOrDefault();
                 if (_param == null)
                 {
                     return Response<string>.Fail("Şirket Parametlerini Tamamlayınız.", 404);
+                }
+
+                if (request.CreateCustomers.PatientDetails.Any(x => x.AnimalType.GetValueOrDefault() == 0))
+                {
+                    return Response<string>.Fail("Hayvan Türünün Seçilmesi Zorunludur.", 404);
+                }
+
+                if (_param.IsAnimalsBreeds.GetValueOrDefault())
+                {
+                    if (request.CreateCustomers.PatientDetails.Any(x=>x.AnimalBreed.GetValueOrDefault() == 0))
+                    {
+                        return Response<string>.Fail("Hayvan Türünün Irkı Seçilmesi Zorunludur.", 404);
+                    }
                 }
 
                 Vet.Domain.Entities.VetAdress adress = new()

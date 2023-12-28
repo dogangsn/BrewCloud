@@ -24,8 +24,9 @@ namespace VetSystems.Vet.Domain.Entities
         public Guid? CustomerWelcomeTemplate { get; set; }
         public Guid? AutomaticAppointmentReminderMessageTemplate { get; set; }
         public bool? IsOtoCustomerWelcomeMessage { get; set; }
-        public bool? DisplayVetNo { get; set; }
-        public bool? AutoSms { get; set; }
+        public bool? DisplayVetNo { get; set; } = false;
+        public bool? AutoSms { get; set; } = false;
+        public bool? IsAnimalsBreeds { get; set; } = false;
 
     }
 }

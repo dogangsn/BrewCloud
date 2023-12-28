@@ -104,8 +104,9 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                     List<PatientDetailsDto> patientList = _uow.Query<PatientDetailsDto>(patientQuery, new { customerId = customerDetail.id }).ToList();
                     customerDetail.PatientDetails = patientList;
 
-                    customerDetail.TotalData.TotalSaleBuyCount = (await _saleBuyOwnerRepository.GetAsync(x => x.CustomerId == customerDetail.id)).Count();
-                    customerDetail.TotalData.TotalVisitCount = (await _AppointmentRepository.GetAsync(x => x.CustomerId == customerDetail.id)).Count();
+                    customerDetail.TotalData.TotalSaleBuyCount = (await _saleBuyOwnerRepository.GetAsync(x => x.CustomerId == customerDetail.id && x.Deleted == false)).Count();
+                    customerDetail.TotalData.TotalVisitCount = (await _AppointmentRepository.GetAsync(x => x.CustomerId == customerDetail.id && x.Deleted == false)).Count();
+                    customerDetail.TotalData.TotalEarnings = (await _saleBuyOwnerRepository.GetAsync(x => x.CustomerId == customerDetail.id && x.Deleted == false)).Sum(x => x.Total).GetValueOrDefault();
 
                     response = new Response<CustomerDetailsDto>
                     {

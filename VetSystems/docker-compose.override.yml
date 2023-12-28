@@ -4,9 +4,7 @@ services:
         container_name: identitydb
         restart: always
         ports:
-            - "1433:1433"
-        volumes:
-            - identitydb_volume:/var/opt/mssql/data
+            - "1433:1433" 
         environment:
             - ACCEPT_EULA=Y
             - SA_PASSWORD=123654Dg  
@@ -24,7 +22,7 @@ services:
         restart: on-failure
         environment:
             - ASPNETCORE_ENVIRONMENT=Local
-            - ConnectionStrings:DefaultConnection=Server=DG1; Database=VetAdminIdentityDb; User=sa; Password=123654Dg,
+            - ConnectionStrings:DefaultConnection=Server=DG1; Database=VetAdminIdentityDb; User=sa; Password=123654Dg
             - VetDbSettings:ServerName=DG1
             - VetDbSettings:User=sa
             - VetDbSettings:Password=123654Dg

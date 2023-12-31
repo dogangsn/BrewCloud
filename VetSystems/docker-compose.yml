@@ -1,8 +1,7 @@
 version: '3.8'
 services:
-    identitydb:
+    vetsytemsdb:
         image: mcr.microsoft.com/mssql/server:2019-latest
-        
         
     gateway.api:
         image:  gateway_api_image

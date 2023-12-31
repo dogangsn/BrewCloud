@@ -60,7 +60,7 @@ namespace VetSystems.IdentityServer.Application.Features.Accounts.Commands
                 _logger.LogError($"Exception: {ex.Message}");
             }
 
-            var entity = await _tempRepository.FirstOrDefaultAsync(r => r.Username == request.Username && r.IsComplate == false);
+            var entity = await _tempRepository.FirstOrDefaultAsync(r => r.EMail == request.Email && r.IsComplate == false);
             request.ActivationCode = GenerateRandomAlphanumericString();
             if (entity == null)
             {

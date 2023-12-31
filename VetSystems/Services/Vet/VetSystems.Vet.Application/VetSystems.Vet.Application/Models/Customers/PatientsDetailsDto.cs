@@ -14,7 +14,7 @@ namespace VetSystems.Vet.Application.Models.Customers
         public int Sex { get; set; }
         public int? AnimalType { get; set; }
         public int? AnimalBreed { get; set; }
-        public string AnimalColor { get; set; } = string.Empty;
+        public int? AnimalColor { get; set; } 
         public string MyProperty { get; set; } = string.Empty;
         public string ReportNumber { get; set; } = string.Empty;
         public string SpecialNote { get; set; } = string.Empty;

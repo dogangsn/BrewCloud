@@ -125,7 +125,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                         {
                             Active= item.Active,
                             AnimalBreed =  item.AnimalBreed.GetValueOrDefault(),
-                            AnimalColor = string.IsNullOrEmpty(item.AnimalColor) ? 0 : Convert.ToInt32(item.AnimalColor),
+                            AnimalColor = item.AnimalColor.GetValueOrDefault(),
                             AnimalType = Convert.ToInt32(item.AnimalType),
                             BirthDate = string.IsNullOrEmpty(item.BirthDate) ? DateTime.Now : Convert.ToDateTime(item.BirthDate),
                             ChipNumber = item.ChipNumber,

@@ -34,7 +34,7 @@ namespace VetSystems.Vet.Application.Features.Definition.AnimalColorsDef.Queries
             var response = new Response<List<AnimalColorsDefListDto>>();
             try
             {
-                string query = "Select * from vetAnimalColorsDef  With(NOLOCK)";
+                string query = "Select * from vetAnimalColorsDef  With(NOLOCK) where deleted = 0 ";
                 var _data = _uow.Query<AnimalColorsDefListDto>(query).ToList();
                 response = new Response<List<AnimalColorsDefListDto>>
                 {

@@ -1,7 +1,7 @@
 version: '3.8'
 services:
-    identitydb:
-        container_name: identitydb
+    vetsytemsdb:
+        container_name: vetsytemsdb
         restart: always
         ports:
             - "1433:1433" 
@@ -22,8 +22,8 @@ services:
         restart: on-failure
         environment:
             - ASPNETCORE_ENVIRONMENT=Local
-            - ConnectionStrings:DefaultConnection=Server=DG1; Database=VetAdminIdentityDb; User=sa; Password=123654Dg
-            - VetDbSettings:ServerName=DG1
+            - ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=VetAdminIdentityDb; User=sa; Password=123654Dg
+            - VetDbSettings:ServerName=vetsytemsdb,1433
             - VetDbSettings:User=sa
             - VetDbSettings:Password=123654Dg
             - GRPC_PORT=5010
@@ -35,7 +35,7 @@ services:
         restart: on-failure
         environment: 
             - ASPNETCORE_ENVIRONMENT=Local
-            - ConnectionStrings:DefaultConnection=Server=identitydb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+            - ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
         ports:
             - "5012:80" 
     vet.api:
@@ -43,7 +43,7 @@ services:
         restart: on-failure
         environment:
             - ASPNETCORE_ENVIRONMENT=Local
-            - ConnectionStrings:DefaultConnection=Server=identitydb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+            - ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
         ports:
             -  "5013:80"
     farm.api:
@@ -51,7 +51,7 @@ services:
         restart: on-failure
         environment:
             - ASPNETCORE_ENVIRONMENT=Local
-            - ConnectionStrings:DefaultConnection=Server=identitydb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+            - ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
         ports:
             -  "5016:80"
     mail.api:
@@ -59,7 +59,7 @@ services:
         restart: on-failure
         environment:
             - ASPNETCORE_ENVIRONMENT=Local
-            - ConnectionStrings:DefaultConnection=Server=identitydb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+            - ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
         ports:
             - "5018:80"
     chat.api:
@@ -67,7 +67,7 @@ services:
         restart: on-failure
         environment: 
             - ASPNETCORE_ENVIRONMENT=Local
-            - ConnectionStrings:DefaultConnection=Server=identitydb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+            - ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
         ports:
             - "5017:80"  
     integrations.api:
@@ -75,7 +75,7 @@ services:
         restart: on-failure
         environment:
             - ASPNETCORE_ENVIRONMENT=Local
-            - ConnectionStrings:DefaultConnection=Server=identitydb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+            - ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
         ports:
             - "5015:80"  
     mobile.api:
@@ -83,7 +83,7 @@ services:
         restart: on-failure
         environment:
             - ASPNETCORE_ENVIRONMENT=Local
-            - ConnectionStrings:DefaultConnection=Server=identitydb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+            - ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
         ports:
             - "5014:80" 
 

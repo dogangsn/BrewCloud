@@ -10,6 +10,7 @@ using VetSystems.Shared.Dtos;
 using VetSystems.Shared.Service;
 using VetSystems.Vet.Application.Features.Store.Commands;
 using VetSystems.Vet.Domain.Contracts;
+using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Features.Customers.Commands
 {
@@ -26,8 +27,10 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
         private readonly ILogger<DeleteCustomerCommandHandler> _logger;
         private readonly IRepository<Vet.Domain.Entities.VetCustomers> _customersRepository;
         private readonly IIdentityRepository _identityRepository;
+        private readonly IRepository<VetPatients> _patientsRepository;
+        private readonly IRepository<VetAppointments> _appointmentsRepository;
 
-        public DeleteCustomerCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<DeleteCustomerCommandHandler> logger, IRepository<Domain.Entities.VetCustomers> customerRepository, IIdentityRepository identityRepository)
+        public DeleteCustomerCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<DeleteCustomerCommandHandler> logger, IRepository<Domain.Entities.VetCustomers> customerRepository, IIdentityRepository identityRepository, IRepository<VetPatients> patientsRepository, IRepository<VetAppointments> appointmentsRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
@@ -35,6 +38,8 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _customersRepository = customerRepository ?? throw new ArgumentNullException(nameof(customerRepository));
             _identityRepository = identityRepository ?? throw new ArgumentNullException(nameof(identityRepository));
+            _patientsRepository = patientsRepository ?? throw new ArgumentNullException(nameof(patientsRepository));
+            _appointmentsRepository = appointmentsRepository ?? throw new ArgumentNullException(nameof(appointmentsRepository));
         }
 
         public async Task<Response<bool>> Handle(DeleteCustomerCommand request, CancellationToken cancellationToken)
@@ -47,18 +52,38 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
             };
             try
             {
-                var stores = await _customersRepository.GetByIdAsync(request.Id);
-                if (stores == null)
+                var customers = await _customersRepository.GetByIdAsync(request.Id);
+                if (customers == null)
                 {
                     _logger.LogWarning($"Customer update failed. Id number: {request.Id}");
                     return Response<bool>.Fail("Customer update failed", 404);
                 }
 
-                stores.Deleted = true;
-                stores.DeletedDate = DateTime.Now;
-                stores.DeletedUsers = _identityRepository.Account.UserName;
+                customers.Deleted = true;
+                customers.DeletedDate = DateTime.Now;
+                customers.DeletedUsers = _identityRepository.Account.UserName;
 
+                List<VetPatients> patients = (await _patientsRepository.GetAsync(x => x.CustomerId == request.Id)).ToList();
+                if (patients != null)
+                {
+                    foreach (var item in patients)
+                    {
+                        item.Deleted = true;
+                        item.DeletedDate = customers.DeletedDate;
+                        item.DeletedUsers = _identityRepository.Account.UserName;
+                    }
+                }
 
+                List<VetAppointments> appointments = (await _appointmentsRepository.GetAsync(x => x.CustomerId == request.Id)).ToList();
+                if (appointments != null)
+                {
+                    foreach (var item in appointments)
+                    {
+                        item.Deleted = true;
+                        item.DeletedDate = customers.DeletedDate;
+                        item.DeletedUsers = _identityRepository.Account.UserName;
+                    }
+                }
 
 
                 await _uow.SaveChangesAsync(cancellationToken);

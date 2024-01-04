@@ -53,14 +53,16 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
 
             try
             {
+                TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
+
                 if (request.AppointmentType == (int)AppointmentType.AsiRandevusu)
                 {
                     foreach (var item in request.VaccineItems)
                     {
                         Vet.Domain.Entities.VetAppointments Appointments = new()
                         {
-                            BeginDate = item.Date,
-                            EndDate = item.Date,
+                            BeginDate = TimeZoneInfo.ConvertTimeFromUtc(item.Date, localTimeZone),
+                            EndDate = TimeZoneInfo.ConvertTimeFromUtc(item.Date.AddMinutes(10), localTimeZone),
                             CustomerId = Guid.Parse(request.CustomerId),
                             DoctorId = Guid.Parse(request.DoctorId),
                             Note = request.Note,
@@ -76,8 +78,8 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
                 {
                     Vet.Domain.Entities.VetAppointments Appointments = new()
                     {
-                        BeginDate = request.BeginDate,
-                        EndDate = request.BeginDate,
+                        BeginDate = TimeZoneInfo.ConvertTimeFromUtc(request.BeginDate, localTimeZone),
+                        EndDate = TimeZoneInfo.ConvertTimeFromUtc(request.BeginDate.AddMinutes(10), localTimeZone),
                         CustomerId = Guid.Parse(request.CustomerId),
                         DoctorId = Guid.Parse(request.DoctorId),
                         Note = request.Note,

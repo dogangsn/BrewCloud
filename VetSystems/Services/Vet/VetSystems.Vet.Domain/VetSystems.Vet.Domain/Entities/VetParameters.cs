@@ -27,6 +27,7 @@ namespace VetSystems.Vet.Domain.Entities
         public bool? DisplayVetNo { get; set; } = false;
         public bool? AutoSms { get; set; } = false;
         public bool? IsAnimalsBreeds { get; set; } = false;
+        public bool? IsFirstInspection { get; set; } = false;
 
     }
 }

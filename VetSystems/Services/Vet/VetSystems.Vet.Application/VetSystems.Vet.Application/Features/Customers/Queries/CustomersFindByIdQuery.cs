@@ -45,9 +45,6 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
             try
             {
 
-
-
-
                 string query = @"select 
                                     vc.id, 
                                     vc.firstname, 
@@ -67,12 +64,8 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                                     from vetcustomers as vc where vc.deleted = 0 and id = @id";
 
                 CustomerDetailsDto? customerDetail = _uow.Query<CustomerDetailsDto>(query, new { id = request.Id }).FirstOrDefault();
-
-                
-
                 if (customerDetail != null)
                 {
-
                     if (customerDetail.adressid != null)
                     {
                         string addressQuery = @"select province, district, longadress from vetadress where id = @id";

@@ -69,7 +69,8 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
                             AppointmentType = request.AppointmentType,
                             Deleted = false,
                             CreateDate = DateTime.UtcNow,
-                            VaccineId = item.ProductId
+                            VaccineId = item.ProductId,
+                            IsCompleted = item.IsComplated
                         };
                         await _AppointmentRepository.AddAsync(Appointments);
                     }
@@ -86,6 +87,7 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
                         AppointmentType = request.AppointmentType,
                         Deleted = false,
                         CreateDate = DateTime.UtcNow,
+                        IsCompleted = false
                     };
                     await _AppointmentRepository.AddAsync(Appointments);
 

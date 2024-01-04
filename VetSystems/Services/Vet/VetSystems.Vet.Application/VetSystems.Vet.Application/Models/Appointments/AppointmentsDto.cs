@@ -20,6 +20,7 @@ namespace VetSystems.Vet.Application.Models.Appointments
         public Guid? customerId { get; set; }
         public int AppointmentType { get; set; }
         public string Text { get; set; }
+        public bool? IsComplated { get; set; }
 
     }
 }

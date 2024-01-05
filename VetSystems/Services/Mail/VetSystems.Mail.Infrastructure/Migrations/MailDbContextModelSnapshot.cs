@@ -38,6 +38,10 @@ namespace VetSystems.Mail.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("createusers");
 
+                    b.Property<bool>("Defaults")
+                        .HasColumnType("bit")
+                        .HasColumnName("defaults");
+
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit")
                         .HasColumnName("deleted");

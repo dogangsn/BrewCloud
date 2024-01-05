@@ -8,7 +8,7 @@ namespace VetSystems.Vet.Application.Models.Definition.AnimalColorsDef
 {
     public class AnimalColorsDefListDto
     {
-        public int Id { get; set; }
+        public int RecId { get; set; }
         public string Name { get; set; }
     }
 }

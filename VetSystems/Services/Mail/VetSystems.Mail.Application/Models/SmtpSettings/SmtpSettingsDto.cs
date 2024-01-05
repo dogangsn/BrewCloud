@@ -9,6 +9,7 @@ namespace VetSystems.Mail.Application.Models.SmtpSettings
     public class SmtpSettingsDto
     {
         public Guid Id { get; set; }
+        public bool Defaults { get; set; } = false;
         public string DisplayName { get; set; } = string.Empty;
         public string EmailId { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;

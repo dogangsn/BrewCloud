@@ -102,11 +102,16 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Commands
                                         + Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.VatAmount.GetValueOrDefault()), 2, MidpointRounding.ToEven); 
               
             saleBuyOwner.Discount = Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.Discount.GetValueOrDefault()), 2, MidpointRounding.ToEven);
-            saleBuyOwner.InvoiceNo = string.IsNullOrEmpty(request.InvoiceNo) ? ("#" + Convert.ToString(saleBuyOwner.RecordId)) : request.InvoiceNo;
+           
 
             try
             {
                 await _saleBuyOwnerRepository.AddAsync(saleBuyOwner);
+                await _uow.SaveChangesAsync(cancellationToken);
+
+                saleBuyOwner.InvoiceNo = string.IsNullOrEmpty(request.InvoiceNo) ? ("#" + Convert.ToString(saleBuyOwner.RecordId)) : request.InvoiceNo;
+
+
                 await _uow.SaveChangesAsync(cancellationToken);
             }
             catch (Exception ex)

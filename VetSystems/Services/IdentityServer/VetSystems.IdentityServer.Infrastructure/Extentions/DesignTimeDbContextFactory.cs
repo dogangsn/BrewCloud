@@ -15,7 +15,7 @@ namespace VetSystems.IdentityServer.Infrastructure.Extentions
             
             DbContextOptionsBuilder<ApplicationDbContext> dbContextOptionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
             //string connectionString = _configuration.GetConnectionString("DefaultConnection");
-            dbContextOptionsBuilder.UseSqlServer("Server=DG1;Database=VetAdminIdentityDb;User Id=sa;Password=123654Dg;");
+            dbContextOptionsBuilder.UseSqlServer("Server=vetsytemsdb,1433;Database=VetAdminIdentityDb;User Id=sa;Password=123654Dg;");
             return new ApplicationDbContext(dbContextOptionsBuilder.Options);
 
         }

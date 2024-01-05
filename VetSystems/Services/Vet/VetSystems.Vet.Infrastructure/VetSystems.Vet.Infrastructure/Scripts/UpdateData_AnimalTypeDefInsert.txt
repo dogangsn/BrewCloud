@@ -5,10 +5,6 @@ INSERT INTO VetAnimalsType (Type,Name, Description,createusers, createdate, upda
 ( 2,'Kedi', 'Ev kedilerinin farklı türleri.',  '', GETDATE(), '1900-01-01', '1900-01-01', 0, '', ''),
 ( 3,'At', 'Farklı amaçlar için kullanılan at türleri.',  '', GETDATE(), '1900-01-01', '1900-01-01', 0, '', ''),
 ( 4,'Küçük Kemirgenler', 'Hamster, sıçan gibi küçük kemirgenler.',  '', GETDATE(), '1900-01-01', '1900-01-01', 0, '', ''),
-( 5,'Kanatlılar', 'Tavuk, ördek gibi kümes hayvanları.',  '', GETDATE(), '1900-01-01', '1900-01-01', 0, '', ''),
-( 6,'Sığır', 'İnek, düve gibi tarım amaçlı hayvanlar.',  '', GETDATE(), '1900-01-01', '1900-01-01', 0, '', ''),
-( 7,'Koyun ve Keçi', 'Yün ve et üretimi amaçlı hayvanlar.',  '', GETDATE(), '1900-01-01', '1900-01-01', 0, '', ''),
-( 8,'Sürüngen', 'Kertenkele, yılan gibi sürüngenler.',  '', GETDATE(), '1900-01-01', '1900-01-01', 0, '', ''),
-( 9,'Balık', 'Süs balıkları ve akvaryum balıkları.',  '', GETDATE(), '1900-01-01', '1900-01-01', 0, '', ''),
-( 10,'Tavşan', 'Evcil tavşan türleri.',  '', GETDATE(), '1900-01-01', '1900-01-01', 0, '', '');
+( 5,'Sığır', 'İnek, düve gibi tarım amaçlı hayvanlar.',  '', GETDATE(), '1900-01-01', '1900-01-01', 0, '', ''),
+( 6,'Koyun ve Keçi', 'Yün ve et üretimi amaçlı hayvanlar.',  '', GETDATE(), '1900-01-01', '1900-01-01', 0, '', '')
 

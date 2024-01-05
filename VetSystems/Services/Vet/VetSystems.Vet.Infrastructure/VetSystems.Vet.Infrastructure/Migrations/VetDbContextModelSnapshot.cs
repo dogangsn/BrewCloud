@@ -453,6 +453,10 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("patientsid");
 
+                    b.Property<int>("RecId")
+                        .HasColumnType("int")
+                        .HasColumnName("recid");
+
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("updatedate");
@@ -461,6 +465,10 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("updateusers");
+
+                    b.Property<Guid?>("VaccineId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("vaccineid");
 
                     b.HasKey("Id")
                         .HasName("VetAppointments_pkey");
@@ -1090,6 +1098,14 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                     b.Property<bool?>("DisplayVetNo")
                         .HasColumnType("bit")
                         .HasColumnName("displayvetno");
+
+                    b.Property<bool?>("IsAnimalsBreeds")
+                        .HasColumnType("bit")
+                        .HasColumnName("isanimalsbreeds");
+
+                    b.Property<bool?>("IsFirstInspection")
+                        .HasColumnType("bit")
+                        .HasColumnName("isfirstinspection");
 
                     b.Property<bool?>("IsOtoCustomerWelcomeMessage")
                         .HasColumnType("bit")

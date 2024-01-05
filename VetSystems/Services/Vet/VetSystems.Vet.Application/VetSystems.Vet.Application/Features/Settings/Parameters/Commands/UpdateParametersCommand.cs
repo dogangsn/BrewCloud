@@ -31,6 +31,10 @@ namespace VetSystems.Vet.Application.Features.Settings.Parameters.Commands
         public bool? isOtoCustomerWelcomeMessage { get; set; }
         public bool? displayVetNo { get; set; }
         public bool? autoSms { get; set; }
+        public bool? IsAnimalsBreeds { get; set; }
+        public bool? IsFirstInspection { get; set; }
+
+
     }
 
     public class UpdateParametersCommandHandler : IRequestHandler<UpdateParametersCommand, Response<bool>>
@@ -83,6 +87,9 @@ namespace VetSystems.Vet.Application.Features.Settings.Parameters.Commands
                         WhatsappTemplate = request.whatsappTemplate,
                         CreateUsers = _identity.Account.UserName,
                         CreateDate = DateTime.Now,
+                        IsAnimalsBreeds = request.IsAnimalsBreeds.GetValueOrDefault(),
+                        IsFirstInspection = request.IsFirstInspection.GetValueOrDefault(),
+                        
                     };
                     await _parametersRepository.AddAsync(crparameters);
                     await _uow.SaveChangesAsync(cancellationToken);
@@ -111,6 +118,9 @@ namespace VetSystems.Vet.Application.Features.Settings.Parameters.Commands
                     parameters.WhatsappTemplate = request.whatsappTemplate;
                     parameters.UpdateUsers = _identity.Account.UserName;
                     parameters.UpdateDate = DateTime.Now;
+                    parameters.IsAnimalsBreeds = request.IsAnimalsBreeds.GetValueOrDefault();
+                    parameters.IsAnimalsBreeds = request.IsFirstInspection.GetValueOrDefault();
+                    
                     await _uow.SaveChangesAsync(cancellationToken);
                 }
 

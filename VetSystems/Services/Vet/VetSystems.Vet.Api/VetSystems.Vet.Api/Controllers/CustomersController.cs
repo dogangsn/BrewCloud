@@ -78,5 +78,18 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "DeletePatient")]
+        public async Task<IActionResult> DeletePatient([FromBody] DeletePatientCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "GetTransactionMovementList")]
+        public async Task<IActionResult> GetTransactionMovementList([FromBody] GetTransactionMovementListQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
     }
 }

@@ -9,17 +9,16 @@ namespace VetSystems.Vet.Domain.Entities
 {
     public class VetAppointments : BaseEntity, IAggregateRoot
     {
-
-        [NotMapped]
-        public Guid RecId { get; set; }
+         
         public DateTime BeginDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Note { get; set; } = string.Empty;
-        public Guid? DoctorId { get; set; } 
-        public Guid? CustomerId { get; set; }
-        public Guid? PatientsId { get; set; }
-        public int? AppointmentType { get; set; }
-        public bool? IsCompleted { get; set; }
+        public Guid? DoctorId { get; set; } = Guid.Empty;
+        public Guid? CustomerId { get; set; } 
+        public Guid? PatientsId { get; set; } = Guid.Empty;
+        public int? AppointmentType { get; set; } 
+        public bool? IsCompleted { get; set; } = false;
+        public Guid? VaccineId { get; set; } = Guid.Empty;
 
     }
 }

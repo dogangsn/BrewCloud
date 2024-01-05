@@ -42,7 +42,7 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Queries
                     "vetsalebuyowner.supplierid, vetsalebuyowner.netprice, vetsalebuyowner.customerid, \r\n\t\t\t\t\t\t CASE WHEN vetsalebuyowner.customerid IS NULL OR\r\n                         " +
                     "vetsalebuyowner.customerid = '00000000-0000-0000-0000-000000000000' THEN 'PARAKENDE SATIŞ' ELSE vetcustomers.firstname + ' ' + vetcustomers.lastname  END AS customerName,\r\n\t\t\t\t\t\t  " +
                     "CASE WHEN vetsalebuyowner.supplierid IS NULL OR\r\n                         " +
-                    "vetsalebuyowner.supplierid = '00000000-0000-0000-0000-000000000000' THEN '-' ELSE vetsuppliers.suppliername END AS supplierName\r\n\r\nFROM            " +
+                    "vetsalebuyowner.supplierid = '00000000-0000-0000-0000-000000000000' THEN '-' ELSE vetsuppliers.suppliername END AS supplierName, vetsalebuyowner.supplierid,vetsalebuyowner.customerid  \r\n\r\nFROM            " +
                     "vetsalebuyowner INNER JOIN\r\n                         vetsalebuytrans ON vetsalebuyowner.id = vetsalebuytrans.ownerid LEFT JOIN\r\n                         " +
                     "vetcustomers ON vetsalebuyowner.customerid = vetcustomers.id LEFT JOIN\r\n                         " +
                     "vetsuppliers ON vetsalebuyowner.supplierid = vetsuppliers.id LEFT JOIN\r\n\t\t\t\t\t\t vetpaymentmethods ON vetsalebuyowner.paymenttype = vetpaymentmethods.RecId " +

@@ -5,7 +5,8 @@ Mobile => 5014
 Integration => 5015
 Farm => 5016
 Chat => 5017
-
+Mail => 5018
+Report => 5019
 
 
 GateWay => 5000

@@ -66,7 +66,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                 {
                     Active = request.PatientDetails.Active,
                     AnimalBreed = request.PatientDetails.AnimalBreed.GetValueOrDefault(),
-                    AnimalColor = string.IsNullOrEmpty(request.PatientDetails.AnimalColor) ? 0 : Convert.ToInt32(request.PatientDetails.AnimalColor),
+                    AnimalColor =   request.PatientDetails.AnimalColor.GetValueOrDefault(),
                     AnimalType = Convert.ToInt32(request.PatientDetails.AnimalType),
                     BirthDate = string.IsNullOrEmpty(request.PatientDetails.BirthDate) ? DateTime.Now : Convert.ToDateTime(request.PatientDetails.BirthDate),
                     ChipNumber = request.PatientDetails.ChipNumber,

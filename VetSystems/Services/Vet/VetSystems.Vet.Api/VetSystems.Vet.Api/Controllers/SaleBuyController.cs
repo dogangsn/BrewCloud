@@ -47,6 +47,12 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "UpdateSaleBuy")]
+        public async Task<IActionResult> UpdateSaleBuy([FromBody] UpdateSaleBuyCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
     }
 }

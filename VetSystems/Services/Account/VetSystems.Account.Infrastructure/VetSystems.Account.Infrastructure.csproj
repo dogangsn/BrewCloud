@@ -14,8 +14,12 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Scripts\UpdateData_TitleDefination.txt" />
-    <EmbeddedResource Include="Settings\NavBar\farm.json" />
-    <EmbeddedResource Include="Settings\NavBar\vet.json" />
+    <EmbeddedResource Include="Settings\NavBar\farm.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings\NavBar\vet.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

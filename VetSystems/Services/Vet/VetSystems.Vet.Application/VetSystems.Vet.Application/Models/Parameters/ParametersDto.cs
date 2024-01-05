@@ -22,6 +22,7 @@ namespace VetSystems.Vet.Application.Models.Parameters
         public bool? isOtoCustomerWelcomeMessage { get; set; } = false;
         public bool? displayVetNo { get; set; } = false; 
         public bool? autoSms { get; set; } = false;
+        public bool? IsAnimalsBreeds { get; set; }
 
     }
 }

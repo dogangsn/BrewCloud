@@ -19,7 +19,9 @@ namespace VetSystems.Vet.Application.Models.SaleBuy
         public decimal? KDV { get; set; }
         public decimal? Discount { get; set; }
         public decimal? Total { get; set; }
-        
+        public Guid? SupplierId { get; set; }
+        public Guid? CustomerId { get; set; }
+
 
     }
 }

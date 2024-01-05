@@ -109,14 +109,14 @@ namespace VetSystems.Mail.Infrastructure.Repositories
                 var migrations = await db.Database.GetAppliedMigrationsAsync();
                 foreach (var migration in migrations)
                 {
-                    string query =
-                        $"insert into \"{historyTable}\" (migrationid,productversion) values(@migrationId,@version)";
-                    db.Execute(query,
-                        new
-                        {
-                            migrationId = migration,
-                            version = "7.0.1"
-                        });
+                    //string query =
+                    //    $"insert into \"{historyTable}\" (migrationid,productversion) values(@migrationId,@version)";
+                    //db.Execute(query,
+                    //    new
+                    //    {
+                    //        migrationId = migration,
+                    //        version = "7.0.1"
+                    //    });
                 }
             }
         }

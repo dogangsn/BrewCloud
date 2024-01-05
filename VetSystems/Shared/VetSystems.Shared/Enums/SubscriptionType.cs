@@ -6,6 +6,7 @@ namespace VetSystems.Shared.Enums
 {
     public enum SubscriptionType
     {
-        Vet
+        Vet,
+        Farm,
     }
 }

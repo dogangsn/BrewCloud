@@ -57,9 +57,10 @@ namespace VetSystems.IdentityServer.Infrastructure.Services
             return result;
         }
 
-        public Task<Accounts> GetAccountById(string id)
+        public async Task<Accounts> GetAccountById(string id)
         {
-            throw new NotImplementedException();
+            var result = await _dbContext.Accounts.FirstOrDefaultAsync(r => r.UserId == id);
+            return result;
         }
 
         public async Task<SignupDto> GetAccountByIdForClaims(string id)

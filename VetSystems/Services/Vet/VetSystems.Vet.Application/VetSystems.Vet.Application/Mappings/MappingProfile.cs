@@ -4,10 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VetSystems.Vet.Application.Models.Appointments;
+using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Mappings
 {
-    internal class MappingProfile : Profile
+    public class MappingProfile : Profile
     {
+        public MappingProfile() 
+        { 
+            CreateMap<VetAppointments, AppointmentsDto>().ReverseMap();
+        }
     }
 }

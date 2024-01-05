@@ -54,6 +54,7 @@ namespace VetSystems.Vet.Application.Features.Demands.Demand.Commands
 
         public async Task<Response<VetDemands>> Handle(CreateDemandCommand request, CancellationToken cancellationToken)
         {
+            TimeZoneInfo timeZone = TimeZoneInfo.Local;
             var response = new Response<VetDemands>
             {
                 ResponseType = ResponseType.Ok,
@@ -66,9 +67,9 @@ namespace VetSystems.Vet.Application.Features.Demands.Demand.Commands
                 {
                     Id = Guid.NewGuid(),
                     suppliers = request.suppliers,
-                    date = request.date,
+                    date = TimeZoneInfo.ConvertTime(Convert.ToDateTime(request.date), timeZone) ,
                     documentno = request.documentno,
-                    deliverydate = request.deliverydate,
+                    deliverydate = TimeZoneInfo.ConvertTime(Convert.ToDateTime(request.deliverydate),timeZone),
                     note = request.note,
                     state = request.state,
                     iscomplated = false,

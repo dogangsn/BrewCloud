@@ -50,13 +50,14 @@ namespace VetSystems.Vet.Application.Features.Agenda.Commands
             try
             {
                 var agenda = await _agendaRepository.GetByIdAsync(request.Id);
-                var agendaTagsAllList= await _agendaTagsRepository.GetAllAsync();
-                var agendaTags = agendaTagsAllList.Where(x => x.AgendaId == agenda.Id).ToList();
                 if (agenda == null)
                 {
                     _logger.LogWarning($"Agenda delete failed. Id number: {request.Id}");
                     return Response<bool>.Fail("Property update failed", 404);
                 }
+                var agendaTagsAllList= await _agendaTagsRepository.GetAllAsync();
+                var agendaTags = agendaTagsAllList.Where(x => x.AgendaId == agenda.Id).ToList();
+                
 
                 agenda.Deleted = true;
                 agenda.DeletedDate = DateTime.Now;

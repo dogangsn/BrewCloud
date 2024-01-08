@@ -8,6 +8,7 @@ services:
         environment:
             - ACCEPT_EULA=Y
             - SA_PASSWORD=123654Dg  
+      
     gateway.api:
         container_name: gateway.api
         restart: on-failure
@@ -35,7 +36,9 @@ services:
         restart: on-failure
         environment: 
             - ASPNETCORE_ENVIRONMENT=Local
-            - ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+            - ConnectionStrings:ConnectionString=Server=vetsytemsdb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+            - IdentityServerURL=http://identityserver.api
+            - GrpcSettings:IdentityUrl=http://identityserver.api
         ports:
             - "5012:80" 
     vet.api:
@@ -43,7 +46,8 @@ services:
         restart: on-failure
         environment:
             - ASPNETCORE_ENVIRONMENT=Local
-            - ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+            - ConnectionStrings:ConnectionString=Server=vetsytemsdb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+            - IdentityServerURL=http://identityserver.api  
         ports:
             -  "5013:80"
     farm.api:

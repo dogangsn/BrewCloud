@@ -1,5 +1,6 @@
 ﻿using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -18,16 +19,16 @@ namespace VetSystems.IdentityServer.Infrastructure.Persistence
 
             context.SaveChanges();
         }
-        //Migration kısmı kapatıldı
-        //Postgreden dolayı MigrationId yi tanımadı bende mcburen migration kısmını kapattım
+ 
         private static void InitializeTokenServerConfigurationDatabase(IApplicationBuilder app)
         {
             using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
-                //scope.ServiceProvider.GetRequiredService<PersistedGrantDataContext>().Database.Migrate();
+               scope.ServiceProvider.GetRequiredService<PersistedGrantDataContext>().Database.Migrate();
 
                 var context = scope.ServiceProvider.GetRequiredService<ConfigurationDataContext>();
-                //context.Database.Migrate();
+                context.Database.Migrate();
+
                 if (!context.Clients.Any())
                 {
                     foreach (var client in Config.Clients)

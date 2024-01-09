@@ -22,6 +22,8 @@ namespace VetSystems.Vet.Application.Models.SaleBuy
         public Guid? SupplierId { get; set; }
         public Guid? CustomerId { get; set; }
 
+        public Guid? demandsGuidId { get; set; }
+
 
     }
 }

@@ -25,6 +25,8 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Commands
         public string InvoiceNo { get; set; }
         public int PaymentType { get; set; }
         public decimal Amount { get; set; }
+        public Guid? demandsGuidId { get; set; }
+
     }
 
     public class CreateSaleBuyCommandHandler : IRequestHandler<CreateSaleBuyCommand, Response<bool>>
@@ -74,6 +76,7 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Commands
                 CreateDate = DateTime.Now,
                 CreateUsers = _identity.Account.UserName,
                 PaymentType = request.PaymentType,
+                demandsGuidId = request.demandsGuidId,
             };
 
             decimal vatAmaount = CalculateVatAmount((request.Type == (int)BuySaleType.Selling ? _product.SellingPrice : _product.BuyingPrice), request.Amount, _product.Ratio, (request.Type == (int)BuySaleType.Selling ? _product.SellingIncludeKDV.GetValueOrDefault() : _product.BuyingIncludeKDV.GetValueOrDefault()));

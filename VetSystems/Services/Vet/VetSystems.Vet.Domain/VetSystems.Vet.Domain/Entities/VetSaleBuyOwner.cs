@@ -25,6 +25,7 @@ namespace VetSystems.Vet.Domain.Entities
         public Guid? SupplierId { get; set; }
         public string Remark { get; set; } = string.Empty;
         public int RecordId { get; set; }
+        public Guid? demandsGuidId  { get; set; }
 
         public void addSaleBuyTrans(VetSaleBuyTrans trans)
         {

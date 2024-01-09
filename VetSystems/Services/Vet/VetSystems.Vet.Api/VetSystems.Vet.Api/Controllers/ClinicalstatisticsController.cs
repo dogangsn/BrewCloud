@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VetSystems.Vet.Application.Features.Clinicalstatistics.Queries;
+using VetSystems.Vet.Application.Features.Definition.CasingDefinition.Queries;
 using VetSystems.Vet.Application.Features.SaleBuy.Queries;
 
 namespace VetSystems.Vet.Api.Controllers
@@ -28,6 +29,19 @@ namespace VetSystems.Vet.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+        [HttpPost(Name = "WeekVisitList")]
+        public async Task<IActionResult> WeekVisitList([FromBody] WeekVisitListQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
+        [HttpGet(Name = "BagelSliceGraphList")]
+        public async Task<IActionResult> BagelSliceGraphList()
+        {
+            var command = new BagelSliceGraphListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
     }
 }

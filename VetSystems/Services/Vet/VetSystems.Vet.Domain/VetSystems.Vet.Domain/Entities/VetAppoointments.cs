@@ -19,6 +19,7 @@ namespace VetSystems.Vet.Domain.Entities
         public int? AppointmentType { get; set; } 
         public bool? IsCompleted { get; set; } = false;
         public Guid? VaccineId { get; set; } = Guid.Empty;
+        public bool? IsPaymentReceived { get; set; } = false;
 
     }
 }

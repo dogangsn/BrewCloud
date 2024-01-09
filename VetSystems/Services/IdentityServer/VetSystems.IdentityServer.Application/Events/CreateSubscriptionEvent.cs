@@ -69,22 +69,6 @@ namespace VetSystems.IdentityServer.Application.Events
                     _logger.LogError($"UpdateDatabase Err: {item}-{resultData.Errors.ToArray()}");
                 }
             }
-
-            //var exchangeRequest = new ExchangeRequestDto
-            //{
-            //    CurrDate = DateTime.Today.Date,
-            //    PropertyId = temp.RecId,
-            //    ConnectionString = temp.ConnectionString
-            //};
-            //var integrationResult = await _accountService.ImportExchangeRate(exchangeRequest);
-            //if (integrationResult.ResponseType != ResponseType.Ok)
-            //{
-            //    //isError = true;
-            //    _logger.LogError($"Exchange Curr Err: {resultData.Errors.ToArray()}");
-            //}
-
-
-
         }
     }
 

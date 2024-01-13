@@ -50,5 +50,19 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "UpdatePaymentReceivedAppointment")]
+        public async Task<IActionResult> UpdatePaymentReceivedAppointment([FromBody] UpdatePaymentReceivedAppointmentCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "UpdateCompletedAppointment")]
+        public async Task<IActionResult> UpdateCompletedAppointment([FromBody] UpdateCompletedAppointmentCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
     }
 }

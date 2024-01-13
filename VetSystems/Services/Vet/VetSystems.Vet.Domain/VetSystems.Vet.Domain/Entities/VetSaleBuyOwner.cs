@@ -22,11 +22,12 @@ namespace VetSystems.Vet.Domain.Entities
         public decimal? Discount { get; set; } = 0; 
         public decimal? KDV { get; set; } = 0;
         public decimal? NetPrice { get; set; } = 0;
-        public Guid? SupplierId { get; set; }
+        public Guid? SupplierId { get; set; } = Guid.Empty;
         public string Remark { get; set; } = string.Empty;
         public int RecordId { get; set; }
-        public Guid? demandsGuidId  { get; set; }
-
+        public Guid? demandsGuidId  { get; set; } = Guid.Empty;
+        public bool? IsAppointment { get; set; } = false;
+        public Guid? AppointmentId { get; set; } = Guid.Empty;
         public void addSaleBuyTrans(VetSaleBuyTrans trans)
         {
             trans.OwnerId = Id;

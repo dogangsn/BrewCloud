@@ -99,5 +99,11 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "CreateCollection")]
+        public async Task<IActionResult> CreateCollection([FromBody] CreateCollectionCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
     }
 }

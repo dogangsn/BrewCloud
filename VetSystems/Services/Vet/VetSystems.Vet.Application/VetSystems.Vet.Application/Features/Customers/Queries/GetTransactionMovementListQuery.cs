@@ -40,7 +40,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
             {
                 string _query = "SELECT        vetsalebuyowner.id, vetsalebuyowner.recordid as operationNumber, vetsalebuyowner.date, vetsalebuyowner.remark, vetsalebuyowner.total as amount, vetpaymentmethods.name AS paymenttype\r\n " +
                     "FROM            vetsalebuyowner INNER JOIN\r\n                         vetpaymentmethods ON vetsalebuyowner.paymenttype = vetpaymentmethods.RecId\r\nWHERE        " +
-                    "(vetsalebuyowner.deleted = 0) and customerid = @CustomerId ";
+                    "(vetsalebuyowner.deleted = 0) and customerid = @CustomerId and ISNULL(isappointment, 0) = 0 ";
                  var result = _uow.Query<TransactionMovementListDto>(_query, new { CustomerId = request.CustomerId }).ToList();
 
                 response.Data = result;

@@ -55,6 +55,7 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Commands
                 Data = true,
                 IsSuccessful = true
             };
+            TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
 
             Vet.Domain.Entities.VetProducts _product = await _productRepository.GetByIdAsync(request.ProductId.GetValueOrDefault());
             if (_product == null)
@@ -67,7 +68,7 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Commands
             Vet.Domain.Entities.VetSaleBuyOwner saleBuyOwner = new()
             {
                 Id = Guid.NewGuid(),
-                Date = request.Date,
+                Date = TimeZoneInfo.ConvertTime(Convert.ToDateTime(request.Date), localTimeZone),
                 CustomerId = request.CustomerId,
                 Type = request.Type,
                 SupplierId = request.SupplierId,

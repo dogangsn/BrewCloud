@@ -13,13 +13,13 @@ using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Features.Appointment.Commands
 {
-    public class UpdateCompletedAppointmentCommand : IRequest<Response<bool>>
+    public class UpdateCompletedAppointmentCommand : IRequest<Response<string>>
     {
         public Guid Id { get; set; }
         public bool IsCompleted { get; set; }
     }
 
-    public class UpdateCompletedAppointmentCommandHandler : IRequestHandler<UpdateCompletedAppointmentCommand, Response<bool>>
+    public class UpdateCompletedAppointmentCommandHandler : IRequestHandler<UpdateCompletedAppointmentCommand, Response<string>>
     {
         private readonly IUnitOfWork _uow;
         private readonly IIdentityRepository _identity;
@@ -36,12 +36,12 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
             _appointmentRepository = appointmentRepository;
         }
 
-        public async Task<Response<bool>> Handle(UpdateCompletedAppointmentCommand request, CancellationToken cancellationToken)
+        public async Task<Response<string>> Handle(UpdateCompletedAppointmentCommand request, CancellationToken cancellationToken)
         {
-            var response = new Response<bool>
+            var response = new Response<string>
             {
                 ResponseType = ResponseType.Ok,
-                Data = true,
+                Data = string.Empty,
                 IsSuccessful = true
             };
             try
@@ -50,13 +50,20 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
                 if (appointment == null)
                 {
                     _logger.LogWarning($"Not Foun number: {request.Id}");
-                    return Response<bool>.Fail("Appointments update failed", 404);
+                    return Response<string>.Fail("Appointments update failed", 404);
                 }
+                if (appointment.IsPaymentReceived.GetValueOrDefault())
+                {
+                    return Response<string>.Fail("Tahsilatı Yapılmış İşlemlerde Değişiklik Yapılamaz.", 404);
+                }
+
                 appointment.IsCompleted = request.IsCompleted;
                 await _uow.SaveChangesAsync(cancellationToken);
+                response.IsSuccessful = true;
             }
             catch (Exception ex)
             {
+                response.IsSuccessful = false;
             }
             return response;
         }

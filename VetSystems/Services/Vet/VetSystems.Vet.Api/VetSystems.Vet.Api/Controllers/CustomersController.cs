@@ -105,5 +105,13 @@ namespace VetSystems.Vet.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
+        [HttpPost(Name = "GetPayChartList")]
+        public async Task<IActionResult> GetPayChartList([FromBody] GetPayChartListQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
     }
 }

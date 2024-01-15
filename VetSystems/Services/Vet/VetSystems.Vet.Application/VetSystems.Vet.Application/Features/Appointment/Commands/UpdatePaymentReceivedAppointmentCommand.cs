@@ -53,6 +53,8 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
                     _logger.LogWarning($"Not Foun number: {request.Id}");
                     return Response<bool>.Fail("Appointments update failed", 404);
                 }
+
+
                 appointment.IsPaymentReceived = request.IsPaymentReceived;
                 _appointmentRepository.Update(appointment);
 

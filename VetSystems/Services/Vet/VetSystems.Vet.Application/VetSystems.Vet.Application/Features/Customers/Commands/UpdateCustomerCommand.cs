@@ -80,7 +80,11 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                 customers.TaxOffice = request.TaxOffice;
                 customers.UpdateDate = DateTime.Now;
                 customers.UpdateUsers = _identity.Account.UserName;
+                customers.EMail = request.EMail;
+
                 await _uow.SaveChangesAsync(cancellationToken);
+                response.IsSuccessful = true;
+
             }
             catch (Exception ex)
             {

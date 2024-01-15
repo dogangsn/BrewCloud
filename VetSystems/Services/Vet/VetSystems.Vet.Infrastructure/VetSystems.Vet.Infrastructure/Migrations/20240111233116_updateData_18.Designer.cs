@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VetSystems.Vet.Infrastructure.Persistence;
 
@@ -11,9 +12,10 @@ using VetSystems.Vet.Infrastructure.Persistence;
 namespace VetSystems.Vet.Infrastructure.Migrations
 {
     [DbContext(typeof(VetDbContext))]
-    partial class VetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240111233116_updateData_18")]
+    partial class updateData_18
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1240,90 +1242,6 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasDatabaseName("ix_vetpatients_customersid");
 
                     b.ToTable("vetpatients", (string)null);
-                });
-
-            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetPaymentCollection", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("id");
-
-                    b.Property<Guid?>("CollectionId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("collectionid");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("createdate");
-
-                    b.Property<string>("CreateUsers")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("createusers");
-
-                    b.Property<decimal?>("Credit")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("credit");
-
-                    b.Property<Guid?>("CustomerId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("customerid");
-
-                    b.Property<DateTime?>("Date")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("date");
-
-                    b.Property<decimal?>("Debit")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("debit");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasColumnName("deleted");
-
-                    b.Property<DateTime>("DeletedDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("deleteddate");
-
-                    b.Property<string>("DeletedUsers")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("deletedusers");
-
-                    b.Property<decimal?>("Paid")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("paid");
-
-                    b.Property<int>("RecId")
-                        .HasColumnType("int")
-                        .HasColumnName("recid");
-
-                    b.Property<string>("Remark")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("remark");
-
-                    b.Property<decimal?>("Total")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("total");
-
-                    b.Property<decimal?>("TotalPaid")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("totalpaid");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("updatedate");
-
-                    b.Property<string>("UpdateUsers")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("updateusers");
-
-                    b.HasKey("Id")
-                        .HasName("VetPaymentCollection_pkey");
-
-                    b.ToTable("vetpaymentcollection", (string)null);
                 });
 
             modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetPaymentMethods", b =>

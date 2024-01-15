@@ -11,6 +11,7 @@ namespace VetSystems.Vet.Application.Models.Customers
         public Guid Id { get; set; }
         public int AppointmentType { get; set; }
         public decimal? SellingPrice { get; set; }
+        public Guid? Vaccineid { get; set; }
         public string? TextValue { get; set; }
     }
 }

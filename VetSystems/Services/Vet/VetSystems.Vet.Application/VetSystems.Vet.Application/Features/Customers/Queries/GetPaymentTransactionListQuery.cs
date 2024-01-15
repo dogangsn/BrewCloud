@@ -39,6 +39,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                                 + "     vetappointments.id, "
                                 + "     vetappointments.appointmenttype, "
                                 + " 	vetproducts.sellingprice,  "
+                                + "     vetappointments.vaccineid,"
                                 + "     CASE "
                                 + "         WHEN vetappointments.vaccineid = '00000000-0000-0000-0000-000000000000' THEN  "
                                 + "             CASE vetappointments.appointmenttype "
@@ -72,7 +73,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                                 + "     vetproducts ON vetappointments.vaccineid = vetproducts.id "
                                 + " WHERE "
                                 + "     vetappointments.deleted = 0 "
-                                + "     AND COALESCE(vetappointments.iscompleted, 0) = 1 and vetappointments.customerid = @CustomerId";
+                                + "     AND COALESCE(vetappointments.iscompleted, 0) = 1 and ISNULL(vetappointments.ispaymentreceived, 0) = 0 and  vetappointments.customerid = @CustomerId";
 
                 var result = _uow.Query<PaymentTransactionListDto>(_query, new { CustomerId = request.CustomerId }).ToList();
                 response.Data = result;

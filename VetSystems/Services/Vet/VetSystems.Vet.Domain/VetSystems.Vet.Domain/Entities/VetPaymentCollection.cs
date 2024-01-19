@@ -18,6 +18,7 @@ namespace VetSystems.Vet.Domain.Entities
         public decimal? Paid { get; set; } = 0;
         public decimal? TotalPaid { get; set; } = 0;
         public decimal? Total { get; set; } = 0;
-        
+        public Guid? SaleBuyId { get; set; } = Guid.Empty;
+
     }
 }

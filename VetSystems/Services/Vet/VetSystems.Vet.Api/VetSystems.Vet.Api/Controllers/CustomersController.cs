@@ -113,5 +113,11 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "DeletePayChart")]
+        public async Task<IActionResult> DeletePayChart([FromBody] DeletePayChartCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
     }
 }

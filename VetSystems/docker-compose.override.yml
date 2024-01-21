@@ -1,13 +1,13 @@
 version: '3.8'
 services:
-    vetsytemsdb:
-        container_name: vetsytemsdb
-        restart: always
-        ports:
-            - "1433:1433" 
-        environment:
-            - ACCEPT_EULA=Y
-            - SA_PASSWORD=123654Dg  
+    # vetsytemsdb:
+    #     container_name: vetsytemsdb
+    #     restart: always
+    #     ports:
+    #         - "1433:1433" 
+    #     environment:
+    #         - ACCEPT_EULA=Y
+    #         - SA_PASSWORD=123654Dg  
       
     gateway.api:
         container_name: gateway.api
@@ -16,38 +16,46 @@ services:
             - ASPNETCORE_ENVIRONMENT=Production
         depends_on:
             - identityserver.api
+            - account.api
         ports:
             - "5000:80"    
     identityserver.api:
         container_name: identityserver.api
         restart: on-failure
         environment:
-            - ASPNETCORE_ENVIRONMENT=Local
+            - ASPNETCORE_ENVIRONMENT=Development
             - ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=VetAdminIdentityDb; User=sa; Password=123654Dg
             - VetDbSettings:ServerName=vetsytemsdb,1433
             - VetDbSettings:User=sa
             - VetDbSettings:Password=123654Dg
-            - GRPC_PORT=5010
-            - PORT=5001 
+            - GRPC_PORT=81
+            - PORT=80 
         ports:
             - "5001:80"
     account.api:
         container_name: account.api
         restart: on-failure
         environment: 
-            - ASPNETCORE_ENVIRONMENT=Local
+            - ASPNETCORE_ENVIRONMENT=Development
             - ConnectionStrings:ConnectionString=Server=vetsytemsdb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
-            - IdentityServerURL=http://identityserver.api
-            - GrpcSettings:IdentityUrl=http://identityserver.api
+            - IdentityServerURL=http://identityserver.api:80
+            - GrpcSettings:IdentityUrl=http://identityserver.api:81
+            - VetDbSettings:ServerName=vetsytemsdb,1433
+            - VetDbSettings:User=sa
+            - VetDbSettings:Password=123654Dg
+        depends_on:
+            - identityserver.api
         ports:
             - "5012:80" 
     vet.api:
         container_name: vet.api
         restart: on-failure
         environment:
-            - ASPNETCORE_ENVIRONMENT=Local
+            - ASPNETCORE_ENVIRONMENT=Development
             - ConnectionStrings:ConnectionString=Server=vetsytemsdb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
-            - IdentityServerURL=http://identityserver.api  
+            - IdentityServerURL=http://identityserver.api:80
+            - GrpcSettings:IdentityUrl=http://identityserver.api:81
+            - ApiGatewayUrl=http://gateway.api/services/
         ports:
             -  "5013:80"
     farm.api:
@@ -70,8 +78,13 @@ services:
         container_name: chat.api
         restart: on-failure
         environment: 
-            - ASPNETCORE_ENVIRONMENT=Local
-            - ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=VetAdminIdentityDb; User=sa; Password=123654Dg
+            - VetDbSettings:ServerName=vetsytemsdb,1433
+            - VetDbSettings:User=sa
+            - VetDbSettings:Password=123654Dg
+            - IdentityServerURL=http://identityserver.api:80
+            - GrpcSettings:IdentityUrl=http://identityserver.api:81
         ports:
             - "5017:80"  
     integrations.api:
@@ -80,6 +93,9 @@ services:
         environment:
             - ASPNETCORE_ENVIRONMENT=Local
             - ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=VetAdminIdentityDb; User=sa; Password=123D654Dg
+            - VetDbSettings:ServerName=vetsytemsdb,1433
+            - VetDbSettings:User=sa
+            - VetDbSettings:Password=123654Dg
         ports:
             - "5015:80"  
     mobile.api:

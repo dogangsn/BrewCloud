@@ -46,9 +46,9 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Queries
                     "vetsalebuyowner INNER JOIN\r\n                         vetsalebuytrans ON vetsalebuyowner.id = vetsalebuytrans.ownerid LEFT JOIN\r\n                         " +
                     "vetcustomers ON vetsalebuyowner.customerid = vetcustomers.id LEFT JOIN\r\n                         " +
                     "vetsuppliers ON vetsalebuyowner.supplierid = vetsuppliers.id LEFT JOIN\r\n\t\t\t\t\t\t vetpaymentmethods ON vetsalebuyowner.paymenttype = vetpaymentmethods.RecId " +
-                    "\r\nWHERE        (vetsalebuyowner.deleted = 0) and (vetsalebuyowner.type = @type) and (CONVERT(date, vetsalebuyowner.CreateDate) = CONVERT(date, GETDATE())) order by vetsalebuyowner.CreateDate desc";
+                    "\r\nWHERE        (vetsalebuyowner.deleted = 0) and (vetsalebuyowner.type = @type) and (CONVERT(date, vetsalebuyowner.CreateDate) = CONVERT(date, @Date)) order by vetsalebuyowner.CreateDate desc";
 
-                var _data = _uow.Query<SaleBuyListDto>(query, new { type = request.Type }).ToList();
+                var _data = _uow.Query<SaleBuyListDto>(query, new { type = request.Type, Date = DateTime.Today }).ToList();
                 response = new Response<List<SaleBuyListDto>>
                 {
                     Data = _data,

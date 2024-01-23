@@ -41,7 +41,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                         + "  CASE WHEN vetappointments.vaccineid = '00000000-0000-0000-0000-000000000000' THEN CASE vetappointments.appointmenttype WHEN 0 THEN 'İlk Muayene' WHEN 1 THEN 'Aşı Randevusu' WHEN 2 THEN 'Genel Muayene' "
                         + "   WHEN 3 THEN 'Kontrol Muayene' WHEN 4 THEN 'Operasyon' WHEN 5 THEN 'Tıraş' WHEN 6 THEN 'Tedavi' ELSE 'Diğer' END ELSE CONCAT(CASE vetappointments.appointmenttype WHEN 0 THEN 'İlk Muayene' WHEN 1 THEN " 
                         + "   'Aşı Randevusu' WHEN 2 THEN 'Genel Muayene' WHEN 3 THEN 'Kontrol Muayene' WHEN 4 THEN 'Operasyon' WHEN 5 THEN 'Tıraş' WHEN 6 THEN 'Tedavi' ELSE 'Diğer' END, ' - ', vetproducts.name) END AS operation,  "
-                        + "  vetpaymentcollection.paid, vetpaymentcollection.totalpaid, vetpaymentcollection.total "
+                        + "  vetpaymentcollection.paid, vetpaymentcollection.totalpaid, vetpaymentcollection.total, vetappointments.id as appointmentId "
                         + "  FROM            vetpaymentcollection INNER JOIN "
                         + "  vetcustomers ON vetpaymentcollection.customerid = vetcustomers.id INNER JOIN "
                         + "  vetappointments ON vetpaymentcollection.collectionid = vetappointments.id INNER JOIN "

@@ -130,6 +130,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                     Debit = _product != null ? _product.SellingPrice - request.Amount : 0,
                     Total = request.Amount,
                     TotalPaid = request.Amount,
+                    SaleBuyId = saleBuyOwner.Id
                 };
 
                 #endregion

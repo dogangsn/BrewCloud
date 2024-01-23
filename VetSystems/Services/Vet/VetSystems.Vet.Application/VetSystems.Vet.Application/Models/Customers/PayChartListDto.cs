@@ -15,5 +15,6 @@ namespace VetSystems.Vet.Application.Models.Customers
         public decimal? Paid { get; set; }
         public decimal TotalPaid { get; set; }
         public decimal? Total { get; set; }
+        public Guid? AppointmentId { get; set; }
     }
 }

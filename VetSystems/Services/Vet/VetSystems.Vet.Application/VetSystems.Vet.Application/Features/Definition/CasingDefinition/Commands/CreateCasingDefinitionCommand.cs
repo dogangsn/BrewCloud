@@ -55,6 +55,7 @@ namespace VetSystems.Vet.Application.Features.Definition.CasingDefinition.Comman
                     CaseName = request.CaseName,
                     Active = request.Active,
                     CreateDate = DateTime.Now,
+                    CreateUsers = _identity.Account.UserName
                 };
                 await _casingdefinitionRepository.AddAsync(casingDefinition);
                 await _uow.SaveChangesAsync(cancellationToken);

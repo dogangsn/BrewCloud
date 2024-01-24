@@ -2,6 +2,7 @@
 using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -92,6 +93,14 @@ namespace VetSystems.IdentityServer.Infrastructure.Services
             //claims.Add(new Claim("SubscriptionType", Convert.ToInt32(account.SubscriptionType).ToString()));
             //claims.Add(new Claim("CurrencyCode", account.CurrencyCode));
             //claims.Add(new Claim("DefaultLanguage", account.DefaultLanguage));
+
+            string accounts = string.Empty;
+            if (account.Accounts.Any())
+            {
+                accounts = JsonConvert.SerializeObject(account.Accounts);
+            }
+            claims.Add(new Claim("Accounts", accounts));
+
             return claims;
         }
 

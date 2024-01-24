@@ -79,17 +79,22 @@ namespace VetSystems.Account.Application.Features.Settings.Queries
                             {
                                 response.Data.Default.Add(navigations);
                             }
+                        }
+                        else
+                        {
+                            response.Errors.Add("Dosya Yolu Bulunamadı.");
                         } 
                     }
                 }
                 else
-                {
-
-
+                { 
                 }
             }
             catch (Exception ex)
             {
+                response.Errors.Add(ex.Message.ToString());
+                response.Errors.Add(ex.InnerException.ToString());
+                response.ResponseType = ResponseType.Error;
             }
             return response;
         }

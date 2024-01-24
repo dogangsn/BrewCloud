@@ -56,6 +56,7 @@ namespace VetSystems.Vet.Application.Features.Definition.CasingDefinition.Comman
                 casingDefinitions.CaseName = request.CaseName;
                 casingDefinitions.Active = request.Durumu;
                 casingDefinitions.UpdateDate = DateTime.Now;
+                casingDefinitions.UpdateUsers = _identity.Account.UserName;
                 await _uow.SaveChangesAsync(cancellationToken);
             }
             catch (Exception ex)

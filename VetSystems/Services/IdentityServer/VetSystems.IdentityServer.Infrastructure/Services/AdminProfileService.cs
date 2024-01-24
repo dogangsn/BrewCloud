@@ -95,9 +95,12 @@ namespace VetSystems.IdentityServer.Infrastructure.Services
             //claims.Add(new Claim("DefaultLanguage", account.DefaultLanguage));
 
             string accounts = string.Empty;
-            if (account.Accounts.Any())
+            if (account.Accounts != null)
             {
-                accounts = JsonConvert.SerializeObject(account.Accounts);
+                if (account.Accounts.Any())
+                {
+                    accounts = JsonConvert.SerializeObject(account.Accounts);
+                } 
             }
             claims.Add(new Claim("Accounts", accounts));
 

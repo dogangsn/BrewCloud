@@ -24,12 +24,14 @@ services:
         restart: on-failure
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
-            - ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=VetAdminIdentityDb; User=sa; Password=123654Dg
-            - VetDbSettings:ServerName=vetsytemsdb,1433
-            - VetDbSettings:User=sa
-            - VetDbSettings:Password=123654Dg
+            - "ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=VetAdminIdentityDb; User=sa; Password=123654Dg;"
+            - "EventBusSettings:HostAddress=amqps://ebgfgaha:DCwUehyMQDtR0oeiqYJDCn-T4VEYhXY7@stingray.rmq.cloudamqp.com/ebgfgaha" 
+            - "VetDbSettings:ServerName=vetsytemsdb,1433"
+            - "VetDbSettings:User=sa"
+            - "VetDbSettings:Password=123654Dg"
             - GRPC_PORT=81
             - PORT=80 
+            - ApiGatewayUrl=http://gateway.api/services/
         ports:
             - "5001:80"
     account.api:
@@ -38,6 +40,7 @@ services:
         environment: 
             - ASPNETCORE_ENVIRONMENT=Development
             - ConnectionStrings:ConnectionString=Server=vetsytemsdb,1433; Database=vetsytemsDb; User=sa; Password=123654Dg
+            - "EventBusSettings:HostAddress=amqps://ebgfgaha:DCwUehyMQDtR0oeiqYJDCn-T4VEYhXY7@stingray.rmq.cloudamqp.com/ebgfgaha" 
             - IdentityServerURL=http://identityserver.api:80
             - GrpcSettings:IdentityUrl=http://identityserver.api:81
             - VetDbSettings:ServerName=vetsytemsdb,1433

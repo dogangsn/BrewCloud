@@ -1,5 +1,9 @@
-﻿using MediatR;
+﻿using MassTransit;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using VetSystems.Account.Application.Features.Settings.Commands;
 using VetSystems.Account.Application.Models.Settings;
 using VetSystems.Account.Domain.Contracts;
 using VetSystems.Shared.Dtos;
@@ -17,29 +22,33 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace VetSystems.Account.Application.Features.Settings.Queries
 {
-    public class GetNavigationQuery : IRequest<Response<Navigation>>
+    public class GetNavigationQuery : IRequest<Shared.Dtos.Response<Navigation>>
     {
         public bool All { get; set; }
         public Guid? RoleId { get; set; }
     }
 
-    public class GetNavigationQueryHandler : IRequestHandler<GetNavigationQuery, Response<Navigation>>
+    public class GetNavigationQueryHandler : IRequestHandler<GetNavigationQuery, Shared.Dtos.Response<Navigation>>
     {
         private readonly IIdentityRepository _identity;
         private readonly IUnitOfWork _uow;
         private readonly ModuleService _moduleService;
+        private readonly ISendEndpointProvider _sendEndpointProvider;
+        private readonly ILogger<CreateRoleSettingCommandHandler> _logger;
 
-        public GetNavigationQueryHandler(IIdentityRepository identity, IUnitOfWork uow, ModuleService moduleService)
+        public GetNavigationQueryHandler(IIdentityRepository identity, IUnitOfWork uow, ModuleService moduleService, ISendEndpointProvider sendEndpointProvider, ILogger<CreateRoleSettingCommandHandler> logger)
         {
             _identity = identity;
             _uow = uow;
             _moduleService = moduleService;
+            _sendEndpointProvider = sendEndpointProvider;
+            _logger = logger;
         }
 
-        public async Task<Response<Navigation>> Handle(GetNavigationQuery request, CancellationToken cancellationToken)
+        public async Task<Shared.Dtos.Response<Navigation>> Handle(GetNavigationQuery request, CancellationToken cancellationToken)
         {
 
-            var response = new Response<Navigation>
+            var response = new Shared.Dtos.Response<Navigation>
             {
                 Data = new Navigation(),
                 ResponseType = ResponseType.Ok
@@ -49,7 +58,20 @@ namespace VetSystems.Account.Application.Features.Settings.Queries
             try
             {
 
+                //var endpointHub = await _sendEndpointProvider.GetSendEndpoint(new Uri($"queue:start"));
+                //await endpointHub.Send("Başladı");
+
+                _logger.LogInformation(account.ConnectionDb);
+
                 var modules = _moduleService.GetModule();
+                _logger.LogInformation("Module Sayısı" + modules.Count.ToString());
+
+
+                _logger.LogInformation("ConnecDb" + _uow);
+                _logger.LogInformation(request.All.ToString());
+                _logger.LogInformation(request.RoleId.ToString());
+                _logger.LogInformation(account.RoleId.ToString());
+
 
                 string query = @"select id,action,target,roleSettingid  from rolesettingdetail r 
                                         where r.rolesettingid =@rolesettingid ";
@@ -57,6 +79,7 @@ namespace VetSystems.Account.Application.Features.Settings.Queries
 
                 if (!request.All)
                 {
+                    _logger.LogInformation("İf Girdi");
                     foreach (var item in modules)
                     {
                         var navigations = GetData(item);
@@ -83,12 +106,16 @@ namespace VetSystems.Account.Application.Features.Settings.Queries
                         else
                         {
                             response.Errors.Add("Dosya Yolu Bulunamadı.");
-                        } 
+                        }
                     }
                 }
                 else
-                { 
+                {
                 }
+
+
+
+
             }
             catch (Exception ex)
             {
@@ -101,6 +128,8 @@ namespace VetSystems.Account.Application.Features.Settings.Queries
 
         private RootNavigationItem GetData(string name)
         {
+            _logger.LogInformation(AppDomain.CurrentDomain.RelativeSearchPath == null ? "RelativeSearchPath NULL" : AppDomain.CurrentDomain.RelativeSearchPath);
+            _logger.LogInformation(AppDomain.CurrentDomain.BaseDirectory == null ? "BaseDirectory NULL" : AppDomain.CurrentDomain.BaseDirectory);
             var path = Path.Combine(AppDomain.CurrentDomain.RelativeSearchPath ?? AppDomain.CurrentDomain.BaseDirectory, $"Settings/NavBar/{name}.json");
             if (!File.Exists(path))
             {

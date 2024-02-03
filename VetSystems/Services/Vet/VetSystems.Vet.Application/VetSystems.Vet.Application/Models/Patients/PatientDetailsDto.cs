@@ -17,5 +17,11 @@ namespace VetSystems.Vet.Application.Models.Patients
         public string AnimalType { get; set; }
         public string BreedType { get; set; }
         public string AnimalColor { get; set; }
+        public string ReportNumber { get; set; }
+        public string SpecialNote { get; set; }
+        public bool Sterilization { get; set; }
+        public bool Active { get; set; }
+        public string Thumbnail { get; set; } = string.Empty;
+        public byte[] Images { get; set; }
     }
 }

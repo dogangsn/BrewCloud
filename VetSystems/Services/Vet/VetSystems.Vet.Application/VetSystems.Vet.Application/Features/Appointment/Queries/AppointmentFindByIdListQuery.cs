@@ -41,7 +41,7 @@ namespace VetSystems.Vet.Application.Features.Appointment.Queries
                 //List<VetAppointments> appointmentsList = (await _AppointmentRepository.GetAsync(x => x.Deleted == false && x.CustomerId == Guid.Parse(request.CustomerId))).ToList();
                 //var result = _mapper.Map<List<AppointmentsDto>>(appointmentsList.OrderByDescending(e => e.CreateDate));
 
-                string query = "   SELECT       vetappointments.id,vetappointments.begindate, vetappointments.enddate,vetappointments.note, ISNULL(vetappointments.IsCompleted, 0) as IsComplated ,vetappointments.appointmenttype,  \r\n" +
+                string query = "   SELECT       vetappointments.id,vetappointments.begindate, vetappointments.enddate,vetappointments.note, ISNULL(vetappointments.IsCompleted, 0) as IsComplated ,vetappointments.appointmenttype, vetappointments.vaccineid,  \r\n" +
                                             "   CASE vetappointments.appointmenttype\r\n\t\tWHEN 0 THEN 'İlk Muayene'\r\n        " +
                                             " WHEN 1 THEN 'Aşı Randevusu'\r\n        " +
                                             " WHEN 2 THEN 'Genel Muayene'\r\n        " +

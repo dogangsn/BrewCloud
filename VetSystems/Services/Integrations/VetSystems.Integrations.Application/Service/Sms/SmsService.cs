@@ -10,6 +10,10 @@ namespace VetSystems.Integrations.Application.Service.Sms
     public class SmsService
     {
 
+        private String start = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+        private String end = "</smspack>";
+        private String body = "";
+
         private static String tarihStr(DateTime d)
         {
             return xmlEncode(d.ToString("yyyy-MM-dd HH:mm"));
@@ -36,10 +40,6 @@ namespace VetSystems.Integrations.Application.Service.Sms
             s = s.Replace("\"", "&quot;");
             return s;
         }
-
-        private String start = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-        private String end = "</smspack>";
-        private String body = "";
 
         public void addSMS(String mesaj, String[] numaralar)
         {

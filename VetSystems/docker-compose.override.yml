@@ -74,7 +74,9 @@ services:
         restart: on-failure
         environment:
             - ASPNETCORE_ENVIRONMENT=Local
-            - ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=vetsytemsDb; User=sa; Password=123654Dg
+            - ConnectionStrings:ConnectionString=Server=vetsytemsdb,1433; Database=vetsytemsDb; User=sa; Password=123654Dg
+            - IdentityServerURL=http://identityserver.api:80 
+            - GrpcSettings:IdentityUrl=http://identityserver.api:81
         ports:
             - "5018:80"
     chat.api:

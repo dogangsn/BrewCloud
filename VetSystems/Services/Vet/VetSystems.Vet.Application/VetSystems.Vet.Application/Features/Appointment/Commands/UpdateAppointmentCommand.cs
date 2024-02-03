@@ -18,6 +18,7 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
         public DateTime BeginDate { get; set; }
         public string Note { get; set; } = string.Empty;
         public Guid? DoctorId { get; set; }
+        public Guid? VaccineId { get; set; }
         public int AppointmentType { get; set; }
     }
 
@@ -47,6 +48,9 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
             };
             try
             {
+
+                TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
+
                 var appointment = await _appointmentRepository.GetByIdAsync(request.Id);
                 if (appointment == null || appointment.Deleted)
                 {
@@ -56,9 +60,10 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
                     return response;
                 }
 
-                appointment.BeginDate = request.BeginDate;
+                appointment.BeginDate = TimeZoneInfo.ConvertTimeFromUtc(request.BeginDate, localTimeZone);
+                appointment.EndDate = TimeZoneInfo.ConvertTimeFromUtc(request.BeginDate.AddMinutes(10), localTimeZone);
                 appointment.Note = request.Note;
-                appointment.DoctorId = request.DoctorId;
+                appointment.VaccineId = request.VaccineId;
                 appointment.AppointmentType = request.AppointmentType;
                 appointment.UpdateDate = DateTime.Now;
                 appointment.UpdateUsers = _identity.Account.UserName;

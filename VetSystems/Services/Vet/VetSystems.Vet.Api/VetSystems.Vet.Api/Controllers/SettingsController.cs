@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VetSystems.Vet.Application.Features.Definition.ProductDescription.Commands;
 using VetSystems.Vet.Application.Features.Definition.ProductDescription.Queries;
+using VetSystems.Vet.Application.Features.SaleBuy.Commands;
 using VetSystems.Vet.Application.Features.Settings.Parameters.Commands;
 using VetSystems.Vet.Application.Features.Settings.Parameters.Queries;
+using VetSystems.Vet.Application.Features.Settings.SmsParameters.Commands;
 
 namespace VetSystems.Vet.Api.Controllers
 {
@@ -35,8 +37,19 @@ namespace VetSystems.Vet.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
-        #endregion  
+        #endregion
+
+        #region SmsParameters
+
+        [HttpPost(Name = "CreateSmsParameters")]
+        public async Task<IActionResult> CreateSmsParameters([FromBody] CreateSmsParametersCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
 
+
+        #endregion
     }
 }

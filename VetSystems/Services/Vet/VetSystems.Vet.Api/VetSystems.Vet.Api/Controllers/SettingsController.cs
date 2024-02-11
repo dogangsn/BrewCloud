@@ -7,6 +7,7 @@ using VetSystems.Vet.Application.Features.SaleBuy.Commands;
 using VetSystems.Vet.Application.Features.Settings.Parameters.Commands;
 using VetSystems.Vet.Application.Features.Settings.Parameters.Queries;
 using VetSystems.Vet.Application.Features.Settings.SmsParameters.Commands;
+using VetSystems.Vet.Application.Features.Settings.SmsParameters.Queries;
 
 namespace VetSystems.Vet.Api.Controllers
 {
@@ -48,6 +49,12 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "GetSmsParametersIdBy")]
+        public async Task<IActionResult> GetSmsParametersIdBy([FromBody] GetSmsParametersIdByQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
 
         #endregion

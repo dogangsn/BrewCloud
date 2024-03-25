@@ -32,6 +32,7 @@ namespace VetSystems.Vet.Domain.Entities
         public bool? IsExpirationDate { get; set; } = false;
         public int? AnimalType { get; set; }
         public int? NumberRepetitions { get; set; }
+        public Guid StoreId { get; set; } = Guid.Empty;
 
 
     }

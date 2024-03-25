@@ -33,6 +33,7 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductDescription.Comm
         public bool? IsExpirationDate { get; set; } = false;
         public int? AnimalType { get; set; }
         public int? NumberRepetitions { get; set; }
+        public Guid StoreId { get; set; }
 
 
     }
@@ -87,6 +88,7 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductDescription.Comm
                     CreateUsers = _identity.Account.UserName,
                     AnimalType = request.AnimalType,
                     NumberRepetitions = request.NumberRepetitions,
+                    StoreId = request.StoreId,
                 };
                 await _productRepository.AddAsync(_product);
                 await _uow.SaveChangesAsync(cancellationToken);

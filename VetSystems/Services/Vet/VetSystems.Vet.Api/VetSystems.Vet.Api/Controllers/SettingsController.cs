@@ -21,7 +21,6 @@ namespace VetSystems.Vet.Api.Controllers
             _mediator = mediator;
         }
 
-
         #region Parameters 
 
         [HttpGet(Name = "ParametersList")]
@@ -44,6 +43,13 @@ namespace VetSystems.Vet.Api.Controllers
 
         [HttpPost(Name = "CreateSmsParameters")]
         public async Task<IActionResult> CreateSmsParameters([FromBody] CreateSmsParametersCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "UpdateSmsParameters")]
+        public async Task<IActionResult> UpdateSmsParameters([FromBody] UpdateSmsParametersCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);

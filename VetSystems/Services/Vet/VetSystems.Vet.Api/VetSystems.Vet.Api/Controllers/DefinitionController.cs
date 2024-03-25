@@ -68,6 +68,14 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+
+        [HttpPost(Name = "ProductMovementList")]
+        public async Task<IActionResult> ProductMovementList([FromBody] ProductMovementListQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
         #endregion
 
 

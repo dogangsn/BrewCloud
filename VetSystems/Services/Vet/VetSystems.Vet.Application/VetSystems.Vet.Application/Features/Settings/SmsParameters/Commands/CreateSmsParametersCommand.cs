@@ -17,7 +17,7 @@ namespace VetSystems.Vet.Application.Features.Settings.SmsParameters.Commands
     public class CreateSmsParametersCommand : IRequest<Response<bool>>
     {
         public SmsParameterType SmsIntegrationType { get; set; }
-        public bool Activite { get; set; }
+        public bool Active { get; set; }
         public string UserName { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
     }
@@ -59,7 +59,7 @@ namespace VetSystems.Vet.Application.Features.Settings.SmsParameters.Commands
                 var smsParameters = new VetSmsParameters()
                 {
                     Id = Guid.NewGuid(),
-                    Active = request.Activite,
+                    Active = request.Active,
                     CreateDate = DateTime.Now,
                     CreateUsers = _identity.Account.UserName,
                     Password = request.Password,

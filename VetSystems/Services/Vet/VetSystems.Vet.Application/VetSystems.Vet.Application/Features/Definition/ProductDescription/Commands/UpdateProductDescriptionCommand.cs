@@ -33,6 +33,7 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductDescription.Comm
         public bool? IsExpirationDate { get; set; } = false;
         public int? NumberRepetitions { get; set; } 
         public int? AnimalType { get; set; }
+        public Guid StoreId { get; set; }
     }
 
     public class UpdateProductDescriptionCommandHandler : IRequestHandler<UpdateProductDescriptionCommand, Response<bool>>
@@ -89,6 +90,7 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductDescription.Comm
                 product.ProductCode = request.ProductCode;
                 product.NumberRepetitions = request.NumberRepetitions.GetValueOrDefault();
                 product.AnimalType = request.AnimalType.GetValueOrDefault();
+                product.StoreId = request.StoreId;
 
                 await _uow.SaveChangesAsync(cancellationToken);
             }

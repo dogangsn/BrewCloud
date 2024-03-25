@@ -83,13 +83,13 @@
           "icon": "heroicons_outline:switch-vertical",
           "link": "/cashtransactions"
         },
-        {
-          "id": "checkportfolio",
-          "title": "Çek Portföyü",
-          "type": "basic",
-          "icon": "heroicons_outline:clipboard-check",
-          "link": "/checkportfolio"
-        }
+        //{
+        //  "id": "checkportfolio",
+        //  "title": "Çek Portföyü",
+        //  "type": "basic",
+        //  "icon": "heroicons_outline:clipboard-check",
+        //  "link": "/checkportfolio"
+        //}
       ]
 
     },
@@ -193,6 +193,13 @@
           "link": "/unitdefinition"
         },
         {
+          "id": "appointmenttypes",
+          "title": "Randevu Tipleri",
+          "type": "basic",
+          "icon": "heroicons_outline:queue-list",
+          "link": "/appointmenttypes"
+        },
+        {
           "id": "customergroup",
           "title": "Müşteri Grubu",
           "type": "basic",
@@ -217,7 +224,7 @@
           "id": "smstemplate",
           "title": "Sms Şablonları",
           "type": "basic",
-          "icon": "heroicons_outline:cash",
+          "icon": "heroicons_outline:chat-bubble-left",
           "link": "/smstemplate"
         }
 

@@ -196,7 +196,7 @@
           "id": "appointmenttypes",
           "title": "Randevu Tipleri",
           "type": "basic",
-          "icon": "heroicons_outline:queue-list",
+          "icon": "mat_outline:checklist",
           "link": "/appointmenttypes"
         },
         {
@@ -221,10 +221,17 @@
           "link": "/paymentmethods"
         },
         {
+          "id": "taxes",
+          "title": "KDV Oranı",
+          "type": "basic",
+          "icon": "mat_outline:exposure",
+          "link": "/taxes"
+        },
+        {
           "id": "smstemplate",
           "title": "Sms Şablonları",
           "type": "basic",
-          "icon": "heroicons_outline:chat-bubble-left",
+          "icon": "mat_outline:sms",
           "link": "/smstemplate"
         }
 

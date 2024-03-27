@@ -52,7 +52,7 @@ namespace VetSystems.Vet.Application.Features.Appointment.Queries
                                             " ELSE 'Diğer'\r\n    END AS text  " +
                                             " FROM            vetappointments INNER JOIN\r\n                         " +
                                             " vetcustomers ON vetappointments.customerid = vetcustomers.id\r\n\t\t\t\t\t\t " +
-                                            " where vetappointments.deleted = 0 and vetappointments.customerid = @customerid and vetappointments.appointmenttype != 0";
+                                            " where vetappointments.deleted = 0 and vetappointments.customerid = @customerid and vetappointments.appointmenttype != 0 order by vetappointments.begindate asc";
 
                 var _data = _uow.Query<AppointmentsDto>(query, new { customerid = Guid.Parse(request.CustomerId)}).ToList();
                 response.Data = _data;

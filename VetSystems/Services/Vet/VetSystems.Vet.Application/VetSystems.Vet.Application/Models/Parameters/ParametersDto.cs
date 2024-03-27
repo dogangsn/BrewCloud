@@ -23,6 +23,7 @@ namespace VetSystems.Vet.Application.Models.Parameters
         public bool? displayVetNo { get; set; } = false; 
         public bool? autoSms { get; set; } = false;
         public bool? IsAnimalsBreeds { get; set; }
+        public bool? IsFirstInspection { get; set; } = false;
 
     }
 }

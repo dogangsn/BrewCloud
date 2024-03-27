@@ -5,6 +5,7 @@ using VetSystems.Vet.Application.Features.Customers.Commands;
 using VetSystems.Vet.Application.Features.Customers.Queries;
 using VetSystems.Vet.Application.Features.Definition.AnimalColorsDef.Commands;
 using VetSystems.Vet.Application.Features.Definition.AnimalColorsDef.Queries;
+using VetSystems.Vet.Application.Features.Definition.AppointmentTypes.Queries;
 using VetSystems.Vet.Application.Features.Definition.CasingDefinition.Commands;
 using VetSystems.Vet.Application.Features.Definition.CasingDefinition.Queries;
 using VetSystems.Vet.Application.Features.Definition.CustomerGroup.Commands;
@@ -272,5 +273,18 @@ namespace VetSystems.Vet.Api.Controllers
 
         #endregion
 
+        #region AppointmentTypes
+
+        [HttpGet(Name = "GetAppointmentTypesList")]
+        public async Task<IActionResult> GetAppointmentTypesList()
+        {
+            var command = new GetAppointmentTypesListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+
+
+        #endregion
     }
 }

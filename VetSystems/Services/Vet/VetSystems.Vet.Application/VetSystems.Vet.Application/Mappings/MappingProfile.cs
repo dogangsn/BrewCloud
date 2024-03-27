@@ -16,6 +16,7 @@ namespace VetSystems.Vet.Application.Mappings
         { 
             CreateMap<VetAppointments, AppointmentsDto>().ReverseMap();
             CreateMap<VetSmsParameters, SmsParametersDto>().ReverseMap();
+            CreateMap<VetAppointmentTypes, AppointmentsDto>().ReverseMap();
         }
     }
 }

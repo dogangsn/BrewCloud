@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VetSystems.Vet.Application.Models.Appointments;
+using VetSystems.Vet.Application.Models.Definition.AppointmentTypes;
+using VetSystems.Vet.Application.Models.Definition.Taxis;
 using VetSystems.Vet.Application.Models.Settings.SmsParameters;
 using VetSystems.Vet.Domain.Entities;
 
@@ -16,7 +18,9 @@ namespace VetSystems.Vet.Application.Mappings
         { 
             CreateMap<VetAppointments, AppointmentsDto>().ReverseMap();
             CreateMap<VetSmsParameters, SmsParametersDto>().ReverseMap();
-            CreateMap<VetAppointmentTypes, AppointmentsDto>().ReverseMap();
+            CreateMap<VetAppointmentTypes, AppointmentTypesDto>().ReverseMap();
+            CreateMap<VetTaxis, TaxisDto>().ReverseMap();
+        
         }
     }
 }

@@ -1,0 +1,9 @@
+﻿
+
+
+INSERT INTO vetappointmenttypes (id, type, remark, ischange, isdefaultprice,  price, ratio, createdate, updatedate, deleteddate, deleted, deletedusers, updateusers, createusers)  VALUES (NEWID(), 1 , 'Aşı Randevusu', 0, 0, 0,  0, GETDATE(), '1900-01-01', '1900-01-01', 0, '', '', '')
+INSERT INTO vetappointmenttypes (id, type, remark, ischange, isdefaultprice,  price, ratio, createdate, updatedate, deleteddate, deleted, deletedusers, updateusers, createusers)  VALUES (NEWID(), 2 , 'Genel Muayene', 0, 0, 0,  0, GETDATE(), '1900-01-01', '1900-01-01', 0, '', '', '')
+INSERT INTO vetappointmenttypes (id, type, remark, ischange, isdefaultprice,  price, ratio, createdate, updatedate, deleteddate, deleted, deletedusers, updateusers, createusers)  VALUES (NEWID(), 3 , 'Kontrol Muayene', 0, 0, 0,  0, GETDATE(), '1900-01-01', '1900-01-01', 0, '', '', '')
+INSERT INTO vetappointmenttypes (id, type, remark, ischange, isdefaultprice,  price, ratio, createdate, updatedate, deleteddate, deleted, deletedusers, updateusers, createusers)  VALUES (NEWID(), 4 , 'Operasyon', 0, 0, 0,  0, GETDATE(), '1900-01-01', '1900-01-01', 0, '', '', '')
+INSERT INTO vetappointmenttypes (id, type, remark, ischange, isdefaultprice,  price, ratio, createdate, updatedate, deleteddate, deleted, deletedusers, updateusers, createusers)  VALUES (NEWID(), 5 , 'Tıraş', 0, 0, 0,  0, GETDATE(), '1900-01-01', '1900-01-01', 0, '', '', '')
+INSERT INTO vetappointmenttypes (id, type, remark, ischange, isdefaultprice,  price, ratio, createdate, updatedate, deleteddate, deleted, deletedusers, updateusers, createusers)  VALUES (NEWID(), 6 , 'Tedavi', 0, 0, 0,  0, GETDATE(), '1900-01-01', '1900-01-01', 0, '', '', '')

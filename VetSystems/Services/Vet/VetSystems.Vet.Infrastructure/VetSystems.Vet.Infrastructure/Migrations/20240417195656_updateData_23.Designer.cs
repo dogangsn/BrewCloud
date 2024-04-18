@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VetSystems.Vet.Infrastructure.Persistence;
 
@@ -11,9 +12,10 @@ using VetSystems.Vet.Infrastructure.Persistence;
 namespace VetSystems.Vet.Infrastructure.Migrations
 {
     [DbContext(typeof(VetDbContext))]
-    partial class VetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240417195656_updateData_23")]
+    partial class updateData_23
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -521,14 +523,14 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("price");
 
+                    b.Property<decimal>("Ratio")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("ratio");
+
                     b.Property<string>("Remark")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("remark");
-
-                    b.Property<Guid?>("TaxisId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("taxisid");
 
                     b.Property<int>("Type")
                         .HasColumnType("int")

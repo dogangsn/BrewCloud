@@ -38,8 +38,8 @@ namespace VetSystems.Vet.Application.Features.Definition.AppointmentTypes.Querie
             var response = Response<List<AppointmentTypesDto>>.Success(200);
             try
             {
-                List<VetAppointmentTypes> appointmentsList = (await _AppointmentTypesRepository.GetAsync(x => x.Deleted == false)).ToList();
-                var result = _mapper.Map<List<AppointmentTypesDto>>(appointmentsList.OrderByDescending(e => e.CreateDate));
+                List<VetAppointmentTypes> appointmentsList = (await _AppointmentTypesRepository.GetAsync(x => x.Deleted == false)).OrderBy(x => x.Type).ToList();
+                var result = _mapper.Map<List<AppointmentTypesDto>>(appointmentsList);
 
                 response.Data = result;
             }

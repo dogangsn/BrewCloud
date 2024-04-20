@@ -34,6 +34,7 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductDescription.Comm
         public int? NumberRepetitions { get; set; } 
         public int? AnimalType { get; set; }
         public Guid StoreId { get; set; }
+        public Guid TaxisId { get; set; }
     }
 
     public class UpdateProductDescriptionCommandHandler : IRequestHandler<UpdateProductDescriptionCommand, Response<bool>>
@@ -91,6 +92,7 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductDescription.Comm
                 product.NumberRepetitions = request.NumberRepetitions.GetValueOrDefault();
                 product.AnimalType = request.AnimalType.GetValueOrDefault();
                 product.StoreId = request.StoreId;
+                product.TaxisId = request.TaxisId;
 
                 await _uow.SaveChangesAsync(cancellationToken);
             }

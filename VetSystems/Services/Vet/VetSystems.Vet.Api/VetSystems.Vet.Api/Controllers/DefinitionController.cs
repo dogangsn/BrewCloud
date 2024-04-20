@@ -82,9 +82,6 @@ namespace VetSystems.Vet.Api.Controllers
 
         #endregion
 
-
-
-
         #region ProductCategory
 
         [HttpGet(Name = "ProductCategoryList")]
@@ -240,7 +237,6 @@ namespace VetSystems.Vet.Api.Controllers
         }
 
         #endregion
-
 
         #region PaymentMethods
 

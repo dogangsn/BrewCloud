@@ -33,6 +33,8 @@ namespace VetSystems.Vet.Application.Features.Settings.Parameters.Commands
         public bool? autoSms { get; set; }
         public bool? IsAnimalsBreeds { get; set; }
         public bool? IsFirstInspection { get; set; }
+        public string AppointmentBeginDate { get; set; }
+        public string AppointmentEndDate { get; set; }
 
 
     }
@@ -89,7 +91,9 @@ namespace VetSystems.Vet.Application.Features.Settings.Parameters.Commands
                         CreateDate = DateTime.Now,
                         IsAnimalsBreeds = request.IsAnimalsBreeds.GetValueOrDefault(),
                         IsFirstInspection = request.IsFirstInspection.GetValueOrDefault(),
-                        
+                        AppointmentBeginDate=request.AppointmentBeginDate,
+                        AppointmentEndDate=request.AppointmentEndDate
+
                     };
                     await _parametersRepository.AddAsync(crparameters);
                     await _uow.SaveChangesAsync(cancellationToken);
@@ -120,6 +124,8 @@ namespace VetSystems.Vet.Application.Features.Settings.Parameters.Commands
                     parameters.UpdateDate = DateTime.Now;
                     parameters.IsAnimalsBreeds = request.IsAnimalsBreeds.GetValueOrDefault();
                     parameters.IsAnimalsBreeds = request.IsFirstInspection.GetValueOrDefault();
+                    parameters.AppointmentBeginDate = request.AppointmentBeginDate;
+                    parameters.AppointmentEndDate = request.AppointmentEndDate;
                     
                     await _uow.SaveChangesAsync(cancellationToken);
                 }

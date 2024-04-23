@@ -86,9 +86,14 @@ namespace VetSystems.IdentityServer.Infrastructure.Services
                                     UserName = ac.User.UserName,
                                     //SubscriptionType = sb.SubscriptionType
                                 }).FirstOrDefaultAsync();
-            if (result != null)
+            if (result == null)
             {
+                return result;
             }
+
+
+
+
             return result;
         }
 

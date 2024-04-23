@@ -84,6 +84,11 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                                             FORMAT(vp.birthdate, 'yyyy-MM-dd') AS BirthDate,
                                             vp.chipnumber as ChipNumber,
                                             vp.sex as Sex,
+                                            vp.reportnumber as ReportNumber,
+                                            vp.specialnote as SpecialNote,
+                                            vp.sterilization as Sterilization,
+                                            vp.active as Active,
+                                            vp.images as Images,
                                             vat.name as AnimalType,
                                             vabd.breedname as BreedType,
                                             vacd.name as AnimalColor from vetpatients as vp

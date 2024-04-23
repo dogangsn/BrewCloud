@@ -480,6 +480,75 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                     b.ToTable("vetappointments", (string)null);
                 });
 
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetAppointmentTypes", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("createdate");
+
+                    b.Property<string>("CreateUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("createusers");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("deleted");
+
+                    b.Property<DateTime>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("deleteddate");
+
+                    b.Property<string>("DeletedUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("deletedusers");
+
+                    b.Property<bool>("IsChange")
+                        .HasColumnType("bit")
+                        .HasColumnName("ischange");
+
+                    b.Property<bool>("IsDefaultPrice")
+                        .HasColumnType("bit")
+                        .HasColumnName("isdefaultprice");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("price");
+
+                    b.Property<string>("Remark")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("remark");
+
+                    b.Property<Guid?>("TaxisId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("taxisid");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int")
+                        .HasColumnName("type");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("updatedate");
+
+                    b.Property<string>("UpdateUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("updateusers");
+
+                    b.HasKey("Id")
+                        .HasName("VetAppointmentTypes_pkey");
+
+                    b.ToTable("vetappointmenttypes", (string)null);
+                });
+
             modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetCasingDefinition", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1611,9 +1680,17 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("sellingprice");
 
+                    b.Property<Guid>("StoreId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("storeid");
+
                     b.Property<Guid?>("SupplierId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("supplierid");
+
+                    b.Property<Guid?>("TaxisId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("taxisid");
 
                     b.Property<Guid?>("UnitId")
                         .HasColumnType("uniqueidentifier")
@@ -1847,6 +1924,134 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                     b.ToTable("vetsalebuytrans", (string)null);
                 });
 
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetSmsParameters", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit")
+                        .HasColumnName("active");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("createdate");
+
+                    b.Property<string>("CreateUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("createusers");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("deleted");
+
+                    b.Property<DateTime>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("deleteddate");
+
+                    b.Property<string>("DeletedUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("deletedusers");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("password");
+
+                    b.Property<int>("RecId")
+                        .HasColumnType("int")
+                        .HasColumnName("recid");
+
+                    b.Property<int>("SmsIntegrationType")
+                        .HasColumnType("int")
+                        .HasColumnName("smsintegrationtype");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("updatedate");
+
+                    b.Property<string>("UpdateUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("updateusers");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("username");
+
+                    b.HasKey("Id")
+                        .HasName("vetsmsparameters_pkey");
+
+                    b.ToTable("vetsmsparameters", (string)null);
+                });
+
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetSmsTemplate", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("createdate");
+
+                    b.Property<string>("CreateUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("createusers");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("deleted");
+
+                    b.Property<DateTime>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("deleteddate");
+
+                    b.Property<string>("DeletedUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("deletedusers");
+
+                    b.Property<string>("Design")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("design");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("bit")
+                        .HasColumnName("isdefault");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("name");
+
+                    b.Property<int>("RecId")
+                        .HasColumnType("int")
+                        .HasColumnName("recid");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("updatedate");
+
+                    b.Property<string>("UpdateUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("updateusers");
+
+                    b.HasKey("Id")
+                        .HasName("VetSmsTemplate_pkey");
+
+                    b.ToTable("vetsmstemplate", (string)null);
+                });
+
             modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetStores", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1966,6 +2171,67 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasName("VetSuppliers_pkey");
 
                     b.ToTable("vetsuppliers", (string)null);
+                });
+
+            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetTaxis", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("createdate");
+
+                    b.Property<string>("CreateUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("createusers");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit")
+                        .HasColumnName("deleted");
+
+                    b.Property<DateTime>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("deleteddate");
+
+                    b.Property<string>("DeletedUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("deletedusers");
+
+                    b.Property<int>("RecId")
+                        .HasColumnType("int")
+                        .HasColumnName("recid");
+
+                    b.Property<string>("TaxName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("taxname");
+
+                    b.Property<int>("TaxRatio")
+                        .HasColumnType("int")
+                        .HasColumnName("taxratio");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int")
+                        .HasColumnName("type");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("updatedate");
+
+                    b.Property<string>("UpdateUsers")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("updateusers");
+
+                    b.HasKey("Id")
+                        .HasName("VetTaxes_pkey");
+
+                    b.ToTable("vettaxis", (string)null);
                 });
 
             modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetUnits", b =>

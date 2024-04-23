@@ -27,6 +27,8 @@ namespace VetSystems.Vet.Application.Models.Definition.Product
         public bool? IsExpirationDate { get; set; } = false;
         public int? AnimalType { get; set; }
         public int? NumberRepetitions { get; set; }
+        public Guid StoreId { get; set; } = Guid.Empty;
+        public Guid? TaxisId { get; set; }
 
     }
 }

@@ -60,7 +60,7 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Commands
                 salebuyOwner.Deleted = true;
                 salebuyOwner.DeletedDate = DateTime.Now;
                 salebuyOwner.DeletedUsers = _identityRepository.Account.UserName;
-                if(salebuyOwner.demandsGuidId != null)
+                if(salebuyOwner.demandsGuidId != null && salebuyOwner.demandsGuidId != Guid.Empty)
                 {
                     Guid demandsId = (Guid)salebuyOwner.demandsGuidId;
                     var demands = await _vetDemandsRepository.GetByIdAsync(demandsId);

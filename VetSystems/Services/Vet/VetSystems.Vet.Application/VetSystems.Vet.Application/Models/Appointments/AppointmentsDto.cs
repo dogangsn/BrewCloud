@@ -19,8 +19,9 @@ namespace VetSystems.Vet.Application.Models.Appointments
         public Guid? doctorId { get; set; } 
         public Guid? customerId { get; set; }
         public int AppointmentType { get; set; }
-        public string Text { get; set; }
+        public string Text { get; set; } = string.Empty;
         public bool? IsComplated { get; set; }
+        public Guid? VaccineId { get; set; }
 
     }
 }

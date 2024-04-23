@@ -39,5 +39,6 @@ namespace VetSystems.Shared.Accounts
         public string Phone { get; set; }
         public Guid? TitleId { get; set; }
         public SubscriptionType SubscriptionType { get; set; }
+        public List<Guid> Accounts { get; set; }
     }
 }

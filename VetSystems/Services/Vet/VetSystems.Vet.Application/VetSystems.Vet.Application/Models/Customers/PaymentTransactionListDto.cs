@@ -13,5 +13,8 @@ namespace VetSystems.Vet.Application.Models.Customers
         public decimal? SellingPrice { get; set; }
         public Guid? Vaccineid { get; set; }
         public string? TextValue { get; set; }
+        public bool? IsDefaultPrice { get; set; }
+        public decimal? Price { get; set; }
+        public Guid? TaxisId { get; set; }
     }
 }

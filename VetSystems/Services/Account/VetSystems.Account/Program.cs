@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using VetSystems.Account.Application;
+using VetSystems.Account.Application.Behaviours;
 using VetSystems.Account.Infrastructure;
 using VetSystems.Shared.Accounts;
 
@@ -46,10 +47,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+//app.UseResponseCompression();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();

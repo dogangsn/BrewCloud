@@ -63,6 +63,13 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "GetPatientsByCustomerId")]
+        public async Task<IActionResult> GetPatientsByCustomerId([FromBody] GetPatientsByCustomerIdQuery model)
+        {
+            var result = await _mediator.Send(model);
+            return Ok(result);
+        }
+
         [HttpPost(Name = "UpdateCustomerById")]
         [AllowAnonymous]
         public async Task<IActionResult> UpdateCustomerById([FromBody] UpdateCustomerCommand model)

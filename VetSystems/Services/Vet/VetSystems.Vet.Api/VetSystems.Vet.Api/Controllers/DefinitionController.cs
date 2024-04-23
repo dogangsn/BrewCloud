@@ -5,6 +5,8 @@ using VetSystems.Vet.Application.Features.Customers.Commands;
 using VetSystems.Vet.Application.Features.Customers.Queries;
 using VetSystems.Vet.Application.Features.Definition.AnimalColorsDef.Commands;
 using VetSystems.Vet.Application.Features.Definition.AnimalColorsDef.Queries;
+using VetSystems.Vet.Application.Features.Definition.AppointmentTypes.Commands;
+using VetSystems.Vet.Application.Features.Definition.AppointmentTypes.Queries;
 using VetSystems.Vet.Application.Features.Definition.CasingDefinition.Commands;
 using VetSystems.Vet.Application.Features.Definition.CasingDefinition.Queries;
 using VetSystems.Vet.Application.Features.Definition.CustomerGroup.Commands;
@@ -15,6 +17,8 @@ using VetSystems.Vet.Application.Features.Definition.ProductCategory.Commands;
 using VetSystems.Vet.Application.Features.Definition.ProductCategory.Queries;
 using VetSystems.Vet.Application.Features.Definition.ProductDescription.Commands;
 using VetSystems.Vet.Application.Features.Definition.ProductDescription.Queries;
+using VetSystems.Vet.Application.Features.Definition.Taxis.Commands;
+using VetSystems.Vet.Application.Features.Definition.Taxis.Queries;
 using VetSystems.Vet.Application.Features.Definition.UnitDefinitions.Commands;
 using VetSystems.Vet.Application.Features.Definition.UnitDefinitions.Queries;
 
@@ -68,10 +72,15 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+
+        [HttpPost(Name = "ProductMovementList")]
+        public async Task<IActionResult> ProductMovementList([FromBody] ProductMovementListQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
         #endregion
-
-
-
 
         #region ProductCategory
 
@@ -229,7 +238,6 @@ namespace VetSystems.Vet.Api.Controllers
 
         #endregion
 
-
         #region PaymentMethods
 
 
@@ -264,5 +272,72 @@ namespace VetSystems.Vet.Api.Controllers
 
         #endregion
 
+        #region AppointmentTypes
+
+        [HttpGet(Name = "GetAppointmentTypesList")]
+        public async Task<IActionResult> GetAppointmentTypesList()
+        {
+            var command = new GetAppointmentTypesListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "CreateAppointmentTypes")]
+        public async Task<IActionResult> CreateAppointmentTypes([FromBody] CreateAppointmentTypesCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "DeleteAppointmentTypes")]
+        public async Task<IActionResult> DeleteAppointmentTypes([FromBody] DeleteAppointmentTypesCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "UpdateAppointmentTypes")]
+        public async Task<IActionResult> UpdateAppointmentTypes([FromBody] UpdateAppointmentTypesCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+
+        #endregion
+
+        #region Taxis
+
+        [HttpGet(Name = "GetTaxisList")]
+        public async Task<IActionResult> GetTaxisList()
+        {
+            var command = new GetTaxisListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "CreateTaxis")]
+        public async Task<IActionResult> CreateTaxis([FromBody] CreateTaxisCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "DeleteTaxis")]
+        public async Task<IActionResult> DeleteTaxis([FromBody] DeleteTaxisCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "UpdateTaxis")]
+        public async Task<IActionResult> UpdateTaxis([FromBody] UpdateTaxisCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+
+        #endregion
     }
 }

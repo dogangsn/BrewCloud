@@ -41,7 +41,7 @@ namespace VetSystems.Vet.Application.Features.Appointment.Queries
                 //List<VetAppointments> appointmentsList = (await _AppointmentRepository.GetAsync(x => x.Deleted == false && x.CustomerId == Guid.Parse(request.CustomerId))).ToList();
                 //var result = _mapper.Map<List<AppointmentsDto>>(appointmentsList.OrderByDescending(e => e.CreateDate));
 
-                string query = "   SELECT       vetappointments.id,vetappointments.begindate, vetappointments.enddate,vetappointments.note, ISNULL(vetappointments.IsCompleted, 0) as IsComplated ,  \r\n" +
+                string query = "   SELECT       vetappointments.id,vetappointments.begindate, vetappointments.enddate,vetappointments.note, ISNULL(vetappointments.IsCompleted, 0) as IsComplated ,vetappointments.appointmenttype, vetappointments.vaccineid,  \r\n" +
                                             "   CASE vetappointments.appointmenttype\r\n\t\tWHEN 0 THEN 'İlk Muayene'\r\n        " +
                                             " WHEN 1 THEN 'Aşı Randevusu'\r\n        " +
                                             " WHEN 2 THEN 'Genel Muayene'\r\n        " +
@@ -52,7 +52,7 @@ namespace VetSystems.Vet.Application.Features.Appointment.Queries
                                             " ELSE 'Diğer'\r\n    END AS text  " +
                                             " FROM            vetappointments INNER JOIN\r\n                         " +
                                             " vetcustomers ON vetappointments.customerid = vetcustomers.id\r\n\t\t\t\t\t\t " +
-                                            " where vetappointments.deleted = 0 and vetappointments.customerid = @customerid and vetappointments.appointmenttype != 0";
+                                            " where vetappointments.deleted = 0 and vetappointments.customerid = @customerid and vetappointments.appointmenttype != 0 order by vetappointments.begindate asc";
 
                 var _data = _uow.Query<AppointmentsDto>(query, new { customerid = Guid.Parse(request.CustomerId)}).ToList();
                 response.Data = _data;

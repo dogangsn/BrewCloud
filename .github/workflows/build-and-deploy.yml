@@ -18,7 +18,6 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
-        port: 22
 
     - name: Pull latest changes from GitHub
       run: |

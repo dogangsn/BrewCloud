@@ -34,6 +34,13 @@
           "link": "/farmclientadd"
         },
         {
+          "id": "examinationadd",
+          "title": "Yeni Muayene Ekle",
+          "type": "basic",
+          "icon": "heroicons_solid:plus",
+          "link": "/examinationadd"
+        },
+        {
           "id": "customerlist",
           "title": "Müşteri Listesi",
           "type": "basic",
@@ -44,10 +51,39 @@
     },
     {
       "id": "appointment",
-      "title": "Randevu Takvimi",
-      "type": "basic",
+      "title": "Randevular",
+      "type": "collapsable",
       "icon": "heroicons_solid:calendar",
-      "link": "/appointment"
+      "children": [
+        {
+          "id": "appointmentcalendar",
+          "title": "Randevu Takvimi",
+          "type": "basic",
+          "icon": "heroicons_solid:calendar",
+          "link": "/appointmentcalendar"
+        },
+        {
+          "id": "vaccineappointment",
+          "title": "Aşı Takvimi",
+          "type": "basic",
+          "icon": "colorize",
+          "link": "/vaccineappointment"
+        },
+        {
+          "id": "dailyappointment",
+          "title": "Günlük Randevular",
+          "type": "basic",
+          "icon": "heroicons_solid:calendar",
+          "link": "/dailyappointment"
+        },
+        {
+          "id": "reportappointment",
+          "title": "Raporlar",
+          "type": "basic",
+          "icon": "heroicons_solid:chart-bar",
+          "link": "/reportappointment"
+        }
+      ]
     },
     {
       "id": "sales",
@@ -71,8 +107,8 @@
       "link": "/lab"
     },
     {
-      "id": "cashing",
-      "title": "Kasa İşlemleri",
+      "id": "accounting",
+      "title": "Muhasebe",
       "type": "collapsable",
       "icon": "heroicons_outline:cash",
       "children": [
@@ -82,7 +118,7 @@
           "type": "basic",
           "icon": "heroicons_outline:switch-vertical",
           "link": "/cashtransactions"
-        },
+        }
         //{
         //  "id": "checkportfolio",
         //  "title": "Çek Portföyü",
@@ -100,6 +136,13 @@
       "icon": "shopping_bag",
       "children": [
         {
+          "id": "vaccinelist",
+          "title": "Aşı Listesi",
+          "type": "basic",
+          "icon": "checklist",
+          "link": "/vaccinelist"
+        },
+        {
           "id": "productdescription",
           "title": "Ürün Tanımı",
           "type": "basic",
@@ -108,11 +151,34 @@
         },
         {
           "id": "vaccinedefinition",
-          "title": "Aşı Tanım",
+          "title": "Aşı/İlaç Tanım",
           "type": "basic",
           "icon": "colorize",
           "link": "/vaccinedefinition"
         }
+      ]
+
+    },
+    {
+      "id": "pethotels",
+      "title": "Pet Otel",
+      "type": "collapsable",
+      "icon": "pets",
+      "children": [
+        {
+          "id": "accommodations",
+          "title": "Konaklamalar",
+          "type": "basic",
+          "icon": "hotel",
+          "link": "/accommodations"
+        },
+        {
+          "id": "accommodationrooms",
+          "title": "Odalar",
+          "type": "basic",
+          "icon": "hotel",
+          "link": "/accommodationrooms"
+        } 
       ]
 
     },

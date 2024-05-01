@@ -14,6 +14,7 @@
     <None Remove="Scripts\UpdateData_PaymentMethods.txt" />
     <None Remove="Scripts\UpdateData_ProductCategories.txt" />
     <None Remove="Scripts\UpdateData_Units.txt" />
+    <None Remove="Scripts\UpdateData_VaccineDef.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +24,7 @@
     <EmbeddedResource Include="Scripts\UpdateData_AppointmentTypes.txt" />
     <EmbeddedResource Include="Scripts\UpdateData_PaymentMethods.txt" />
     <EmbeddedResource Include="Scripts\UpdateData_ProductCategories.txt" />
+    <EmbeddedResource Include="Scripts\UpdateData_VaccineDef.txt" />
     <EmbeddedResource Include="Scripts\UpdateData_Units.txt" />
   </ItemGroup>
 

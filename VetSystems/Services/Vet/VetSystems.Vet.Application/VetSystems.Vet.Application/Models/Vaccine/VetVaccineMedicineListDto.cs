@@ -8,7 +8,7 @@ namespace VetSystems.Vet.Application.Models.Vaccine
 {
     public class VetVaccineMedicineListDto
     {
-
+        public Guid Id { get; set; }
         public Guid VaccineId { get; set; }
         public Guid ProductId { get; set; }
         public int Quantity { get; set; } = 0;

@@ -12,8 +12,8 @@ using VetSystems.Vet.Infrastructure.Persistence;
 namespace VetSystems.Vet.Infrastructure.Migrations
 {
     [DbContext(typeof(VetDbContext))]
-    [Migration("20240501135609_updateData_29")]
-    partial class updateData_29
+    [Migration("20240501183223_updateData_30")]
+    partial class updateData_30
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -2495,12 +2495,8 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasColumnName("obligation");
 
-                    b.Property<int>("RecId")
+                    b.Property<int>("RenewalOption")
                         .HasColumnType("int")
-                        .HasColumnName("recid");
-
-                    b.Property<Guid>("RenewalOption")
-                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("renewaloption");
 
                     b.Property<int>("TimeDone")

@@ -21,8 +21,7 @@ namespace VetSystems.Vet.Application.Features.Vaccine.Commands
 
     public class CreateVaccineCommandHandler : IRequestHandler<CreateVaccineCommand, Response<bool>>
     {
-         
-
+          
 
 
 

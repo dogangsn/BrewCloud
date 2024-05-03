@@ -14,42 +14,6 @@
       "link": "/dashboards"
     },
     {
-      "id": "customer",
-      "title": "Müşteri",
-      "type": "collapsable",
-      "icon": "heroicons_outline:user-group",
-      "children": [
-        {
-          "id": "customeradd",
-          "title": "Yeni Müşteri Ekle",
-          "type": "basic",
-          "icon": "heroicons_outline:user-add",
-          "link": "/customeradd"
-        },
-        {
-          "id": "farmclientadd",
-          "title": "Yeni Çiftlik Ekle",
-          "type": "basic",
-          "icon": "pets",
-          "link": "/farmclientadd"
-        },
-        {
-          "id": "examinationadd",
-          "title": "Yeni Muayene Ekle",
-          "type": "basic",
-          "icon": "heroicons_solid:plus",
-          "link": "/examinationadd"
-        },
-        {
-          "id": "customerlist",
-          "title": "Müşteri Listesi",
-          "type": "basic",
-          "icon": "heroicons_outline:clipboard-check",
-          "link": "/customerlist"
-        }
-      ]
-    },
-    {
       "id": "appointment",
       "title": "Randevular",
       "type": "collapsable",
@@ -86,32 +50,91 @@
       ]
     },
     {
-      "id": "sales",
-      "title": "Satış",
-      "type": "basic",
-      "icon": "heroicons_outline:trending-up",
-      "link": "/sales"
+      "id": "customer",
+      "title": "Müşteri",
+      "type": "collapsable",
+      "icon": "heroicons_outline:user-group",
+      "children": [
+        {
+          "id": "customeradd",
+          "title": "Yeni Müşteri Ekle",
+          "type": "basic",
+          "icon": "heroicons_outline:user-add",
+          "link": "/customeradd"
+        },
+        {
+          "id": "farmclientadd",
+          "title": "Yeni Çiftlik Ekle",
+          "type": "basic",
+          "icon": "pets",
+          "link": "/farmclientadd"
+        },
+        {
+          "id": "examinationadd",
+          "title": "Yeni Muayene Ekle",
+          "type": "basic",
+          "icon": "heroicons_solid:plus",
+          "link": "/examinationadd"
+        },
+        {
+          "id": "customerlist",
+          "title": "Müşteri Listesi",
+          "type": "basic",
+          "icon": "heroicons_outline:clipboard-check",
+          "link": "/customerlist"
+        }
+      ]
     },
     {
-      "id": "buying",
-      "title": "Alış",
-      "type": "basic",
-      "icon": "heroicons_outline:trending-down",
-      "link": "/buying"
+      "id": "patients",
+      "title": "Hastalar",
+      "type": "collapsable",
+      "icon": "pets",
+      "children": [
+        {
+          "id": "patientslist",
+          "title": "Hasta Listesi",
+          "type": "basic",
+          "icon": "pets",
+          "link": "/patientslist"
+        },
+        {
+          "id": "inspections",
+          "title": "Muayeneler",
+          "type": "basic",
+          "icon": "local_hospital",
+          "link": "/nspections"
+        },
+        {
+          "id": "lab",
+          "title": "Laboratuvar",
+          "type": "basic",
+          "icon": "heroicons_outline:beaker",
+          "link": "/lab"
+        }
+      ]
     },
-    {
-      "id": "lab",
-      "title": "Laboratuvar",
-      "type": "basic",
-      "icon": "heroicons_outline:beaker",
-      "link": "/lab"
-    },
+     
     {
       "id": "accounting",
       "title": "Muhasebe",
       "type": "collapsable",
       "icon": "heroicons_outline:cash",
       "children": [
+        {
+          "id": "sales",
+          "title": "Satış",
+          "type": "basic",
+          "icon": "heroicons_outline:trending-up",
+          "link": "/sales"
+        },
+        {
+          "id": "buying",
+          "title": "Alış",
+          "type": "basic",
+          "icon": "heroicons_outline:trending-down",
+          "link": "/buying"
+        },
         {
           "id": "cashtransactions",
           "title": "Kasa Hareketleri",
@@ -163,7 +186,7 @@
       "id": "pethotels",
       "title": "Pet Otel",
       "type": "collapsable",
-      "icon": "pets",
+      "icon": "local_hotel",
       "children": [
         {
           "id": "accommodations",
@@ -176,9 +199,9 @@
           "id": "accommodationrooms",
           "title": "Odalar",
           "type": "basic",
-          "icon": "hotel",
+          "icon": "room_service",
           "link": "/accommodationrooms"
-        } 
+        }
       ]
 
     },
@@ -299,8 +322,21 @@
           "type": "basic",
           "icon": "mat_outline:sms",
           "link": "/smstemplate"
+        },
+        {
+          "id": "services",
+          "title": "Hizmetler",
+          "type": "basic",
+          "icon": "view_comfy",
+          "link": "/services"
+        },
+        {
+          "id": "outputtemplate",
+          "title": "Çıktı Şablonları",
+          "type": "basic",
+          "icon": "print",
+          "link": "/outputtemplate"
         }
-
       ]
 
     },

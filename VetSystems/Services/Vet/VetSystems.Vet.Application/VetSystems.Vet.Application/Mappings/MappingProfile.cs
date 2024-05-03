@@ -23,6 +23,7 @@ namespace VetSystems.Vet.Application.Mappings
             CreateMap<VetTaxis, TaxisDto>().ReverseMap();
             CreateMap<VetVaccine, Models.Vaccine.VaccineListDto>().ReverseMap();
             CreateMap<VetVaccineMedicine, Models.Vaccine.VetVaccineMedicineListDto>().ReverseMap();
+            CreateMap<VetRooms, Models.PetHotels.Rooms.RoomListDto>().ReverseMap();
         }
     }
 }

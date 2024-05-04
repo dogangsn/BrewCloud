@@ -99,11 +99,11 @@
           "link": "/patientslist"
         },
         {
-          "id": "inspections",
+          "id": "examination",
           "title": "Muayeneler",
           "type": "basic",
           "icon": "local_hospital",
-          "link": "/nspections"
+          "link": "/examination"
         },
         {
           "id": "lab",
@@ -114,7 +114,6 @@
         }
       ]
     },
-     
     {
       "id": "accounting",
       "title": "Muhasebe",

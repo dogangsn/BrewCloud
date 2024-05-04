@@ -1,7 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using VetSystems.Vet.Application.Features.Appointment.Commands;
+using VetSystems.Vet.Application.Features.Customers.Queries;
 using VetSystems.Vet.Application.Features.GeneralSettings.Users.Queries;
+using VetSystems.Vet.Application.Features.Patient.Examination.Commands;
+using VetSystems.Vet.Application.Features.Patient.Examination.Queries;
 using VetSystems.Vet.Application.Features.Patient.PatientList.Queries;
 
 namespace VetSystems.Vet.Api.Controllers
@@ -28,6 +32,20 @@ namespace VetSystems.Vet.Api.Controllers
 
         #endregion
 
+        [HttpPost(Name = "CreateExamination")]
+        public async Task<IActionResult> CreateExamination([FromBody] CreateExaminationCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpGet(Name = "GetExaminations")]
+        public async Task<IActionResult> GetExaminations()
+        {
+            var command = new GetExaminationsQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
     }
 }

@@ -17,7 +17,7 @@ namespace VetSystems.Vet.Domain.Entities
         public decimal Pulse { get; set; } = 0; //Nabız
         public decimal RespiratoryRate { get; set; } = 0; //SolunumHizi
         public decimal Weight { get; set; } = 0; //Agirlik
-        public Guid SymptomsId { get; set; } //Semptomlar
+        public string Symptoms { get; set; } //Semptomlar
         public string ComplaintStory { get; set; } = string.Empty; //SikayetHikaye
         public string TreatmentDescription { get; set; } = string.Empty; //TedaviAciklamasi
 

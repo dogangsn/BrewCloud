@@ -20,10 +20,9 @@ namespace VetSystems.Vet.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet(Name = "AppointmentsList")]
-        public async Task<IActionResult> AppointmentsList()
-        {
-            var command = new AppointmentsListQuery();
+        [HttpPost(Name = "AppointmentsList")]
+        public async Task<IActionResult> AppointmentsList([FromBody] AppointmentsListQuery command)
+        { 
             var result = await _mediator.Send(command);
             return Ok(result);
         }

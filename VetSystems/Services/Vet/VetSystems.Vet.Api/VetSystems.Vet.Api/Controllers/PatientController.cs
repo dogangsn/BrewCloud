@@ -32,6 +32,8 @@ namespace VetSystems.Vet.Api.Controllers
 
         #endregion
 
+        #region Examination "Muayne"
+
         [HttpPost(Name = "CreateExamination")]
         public async Task<IActionResult> CreateExamination([FromBody] CreateExaminationCommand command)
         {
@@ -46,6 +48,16 @@ namespace VetSystems.Vet.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
+        [HttpGet(Name = "GetSymptoms")]
+        public async Task<IActionResult> GetSymptoms()
+        {
+            var command = new GetSymptomsQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        #endregion
 
     }
 }

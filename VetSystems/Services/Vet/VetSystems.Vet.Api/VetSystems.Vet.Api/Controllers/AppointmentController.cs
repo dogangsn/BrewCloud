@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using VetSystems.Vet.Application.Features.Agenda.Queries;
 using VetSystems.Vet.Application.Features.Appointment.Commands;
 using VetSystems.Vet.Application.Features.Appointment.Queries;
 using VetSystems.Vet.Application.Features.Customers.Queries;
@@ -66,6 +67,14 @@ namespace VetSystems.Vet.Api.Controllers
         [HttpPost(Name = "UpdateCompletedAppointment")]
         public async Task<IActionResult> UpdateCompletedAppointment([FromBody] UpdateCompletedAppointmentCommand command)
         {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+         
+        [HttpGet(Name = "GetAppointmentDailyList")]
+        public async Task<IActionResult> GetAppointmentDailyList()
+        {
+            var command = new GetAppointmentDailyListQuery();
             var result = await _mediator.Send(command);
             return Ok(result);
         }

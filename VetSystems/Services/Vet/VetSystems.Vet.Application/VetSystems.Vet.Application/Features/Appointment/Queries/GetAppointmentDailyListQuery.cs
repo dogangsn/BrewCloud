@@ -58,11 +58,11 @@ namespace VetSystems.Vet.Application.Features.Appointment.Queries
                         + "                                                WHEN 5 THEN 'Tıraş' "
                         + "                                                WHEN 6 THEN 'Tedavi' "
                         + "                                                ELSE 'Diğer' "
-                        + " 												END AS services "
+                        + " 												END AS services  , vetappointments.status"
                         + " FROM            vetappointments  "
                         + " INNER JOIN vetcustomers ON vetappointments.customerid = vetcustomers.id "
                         + " LEFT JOIN vetpatients ON vetappointments.patientsid = vetpatients.id "
-                        + " where vetappointments.deleted = 0 and begindate = GETDATE() ";
+                        + " where vetappointments.deleted = 0 and CAST(begindate as date) = CAST(GETDATE() AS DATE) ";
 
                 var _data = _uow.Query<AppointmentDailyListDto>(query).ToList();
                 response = new Response<List<AppointmentDailyListDto>>

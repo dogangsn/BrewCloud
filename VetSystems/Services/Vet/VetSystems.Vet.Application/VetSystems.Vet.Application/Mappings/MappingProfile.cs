@@ -8,6 +8,7 @@ using VetSystems.Vet.Application.Models.Appointments;
 using VetSystems.Vet.Application.Models.Definition.AppointmentTypes;
 using VetSystems.Vet.Application.Models.Definition.Taxis;
 using VetSystems.Vet.Application.Models.Settings.SmsParameters;
+
 using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Mappings
@@ -20,7 +21,9 @@ namespace VetSystems.Vet.Application.Mappings
             CreateMap<VetSmsParameters, SmsParametersDto>().ReverseMap();
             CreateMap<VetAppointmentTypes, AppointmentTypesDto>().ReverseMap();
             CreateMap<VetTaxis, TaxisDto>().ReverseMap();
-        
+            CreateMap<VetVaccine, Models.Vaccine.VaccineListDto>().ReverseMap();
+            CreateMap<VetVaccineMedicine, Models.Vaccine.VetVaccineMedicineListDto>().ReverseMap();
+            CreateMap<VetRooms, Models.PetHotels.Rooms.RoomListDto>().ReverseMap();
         }
     }
 }

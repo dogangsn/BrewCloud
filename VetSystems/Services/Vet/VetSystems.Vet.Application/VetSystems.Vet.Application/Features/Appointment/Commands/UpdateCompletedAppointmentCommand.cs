@@ -26,14 +26,16 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
         private readonly IMapper _mapper;
         private readonly ILogger<UpdateCompletedAppointmentCommandHandler> _logger;
         private readonly IRepository<VetAppointments> _appointmentRepository;
+        private readonly IRepository<VetPaymentCollection> _paymentCollectionRepository;
 
-        public UpdateCompletedAppointmentCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<UpdateCompletedAppointmentCommandHandler> logger, IRepository<VetAppointments> appointmentRepository)
+        public UpdateCompletedAppointmentCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<UpdateCompletedAppointmentCommandHandler> logger, IRepository<VetAppointments> appointmentRepository, IRepository<VetPaymentCollection> paymentCollectionRepository)
         {
             _uow = uow;
             _identity = identity;
             _mapper = mapper;
             _logger = logger;
             _appointmentRepository = appointmentRepository;
+            _paymentCollectionRepository = paymentCollectionRepository;
         }
 
         public async Task<Response<string>> Handle(UpdateCompletedAppointmentCommand request, CancellationToken cancellationToken)
@@ -56,8 +58,39 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
                 {
                     return Response<string>.Fail("Tahsilatı Yapılmış İşlemlerde Değişiklik Yapılamaz.", 404);
                 }
-
                 appointment.IsCompleted = request.IsCompleted;
+
+                if (appointment.IsCompleted.GetValueOrDefault())
+                {
+                    VetPaymentCollection paymentCollection = new()
+                    {
+                        Id = Guid.NewGuid(),
+                        CollectionId = appointment.Id,
+                        CustomerId = appointment.CustomerId,
+                        Date = DateTime.Today,
+                        Remark = "",
+                        CreateDate = DateTime.Now,
+                        CreateUsers = _identity.Account.UserName,
+                        Credit = 0,
+                        Debit = 0,
+                        Paid = 0,
+                        Total = 0,
+                        TotalPaid = 0,
+                        SaleBuyId = Guid.Empty
+                    };
+                    await _paymentCollectionRepository.AddAsync(paymentCollection);
+                }
+                else
+                {
+                    var _collection = (await _paymentCollectionRepository.GetAsync(x => !x.Deleted && x.CollectionId == appointment.Id)).FirstOrDefault();
+                    if (_collection != null)
+                    {
+                        _collection.Deleted = true;
+                        _collection.DeletedDate = DateTime.Today;
+                        _collection.DeletedUsers = _identity.Account.UserName; 
+                    }
+                }
+
                 await _uow.SaveChangesAsync(cancellationToken);
                 response.IsSuccessful = true;
             }

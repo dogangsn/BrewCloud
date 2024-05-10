@@ -14,6 +14,42 @@
       "link": "/dashboards"
     },
     {
+      "id": "appointment",
+      "title": "Randevular",
+      "type": "collapsable",
+      "icon": "heroicons_solid:calendar",
+      "children": [
+        {
+          "id": "appointmentcalendar",
+          "title": "Randevu Takvimi",
+          "type": "basic",
+          "icon": "heroicons_solid:calendar",
+          "link": "/appointmentcalendar"
+        },
+        {
+          "id": "vaccineappointment",
+          "title": "Aşı Takvimi",
+          "type": "basic",
+          "icon": "colorize",
+          "link": "/vaccineappointment"
+        },
+        {
+          "id": "dailyappointment",
+          "title": "Günlük Randevular",
+          "type": "basic",
+          "icon": "heroicons_solid:calendar",
+          "link": "/dailyappointment"
+        },
+        {
+          "id": "reportappointment",
+          "title": "Raporlar",
+          "type": "basic",
+          "icon": "heroicons_solid:chart-bar",
+          "link": "/reportappointment"
+        }
+      ]
+    },
+    {
       "id": "customer",
       "title": "Müşteri",
       "type": "collapsable",
@@ -34,6 +70,13 @@
           "link": "/farmclientadd"
         },
         {
+          "id": "examinationadd",
+          "title": "Yeni Muayene Ekle",
+          "type": "basic",
+          "icon": "heroicons_solid:plus",
+          "link": "/examinationadd"
+        },
+        {
           "id": "customerlist",
           "title": "Müşteri Listesi",
           "type": "basic",
@@ -43,46 +86,61 @@
       ]
     },
     {
-      "id": "appointment",
-      "title": "Randevu Takvimi",
-      "type": "basic",
-      "icon": "heroicons_solid:calendar",
-      "link": "/appointment"
+      "id": "patients",
+      "title": "Hastalar",
+      "type": "collapsable",
+      "icon": "pets",
+      "children": [
+        {
+          "id": "patientslist",
+          "title": "Hasta Listesi",
+          "type": "basic",
+          "icon": "pets",
+          "link": "/patientslist"
+        },
+        {
+          "id": "examination",
+          "title": "Muayeneler",
+          "type": "basic",
+          "icon": "local_hospital",
+          "link": "/examination"
+        },
+        {
+          "id": "lab",
+          "title": "Laboratuvar",
+          "type": "basic",
+          "icon": "heroicons_outline:beaker",
+          "link": "/lab"
+        }
+      ]
     },
     {
-      "id": "sales",
-      "title": "Satış",
-      "type": "basic",
-      "icon": "heroicons_outline:trending-up",
-      "link": "/sales"
-    },
-    {
-      "id": "buying",
-      "title": "Alış",
-      "type": "basic",
-      "icon": "heroicons_outline:trending-down",
-      "link": "/buying"
-    },
-    {
-      "id": "lab",
-      "title": "Laboratuvar",
-      "type": "basic",
-      "icon": "heroicons_outline:beaker",
-      "link": "/lab"
-    },
-    {
-      "id": "cashing",
-      "title": "Kasa İşlemleri",
+      "id": "accounting",
+      "title": "Muhasebe",
       "type": "collapsable",
       "icon": "heroicons_outline:cash",
       "children": [
+        {
+          "id": "sales",
+          "title": "Satış",
+          "type": "basic",
+          "icon": "heroicons_outline:trending-up",
+          "link": "/sales"
+        },
+        {
+          "id": "buying",
+          "title": "Alış",
+          "type": "basic",
+          "icon": "heroicons_outline:trending-down",
+          "link": "/buying"
+        },
         {
           "id": "cashtransactions",
           "title": "Kasa Hareketleri",
           "type": "basic",
           "icon": "heroicons_outline:switch-vertical",
           "link": "/cashtransactions"
-        },
+        }
         //{
         //  "id": "checkportfolio",
         //  "title": "Çek Portföyü",
@@ -100,6 +158,13 @@
       "icon": "shopping_bag",
       "children": [
         {
+          "id": "vaccinelist",
+          "title": "Aşı Listesi",
+          "type": "basic",
+          "icon": "checklist",
+          "link": "/vaccinelist"
+        },
+        {
           "id": "productdescription",
           "title": "Ürün Tanımı",
           "type": "basic",
@@ -108,10 +173,33 @@
         },
         {
           "id": "vaccinedefinition",
-          "title": "Aşı Tanım",
+          "title": "Aşı/İlaç Tanım",
           "type": "basic",
           "icon": "colorize",
           "link": "/vaccinedefinition"
+        }
+      ]
+
+    },
+    {
+      "id": "pethotels",
+      "title": "Pet Otel",
+      "type": "collapsable",
+      "icon": "local_hotel",
+      "children": [
+        {
+          "id": "accommodations",
+          "title": "Konaklamalar",
+          "type": "basic",
+          "icon": "hotel",
+          "link": "/accommodations"
+        },
+        {
+          "id": "accommodationrooms",
+          "title": "Odalar",
+          "type": "basic",
+          "icon": "room_service",
+          "link": "/accommodationrooms"
         }
       ]
 
@@ -233,8 +321,21 @@
           "type": "basic",
           "icon": "mat_outline:sms",
           "link": "/smstemplate"
+        },
+        {
+          "id": "services",
+          "title": "Hizmetler",
+          "type": "basic",
+          "icon": "view_comfy",
+          "link": "/services"
+        },
+        {
+          "id": "outputtemplate",
+          "title": "Çıktı Şablonları",
+          "type": "basic",
+          "icon": "print",
+          "link": "/outputtemplate"
         }
-
       ]
 
     },

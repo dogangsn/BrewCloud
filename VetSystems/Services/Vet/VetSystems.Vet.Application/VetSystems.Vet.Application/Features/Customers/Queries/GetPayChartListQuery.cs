@@ -44,7 +44,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                         + "  vetpaymentcollection.paid, vetpaymentcollection.totalpaid, vetpaymentcollection.total, vetappointments.id as appointmentId "
                         + "  FROM            vetpaymentcollection INNER JOIN "
                         + "  vetcustomers ON vetpaymentcollection.customerid = vetcustomers.id INNER JOIN "
-                        + "  vetappointments ON vetpaymentcollection.collectionid = vetappointments.id INNER JOIN "
+                        + "  vetappointments ON vetpaymentcollection.collectionid = vetappointments.id LEFT JOIN "
                         + "  vetproducts ON vetappointments.vaccineid = vetproducts.id "
                         + "  WHERE(vetpaymentcollection.customerid = @CustomerId) AND(vetpaymentcollection.deleted = 0)";
 

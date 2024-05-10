@@ -23,6 +23,8 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
         public string? DoctorId { get; set; }
         public string? CustomerId { get; set; }
         public int AppointmentType { get; set; }
+        public int Status { get; set; }
+        public string PatientId { get; set; }
         public List<VaccineListDto>? VaccineItems { get; set; } 
     }
 
@@ -72,6 +74,8 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
                             VaccineId = item.ProductId,
                             IsCompleted = item.IsComplated,
                             CreateUsers = _identity.Account.UserName,
+                            Status = (StatusType)request.Status,
+                            PatientsId = Guid.Parse(request.PatientId)
                            
                         };
                         await _AppointmentRepository.AddAsync(Appointments);
@@ -91,6 +95,8 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
                         CreateDate = DateTime.UtcNow,
                         IsCompleted = false,
                         CreateUsers = _identity.Account.UserName,
+                        Status = (StatusType)request.Status,
+                        PatientsId = Guid.Parse(request.PatientId)
                     };
                     await _AppointmentRepository.AddAsync(Appointments);
 

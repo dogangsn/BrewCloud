@@ -15,6 +15,7 @@ namespace VetSystems.Vet.Application.Features.Appointment.Queries
 {
     public class AppointmentsListQuery : IRequest<Response<List<AppointmentsListDto>>>
     {
+        public int AppointmentType { get; set; }
     }
 
     public class AppointmentsListQueryHandler : IRequestHandler<AppointmentsListQuery, Response<List<AppointmentsListDto>>>
@@ -57,10 +58,12 @@ namespace VetSystems.Vet.Application.Features.Appointment.Queries
                                                 "vetappointments.begindate as startDate, vetappointments.enddate\r\n" +
                                                 "FROM            vetappointments INNER JOIN\r\n                         " +
                                                     "  vetcustomers ON vetappointments.customerid = vetcustomers.id\r\n\t\t\t\t\t\t where vetappointments.deleted = 0 ";
+                query += $" and {(request.AppointmentType == 0 ? " vetappointments.appointmenttype != 1 " : " vetappointments.appointmenttype = 1 ")} ";
                 if (!_isFirstInspection)
                 {
                     query += " and vetappointments.appointmenttype != 0";
                 }
+            
 
                 var _data = _uow.Query<AppointmentsListDto>(query).ToList();
                 response = new Response<List<AppointmentsListDto>>

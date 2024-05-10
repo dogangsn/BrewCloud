@@ -24,6 +24,8 @@ namespace VetSystems.Vet.Application.Models.Parameters
         public bool? autoSms { get; set; } = false;
         public bool? IsAnimalsBreeds { get; set; }
         public bool? IsFirstInspection { get; set; } = false;
+        public string appointmentBeginDate { get; set; }
+        public string appointmentEndDate { get; set; }
 
     }
 }

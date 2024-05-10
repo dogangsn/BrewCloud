@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Models.Customers
 {
@@ -23,6 +24,8 @@ namespace VetSystems.Vet.Application.Models.Customers
         public string Province { get; set; } = string.Empty;
         public string District { get; set; } = string.Empty;
         public string LongAdress { get; set; } = string.Empty;
+        //public Guid FarmsId { get; set; }
+        public  FarmsDto FarmsDetail { get; set; }
         public List<PatientsDetailsDto> PatientDetails { get; set; }
     }
 }

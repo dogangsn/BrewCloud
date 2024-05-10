@@ -34,11 +34,12 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
         private readonly IMapper _mapper;
         private readonly ILogger<CreateCustomerHandler> _logger;
         private readonly IRepository<Vet.Domain.Entities.VetCustomers> _customerRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetFarms> _farmsRepository;
         private readonly IRepository<VetParameters> _parametersRepository;
         private readonly IMediator _mediator;
         private readonly IMailService _mailService;
 
-        public CreateCustomerHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<Domain.Entities.VetCustomers> customerRepository, IRepository<VetParameters> parametersRepository, IMediator mediator, IMailService mailService)
+        public CreateCustomerHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<Domain.Entities.VetCustomers> customerRepository, IRepository<VetParameters> parametersRepository, IMediator mediator, IMailService mailService, IRepository<Domain.Entities.VetFarms> farmsRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
@@ -46,6 +47,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _customerRepository = customerRepository ?? throw new ArgumentNullException(nameof(customerRepository));
             _parametersRepository = parametersRepository ?? throw new ArgumentNullException(nameof(parametersRepository));
+            _farmsRepository = farmsRepository ?? throw new ArgumentNullException(nameof(farmsRepository));
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
             _mailService = mailService;
         }
@@ -116,6 +118,24 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                     Deleted = false,
                     CreateDate = DateTime.Now,
                 };
+                if (request.CreateCustomers.FarmsDetail != null)
+                {
+                    Vet.Domain.Entities.VetFarms farms = new()
+                    {
+                        CustomerId = customers.Id,
+                        FarmName = request.CreateCustomers.FarmsDetail.FarmName,
+                        FarmContact = request.CreateCustomers.FarmsDetail.FarmContact,
+                        FarmRelationship = request.CreateCustomers.FarmsDetail.FarmRelationship,
+                        Active = request.CreateCustomers.FarmsDetail.Active,
+                        Deleted = false,
+                        CreateDate = DateTime.Now,
+                        CreateUsers = _identity.Account.UserName,
+
+                    };
+                    await _farmsRepository.AddAsync(farms);
+                    await _uow.SaveChangesAsync(cancellationToken);
+
+                }
 
                 if (request.CreateCustomers.PatientDetails.Any())
                 {
@@ -138,6 +158,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                             CustomerId = customers.Id,
                             CreateUsers = _identity.Account.UserName,
                             CreateDate = DateTime.Now,
+                            Deleted = false
                         };
                         customers.Patients.Add(patients);
                     }

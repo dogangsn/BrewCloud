@@ -77,7 +77,7 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductDescription.Comm
                     ProductCode = request.ProductCode,
                     ProductBarcode = request.ProductBarcode,
                     Ratio = request.Ratio,
-                    Active = request.Active,
+                    Active = false,
                     BuyingPrice = request.BuyingPrice,
                     CriticalAmount = request.CriticalAmount,
                     FixPrice = request.FixPrice,

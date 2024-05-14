@@ -17,6 +17,8 @@ using VetSystems.Vet.Application.Features.Definition.ProductCategory.Commands;
 using VetSystems.Vet.Application.Features.Definition.ProductCategory.Queries;
 using VetSystems.Vet.Application.Features.Definition.ProductDescription.Commands;
 using VetSystems.Vet.Application.Features.Definition.ProductDescription.Queries;
+using VetSystems.Vet.Application.Features.Definition.StockTracking.Commands;
+using VetSystems.Vet.Application.Features.Definition.StockTracking.Queries;
 using VetSystems.Vet.Application.Features.Definition.Taxis.Commands;
 using VetSystems.Vet.Application.Features.Definition.Taxis.Queries;
 using VetSystems.Vet.Application.Features.Definition.UnitDefinitions.Commands;
@@ -75,6 +77,13 @@ namespace VetSystems.Vet.Api.Controllers
 
         [HttpPost(Name = "ProductMovementList")]
         public async Task<IActionResult> ProductMovementList([FromBody] ProductMovementListQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "UpdateProductActive")]
+        public async Task<IActionResult> UpdateProductActive([FromBody] UpdateProductActiveCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
@@ -337,6 +346,24 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+
+        #endregion
+
+        #region StockTracking
+
+        [HttpPost(Name = "StockTrackingProductFilter")]
+        public async Task<IActionResult> StockTrackingProductFilter([FromBody] StockTrackingProductFilterQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "CreateStockTracking")]
+        public async Task<IActionResult> CreateStockTracking([FromBody] CreateStockTrackingCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
         #endregion
     }

@@ -52,7 +52,7 @@ namespace VetSystems.Vet.Application.Features.Definition.StockTracking.Queries
                     + "         WHEN vetstocktracking.ExpirationDate IS NULL THEN 'SKT bilgisi yok' "
                     + "         ELSE CONVERT(varchar, vetstocktracking.ExpirationDate, 103)  "
                     + "     END AS ExpirationDateString, "
-                    + " * from vetstocktracking "
+                    + " vetstocktracking.* from vetstocktracking "
                     + " Left Join vetsuppliers ON vetstocktracking.supplierid = vetsuppliers.id  "
                     + " where  productid = @xProductId and vetstocktracking.deleted = 0"
                     + " order by vetstocktracking.createdate desc ";

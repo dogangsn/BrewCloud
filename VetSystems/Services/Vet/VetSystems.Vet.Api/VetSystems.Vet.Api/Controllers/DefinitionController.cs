@@ -365,6 +365,20 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "UpdateStockTracking")]
+        public async Task<IActionResult> UpdateStockTracking([FromBody] UpdateStockTrackingCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "DeleteStockTracking")]
+        public async Task<IActionResult> DeleteStockTracking([FromBody] DeleteStockTrackingCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
         #endregion
     }
 }

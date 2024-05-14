@@ -39,5 +39,10 @@ namespace VetSystems.Vet.Domain.Entities
         Transfer = 2, //Transfer
         Tuning = 3, //Ayarlama
         Other = 4, //Diger
+        InternalUse = 5, //IcKullanim
+        Damaged = 6, //Hasarli
+        Outdated = 7, //TarihiGecmis
+        Loss = 8 //Kayip
+
     }
 }

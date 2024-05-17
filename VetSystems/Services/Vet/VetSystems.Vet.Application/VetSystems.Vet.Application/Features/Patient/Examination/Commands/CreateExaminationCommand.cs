@@ -19,17 +19,17 @@ namespace VetSystems.Vet.Application.Features.Patient.Examination.Commands
 {
     public class CreateExaminationCommand : IRequest<Response<bool>>
     {
-        public DateTime MuayeneTarihi { get; set; }
-        public string MuayneDurumu { get; set; }
+        public DateTime Date { get; set; }
+        public string Status { get; set; }
         public string CustomerId { get; set; }
         public string PatientId { get; set; }
         public double BodyTemperature { get; set; }
-        public double Pulse { get; set; }
-        public double RespiratoryRate { get; set; }
+        public int Pulse { get; set; }
+        public int RespiratoryRate { get; set; }
         public double Weight { get; set; }
-        public string ComplaintAndHistory { get; set; }
+        public string ComplaintStory { get; set; }
         public string TreatmentDescription { get; set; }
-        public string Semptomlar { get; set; }
+        public string Symptoms { get; set; }
     }
 
     public class CreateExaminationHandler : IRequestHandler<CreateExaminationCommand, Response<bool>>
@@ -63,16 +63,16 @@ namespace VetSystems.Vet.Application.Features.Patient.Examination.Commands
 
                 Vet.Domain.Entities.VetExamination examination = new()
                 {
-                    Date = request.MuayeneTarihi,
-                    Status = request.MuayneDurumu == "Tamamlandı" ? 1 : 0,
+                    Date = request.Date,
+                    Status = request.Status == "Aktif" ? 0 : request.Status == "Tamamlandı" ? 1 : request.Status == "Bekliyor" ? 2 : 3,
                     CustomerId = Guid.Parse(request.CustomerId),
                     PatientId = Guid.Parse(request.PatientId),
                     BodyTemperature = (decimal)request.BodyTemperature,
                     Pulse = (decimal)request.Pulse,
                     RespiratoryRate = (decimal)request.RespiratoryRate,
                     Weight = (decimal)request.Weight,
-                    Symptoms = request.Semptomlar, 
-                    ComplaintStory = request.ComplaintAndHistory, 
+                    Symptoms = request.Symptoms, 
+                    ComplaintStory = request.ComplaintStory, 
                     TreatmentDescription = request.TreatmentDescription,
                     CreateDate = DateTime.UtcNow,
                     CreateUsers = _identity.Account.UserName

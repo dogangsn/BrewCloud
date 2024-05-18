@@ -1,0 +1,58 @@
+﻿IF OBJECT_ID('dbo.GetProductMovementList', 'P') IS NOT NULL
+BEGIN
+    DROP PROCEDURE dbo.GetProductMovementList;
+END
+Go
+
+CREATE PROCEDURE GetProductMovementList
+    @ProductId UNIQUEIDENTIFIER
+AS
+BEGIN
+    SELECT * 
+    FROM (
+        SELECT 
+            productid,
+            1 as type,
+            CASE 
+                WHEN processtype = 1 THEN 'Yeni Stock'
+                WHEN processtype = 2 THEN 'Transfer'
+                WHEN processtype = 3 THEN 'Ayarlama'
+                WHEN processtype = 4 THEN 'Diğer'
+                WHEN processtype = 5 THEN 'İç Kullanım'
+                WHEN processtype = 6 THEN 'Hasarlı'
+                WHEN processtype = 7 THEN 'Tarihi Geçmiş'
+                WHEN processtype = 8 THEN 'Kayıp'
+                ELSE 'Stok Giriş / Çıkış' 
+            END AS remark,
+            vetstocktracking.createdate,
+            vetstocktracking.purchaseprice as amount,
+            vetstocktracking.piece as piecequentity,
+            ISNULL(vetsuppliers.suppliername, '-') as customersupplier
+        FROM 
+            vetstocktracking
+            LEFT JOIN vetsuppliers ON vetsuppliers.id = vetstocktracking.supplierid
+        WHERE 
+            vetstocktracking.deleted = 0
+
+        UNION ALL
+
+        SELECT 
+            productid,
+            2 as type,
+            'Satış' AS remark,
+            vetsalebuytrans.createdate,
+            vetsalebuytrans.netprice as amount,
+            -vetsalebuytrans.amount as piecequentity,
+            ISNULL((vetcustomers.firstname + ' ' + vetcustomers.lastname), '-') as customersupplier
+        FROM 
+            vetsalebuytrans
+            INNER JOIN vetsalebuyowner ON vetsalebuyowner.id = vetsalebuytrans.vetsalebuyownerid
+            LEFT JOIN vetcustomers ON vetcustomers.id = vetsalebuyowner.customerid
+        WHERE 
+            vetsalebuytrans.deleted = 0 
+            AND vetsalebuyowner.type = 1
+    ) AS combined_data
+    WHERE 
+        productid = @ProductId;
+END;
+GO

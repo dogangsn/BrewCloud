@@ -14,6 +14,10 @@ namespace VetSystems.Vet.Application.Models.Definition.StockTracking
         public string ExpirationDateString { get; set; } = string.Empty;
         public decimal PurchasePrice { get; set; }
         public decimal RemainingPiece { get; set; }
+        public decimal Piece { get; set; }
+        public int ProcessType { get; set; }
+        public Guid SupplierId { get; set; }
+        public DateTime ExpirationDate { get; set; }
 
     }
 }

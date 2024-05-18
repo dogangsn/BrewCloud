@@ -35,11 +35,13 @@ namespace VetSystems.Vet.Application.Features.Definition.ProductDescription.Quer
             var response = new Response<List<ProductMovementListDto>>();
             try
             {
-                string query = "select trans.id,trans.createdate,trans.invoiceno,trans.netprice "
-                                + " from "
-                                + " vetsalebuytrans as trans "
-                                + " Inner join vetsalebuyowner on vetsalebuyowner.id = trans.vetsalebuyownerid "
-                                + " where trans.productid = @productid  and trans.deleted = 0 ";
+                //string query = "select trans.id,trans.createdate,trans.invoiceno,trans.netprice "
+                //                + " from "
+                //                + " vetsalebuytrans as trans "
+                //                + " Inner join vetsalebuyowner on vetsalebuyowner.id = trans.vetsalebuyownerid "
+                //                + " where trans.productid = @productid  and trans.deleted = 0 ";
+
+                string query = "EXEC GetProductMovementList @productid";
 
                 var _data = _uow.Query<ProductMovementListDto>(query, new { productid = request.ProductId }).ToList();
                 response = new Response<List<ProductMovementListDto>>

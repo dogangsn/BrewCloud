@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using VetSystems.Vet.Application.Features.PetHotels.Accomodation.Commands;
+using VetSystems.Vet.Application.Features.PetHotels.Accomodation.Queries;
 using VetSystems.Vet.Application.Features.PetHotels.Rooms.Commands;
 using VetSystems.Vet.Application.Features.PetHotels.Rooms.Queries;
 using VetSystems.Vet.Application.Features.Vaccine.Commands;
@@ -52,7 +54,31 @@ namespace VetSystems.Vet.Api.Controllers
         #endregion
 
         #region Accomodation
+
          
+        [HttpGet(Name = "GetAccomodationList")]
+        public async Task<IActionResult> GetAccomodationList()
+        {
+            var command = new GetAccomodationListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "CreateAccomodation")]
+        public async Task<IActionResult> CreateAccomodation([FromBody] CreateAccomodationCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "DeleteAccomodation")]
+        public async Task<IActionResult> DeleteAccomodation([FromBody] DeleteAccomodationCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+
         #endregion
     }
 }

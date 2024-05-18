@@ -9,6 +9,7 @@ namespace VetSystems.Vet.Domain.Entities
 {
     public class VetAccomodation : BaseEntity
     {
+        public int Type { get; set; }
         public Guid RoomId { get; set; }
         public Guid? CustomerId { get; set; }
         public Guid? PatientsId { get; set; }
@@ -16,6 +17,7 @@ namespace VetSystems.Vet.Domain.Entities
         public DateTime CheckOutDate { get; set; }
         public AccomodationType Accomodation { get; set; }
         public string Remark { get; set; } = string.Empty;
+        public bool? IsLogOut { get; set; } = false;
     }
 
 

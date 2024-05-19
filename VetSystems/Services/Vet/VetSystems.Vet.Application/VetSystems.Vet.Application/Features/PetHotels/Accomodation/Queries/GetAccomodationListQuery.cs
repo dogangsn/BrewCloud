@@ -15,7 +15,7 @@ namespace VetSystems.Vet.Application.Features.PetHotels.Accomodation.Queries
 {
     public class GetAccomodationListQuery : IRequest<Response<List<AccomodationListDto>>>
     {
-
+        public Guid? CustomerId { get; set; }
     }
 
     public class GetAccomodationListQueryHandler : IRequestHandler<GetAccomodationListQuery, Response<List<AccomodationListDto>>>
@@ -43,8 +43,12 @@ namespace VetSystems.Vet.Application.Features.PetHotels.Accomodation.Queries
                             + "                          vetrooms ON vetaccomodation.roomid = vetrooms.id LEFT OUTER JOIN "
                             + "                          vetcustomers ON vetaccomodation.customerid = vetcustomers.id "
                             + " WHERE        (vetaccomodation.deleted = 0)";
+                if (request.CustomerId != Guid.Empty)
+                {
+                    query += " and (vetaccomodation.customerid = @customerid)";
+                }
 
-                response.Data = _uow.Query<AccomodationListDto>(query);
+                response.Data = _uow.Query<AccomodationListDto>(query , new { customerid = request.CustomerId});
             }
             catch (Exception ex)
             {

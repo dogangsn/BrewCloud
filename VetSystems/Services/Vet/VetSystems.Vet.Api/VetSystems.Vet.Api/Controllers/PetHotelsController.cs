@@ -56,10 +56,9 @@ namespace VetSystems.Vet.Api.Controllers
         #region Accomodation
 
          
-        [HttpGet(Name = "GetAccomodationList")]
-        public async Task<IActionResult> GetAccomodationList()
-        {
-            var command = new GetAccomodationListQuery();
+        [HttpPost(Name = "GetAccomodationList")]
+        public async Task<IActionResult> GetAccomodationList([FromBody] GetAccomodationListQuery command)
+        { 
             var result = await _mediator.Send(command);
             return Ok(result);
         }

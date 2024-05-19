@@ -60,10 +60,9 @@ namespace VetSystems.Vet.Application.Features.Patient.Examination.Commands
             try
             {
                 TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
-
                 Vet.Domain.Entities.VetExamination examination = new()
                 {
-                    Date = request.Date,
+                    Date = TimeZoneInfo.ConvertTimeFromUtc(request.Date, localTimeZone),
                     Status = request.Status == "Aktif" ? 0 : request.Status == "Tamamlandı" ? 1 : request.Status == "Bekliyor" ? 2 : 3,
                     CustomerId = Guid.Parse(request.CustomerId),
                     PatientId = Guid.Parse(request.PatientId),

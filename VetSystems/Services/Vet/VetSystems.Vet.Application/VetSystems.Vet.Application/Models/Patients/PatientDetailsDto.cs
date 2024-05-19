@@ -8,7 +8,7 @@ namespace VetSystems.Vet.Application.Models.Patients
 {
     public class PatientDetailsDto
     {
-        public Guid RecId { get; set; }
+        public Guid id { get; set; }
         public Guid CustomerId { get; set; }
         public string Name { get; set; }
         public DateTime BirthDate { get; set; }

@@ -44,7 +44,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
             {
 
                     var patientQuery = @"select
-                                            vp.id as RecId,
+                                            vp.id,
                                             vp.customerid as CustomerId,
                                             vp.name as Name,
                                             FORMAT(vp.birthdate, 'yyyy-MM-dd') AS BirthDate,

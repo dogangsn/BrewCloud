@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using VetSystems.Vet.Application.Features.Appointment.Commands;
 using VetSystems.Vet.Application.Features.Customers.Queries;
 using VetSystems.Vet.Application.Features.GeneralSettings.Users.Queries;
+using VetSystems.Vet.Application.Features.Patient.Commands;
 using VetSystems.Vet.Application.Features.Patient.Examination.Commands;
 using VetSystems.Vet.Application.Features.Patient.Examination.Queries;
 using VetSystems.Vet.Application.Features.Patient.PatientList.Queries;
@@ -60,6 +61,20 @@ namespace VetSystems.Vet.Api.Controllers
         public async Task<IActionResult> GetSymptoms()
         {
             var command = new GetSymptomsQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "UpdateExamination")]
+        public async Task<IActionResult> UpdateExamination([FromBody] UpdateExaminationCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "DeleteExamination")]
+        public async Task<IActionResult> DeleteExamination([FromBody] DeleteExaminationCommand command)
+        {
             var result = await _mediator.Send(command);
             return Ok(result);
         }

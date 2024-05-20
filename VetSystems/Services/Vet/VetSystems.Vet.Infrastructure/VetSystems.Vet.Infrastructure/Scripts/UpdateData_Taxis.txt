@@ -1,0 +1,4 @@
+﻿INSERT INTO [dbo].[vettaxis] ([id],[type],[taxname],[taxratio],[recid],[createdate],[updatedate],[deleteddate],[deleted],[deletedusers],[updateusers],[createusers]) VALUES(NEWID(),0,'%0',0,0,'1900-01-01','1900-01-01','1900-01-01',0,'','','')
+INSERT INTO [dbo].[vettaxis] ([id],[type],[taxname],[taxratio],[recid],[createdate],[updatedate],[deleteddate],[deleted],[deletedusers],[updateusers],[createusers]) VALUES(NEWID(),0,'%1',1,0,'1900-01-01','1900-01-01','1900-01-01',0,'','','')
+INSERT INTO [dbo].[vettaxis] ([id],[type],[taxname],[taxratio],[recid],[createdate],[updatedate],[deleteddate],[deleted],[deletedusers],[updateusers],[createusers]) VALUES(NEWID(),0,'%10',10,0,'1900-01-01','1900-01-01','1900-01-01',0,'','','')
+INSERT INTO [dbo].[vettaxis] ([id],[type],[taxname],[taxratio],[recid],[createdate],[updatedate],[deleteddate],[deleted],[deletedusers],[updateusers],[createusers]) VALUES(NEWID(),0,'%20',20,0,'1900-01-01','1900-01-01','1900-01-01',0,'','','')

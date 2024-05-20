@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Models.Definition.Suppliers
 {
@@ -13,6 +14,12 @@ namespace VetSystems.Vet.Application.Models.Definition.Suppliers
         public string email { get; set; }
         public string phone { get; set; }
         public bool active { get; set; }
+        public string Adress { get; set; } = string.Empty;
+        public InvoiceTpe InvoiceType { get; set; }
+        public string CompanyName { get; set; } = string.Empty;
+        public string WebSite { get; set; } = string.Empty;
+        public string TaxOffice { get; set; } = string.Empty;
+        public string TaxNumber { get; set; } = string.Empty;
 
     }
 }

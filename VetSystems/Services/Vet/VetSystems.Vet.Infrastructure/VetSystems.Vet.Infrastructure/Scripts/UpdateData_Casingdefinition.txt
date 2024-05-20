@@ -1,0 +1,1 @@
+﻿INSERT INTO [dbo].[vetcasingdefinition] ([id],[casename],[active],[kasa],[durumu],[createdate],[updatedate],[deleteddate],[deleted],[deletedusers],[updateusers],[createusers]) VALUES (NEWID(),'ANA KASA',1,'',0,'1900-01-01','1900-01-01','1900-01-01',0,'','','')

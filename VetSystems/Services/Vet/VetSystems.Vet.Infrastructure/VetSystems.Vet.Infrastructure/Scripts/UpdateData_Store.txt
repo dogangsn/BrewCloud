@@ -1,0 +1,1 @@
+﻿INSERT INTO [dbo].[vetstores]([id],[active],[depotcode],[depotname],[createdate],[updatedate],[deleteddate],[deleted],[deletedusers],[updateusers],[createusers]) VALUES (NEWID(),0,'001','ANA DEPO','1900-01-01','1900-01-01','1900-01-01',0,'','','')

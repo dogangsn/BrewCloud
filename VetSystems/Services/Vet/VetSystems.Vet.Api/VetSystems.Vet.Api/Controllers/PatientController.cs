@@ -71,6 +71,12 @@ namespace VetSystems.Vet.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+        [HttpPost(Name = "UpdateExaminationStatus")]
+        public async Task<IActionResult> UpdateExaminationStatus([FromBody] UpdateExaminationStatusCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
         [HttpPost(Name = "DeleteExamination")]
         public async Task<IActionResult> DeleteExamination([FromBody] DeleteExaminationCommand command)

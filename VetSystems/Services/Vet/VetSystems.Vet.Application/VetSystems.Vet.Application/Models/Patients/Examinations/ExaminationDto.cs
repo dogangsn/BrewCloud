@@ -10,7 +10,7 @@ namespace VetSystems.Vet.Application.Models.Patients.Examinations
     {
         public Guid Id { get; set; }
         public DateTime Date { get; set; }
-        //public int Status { get; set; }
+        public int Status { get; set; }
         public string CustomerName { get; set; }
         public string PatientName { get; set; }
         //public decimal BodyTemperature { get; set; } = 0; //Vucutısı

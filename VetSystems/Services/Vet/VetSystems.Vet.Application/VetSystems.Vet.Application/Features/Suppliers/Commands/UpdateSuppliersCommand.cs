@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using VetSystems.Shared.Dtos;
 using VetSystems.Shared.Service;
 using VetSystems.Vet.Domain.Contracts;
+using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Features.Suppliers.Commands
 {
@@ -19,6 +20,12 @@ namespace VetSystems.Vet.Application.Features.Suppliers.Commands
         public string Email { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
         public bool Active { get; set; }
+        public string Adress { get; set; } = string.Empty;
+        public InvoiceTpe InvoiceType { get; set; }
+        public string CompanyName { get; set; } = string.Empty;
+        public string WebSite { get; set; } = string.Empty;
+        public string TaxOffice { get; set; } = string.Empty;
+        public string TaxNumber { get; set; } = string.Empty;
     }
 
     public class UpdateSuppliersCommandHandler : IRequestHandler<UpdateSuppliersCommand, Response<bool>>
@@ -60,6 +67,12 @@ namespace VetSystems.Vet.Application.Features.Suppliers.Commands
                 casingDefinitions.Phone = request.Phone;
                 casingDefinitions.Active = request.Active;
                 casingDefinitions.UpdateDate = DateTime.Now;
+                casingDefinitions.Adress = request.Adress;
+                casingDefinitions.InvoiceType = request.InvoiceType;
+                casingDefinitions.CompanyName = request.CompanyName;
+                casingDefinitions.WebSite = request.WebSite;
+                casingDefinitions.TaxNumber = request.TaxNumber;
+                casingDefinitions.TaxOffice = request.TaxOffice;
                 await _uow.SaveChangesAsync(cancellationToken);
             }
             catch (Exception ex)

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using VetSystems.Shared.Dtos;
 using VetSystems.Shared.Service;
 using VetSystems.Vet.Domain.Contracts;
+using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Features.Suppliers.Commands
 {
@@ -18,6 +19,12 @@ namespace VetSystems.Vet.Application.Features.Suppliers.Commands
         public string Email { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
         public bool Active { get; set; }
+        public string Adress { get; set; } = string.Empty;
+        public InvoiceTpe InvoiceType { get; set; }
+        public string CompanyName { get; set; } = string.Empty; 
+        public string WebSite { get; set; } = string.Empty;
+        public string TaxOffice { get; set; } = string.Empty;
+        public string TaxNumber { get; set; } = string.Empty;
     }
 
     public class CreateSuppliersCommandHandler : IRequestHandler<CreateSuppliersCommand, Response<bool>>
@@ -55,6 +62,14 @@ namespace VetSystems.Vet.Application.Features.Suppliers.Commands
                     Phone = request.Phone,
                     Active = request.Active,
                     CreateDate = DateTime.Now,
+                    CreateUsers = _identity.Account.UserName,
+                    Adress = request.Adress,
+                    InvoiceType = request.InvoiceType,
+                    CompanyName = request.CompanyName,
+                    WebSite = request.WebSite,
+                    TaxOffice = request.TaxOffice,
+                    TaxNumber = request.TaxNumber,
+
                 };
                 await _suppliersRepository.AddAsync(suppliers);
                 await _uow.SaveChangesAsync(cancellationToken);

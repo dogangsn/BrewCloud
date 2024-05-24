@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -10,10 +10,13 @@
     <None Remove="Scripts\UpdateData_AnimalBreedsDefInsert.txt" />
     <None Remove="Scripts\UpdateData_AnimalTypeDefInsert.txt" />
     <None Remove="Scripts\UpdateData_AppointmentTypes.txt" />
+    <None Remove="Scripts\UpdateData_Casingdefinition.txt" />
     <None Remove="Scripts\UpdateData_CustomerGroupdef.txt" />
     <None Remove="Scripts\UpdateData_PaymentMethods.txt" />
     <None Remove="Scripts\UpdateData_ProductCategories.txt" />
+    <None Remove="Scripts\UpdateData_Store.txt" />
     <None Remove="Scripts\UpdateData_Symptoms.txt" />
+    <None Remove="Scripts\UpdateData_Taxis.txt" />
     <None Remove="Scripts\UpdateData_Units.txt" />
     <None Remove="Scripts\UpdateData_VaccineDef.txt" />
     <None Remove="Scripts\Update_Data_CreateProcuderGetProductMovementList.txt" />
@@ -26,7 +29,10 @@
     <EmbeddedResource Include="Scripts\UpdateData_AppointmentTypes.txt" />
     <EmbeddedResource Include="Scripts\UpdateData_PaymentMethods.txt" />
     <EmbeddedResource Include="Scripts\UpdateData_ProductCategories.txt" />
+    <EmbeddedResource Include="Scripts\UpdateData_Casingdefinition.txt" />
     <EmbeddedResource Include="Scripts\UpdateData_Symptoms.txt" />
+    <EmbeddedResource Include="Scripts\UpdateData_Store.txt" />
+    <EmbeddedResource Include="Scripts\UpdateData_Taxis.txt" />
     <EmbeddedResource Include="Scripts\Update_Data_CreateProcuderGetProductMovementList.txt" />
     <EmbeddedResource Include="Scripts\UpdateData_VaccineDef.txt" />
     <EmbeddedResource Include="Scripts\UpdateData_Units.txt" />

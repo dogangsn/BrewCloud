@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VetSystems.Shared.Dtos;
 using VetSystems.Shared.Service;
+using VetSystems.Vet.Application.Features.Appointment.Queries;
 using VetSystems.Vet.Application.Models.Customers;
 using VetSystems.Vet.Application.Models.Dashboards;
 using VetSystems.Vet.Domain.Contracts;
@@ -26,8 +27,9 @@ namespace VetSystems.Vet.Application.Features.Dashboards.Queries
         private readonly IRepository<VetAppointments> _vetAppointmentsRepository;
         private readonly IRepository<VetCustomers> _vetCustomersRepository;
         private readonly IRepository<VetSaleBuyOwner> _vetSaleBuyOwnerRepository;
+        private readonly IMediator _mediator;
 
-        public GetDashBoardQueryHandler(IIdentityRepository identityRepository, IUnitOfWork uow, IMapper mapper, IRepository<VetAppointments> vetAppointmentsRepository , IRepository<VetCustomers> vetCustomersRepository, IRepository<VetSaleBuyOwner> vetSaleBuyOwnerRepository)
+        public GetDashBoardQueryHandler(IIdentityRepository identityRepository, IUnitOfWork uow, IMapper mapper, IRepository<VetAppointments> vetAppointmentsRepository, IRepository<VetCustomers> vetCustomersRepository, IRepository<VetSaleBuyOwner> vetSaleBuyOwnerRepository, IMediator mediator)
         {
             _identityRepository = identityRepository ?? throw new ArgumentNullException(nameof(identityRepository));
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
@@ -35,6 +37,7 @@ namespace VetSystems.Vet.Application.Features.Dashboards.Queries
             _vetAppointmentsRepository = vetAppointmentsRepository ?? throw new ArgumentNullException(nameof(vetAppointmentsRepository));
             _vetCustomersRepository = vetCustomersRepository ?? throw new ArgumentNullException(nameof(vetCustomersRepository));
             _vetSaleBuyOwnerRepository = vetSaleBuyOwnerRepository;
+            _mediator = mediator;
         }
 
         public async Task<Response<DashboardsDto>> Handle(GetDashBoardQuery request, CancellationToken cancellationToken)
@@ -56,6 +59,16 @@ namespace VetSystems.Vet.Application.Features.Dashboards.Queries
                 var saleBuy = await _vetSaleBuyOwnerRepository.GetAsync(x => x.Deleted == false && x.CreateDate.Date == DateTime.Today);
                 _totalCount.DailyTurnoverAmount = saleBuy.Sum(x => x.Total);
 
+
+                var req = new GetAppointmentDailyListQuery();
+                var responseAppointment = _mediator.Send(req);
+
+                if (responseAppointment.Result.Data.Count > 0)
+                {
+                    var appoinment = responseAppointment.Result.Data;
+                    response.Data.UpcomingAppointment = appoinment.Where(x => x.Date >= DateTime.Now).ToList();
+                    response.Data.PastAppointment = appoinment.Where(x=> x.Date <= DateTime.Now).ToList();
+                }
 
                 response.Data.TotalCount = _totalCount;
                 response.IsSuccessful = true;

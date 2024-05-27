@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VetSystems.Vet.Application.Models.Appointments;
 
 namespace VetSystems.Vet.Application.Models.Dashboards
 {
@@ -12,8 +13,12 @@ namespace VetSystems.Vet.Application.Models.Dashboards
         public DashboardsDto()
         {
             TotalCount = new DashboardCountTotal();
+            UpcomingAppointment = new List<AppointmentDailyListDto>();
+            PastAppointment = new List<AppointmentDailyListDto>();
         }
         public DashboardCountTotal? TotalCount { get; set; }
+        public List<AppointmentDailyListDto> UpcomingAppointment { get; set; } 
+        public List<AppointmentDailyListDto> PastAppointment { get; set; } 
 
     }
 

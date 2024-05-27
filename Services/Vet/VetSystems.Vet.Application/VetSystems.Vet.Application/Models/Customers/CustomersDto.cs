@@ -27,5 +27,6 @@ namespace VetSystems.Vet.Application.Models.Customers
         //public Guid FarmsId { get; set; }
         public  FarmsDto? FarmsDetail { get; set; }
         public List<PatientsDetailsDto> PatientDetails { get; set; }
+        public int? PetCount { get; set; }
     }
 }

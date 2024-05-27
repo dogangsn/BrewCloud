@@ -34,7 +34,19 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
             var response = new Response<List<CustomersDto>>();
             try
             {
-                string query = "Select * from VetCustomers where Deleted = 0 order by CreateDate ";
+                string query = "SELECT Vc.id, Vc.firstname, Vc.lastname, Vc.phonenumber, Vc.phonenumber2, \r\n " +
+                    "      Vc.email, Vc.taxoffice, Vc.vkntcno, Vc.customergroup, Vc.note, \r\n" +
+                    "       Vc.discountrate, Vc.isemail, Vc.isphone, Vc.adressid, Vc.createdate, \r\n " +
+                    "      Vc.updatedate, Vc.deleteddate, Vc.deleted, Vc.deletedusers, \r\n " +
+                    "      Vc.updateusers, Vc.createusers, COUNT(Vp.id) AS PetCount\r\n" +
+                    "      FROM VetCustomers Vc \r\n" +
+                    "      LEFT OUTER JOIN VetPatients Vp ON Vc.id = Vp.customerid \r\n" +
+                    "      WHERE Vc.Deleted = 0 \r\n" +
+                    "      GROUP BY Vc.id, Vc.firstname, Vc.lastname, Vc.phonenumber, Vc.phonenumber2, \r\n" +
+                    "      Vc.email, Vc.taxoffice, Vc.vkntcno, Vc.customergroup, Vc.note, \r\n" +
+                    "      Vc.discountrate, Vc.isemail, Vc.isphone, Vc.adressid, Vc.createdate, \r\n" +
+                    "      Vc.updatedate, Vc.deleteddate, Vc.deleted, Vc.deletedusers, \r\n" +
+                    "      Vc.updateusers, Vc.createusers\r\nORDER BY Vc.CreateDate; ";
                 var _data = _uow.Query<CustomersDto>(query).ToList();
                 response = new Response<List<CustomersDto>>
                 {

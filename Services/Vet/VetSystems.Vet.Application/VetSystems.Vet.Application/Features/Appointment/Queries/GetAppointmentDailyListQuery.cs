@@ -58,7 +58,7 @@ namespace VetSystems.Vet.Application.Features.Appointment.Queries
                         + "                                                WHEN 5 THEN 'Tıraş' "
                         + "                                                WHEN 6 THEN 'Tedavi' "
                         + "                                                ELSE 'Diğer' "
-                        + " 												END AS services  , vetappointments.status"
+                        + " 												END AS services  , vetappointments.status, CASE vetappointments.status WHEN 1 THEN 'Bekliyor' WHEN 2 THEN 'Iptal Edildi' WHEN 3 THEN 'Görüşüldü' WHEN 4 THEN 'Gelmedi' ELSE '' END as StatusName "
                         + " FROM            vetappointments  "
                         + " INNER JOIN vetcustomers ON vetappointments.customerid = vetcustomers.id "
                         + " LEFT JOIN vetpatients ON vetappointments.patientsid = vetpatients.id "

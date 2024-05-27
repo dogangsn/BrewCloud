@@ -12,5 +12,6 @@ namespace VetSystems.Vet.Application.Models.Appointments
         public string CustomerPatientName { get; set; }
         public string Services { get; set; }
         public int Status { get; set; }
+        public string StatusName { get; set; }
     }
 }

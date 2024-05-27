@@ -42,10 +42,9 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
-        [HttpGet(Name = "GetExaminations")]
-        public async Task<IActionResult> GetExaminations()
-        {
-            var command = new GetExaminationsQuery();
+        [HttpPost(Name = "GetExaminations")]
+        public async Task<IActionResult> GetExaminations([FromBody] GetExaminationsQuery command)
+        { 
             var result = await _mediator.Send(command);
             return Ok(result);
         }

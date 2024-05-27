@@ -15,6 +15,7 @@ namespace VetSystems.Vet.Application.Features.Patient.Examination.Queries
 {
     public class GetExaminationsQuery : IRequest<Response<List<ExaminationDto>>>
     {
+        public Guid? CustomerId { get; set; }
     }
 
     public class GetExaminationsQueryHandler : IRequestHandler<GetExaminationsQuery, Response<List<ExaminationDto>>>
@@ -38,9 +39,15 @@ namespace VetSystems.Vet.Application.Features.Patient.Examination.Queries
                 string query = "Select ve.id as Id,vt.firstname as CustomerName,vp.name as PatientName,ve.date,ve.weight,ve.complaintstory,ve.treatmentdescription,ve.symptoms,ve.status from VetExamination ve \n "
                              + "LEFT OUTER JOIN vetcustomers vt WITH(NOLOCK) ON vt.id=ve.customerid \n"
                              + "LEFT OUTER JOIN vetpatients vp WITH(NOLOCK) ON vp.id=ve.patientid \n"
-                             + "where ve.Deleted = 0 order by ve.Date desc ";
+                             + "where ve.Deleted = 0 ";
 
-                var _data = _uow.Query<ExaminationDto>(query).ToList();
+                if (request.CustomerId != Guid.Empty)
+                {
+                    query += " and ve.customerid = @xCustomerId";
+                }
+                query += " order by ve.Date desc ";
+
+                var _data = _uow.Query<ExaminationDto>(query, new { xCustomerId  = request.CustomerId }).ToList();
                 response = new Response<List<ExaminationDto>>
                 {
                     Data = _data,

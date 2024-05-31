@@ -31,6 +31,13 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "GetPatientById")]
+        public async Task<IActionResult> GetPatientById([FromBody] GetPatientByIdQuery model)
+        {
+            var result = await _mediator.Send(model);
+            return Ok(result);
+        }
+
         #endregion
 
         #region Examination "Muayne"

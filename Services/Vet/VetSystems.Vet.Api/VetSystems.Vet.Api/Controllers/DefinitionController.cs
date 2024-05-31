@@ -17,6 +17,8 @@ using VetSystems.Vet.Application.Features.Definition.ProductCategory.Commands;
 using VetSystems.Vet.Application.Features.Definition.ProductCategory.Queries;
 using VetSystems.Vet.Application.Features.Definition.ProductDescription.Commands;
 using VetSystems.Vet.Application.Features.Definition.ProductDescription.Queries;
+using VetSystems.Vet.Application.Features.Definition.SmsTemplate.Commands;
+using VetSystems.Vet.Application.Features.Definition.SmsTemplate.Queries;
 using VetSystems.Vet.Application.Features.Definition.StockTracking.Commands;
 using VetSystems.Vet.Application.Features.Definition.StockTracking.Queries;
 using VetSystems.Vet.Application.Features.Definition.Taxis.Commands;
@@ -378,6 +380,40 @@ namespace VetSystems.Vet.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
+        #endregion
+
+        #region SmsTemplate
+
+        [HttpGet(Name = "GetSmsTemplateList")]
+        public async Task<IActionResult> GetSmsTemplateList()
+        {
+            var command = new GetSmsTemplateListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "CreateSmsTemplate")]
+        public async Task<IActionResult> CreateSmsTemplate([FromBody] CreateSmsTemplateCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+         
+        [HttpPost(Name = "DeleteSmsTemplate")]
+        public async Task<IActionResult> DeleteSmsTemplate([FromBody] DeleteSmsTemplateCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "UpdateSmsTemplate")]
+        public async Task<IActionResult> UpdateSmsTemplate([FromBody] UpdateSmsTemplateCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
 
         #endregion
     }

@@ -46,7 +46,7 @@ namespace VetSystems.Vet.Application.Features.Appointment.Queries
                 {
                     _isFirstInspection = _param.IsFirstInspection.GetValueOrDefault();
                 }
-                string query = "SELECT   "
+                string query = "SELECT  vetappointments.id, "
                         + " vetappointments.begindate as date, " 
                         + " (vetcustomers.firstname) + ' ' + (vetcustomers.lastname) + ' / ' + (vetpatients.name) as customerPatientName,   "
                         + " CASE vetappointments.appointmenttype    "

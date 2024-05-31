@@ -8,6 +8,7 @@ namespace VetSystems.Vet.Application.Models.Appointments
 {
     public class AppointmentDailyListDto
     {
+        public Guid Id { get; set; }
         public DateTime Date { get; set; }
         public string CustomerPatientName { get; set; }
         public string Services { get; set; }

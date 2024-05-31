@@ -127,5 +127,15 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+
+        [HttpPost(Name = "SendMessage")]
+        public async Task<IActionResult> SendMessage([FromBody] SendMessageCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+
+
     }
 }

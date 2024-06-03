@@ -127,7 +127,6 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
-
         [HttpPost(Name = "SendMessage")]
         public async Task<IActionResult> SendMessage([FromBody] SendMessageCommand command)
         {
@@ -135,6 +134,12 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "GetSalesCustomerList")]
+        public async Task<IActionResult> GetSalesCustomerList([FromBody] GetSalesCustomerListQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
 
     }

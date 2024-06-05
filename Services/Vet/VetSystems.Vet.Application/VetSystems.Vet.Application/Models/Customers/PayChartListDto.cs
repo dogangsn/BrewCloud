@@ -19,5 +19,7 @@ namespace VetSystems.Vet.Application.Models.Customers
         public Guid? AppointmentId { get; set; }
         public string PaymentName { get; set; }
         public Guid SaleBuyId { get; set; }
+        public string Remark { get; set; }
+        public int PaymetntId { get; set; }
     }
 }

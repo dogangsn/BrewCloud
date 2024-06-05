@@ -37,16 +37,28 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
             var response = new Response<List<PayChartListDto>>();
             try
             {
-                string query = "SELECT        vetpaymentcollection.id, vetpaymentcollection.date, vetpaymentcollection.debit,  "
-                        + "  CASE WHEN vetappointments.vaccineid = '00000000-0000-0000-0000-000000000000' THEN CASE vetappointments.appointmenttype WHEN 0 THEN 'İlk Muayene' WHEN 1 THEN 'Aşı Randevusu' WHEN 2 THEN 'Genel Muayene' "
-                        + "   WHEN 3 THEN 'Kontrol Muayene' WHEN 4 THEN 'Operasyon' WHEN 5 THEN 'Tıraş' WHEN 6 THEN 'Tedavi' ELSE 'Diğer' END ELSE CONCAT(CASE vetappointments.appointmenttype WHEN 0 THEN 'İlk Muayene' WHEN 1 THEN " 
-                        + "   'Aşı Randevusu' WHEN 2 THEN 'Genel Muayene' WHEN 3 THEN 'Kontrol Muayene' WHEN 4 THEN 'Operasyon' WHEN 5 THEN 'Tıraş' WHEN 6 THEN 'Tedavi' ELSE 'Diğer' END, ' - ', vetproducts.name) END AS operation,  "
-                        + "  vetpaymentcollection.paid, vetpaymentcollection.totalpaid, vetpaymentcollection.total, vetappointments.id as appointmentId "
-                        + "  FROM            vetpaymentcollection INNER JOIN "
-                        + "  vetcustomers ON vetpaymentcollection.customerid = vetcustomers.id INNER JOIN "
-                        + "  vetappointments ON vetpaymentcollection.collectionid = vetappointments.id LEFT JOIN "
-                        + "  vetproducts ON vetappointments.vaccineid = vetproducts.id "
-                        + "  WHERE(vetpaymentcollection.customerid = @CustomerId) AND(vetpaymentcollection.deleted = 0)";
+                //string query = "SELECT        vetpaymentcollection.id, vetpaymentcollection.date, vetpaymentcollection.debit,  "
+                //        + "  CASE WHEN vetappointments.vaccineid = '00000000-0000-0000-0000-000000000000' THEN CASE vetappointments.appointmenttype WHEN 0 THEN 'İlk Muayene' WHEN 1 THEN 'Aşı Randevusu' WHEN 2 THEN 'Genel Muayene' "
+                //        + "   WHEN 3 THEN 'Kontrol Muayene' WHEN 4 THEN 'Operasyon' WHEN 5 THEN 'Tıraş' WHEN 6 THEN 'Tedavi' ELSE 'Diğer' END ELSE CONCAT(CASE vetappointments.appointmenttype WHEN 0 THEN 'İlk Muayene' WHEN 1 THEN " 
+                //        + "   'Aşı Randevusu' WHEN 2 THEN 'Genel Muayene' WHEN 3 THEN 'Kontrol Muayene' WHEN 4 THEN 'Operasyon' WHEN 5 THEN 'Tıraş' WHEN 6 THEN 'Tedavi' ELSE 'Diğer' END, ' - ', vetproducts.name) END AS operation,  "
+                //        + "  vetpaymentcollection.paid, vetpaymentcollection.totalpaid, vetpaymentcollection.total, vetappointments.id as appointmentId "
+                //        + "  FROM            vetpaymentcollection INNER JOIN "
+                //        + "  vetcustomers ON vetpaymentcollection.customerid = vetcustomers.id INNER JOIN "
+                //        + "  vetappointments ON vetpaymentcollection.collectionid = vetappointments.id LEFT JOIN "
+                //        + "  vetproducts ON vetappointments.vaccineid = vetproducts.id "
+                //        + "  WHERE(vetpaymentcollection.customerid = @CustomerId) AND(vetpaymentcollection.deleted = 0)";
+
+                string query = "SELECT        "
+                        + " vetpaymentcollection.id, "
+                        + " vetpaymentcollection.date, "
+                        + " vetpaymentcollection.debit,       "
+                        + " vetpaymentcollection.paid, "
+                        + " vetpaymentcollection.totalpaid, "
+                        + " vetpaymentcollection.total"
+                        + " FROM           "
+                        + " vetpaymentcollection "
+                        + " INNER JOIN   vetcustomers ON vetpaymentcollection.customerid = vetcustomers.id "
+                        + " WHERE (vetpaymentcollection.deleted = 0) and (vetpaymentcollection.customerid = @CustomerId) ";
 
                 var result = _uow.Query<PayChartListDto>(query, new { CustomerId = request.CustomerId }).ToList();
                 response.Data = result;

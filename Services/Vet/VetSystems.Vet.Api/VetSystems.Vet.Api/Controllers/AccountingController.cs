@@ -23,5 +23,12 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "CreateSaleCollection")]
+        public async Task<IActionResult> CreateSaleCollection([FromBody] CreateSaleCollectionCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
     }
 }

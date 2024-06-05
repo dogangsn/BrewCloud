@@ -29,7 +29,7 @@ namespace VetSystems.Integrations.Application.Features.Integrations.SsmTransacti
             try
             {
                 SmsService service = new SmsService(request.UserName, request.PassWord, "DOGANGUNES");
-                String[] numaralar = { "05398533010" };
+                String[] numaralar = { "05398533010", "05530154968" };
                 service.addSMS("Merhaba. Bu bir denemedir.", numaralar);
                 String sonuc = service.gonder();
 

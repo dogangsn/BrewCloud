@@ -50,7 +50,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                         + " INNER JOIN vetsalebuytrans ON vetsalebuyowner.id = vetsalebuytrans.ownerid "
                         + " LEFT JOIN vetproducts ON vetsalebuytrans.productid = vetproducts.id "
                         + " LEFT JOIN vetcustomers ON vetsalebuyowner.customerid = vetcustomers.id"
-                        + " LEFT JOIN vetpaymentcollection ON vetsalebuyowner.id = vetpaymentcollection.salebuyid "
+                        + " LEFT JOIN vetpaymentcollection ON vetsalebuyowner.id = vetpaymentcollection.salebuyid and vetpaymentcollection.deleted = 0 "
                         + " where "
                         + " vetsalebuyowner.deleted = 0 and vetsalebuyowner.customerid = @xCustomerId";
 

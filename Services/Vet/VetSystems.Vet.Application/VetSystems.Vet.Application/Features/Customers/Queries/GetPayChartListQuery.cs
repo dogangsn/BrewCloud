@@ -49,15 +49,19 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                 //        + "  WHERE(vetpaymentcollection.customerid = @CustomerId) AND(vetpaymentcollection.deleted = 0)";
 
                 string query = "SELECT        "
-                        + " vetpaymentcollection.id, "
-                        + " vetpaymentcollection.date, "
-                        + " vetpaymentcollection.debit,       "
-                        + " vetpaymentcollection.paid, "
-                        + " vetpaymentcollection.totalpaid, "
-                        + " vetpaymentcollection.total"
-                        + " FROM           "
-                        + " vetpaymentcollection "
-                        + " INNER JOIN   vetcustomers ON vetpaymentcollection.customerid = vetcustomers.id "
+                    + " vetpaymentcollection.id, "
+                    + " vetpaymentcollection.date,  "
+                    + " vetpaymentcollection.debit, "      
+                    + " vetpaymentcollection.credit, "
+                    + " vetpaymentcollection.paid,  "
+                    + " vetpaymentcollection.totalpaid,  "
+                    + " vetpaymentcollection.total, "
+                    + " vetpaymentmethods.name as PaymentName, "
+                    + " vetpaymentcollection.salebuyid "
+                    + " FROM "
+                    + " vetpaymentcollection "
+                    + " INNER JOIN   vetcustomers ON vetpaymentcollection.customerid = vetcustomers.id "
+                    + " INNER JOIN vetpaymentmethods ON vetpaymentcollection.paymetntId = vetpaymentmethods.RecId "
                         + " WHERE (vetpaymentcollection.deleted = 0) and (vetpaymentcollection.customerid = @CustomerId) ";
 
                 var result = _uow.Query<PayChartListDto>(query, new { CustomerId = request.CustomerId }).ToList();

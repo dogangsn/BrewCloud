@@ -11,10 +11,13 @@ namespace VetSystems.Vet.Application.Models.Customers
         public Guid Id { get; set; }
         public DateTime Date { get; set; }
         public string? Operation { get; set; }
+        public decimal? Credit { get; set; }
         public decimal? Debit { get; set; }
         public decimal? Paid { get; set; }
         public decimal TotalPaid { get; set; }
         public decimal? Total { get; set; }
         public Guid? AppointmentId { get; set; }
+        public string PaymentName { get; set; }
+        public Guid SaleBuyId { get; set; }
     }
 }

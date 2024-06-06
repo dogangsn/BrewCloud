@@ -28,14 +28,16 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
         private readonly IMapper _mapper;
         private readonly IRepository<Vet.Domain.Entities.VetSaleBuyOwner> _saleBuyOwnerRepository;
         private readonly IRepository<Vet.Domain.Entities.VetAppointments> _AppointmentRepository;
+        private readonly IRepository<VetPaymentCollection> _paymentCollectionRepository;
 
-        public CustomersFindByIdQueryHandler(IIdentityRepository identityRepository, IUnitOfWork uow, IMapper mapper, IRepository<Domain.Entities.VetSaleBuyOwner> salebuyownerRepository, IRepository<Domain.Entities.VetAppointments> AppointmentRepository)
+        public CustomersFindByIdQueryHandler(IIdentityRepository identityRepository, IUnitOfWork uow, IMapper mapper, IRepository<Domain.Entities.VetSaleBuyOwner> salebuyownerRepository, IRepository<Domain.Entities.VetAppointments> AppointmentRepository, IRepository<VetPaymentCollection> paymentCollectionRepository)
         {
             _identityRepository = identityRepository;
             _uow = uow;
             _mapper = mapper;
             _saleBuyOwnerRepository = salebuyownerRepository ?? throw new ArgumentNullException(nameof(salebuyownerRepository));
             _AppointmentRepository = AppointmentRepository ?? throw new ArgumentNullException(nameof(AppointmentRepository));
+            _paymentCollectionRepository = paymentCollectionRepository;
         }
 
 
@@ -105,6 +107,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                     customerDetail.TotalData.TotalSaleBuyCount = (await _saleBuyOwnerRepository.GetAsync(x => x.CustomerId == customerDetail.id && x.Deleted == false)).Count();
                     customerDetail.TotalData.TotalVisitCount = (await _AppointmentRepository.GetAsync(x => x.CustomerId == customerDetail.id && x.Deleted == false && x.EndDate <= DateTime.Now && x.IsCompleted == true)).Count();
                     customerDetail.TotalData.TotalEarnings = (await _saleBuyOwnerRepository.GetAsync(x => x.CustomerId == customerDetail.id && x.Deleted == false)).Sum(x => x.Total).GetValueOrDefault();
+                    customerDetail.TotalData.TotalCollection = (await _paymentCollectionRepository.GetAsync(x => x.CustomerId == customerDetail.id && x.Deleted == false)).Sum(x=>x.Total).GetValueOrDefault();
 
                     response = new Response<CustomerDetailsDto>
                     {

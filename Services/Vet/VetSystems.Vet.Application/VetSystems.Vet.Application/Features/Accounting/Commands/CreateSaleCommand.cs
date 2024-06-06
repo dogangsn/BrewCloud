@@ -15,7 +15,7 @@ using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Features.Accounting.Commands
 {
-    public class CreateSaleCommand : IRequest<Response<bool>>
+    public class CreateSaleCommand : IRequest<Response<SaleResponseDto>>
     {
         public DateTime Date { get; set; }
         public string Remark { get; set; } = string.Empty;
@@ -23,7 +23,7 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
         public List<SaleTransRequestDto> Trans { get; set; }
     }
 
-    public class CreateSaleCommandHandler : IRequestHandler<CreateSaleCommand, Response<bool>>
+    public class CreateSaleCommandHandler : IRequestHandler<CreateSaleCommand, Response<SaleResponseDto>>
     {
 
         private readonly IUnitOfWork _uow;
@@ -45,9 +45,10 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
             _taxisRepository = taxisRepository;
         }
 
-        public async Task<Response<bool>> Handle(CreateSaleCommand request, CancellationToken cancellationToken)
+        public async Task<Response<SaleResponseDto>> Handle(CreateSaleCommand request, CancellationToken cancellationToken)
         {
-            var response = Response<bool>.Success(200);
+            var response = Response<SaleResponseDto>.Success(200);
+            response.Data = new SaleResponseDto();
 
             TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
 
@@ -103,10 +104,13 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
                 await _saleBuyOwnerRepository.AddAsync(saleBuyOwner);
                 await _uow.SaveChangesAsync(cancellationToken);
 
+                response.Data.Id = saleBuyOwner.Id;
+                response.Data.Amount = saleBuyOwner.Total.GetValueOrDefault();
+
             }
             catch (Exception ex)
             {
-                return Response<bool>.Fail(ex.Message, 400);
+                return Response<SaleResponseDto>.Fail(ex.Message, 400);
             }
             return response;
         }

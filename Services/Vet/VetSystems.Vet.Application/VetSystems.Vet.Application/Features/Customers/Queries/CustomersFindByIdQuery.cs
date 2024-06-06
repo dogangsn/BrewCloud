@@ -68,7 +68,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                 CustomerDetailsDto? customerDetail = _uow.Query<CustomerDetailsDto>(query, new { id = request.Id }).FirstOrDefault();
                 if (customerDetail != null)
                 {
-                    if (customerDetail.adressid != null)
+                    if (customerDetail.adressid != Guid.Empty)
                     {
                         string addressQuery = @"select province, district, longadress from vetadress where id = @id";
 

@@ -55,17 +55,17 @@ namespace VetSystems.Vet.Application.Features.PetHotels.Accomodation.Commands
                 Data = true
             };
             _uow.CreateTransaction(IsolationLevel.ReadCommitted);
+            TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
             try
             {
-
                 VetAccomodation accomodation = new()
                 {
                     Type = request.Type,
                     RoomId = request.RoomId,
                     CustomerId = request.CustomerId,
                     PatientsId = request.PatientsId,
-                    CheckinDate = request.CheckinDate,
-                    CheckOutDate = request.CheckOutDate,
+                    CheckinDate = TimeZoneInfo.ConvertTime(Convert.ToDateTime(request.CheckinDate), localTimeZone),
+                    CheckOutDate = TimeZoneInfo.ConvertTime(Convert.ToDateTime(request.CheckOutDate), localTimeZone),
                     Accomodation = (AccomodationType)request.Accomodation,
                     Remark = request.Remark,
                     CreateDate = DateTime.Now,

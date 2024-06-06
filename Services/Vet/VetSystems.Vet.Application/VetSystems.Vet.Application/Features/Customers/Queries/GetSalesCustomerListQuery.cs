@@ -52,7 +52,8 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                         + " LEFT JOIN vetcustomers ON vetsalebuyowner.customerid = vetcustomers.id"
                         + " LEFT JOIN vetpaymentcollection ON vetsalebuyowner.id = vetpaymentcollection.salebuyid and vetpaymentcollection.deleted = 0 "
                         + " where "
-                        + " vetsalebuyowner.deleted = 0 and vetsalebuyowner.customerid = @xCustomerId";
+                        + " vetsalebuyowner.deleted = 0 and vetsalebuyowner.customerid = @xCustomerId " 
+                        + " ORDER BY vetsalebuyowner.CreateDate";
 
                 var result = _uow.Query<SalesCustomerListDto>(_query, new { xCustomerId = request.CustomerId }).ToList();
                 response.Data = result;

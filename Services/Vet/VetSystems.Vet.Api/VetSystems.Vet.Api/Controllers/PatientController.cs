@@ -38,12 +38,19 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "UpdatePatientsWeight")]
+        public async Task<IActionResult> UpdatePatientsWeight([FromBody] UpdatePatientsWeightCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
         #endregion
 
         #region Examination "Muayne"
 
         [HttpPost(Name = "CreateExamination")]
-        public async Task<IActionResult> CreateExamination([FromBody] CreateExaminationCommand command)
+        public async Task<IActionResult> CreateExamination([FromBody] UpdatePatientsWeightCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);

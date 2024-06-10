@@ -17,6 +17,12 @@ namespace VetSystems.Vet.Infrastructure.EntityConfigurations
             entity.HasKey(e => e.Id)
                    .HasName("VetSaleBuyTrans_pkey");
 
+
+            //entity.Property(e => e.RecId)
+            //    .ValueGeneratedOnAdd()
+            //    .HasColumnName("recid")
+            //    .UseIdentityColumn(1,1);
+
         }
     }
 }

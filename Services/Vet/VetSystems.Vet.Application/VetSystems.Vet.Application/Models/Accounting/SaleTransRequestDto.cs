@@ -8,7 +8,7 @@ namespace VetSystems.Vet.Application.Models.Accounting
 {
     public class SaleTransRequestDto
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; }
         public Guid Product { get; set; }
         public int Quantity { get; set; }
         public string Unit { get; set; }

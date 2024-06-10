@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MediatR;
 using VetSystems.Vet.Application.Features.Agenda.Commands;
 using VetSystems.Vet.Application.Features.Accounting.Commands;
+using VetSystems.Vet.Application.Features.Accounting.Queries;
 
 namespace VetSystems.Vet.Api.Controllers
 {
@@ -23,12 +24,33 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "UpdateSale")]
+        public async Task<IActionResult> UpdateSale([FromBody] UpdateSaleCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
         [HttpPost(Name = "CreateSaleCollection")]
         public async Task<IActionResult> CreateSaleCollection([FromBody] CreateSaleCollectionCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+         
+        [HttpPost(Name = "DeleteCollection")]
+        public async Task<IActionResult> DeleteCollection([FromBody] DeleteCollectionCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
+        [HttpPost(Name = "GetSalesById")]
+        public async Task<IActionResult> GetSalesById([FromBody] GetSalesByIdQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+         
     }
 }

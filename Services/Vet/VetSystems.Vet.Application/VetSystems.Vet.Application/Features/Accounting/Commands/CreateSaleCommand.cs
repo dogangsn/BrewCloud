@@ -64,6 +64,7 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
                     CreateDate = DateTime.Now,
                     CreateUsers = _identity.Account.UserName,
                     Type = (int)BuySaleType.Selling,
+                    Remark = request.Remark
                 };
 
                 foreach (var item in request.Trans)
@@ -88,6 +89,8 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
                             Price =  _product.SellingPrice,
                             OwnerId = saleBuyOwner.Id,
                             Discount = item.Discount,
+                            Quantity = item.Quantity,
+                            TaxisId = taxis.Id,
                             NetPrice = (_product.SellingIncludeKDV.GetValueOrDefault() || _product.BuyingIncludeKDV.GetValueOrDefault()) ? (Math.Round((_product.SellingPrice) * item.Quantity, 2, MidpointRounding.ToEven) - vatAmaount) : Math.Round((_product.SellingPrice) * item.Quantity, 2, MidpointRounding.ToEven),
                         };
                         saleBuyOwner.VetSaleBuyTrans.Add(_trans);
@@ -102,6 +105,9 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
 
 
                 await _saleBuyOwnerRepository.AddAsync(saleBuyOwner);
+                await _uow.SaveChangesAsync(cancellationToken);
+
+                saleBuyOwner.InvoiceNo = ("#" + Convert.ToString(saleBuyOwner.RecordId));
                 await _uow.SaveChangesAsync(cancellationToken);
 
                 response.Data.Id = saleBuyOwner.Id;

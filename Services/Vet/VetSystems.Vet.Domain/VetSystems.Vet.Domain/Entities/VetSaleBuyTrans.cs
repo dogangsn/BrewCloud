@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,11 @@ namespace VetSystems.Vet.Domain.Entities
         public bool? VatIncluded { get; set; } = true;
         public decimal? VatAmount { get; set; }
         public Guid? OrderId { get; set; }
+        public int Quantity { get; set; }
+        public Guid TaxisId { get; set; }
+
+        [NotMapped]
+        public bool IsNew { get; set; }
 
         public virtual VetSaleBuyOwner VetSaleBuyOwner { get; set; }
     }

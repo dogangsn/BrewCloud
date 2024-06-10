@@ -85,5 +85,12 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "GetAppointmentListByPatientId")]
+        public async Task<IActionResult> GetAppointmentListByPatientId([FromBody] GetAppointmentListByPatientIdQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
     }
 }

@@ -38,12 +38,19 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "UpdatePatientsWeight")]
+        public async Task<IActionResult> UpdatePatientsWeight([FromBody] UpdatePatientsWeightCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
         #endregion
 
         #region Examination "Muayne"
 
         [HttpPost(Name = "CreateExamination")]
-        public async Task<IActionResult> CreateExamination([FromBody] CreateExaminationCommand command)
+        public async Task<IActionResult> CreateExamination([FromBody] UpdatePatientsWeightCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
@@ -96,6 +103,13 @@ namespace VetSystems.Vet.Api.Controllers
         public async Task<IActionResult> DeleteExamination([FromBody] DeleteExaminationCommand command)
         {
             var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "GetWeightControls")]
+        public async Task<IActionResult> GetWeightControls([FromBody] GetWeightControlsQuery model)
+        {
+            var result = await _mediator.Send(model);
             return Ok(result);
         }
 

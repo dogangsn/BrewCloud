@@ -17,41 +17,30 @@ using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Features.Patient.Examination.Commands
 {
-    public class CreateExaminationCommand : IRequest<Response<bool>>
+    public class UpdatePatientsWeightCommand : IRequest<Response<bool>>
     {
-        public DateTime Date { get; set; }
-        public string Status { get; set; }
-        public string CustomerId { get; set; }
         public string PatientId { get; set; }
-        public double BodyTemperature { get; set; }
-        public int Pulse { get; set; }
-        public int RespiratoryRate { get; set; }
         public double Weight { get; set; }
-        public string ComplaintStory { get; set; }
-        public string TreatmentDescription { get; set; }
-        public string Symptoms { get; set; }
     }
 
-    public class CreateExaminationHandler : IRequestHandler<CreateExaminationCommand, Response<bool>>
+    public class UpdatePatientsWeightnHandler : IRequestHandler<UpdatePatientsWeightCommand, Response<bool>>
     {
         private readonly IUnitOfWork _uow;
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
-        private readonly ILogger<CreateExaminationHandler> _logger;
-        private readonly IRepository<Vet.Domain.Entities.VetExamination> _ExaminationRepository;
+        private readonly ILogger<UpdatePatientsWeightnHandler> _logger;
         private readonly IRepository<Vet.Domain.Entities.VetWeightControl> _weightControlRepository;
 
-        public CreateExaminationHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateExaminationHandler> logger, IRepository<Domain.Entities.VetExamination> ExaminationRepository, IRepository<VetWeightControl> WeightControlRepository)
+        public UpdatePatientsWeightnHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<UpdatePatientsWeightnHandler> logger, IRepository<VetWeightControl> WeightControlRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _ExaminationRepository = ExaminationRepository ?? throw new ArgumentNullException(nameof(ExaminationRepository));
             _weightControlRepository = WeightControlRepository ?? throw new ArgumentNullException(nameof(WeightControlRepository));
         }
 
-        public async Task<Response<bool>> Handle(CreateExaminationCommand request, CancellationToken cancellationToken)
+        public async Task<Response<bool>> Handle(UpdatePatientsWeightCommand request, CancellationToken cancellationToken)
         {
             var response = new Response<bool>
             {
@@ -62,22 +51,6 @@ namespace VetSystems.Vet.Application.Features.Patient.Examination.Commands
             try
             {
                 TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
-                Vet.Domain.Entities.VetExamination examination = new()
-                {
-                    Date = TimeZoneInfo.ConvertTimeFromUtc(request.Date, localTimeZone),
-                    Status = request.Status == "Aktif" ? 0 : request.Status == "Tamamlandı" ? 1 : request.Status == "Bekliyor" ? 2 : 3,
-                    CustomerId = Guid.Parse(request.CustomerId),
-                    PatientId = Guid.Parse(request.PatientId),
-                    BodyTemperature = (decimal)request.BodyTemperature,
-                    Pulse = (decimal)request.Pulse,
-                    RespiratoryRate = (decimal)request.RespiratoryRate,
-                    Weight = (decimal)request.Weight,
-                    Symptoms = request.Symptoms, 
-                    ComplaintStory = request.ComplaintStory, 
-                    TreatmentDescription = request.TreatmentDescription,
-                    CreateDate = DateTime.UtcNow,
-                    CreateUsers = _identity.Account.UserName
-                };
 
                 VetWeightControl vetWeightControl = new()
                 {
@@ -89,7 +62,6 @@ namespace VetSystems.Vet.Application.Features.Patient.Examination.Commands
                 };
 
                 await _weightControlRepository.AddAsync(vetWeightControl);
-                await _ExaminationRepository.AddAsync(examination);
                 await _uow.SaveChangesAsync(cancellationToken);
 
             }

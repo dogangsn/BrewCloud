@@ -9,12 +9,12 @@ using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Infrastructure.EntityConfigurations
 {
-    public class VetWeightControlConfig : IEntityTypeConfiguration<VetWeightControl>
+    public class VetExaminationConfig : IEntityTypeConfiguration<VetExamination>
     {
-        public void Configure(EntityTypeBuilder<VetWeightControl> entity)
+        public void Configure(EntityTypeBuilder<VetExamination> entity)
         {
             entity.HasKey(e => e.Id)
-                        .HasName("VetWeightControl_pkey");
+                        .HasName("VetExamination_pkey");
         }
     }
 }

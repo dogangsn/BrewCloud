@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VetSystems.Vet.Infrastructure.Persistence;
 
@@ -11,9 +12,10 @@ using VetSystems.Vet.Infrastructure.Persistence;
 namespace VetSystems.Vet.Infrastructure.Migrations
 {
     [DbContext(typeof(VetDbContext))]
-    partial class VetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240610174454_updateData_44")]
+    partial class updateData_44
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2209,10 +2211,6 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("productid");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int")
-                        .HasColumnName("quantity");
-
                     b.Property<decimal?>("Ratio")
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("ratio");
@@ -2220,10 +2218,6 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                     b.Property<int>("RecId")
                         .HasColumnType("int")
                         .HasColumnName("recid");
-
-                    b.Property<Guid>("TaxisId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("taxisid");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2")

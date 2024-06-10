@@ -33,7 +33,6 @@
     <Folder Include="Features\Demands\DemandTrans\Commands\" />
     <Folder Include="Features\GeneralSettings\SystemsLog\Commands\" />
     <Folder Include="Features\GeneralSettings\SystemsLog\Queries\" />
-    <Folder Include="Features\Patient\PatientList\Commands\" />
     <Folder Include="Protos\" />
   </ItemGroup>
 

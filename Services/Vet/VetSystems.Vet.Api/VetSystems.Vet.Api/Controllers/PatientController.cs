@@ -99,6 +99,13 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "GetWeightControls")]
+        public async Task<IActionResult> GetWeightControls([FromBody] GetWeightControlsQuery model)
+        {
+            var result = await _mediator.Send(model);
+            return Ok(result);
+        }
+
         #endregion
 
     }

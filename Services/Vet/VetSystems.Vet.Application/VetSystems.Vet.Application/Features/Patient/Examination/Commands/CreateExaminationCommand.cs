@@ -39,14 +39,16 @@ namespace VetSystems.Vet.Application.Features.Patient.Examination.Commands
         private readonly IMapper _mapper;
         private readonly ILogger<CreateExaminationHandler> _logger;
         private readonly IRepository<Vet.Domain.Entities.VetExamination> _ExaminationRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetWeightControl> _weightControlRepository;
 
-        public CreateExaminationHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateExaminationHandler> logger, IRepository<Domain.Entities.VetExamination> ExaminationRepository)
+        public CreateExaminationHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateExaminationHandler> logger, IRepository<Domain.Entities.VetExamination> ExaminationRepository, IRepository<VetWeightControl> WeightControlRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _ExaminationRepository = ExaminationRepository ?? throw new ArgumentNullException(nameof(ExaminationRepository));
+            _weightControlRepository = WeightControlRepository ?? throw new ArgumentNullException(nameof(WeightControlRepository));
         }
 
         public async Task<Response<bool>> Handle(CreateExaminationCommand request, CancellationToken cancellationToken)
@@ -77,8 +79,16 @@ namespace VetSystems.Vet.Application.Features.Patient.Examination.Commands
                     CreateUsers = _identity.Account.UserName
                 };
 
+                VetWeightControl vetWeightControl = new()
+                {
+                    PatientId = Guid.Parse(request.PatientId),
+                    ControlDate = DateTime.Now,
+                    Weight = request.Weight,
+                    CreateDate = DateTime.UtcNow,
+                    CreateUsers = _identity.Account.UserName
+                };
 
-
+                await _weightControlRepository.AddAsync(vetWeightControl);
                 await _ExaminationRepository.AddAsync(examination);
                 await _uow.SaveChangesAsync(cancellationToken);
 

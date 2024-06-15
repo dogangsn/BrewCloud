@@ -25,6 +25,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
     public class CreateCustomerCommand : IRequest<Response<string>>
     {
         public CustomersDto CreateCustomers { get; set; }
+        public bool IsCreateVaccine { get; set; }
     }
 
     public class CreateCustomerHandler : IRequestHandler<CreateCustomerCommand, Response<string>>
@@ -63,6 +64,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
             _uow.CreateTransaction(IsolationLevel.ReadCommitted);
             try
             {
+                List<string> patientsIds = new List<string>();
                 //Silinen kayitlarin uzerinde islem yapılması
                 var recordControl = await _customerRepository.FirstOrDefaultAsync(x=>x.PhoneNumber.Trim() == request.CreateCustomers.PhoneNumber.Trim() && x.Deleted == false);
                 if (recordControl != null)
@@ -161,6 +163,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                             Deleted = false
                         };
                         customers.Patients.Add(patients);
+                        patientsIds.Add(patients.Id.ToString());
                     }
                 }
 
@@ -177,7 +180,14 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                 await _customerRepository.AddAsync(customers);
                 await _uow.SaveChangesAsync(cancellationToken);
                 _uow.Commit();
-                response.Data = customers.Id.ToString();
+                if (request.IsCreateVaccine)
+                {
+                    response.Data = string.Join(",", patientsIds);
+                }
+                else
+                {
+                    response.Data = customers.Id.ToString();                    
+                }
 
                 if (_param.IsOtoCustomerWelcomeMessage.GetValueOrDefault() && !string.IsNullOrEmpty(request.CreateCustomers.EMail) && request.CreateCustomers.IsEmail.GetValueOrDefault())
                     SendMail(customers.EMail);

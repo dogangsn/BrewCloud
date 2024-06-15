@@ -19,6 +19,7 @@ namespace VetSystems.Vet.Application.Features.Vaccine.Queries
 {
     public class VaccineListQuery : IRequest<Response<List<VaccineListDto>>>
     {
+        public int? AnimalType { get; set; }
     }
     public class VaccineListQueryHandler : IRequestHandler<VaccineListQuery, Response<List<VaccineListDto>>>
     {
@@ -56,9 +57,18 @@ namespace VetSystems.Vet.Application.Features.Vaccine.Queries
                         item.VetVaccineMedicine = _medicine;
                     }
                 }
+                if (request.AnimalType>0)
+                {
+                    _vaccine = _vaccine.Where(p => p.AnimalType == request.AnimalType).ToList();
+                    var result = _mapper.Map<List<VaccineListDto>>(_vaccine.OrderBy(e => e.TimeDone));
+                    response.Data = result;
 
-                var result = _mapper.Map<List<VaccineListDto>>(_vaccine.OrderByDescending(e => e.CreateDate));
-                response.Data = result;
+                }
+                else
+                {
+                    var result = _mapper.Map<List<VaccineListDto>>(_vaccine.OrderByDescending(e => e.CreateDate));
+                    response.Data = result;
+                }
             }
             catch (Exception ex)
             {

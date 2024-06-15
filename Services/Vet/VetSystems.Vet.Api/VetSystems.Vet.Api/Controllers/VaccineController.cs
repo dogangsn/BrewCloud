@@ -16,10 +16,9 @@ namespace VetSystems.Vet.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet(Name = "VaccineList")]
-        public async Task<IActionResult> VaccineList()
+        [HttpPost(Name = "VaccineList")]
+        public async Task<IActionResult> VaccineList([FromBody] VaccineListQuery command)
         {
-            var command = new VaccineListQuery();
             var result = await _mediator.Send(command);
             return Ok(result);
         }

@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using VetSystems.Shared.Dtos;
 using VetSystems.Shared.Enums;
 using VetSystems.Shared.Service;
+using VetSystems.Vet.Application.Features.Accounting.Commands;
+using VetSystems.Vet.Application.Models.Accounting;
 using VetSystems.Vet.Application.Models.Appointments;
 using VetSystems.Vet.Application.Models.Customers;
 using VetSystems.Vet.Domain.Contracts;
@@ -20,16 +22,19 @@ namespace VetSystems.Vet.Application.Features.Patient.Examination.Commands
     public class CreateExaminationCommand : IRequest<Response<bool>>
     {
         public DateTime Date { get; set; }
-        public string Status { get; set; }
+        public string Status { get; set; } = string.Empty;
         public string CustomerId { get; set; }
-        public string PatientId { get; set; }
+        public string PatientId { get; set; } 
         public double BodyTemperature { get; set; }
         public int Pulse { get; set; }
         public int RespiratoryRate { get; set; }
         public double Weight { get; set; }
-        public string ComplaintStory { get; set; }
-        public string TreatmentDescription { get; set; }
-        public string Symptoms { get; set; }
+        public string ComplaintStory { get; set; } = string.Empty;
+        public string TreatmentDescription { get; set; } = string.Empty;
+        public string Symptoms { get; set; } = string.Empty;
+        public bool IsPrice { get; set; } = false;
+        public decimal Price { get; set; } = 0;
+        public List<SaleTransRequestDto>? Trans { get; set; }
     }
 
     public class CreateExaminationHandler : IRequestHandler<CreateExaminationCommand, Response<bool>>
@@ -40,8 +45,9 @@ namespace VetSystems.Vet.Application.Features.Patient.Examination.Commands
         private readonly ILogger<CreateExaminationHandler> _logger;
         private readonly IRepository<Vet.Domain.Entities.VetExamination> _ExaminationRepository;
         private readonly IRepository<Vet.Domain.Entities.VetWeightControl> _weightControlRepository;
+        private readonly IMediator _mediator;
 
-        public CreateExaminationHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateExaminationHandler> logger, IRepository<Domain.Entities.VetExamination> ExaminationRepository, IRepository<VetWeightControl> WeightControlRepository)
+        public CreateExaminationHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateExaminationHandler> logger, IRepository<Domain.Entities.VetExamination> ExaminationRepository, IRepository<VetWeightControl> WeightControlRepository, IMediator mediator)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
@@ -49,6 +55,7 @@ namespace VetSystems.Vet.Application.Features.Patient.Examination.Commands
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _ExaminationRepository = ExaminationRepository ?? throw new ArgumentNullException(nameof(ExaminationRepository));
             _weightControlRepository = WeightControlRepository ?? throw new ArgumentNullException(nameof(WeightControlRepository));
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
         public async Task<Response<bool>> Handle(CreateExaminationCommand request, CancellationToken cancellationToken)
@@ -87,6 +94,19 @@ namespace VetSystems.Vet.Application.Features.Patient.Examination.Commands
                     CreateDate = DateTime.UtcNow,
                     CreateUsers = _identity.Account.UserName
                 };
+
+                var req = new CreateSaleCommand()
+                {
+                    CustomerId = Guid.Parse(request.CustomerId),
+                    Date = examination.Date,
+                    Remark = "",
+                    Trans = request.Trans,
+                    IsPrice = request.IsPrice,
+                    Price = request.Price,
+                    ExaminationId = examination.Id
+                };
+                await _mediator.Send(req);
+
 
                 await _weightControlRepository.AddAsync(vetWeightControl);
                 await _ExaminationRepository.AddAsync(examination);

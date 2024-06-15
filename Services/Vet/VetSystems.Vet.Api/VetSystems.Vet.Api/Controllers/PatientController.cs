@@ -50,7 +50,7 @@ namespace VetSystems.Vet.Api.Controllers
         #region Examination "Muayne"
 
         [HttpPost(Name = "CreateExamination")]
-        public async Task<IActionResult> CreateExamination([FromBody] UpdatePatientsWeightCommand command)
+        public async Task<IActionResult> CreateExamination([FromBody] CreateExaminationCommand command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);

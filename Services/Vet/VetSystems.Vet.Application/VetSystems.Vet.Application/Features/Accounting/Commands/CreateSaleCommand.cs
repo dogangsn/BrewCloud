@@ -20,7 +20,10 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
         public DateTime Date { get; set; }
         public string Remark { get; set; } = string.Empty;
         public Guid? CustomerId { get; set; }
-        public List<SaleTransRequestDto> Trans { get; set; }
+        public List<SaleTransRequestDto>? Trans { get; set; }
+        public bool IsPrice { get; set; } = false;
+        public decimal Price { get; set; } = 0;
+        public Guid ExaminationId { get; set; }
     }
 
     public class CreateSaleCommandHandler : IRequestHandler<CreateSaleCommand, Response<SaleResponseDto>>

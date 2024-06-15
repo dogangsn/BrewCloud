@@ -31,6 +31,7 @@ namespace VetSystems.Vet.Application.Models.Dashboards
         public decimal? DailyTurnoverAmount { get; set; } = 0;
         public decimal? DailyTurnoverPreviousAmount { get; set; } = 0;
         public decimal? TotalStockAmount { get; set; } = 0;
+        public decimal? WaitingTotalAmount { get; set; } = 0;
     }
 
 }

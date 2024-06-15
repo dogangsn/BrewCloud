@@ -28,8 +28,9 @@ namespace VetSystems.Vet.Application.Features.Dashboards.Queries
         private readonly IRepository<VetCustomers> _vetCustomersRepository;
         private readonly IRepository<VetSaleBuyOwner> _vetSaleBuyOwnerRepository;
         private readonly IMediator _mediator;
+        private readonly IRepository<VetPaymentCollection> _paymentCollectionRepository;
 
-        public GetDashBoardQueryHandler(IIdentityRepository identityRepository, IUnitOfWork uow, IMapper mapper, IRepository<VetAppointments> vetAppointmentsRepository, IRepository<VetCustomers> vetCustomersRepository, IRepository<VetSaleBuyOwner> vetSaleBuyOwnerRepository, IMediator mediator)
+        public GetDashBoardQueryHandler(IIdentityRepository identityRepository, IUnitOfWork uow, IMapper mapper, IRepository<VetAppointments> vetAppointmentsRepository, IRepository<VetCustomers> vetCustomersRepository, IRepository<VetSaleBuyOwner> vetSaleBuyOwnerRepository, IMediator mediator, IRepository<VetPaymentCollection> paymentCollectionRepository)
         {
             _identityRepository = identityRepository ?? throw new ArgumentNullException(nameof(identityRepository));
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
@@ -38,6 +39,7 @@ namespace VetSystems.Vet.Application.Features.Dashboards.Queries
             _vetCustomersRepository = vetCustomersRepository ?? throw new ArgumentNullException(nameof(vetCustomersRepository));
             _vetSaleBuyOwnerRepository = vetSaleBuyOwnerRepository;
             _mediator = mediator;
+            _paymentCollectionRepository = paymentCollectionRepository;
         }
 
         public async Task<Response<DashboardsDto>> Handle(GetDashBoardQuery request, CancellationToken cancellationToken)
@@ -57,7 +59,10 @@ namespace VetSystems.Vet.Application.Features.Dashboards.Queries
                 _totalCount.DailyAddCustomerYestardayCount = (await _vetCustomersRepository.GetAsync(x => x.Deleted == false && x.CreateDate.Date == DateTime.Today.AddDays(-1))).Count();
 
                 var saleBuy = await _vetSaleBuyOwnerRepository.GetAsync(x => x.Deleted == false && x.CreateDate.Date == DateTime.Today);
-                _totalCount.DailyTurnoverAmount = saleBuy.Sum(x => x.Total);
+                _totalCount.WaitingTotalAmount = saleBuy.Sum(x => x.Total);
+
+                var collection =  (await _paymentCollectionRepository.GetAsync(x =>  x.Deleted == false && x.CreateDate.Date == DateTime.Today)).Sum(x => x.Total).GetValueOrDefault();
+                _totalCount.DailyTurnoverAmount = collection;
 
 
                 var req = new GetAppointmentDailyListQuery();

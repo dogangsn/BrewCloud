@@ -12,9 +12,10 @@ namespace VetSystems.Integrations.Application.Features.Integrations.SsmTransacti
     public class SendSmsTransactionsCommand : IRequest<Response<bool>>
     {
         public string Title { get; set; } = string.Empty;
-        public string Contents { get; set; } = string.Empty;
-        public string UserName { get; set; }
-        public string PassWord { get; set; }
+        public string Content { get; set; } = string.Empty;
+        public string UserName { get; set; } = string.Empty;
+        public string PassWord { get; set; } = string.Empty;
+        public string[] SendPhone { get; set; } 
     }
 
     public class SendSmsTransactionsCommandHandler : IRequestHandler<SendSmsTransactionsCommand, Response<bool>>
@@ -29,14 +30,13 @@ namespace VetSystems.Integrations.Application.Features.Integrations.SsmTransacti
             try
             {
                 SmsService service = new SmsService(request.UserName, request.PassWord, "DOGANGUNES");
-                String[] numaralar = { "05398533010", "05530154968" };
-                service.addSMS("Merhaba. Bu bir denemedir.", numaralar);
+                //String[] numaralar = { "05398533010", "05530154968" };
+                String[] numaralar = request.SendPhone;
+                service.addSMS(request.Content, numaralar);
                 String sonuc = service.gonder();
-
             }
             catch (Exception ex)
             {
-
             }
             return response;
         }

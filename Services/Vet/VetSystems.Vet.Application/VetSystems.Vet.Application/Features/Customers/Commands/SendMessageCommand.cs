@@ -21,7 +21,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
         public MessageType Type { get; set; }
         public string Title { get; set; } = string.Empty;
         public string Content { get; set; } = string.Empty;
-        public string PhoneNumber { get; set; } = string.Empty;
+        public Guid CustomerId { get; set; }
     }
 
     public class SendMessageCommandHandler : IRequestHandler<SendMessageCommand, Response<bool>>
@@ -32,8 +32,9 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
         private readonly ILogger<SendMessageCommandHandler> _logger;
         private readonly IRepository<VetSmsParameters> _smsParametersRepository;
         private readonly ISmsService _smsService;
+        private readonly IRepository<Vet.Domain.Entities.VetCustomers> _customersRepository;
 
-        public SendMessageCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<SendMessageCommandHandler> logger, IRepository<VetSmsParameters> smsParametersRepository, ISmsService smsService)
+        public SendMessageCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<SendMessageCommandHandler> logger, IRepository<VetSmsParameters> smsParametersRepository, ISmsService smsService, IRepository<VetCustomers> customersRepository)
         {
             _uow = uow;
             _identity = identity;
@@ -41,6 +42,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
             _logger = logger;
             _smsParametersRepository = smsParametersRepository;
             _smsService = smsService;
+            _customersRepository = customersRepository;
         }
 
         public async Task<Response<bool>> Handle(SendMessageCommand request, CancellationToken cancellationToken)
@@ -48,6 +50,34 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
             var response = Response<bool>.Success(200);
             try
             {
+
+                var customers = await _customersRepository.GetByIdAsync(request.CustomerId);
+                if (customers == null)
+                {
+                    return Response<bool>.Fail("Not Found", 404);
+                }
+
+                if (!customers.IsPhone.GetValueOrDefault())
+                {
+                    return Response<bool>.Fail("Müşteri İzni Yok.", 404);
+                }
+
+                if (string.IsNullOrEmpty(customers.PhoneNumber))
+                {
+                    return Response<bool>.Fail("Telefon Numarası Bulunamadı.", 404);
+                }
+
+                string _phoneNumber = customers.PhoneNumber.Replace(")", "")
+                                    .Replace("(", "")
+                                    .Replace("-", "")
+                                    .Replace(",", "")
+                                    .Replace(" ", "");
+                if (_phoneNumber.Length != 10)
+                {
+                    return Response<bool>.Fail("Telefon Numarasını Kontrol Ednizi.", 404);
+                }
+
+                string[] charArray = new string[] { _phoneNumber };
                 var smsParamters = await _smsParametersRepository.FirstOrDefaultAsync(x => x.Active == true);
                 if (smsParamters != null)
                 {
@@ -57,12 +87,14 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                         PassWord = smsParamters.Password,
                         Content = request.Content,
                         Title = request.Title,
+                        SendPhone = charArray
                     };
                     var result = _smsService.SendSms(req);
                 }
             }
             catch (Exception ex)
             {
+                return Response<bool>.Fail(ex.Message, 404);
             }
             return response;
         }

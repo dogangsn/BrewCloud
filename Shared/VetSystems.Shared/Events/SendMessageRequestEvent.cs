@@ -11,5 +11,6 @@ namespace VetSystems.Shared.Events
         public string PassWord { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
+        public string[] SendPhone { get; set; }
     }
 }

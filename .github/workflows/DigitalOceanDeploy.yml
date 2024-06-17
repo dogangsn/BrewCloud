@@ -1,0 +1,36 @@
+name: Deploy to DigitalOcean with Docker Compose
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install doctl
+      run: sudo snap install doctl
+
+    - name: Authenticate with DigitalOcean
+      env:
+        DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      run: doctl auth init -t $DIGITALOCEAN_ACCESS_TOKEN
+
+    - name: Retrieve Droplet IP
+      id: droplet
+      run: |
+        droplet_ip=$(doctl compute droplet list --format PublicIPv4,Name --no-header | grep "your-droplet-name" | awk '{print $1}')
+        echo "::set-output name=droplet_ip::$droplet_ip"
+
+    - name: Deploy to DigitalOcean Droplet
+      env:
+        DROPLET_IP: ${{ steps.droplet.outputs.droplet_ip }}
+      run: |
+          cd ./
+          git pull origin master
+          docker-compose down
+          docker-compose up -d --build

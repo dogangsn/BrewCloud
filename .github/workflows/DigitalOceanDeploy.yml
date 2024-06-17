@@ -31,8 +31,8 @@ jobs:
         DROPLET_IP: ${{ steps.droplet.outputs.droplet_ip }}
       run: |
         ssh -o StrictHostKeyChecking=no root@${DROPLET_IP} << 'EOF'
-          cd /path/to/your/project
-          git pull origin main
+          cd ./
+          git pull origin master
           docker-compose down
           docker-compose up -d --build
         EOF

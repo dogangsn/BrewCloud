@@ -8,6 +8,7 @@ namespace VetSystems.Vet.Application.Models.Customers
 {
     public class PatientsDetailsDto
     {
+        public Guid Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string BirthDate { get; set; }
         public string ChipNumber { get; set; } = string.Empty;

@@ -28,6 +28,10 @@ namespace VetSystems.Vet.Domain.Entities
         public Guid? demandsGuidId  { get; set; } = Guid.Empty;
         public bool? IsAppointment { get; set; } = false;
         public Guid? AppointmentId { get; set; } = Guid.Empty;
+        public bool? IsExaminations { get; set; } = false;
+        public Guid? ExaminationsId { get; set; } = Guid.Empty;
+        public bool? IsAccomodation { get; set; } = false;
+        public Guid? AccomodationId { get; set; } = Guid.Empty;
         public void addSaleBuyTrans(VetSaleBuyTrans trans)
         {
             trans.OwnerId = Id;

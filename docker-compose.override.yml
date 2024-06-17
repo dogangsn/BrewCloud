@@ -24,11 +24,11 @@ services:
         restart: on-failure
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
-            - "ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=VetAdminIdentityDb; User=sa; Password=123654Dg;"
-            - "EventBusSettings:HostAddress=amqps://ebgfgaha:DCwUehyMQDtR0oeiqYJDCn-T4VEYhXY7@stingray.rmq.cloudamqp.com/ebgfgaha" 
-            - "VetDbSettings:ServerName=vetsytemsdb,1433"
-            - "VetDbSettings:User=sa"
-            - "VetDbSettings:Password=123654Dg"
+            - ConnectionStrings:DefaultConnection=Server=mssql-172240-0.cloudclusters.net,10023; Database=vet-5cdb0c05-0cc5-4bef-b28d-d27cc5b56017;User Id=vet;Password=123654Dg
+            - EventBusSettings:HostAddress=amqps://ebgfgaha:DCwUehyMQDtR0oeiqYJDCn-T4VEYhXY7@stingray.rmq.cloudamqp.com/ebgfgaha
+            - VetDbSettings:ServerName=mssql-172240-0.cloudclusters.net,10023
+            - VetDbSettings:User=vet
+            - VetDbSettings:Password=123654Dg
             - GRPC_PORT=81
             - PORT=80 
             - ApiGatewayUrl=http://gateway.api/services/
@@ -39,12 +39,12 @@ services:
         restart: on-failure
         environment: 
             - ASPNETCORE_ENVIRONMENT=Development
-            - ConnectionStrings:ConnectionString=Server=vetsytemsdb,1433; Database=vetsytemsDb; User=sa; Password=123654Dg
+            - ConnectionStrings:ConnectionString=Server=mssql-172240-0.cloudclusters.net,10023; Database=vet-5cdb0c05-0cc5-4bef-b28d-d27cc5b56017;User Id=vet;Password=123654Dg
             - "EventBusSettings:HostAddress=amqps://ebgfgaha:DCwUehyMQDtR0oeiqYJDCn-T4VEYhXY7@stingray.rmq.cloudamqp.com/ebgfgaha" 
             - IdentityServerURL=http://identityserver.api:80
             - GrpcSettings:IdentityUrl=http://identityserver.api:81
-            - VetDbSettings:ServerName=vetsytemsdb,1433
-            - VetDbSettings:User=sa
+            - VetDbSettings:ServerName=mssql-172240-0.cloudclusters.net,10023
+            - VetDbSettings:User=vet
             - VetDbSettings:Password=123654Dg
         depends_on:
             - identityserver.api
@@ -55,7 +55,7 @@ services:
         restart: on-failure
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
-            - ConnectionStrings:ConnectionString=Server=vetsytemsdb,1433; Database=vetsytemsDb; User=sa; Password=123654Dg
+            - ConnectionStrings:ConnectionString=Server=mssql-172240-0.cloudclusters.net,10023; Database=vet-5cdb0c05-0cc5-4bef-b28d-d27cc5b56017;User Id=vet;Password=123654Dg
             - IdentityServerURL=http://identityserver.api:80
             - GrpcSettings:IdentityUrl=http://identityserver.api:81
             - ApiGatewayUrl=http://gateway.api/services/
@@ -66,7 +66,7 @@ services:
         restart: on-failure
         environment:
             - ASPNETCORE_ENVIRONMENT=Local
-            - ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=vetsytemsDb; User=sa; Password=123654Dg
+            - ConnectionStrings:DefaultConnection=Server=mssql-172240-0.cloudclusters.net,10023; Database=vet-5cdb0c05-0cc5-4bef-b28d-d27cc5b56017;User Id=vet;Password=123654Dg
         ports:
             -  "5016:80"
     mail.api:
@@ -74,7 +74,7 @@ services:
         restart: on-failure
         environment:
             - ASPNETCORE_ENVIRONMENT=Local
-            - ConnectionStrings:ConnectionString=Server=vetsytemsdb,1433; Database=vetsytemsDb; User=sa; Password=123654Dg
+            - ConnectionStrings:ConnectionString=Server=mssql-172240-0.cloudclusters.net,10023; Database=vet-5cdb0c05-0cc5-4bef-b28d-d27cc5b56017;User Id=vet;Password=123654Dg
             - IdentityServerURL=http://identityserver.api:80 
             - GrpcSettings:IdentityUrl=http://identityserver.api:81
         ports:
@@ -84,9 +84,9 @@ services:
         restart: on-failure
         environment: 
             - ASPNETCORE_ENVIRONMENT=Development
-            - ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=vetsytemsDb; User=sa; Password=123654Dg
-            - VetDbSettings:ServerName=vetsytemsdb,1433
-            - VetDbSettings:User=sa
+            - ConnectionStrings:DefaultConnection=Server=mssql-172240-0.cloudclusters.net,10023; Database=vet-5cdb0c05-0cc5-4bef-b28d-d27cc5b56017;User Id=vet;Password=123654Dg
+            - VetDbSettings:ServerName=mssql-172240-0.cloudclusters.net,10023
+            - VetDbSettings:User=vet
             - VetDbSettings:Password=123654Dg
             - IdentityServerURL=http://identityserver.api:80
             - GrpcSettings:IdentityUrl=http://identityserver.api:81
@@ -97,9 +97,9 @@ services:
         restart: on-failure
         environment:
             - ASPNETCORE_ENVIRONMENT=Local
-            - ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=vetsytemsDb; User=sa; Password=123654Dg
-            - VetDbSettings:ServerName=vetsytemsdb,1433
-            - VetDbSettings:User=sa
+            - ConnectionStrings:DefaultConnection=Server=mssql-172240-0.cloudclusters.net,10023; Database=vet-5cdb0c05-0cc5-4bef-b28d-d27cc5b56017;User Id=vet;Password=123654Dg
+            - VetDbSettings:ServerName=mssql-172240-0.cloudclusters.net,10023
+            - VetDbSettings:User=vet
             - VetDbSettings:Password=123654Dg
         ports:
             - "5015:80"  
@@ -108,7 +108,7 @@ services:
         restart: on-failure
         environment:
             - ASPNETCORE_ENVIRONMENT=Local
-            - ConnectionStrings:DefaultConnection=Server=vetsytemsdb,1433; Database=vetsytemsDb; User=sa; Password=123654Dg
+            - ConnectionStrings:DefaultConnection=Server=mssql-172240-0.cloudclusters.net,10023; Database=vet-5cdb0c05-0cc5-4bef-b28d-d27cc5b56017;User Id=vet;Password=123654Dg
         ports:
             - "5014:80" 
 

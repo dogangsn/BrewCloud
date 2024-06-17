@@ -24,6 +24,9 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
         public bool IsPrice { get; set; } = false;
         public decimal Price { get; set; } = 0;
         public Guid ExaminationId { get; set; }
+        public bool? IsExaminations { get; set; } = false;
+        public bool? IsAccomodation { get; set; } = false;
+
     }
 
     public class CreateSaleCommandHandler : IRequestHandler<CreateSaleCommand, Response<SaleResponseDto>>
@@ -76,7 +79,7 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
                     if (_product != null)
                     {
                         var taxis = await _taxisRepository.GetByIdAsync(_product.TaxisId.GetValueOrDefault());
-                        decimal vatAmaount = CalculateVatAmount(_product.SellingPrice, item.Quantity , (taxis == null ? 0 : taxis.TaxRatio),  _product.SellingIncludeKDV.GetValueOrDefault());
+                        decimal vatAmaount = CalculateVatAmount(_product.SellingPrice, item.Quantity, (taxis == null ? 0 : taxis.TaxRatio), _product.SellingIncludeKDV.GetValueOrDefault());
 
                         var _trans = new Vet.Domain.Entities.VetSaleBuyTrans
                         {
@@ -89,7 +92,7 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
                             Amount = item.UnitPrice,
                             VatIncluded = _product.SellingIncludeKDV,
                             VatAmount = vatAmaount,
-                            Price =  _product.SellingPrice,
+                            Price = _product.SellingPrice,
                             OwnerId = saleBuyOwner.Id,
                             Discount = item.Discount,
                             Quantity = item.Quantity,
@@ -100,11 +103,46 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
                     }
                 }
 
+
+                if (request.IsExaminations.GetValueOrDefault() && request.Price > 0)
+                {
+                    var _trans = new Vet.Domain.Entities.VetSaleBuyTrans
+                    {
+                        Id = Guid.NewGuid(),
+                        InvoiceNo = saleBuyOwner.InvoiceNo,
+                        Ratio = 0,
+                        ProductId = Guid.Empty,
+                        CreateDate = DateTime.Now,
+                        CreateUsers = _identity.Account.UserName,
+                        Amount = request.Price,
+                        VatIncluded = false,
+                        VatAmount = 0,
+                        Price = request.Price,
+                        OwnerId = saleBuyOwner.Id,
+                        Discount = 0,
+                        Quantity = 1,
+                        TaxisId = Guid.Empty,
+                        NetPrice = Math.Round((request.Price) * 1, 2, MidpointRounding.ToEven),
+                    };
+                    saleBuyOwner.VetSaleBuyTrans.Add(_trans);
+                }
+
                 saleBuyOwner.KDV = Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.VatAmount.GetValueOrDefault()), 2, MidpointRounding.ToEven);
                 saleBuyOwner.NetPrice = Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.NetPrice.GetValueOrDefault()), 2, MidpointRounding.ToEven);
                 saleBuyOwner.Total = Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.NetPrice.GetValueOrDefault()), 2, MidpointRounding.ToEven)
                                             + Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.VatAmount.GetValueOrDefault()), 2, MidpointRounding.ToEven);
                 saleBuyOwner.Discount = Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.Discount.GetValueOrDefault()), 2, MidpointRounding.ToEven);
+
+                if (request.IsExaminations.GetValueOrDefault())
+                {
+                    saleBuyOwner.IsExaminations = true;
+                    saleBuyOwner.ExaminationsId = request.ExaminationId;
+                }
+
+
+
+
+
 
 
                 await _saleBuyOwnerRepository.AddAsync(saleBuyOwner);
@@ -128,7 +166,7 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
         {
             decimal vatAmount = 0;
             try
-            { 
+            {
                 if (_ratio != 0)
                 {
                     decimal basePrice = 0;

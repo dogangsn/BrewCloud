@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VetSystems.Vet.Infrastructure.Persistence;
 
@@ -11,9 +12,10 @@ using VetSystems.Vet.Infrastructure.Persistence;
 namespace VetSystems.Vet.Infrastructure.Migrations
 {
     [DbContext(typeof(VetDbContext))]
-    partial class VetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240616210931_updateData_45")]
+    partial class updateData_45
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1369,10 +1371,6 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                     b.Property<bool?>("IsAnimalsBreeds")
                         .HasColumnType("bit")
                         .HasColumnName("isanimalsbreeds");
-
-                    b.Property<bool?>("IsExaminationAmuntZero")
-                        .HasColumnType("bit")
-                        .HasColumnName("isexaminationamuntzero");
 
                     b.Property<bool?>("IsFirstInspection")
                         .HasColumnType("bit")

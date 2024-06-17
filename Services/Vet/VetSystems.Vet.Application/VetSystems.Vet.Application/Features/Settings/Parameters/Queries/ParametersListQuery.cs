@@ -33,6 +33,7 @@ namespace VetSystems.Vet.Application.Features.Settings.Parameters.Queries
         public bool? IsAnimalsBreeds { get; set; } 
         public string appointmentBeginDate { get; set; }
         public string appointmentEndDate { get; set; }
+        public bool? IsExaminationAmuntZero { get; set; }
     }
 
     public class ParametersListQueryHandler : IRequestHandler<ParametersListQuery, Response<List<ParametersDto>>>
@@ -64,12 +65,8 @@ namespace VetSystems.Vet.Application.Features.Settings.Parameters.Queries
             catch (Exception ex)
             {
                 response.IsSuccessful = false;
-                //response.Errors = ex.ToString();
             }
-
             return response;
-
-
         }
     }
 }

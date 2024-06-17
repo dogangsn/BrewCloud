@@ -70,10 +70,29 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
                         else
                             _paidtotal = _amount;
 
-                        SendCreateCollection(request, item.Id, _paidtotal);
 
+                        VetPaymentCollection paymentCollection = new()
+                        {
+                            Id = Guid.NewGuid(),
+                            CreateDate = DateTime.Now,
+                            CreateUsers = _identity.Account.UserName,
+                            CustomerId = request.CustomerId,
+                            Date = request.Date,
+                            Remark = request.Remark,
+                            Credit = _paidtotal,
+                            Paid = _paidtotal,
+                            Debit = 0,
+                            Total = _paidtotal,
+                            TotalPaid = _paidtotal,
+                            SaleBuyId = item.Id,
+                            PaymetntId = request.PaymentId
+                        };
+                        await _paymentCollectionRepository.AddAsync(paymentCollection);
+                        //SendCreateCollection(request, item.Id, _paidtotal);
                         _amount = (decimal)_amount - (decimal)item.Total.GetValueOrDefault();
                     }
+                    await _uow.SaveChangesAsync();
+
                 }
             }
             catch (Exception ex)

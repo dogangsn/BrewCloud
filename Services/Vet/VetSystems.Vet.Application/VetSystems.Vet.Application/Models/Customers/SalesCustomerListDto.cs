@@ -15,6 +15,8 @@ namespace VetSystems.Vet.Application.Models.Customers
         public decimal Amount { get; set; }
         public decimal Collection { get; set; }
         public decimal RameiningBalance { get; set; }
+        public Guid ExaminationsId { get; set; }
+        public bool IsExaminations { get; set; }
 
     }
 }

@@ -35,7 +35,7 @@ namespace VetSystems.Vet.Application.Features.Settings.Parameters.Commands
         public bool? IsFirstInspection { get; set; }
         public string AppointmentBeginDate { get; set; }
         public string AppointmentEndDate { get; set; }
-
+        public bool? IsExaminationAmuntZero { get; set; }
 
     }
 
@@ -92,7 +92,8 @@ namespace VetSystems.Vet.Application.Features.Settings.Parameters.Commands
                         IsAnimalsBreeds = request.IsAnimalsBreeds.GetValueOrDefault(),
                         IsFirstInspection = request.IsFirstInspection.GetValueOrDefault(),
                         AppointmentBeginDate=request.AppointmentBeginDate,
-                        AppointmentEndDate=request.AppointmentEndDate
+                        AppointmentEndDate=request.AppointmentEndDate,
+                        IsExaminationAmuntZero = request.IsExaminationAmuntZero
 
                     };
                     await _parametersRepository.AddAsync(crparameters);
@@ -126,6 +127,7 @@ namespace VetSystems.Vet.Application.Features.Settings.Parameters.Commands
                     parameters.IsAnimalsBreeds = request.IsFirstInspection.GetValueOrDefault();
                     parameters.AppointmentBeginDate = request.AppointmentBeginDate;
                     parameters.AppointmentEndDate = request.AppointmentEndDate;
+                    parameters.IsExaminationAmuntZero = request.IsExaminationAmuntZero;
                     
                     await _uow.SaveChangesAsync(cancellationToken);
                 }

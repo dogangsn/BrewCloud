@@ -9,6 +9,7 @@ using VetSystems.Shared.Dtos;
 using VetSystems.Shared.Service;
 using VetSystems.Vet.Application.Models.Customers;
 using VetSystems.Vet.Domain.Contracts;
+using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Features.Customers.Queries
 {
@@ -59,18 +60,24 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                 string _query =  " SELECT  "
                     + "     vetsalebuyowner.id as SaleOwnerId, "
                     + "     ISNULL(vetpaymentcollection.collectionid, '00000000-0000-0000-0000-000000000000') as CollectionId, "
-                    + "     STUFF(( "
-                    + "         SELECT ', ' + vetproducts.name "
-                    + "         FROM vetsalebuytrans "
-                    + "         INNER JOIN vetproducts ON vetsalebuytrans.productid = vetproducts.id "
-                    + "         WHERE vetsalebuytrans.ownerid = vetsalebuyowner.id "
-                    + "         FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 2, '') as SalesContent, "
+                    + "                  CASE"
+                    + "     WHEN vetsalebuyowner.examinationsid != '00000000-0000-0000-0000-000000000000' THEN 'MUAYENE SATIŞ'"
+                    + "     WHEN vetsalebuyowner.AccomodationId != '00000000-0000-0000-0000-000000000000' THEN 'Konaklama Bedeli'"
+                    + "     ELSE STUFF(("
+                    + "         SELECT ', ' + vetproducts.name"
+                    + "         FROM vetsalebuytrans"
+                    + "         INNER JOIN vetproducts ON vetsalebuytrans.productid = vetproducts.id"
+                    + "         WHERE vetsalebuytrans.ownerid = vetsalebuyowner.id"
+                    + "         FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), 1, 2, '')"
+                    + " END as SalesContent, "
                     + "     vetsalebuyowner.date, "
                     + "     vetsalebuyowner.total as Amount, "
                     + "     ISNULL(vetpaymentcollection.credit, 0) as Collection, "
                     + "     vetsalebuyowner.total - ISNULL(vetpaymentcollection.credit, 0) as RameiningBalance, "
                     + "     vetsalebuyowner.createusers as Kayitlikullanici, "
-                    + "     vetsalebuyowner.createdate as KayitTarihi "
+                    + "     vetsalebuyowner.createdate as KayitTarihi, "
+                    + "  vetsalebuyowner.examinationsid as examinationsid, "
+                    + " vetsalebuyowner.isexaminations as isexaminations "
                     + " FROM  "
                     + "     vetsalebuyowner "
                     + " LEFT JOIN  "

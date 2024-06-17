@@ -46,8 +46,9 @@ namespace VetSystems.Vet.Application.Features.Patient.Examination.Commands
         private readonly IRepository<Vet.Domain.Entities.VetExamination> _ExaminationRepository;
         private readonly IRepository<Vet.Domain.Entities.VetWeightControl> _weightControlRepository;
         private readonly IMediator _mediator;
+        private readonly IRepository<Domain.Entities.VetParameters> _parametersRepository;
 
-        public CreateExaminationHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateExaminationHandler> logger, IRepository<Domain.Entities.VetExamination> ExaminationRepository, IRepository<VetWeightControl> WeightControlRepository, IMediator mediator)
+        public CreateExaminationHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateExaminationHandler> logger, IRepository<Domain.Entities.VetExamination> ExaminationRepository, IRepository<VetWeightControl> WeightControlRepository, IMediator mediator, IRepository<VetParameters> parametersRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
@@ -56,6 +57,7 @@ namespace VetSystems.Vet.Application.Features.Patient.Examination.Commands
             _ExaminationRepository = ExaminationRepository ?? throw new ArgumentNullException(nameof(ExaminationRepository));
             _weightControlRepository = WeightControlRepository ?? throw new ArgumentNullException(nameof(WeightControlRepository));
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+            _parametersRepository = parametersRepository ?? throw new ArgumentNullException(nameof(parametersRepository)); 
         }
 
         public async Task<Response<bool>> Handle(CreateExaminationCommand request, CancellationToken cancellationToken)
@@ -83,7 +85,8 @@ namespace VetSystems.Vet.Application.Features.Patient.Examination.Commands
                     ComplaintStory = request.ComplaintStory, 
                     TreatmentDescription = request.TreatmentDescription,
                     CreateDate = DateTime.UtcNow,
-                    CreateUsers = _identity.Account.UserName
+                    CreateUsers = _identity.Account.UserName,
+                    Id = Guid.NewGuid(),
                 };
 
                 VetWeightControl vetWeightControl = new()
@@ -103,7 +106,9 @@ namespace VetSystems.Vet.Application.Features.Patient.Examination.Commands
                     Trans = request.Trans,
                     IsPrice = request.IsPrice,
                     Price = request.Price,
-                    ExaminationId = examination.Id
+                    ExaminationId = examination.Id,
+                    IsExaminations = true,
+                    IsAccomodation = false, 
                 };
                 await _mediator.Send(req);
 

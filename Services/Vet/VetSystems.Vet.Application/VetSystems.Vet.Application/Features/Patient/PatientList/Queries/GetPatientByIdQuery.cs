@@ -52,7 +52,8 @@ namespace VetSystems.Vet.Application.Features.Patient.PatientList.Queries
                                             vp.sterilization as Sterilization,
                                             vp.active as Active,
                                             vp.images as Images,
-                                            vat.name as AnimalType,
+                                            vat.name as AnimalTypeName,
+                                            vat.type as AnimalType,
                                             vabd.breedname as BreedType,
                                             vacd.name as AnimalColor from vetpatients as vp
                                                 left outer join vetanimalstype as vat on vp.animaltype = vat.type

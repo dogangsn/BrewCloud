@@ -40,7 +40,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                     "      Vc.updatedate, Vc.deleteddate, Vc.deleted, Vc.deletedusers, \r\n " +
                     "      Vc.updateusers, Vc.createusers, COUNT(Vp.id) AS PetCount\r\n" +
                     "      FROM VetCustomers Vc \r\n" +
-                    "      LEFT OUTER JOIN VetPatients Vp ON Vc.id = Vp.customerid \r\n" +
+                    "      LEFT OUTER JOIN VetPatients Vp ON Vc.id = Vp.customerid and Vp.deleted = 0 \r\n" +
                     "      WHERE Vc.Deleted = 0 \r\n" +
                     "      GROUP BY Vc.id, Vc.firstname, Vc.lastname, Vc.phonenumber, Vc.phonenumber2, \r\n" +
                     "      Vc.email, Vc.taxoffice, Vc.vkntcno, Vc.customergroup, Vc.note, \r\n" +

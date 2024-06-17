@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VetSystems.Shared.Dtos;
 using VetSystems.Shared.Service;
+using VetSystems.Vet.Application.Features.SaleBuy.Commands;
 using VetSystems.Vet.Domain.Contracts;
 
 namespace VetSystems.Vet.Application.Features.Patient.Commands
@@ -24,11 +25,13 @@ namespace VetSystems.Vet.Application.Features.Patient.Commands
         private readonly IMapper _mapper;
         private readonly ILogger<DeleteExaminationCommandHandler> _logger; 
         private readonly IIdentityRepository _identityRepository;
-
         private readonly IRepository<Vet.Domain.Entities.VetExamination> _vetExaminationRepository;
+        private readonly IMediator _mediator;
+        private readonly IRepository<Vet.Domain.Entities.VetSaleBuyOwner> _saleBuyOwnerRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetSaleBuyTrans> _saleBuyTransRepository;
 
         public DeleteExaminationCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<DeleteExaminationCommandHandler> logger,
-           IIdentityRepository identityRepository, IRepository<Domain.Entities.VetExamination> vetExaminationRepository)
+           IIdentityRepository identityRepository, IRepository<Domain.Entities.VetExamination> vetExaminationRepository, IMediator mediator, IRepository<Domain.Entities.VetSaleBuyOwner> saleBuyOwnerRepository, IRepository<Domain.Entities.VetSaleBuyTrans> saleBuyTransRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
@@ -36,6 +39,9 @@ namespace VetSystems.Vet.Application.Features.Patient.Commands
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _identityRepository = identityRepository ?? throw new ArgumentNullException(nameof(identityRepository));
             _vetExaminationRepository = vetExaminationRepository;
+            _mediator = mediator;
+            _saleBuyOwnerRepository = saleBuyOwnerRepository;
+            _saleBuyTransRepository = saleBuyTransRepository;
         }
 
         public async Task<Response<bool>> Handle(DeleteExaminationCommand request, CancellationToken cancellationToken)
@@ -58,7 +64,27 @@ namespace VetSystems.Vet.Application.Features.Patient.Commands
                 examination.DeletedDate = DateTime.Now;
                 examination.DeletedUsers = _identityRepository.Account.UserName;
 
+
+                var salebuyOwner = (await _saleBuyOwnerRepository.GetAsync(x=>x.ExaminationsId == examination.Id)).FirstOrDefault();
+                if (salebuyOwner != null)
+                {
+                    salebuyOwner.Deleted = true;
+                    salebuyOwner.DeletedDate = DateTime.Now;
+                    salebuyOwner.DeletedUsers = _identityRepository.Account.UserName;
+                    List<Vet.Domain.Entities.VetSaleBuyTrans> trans = (await _saleBuyTransRepository.GetAsync(x => x.OwnerId == salebuyOwner.Id)).ToList();
+                    if (trans != null)
+                    {
+                        foreach (var item in trans)
+                        {
+                            item.Deleted = true;
+                            salebuyOwner.DeletedDate = DateTime.Now;
+                            salebuyOwner.DeletedUsers = _identityRepository.Account.UserName;
+                        }
+                    }
+                }
+               
                 await _uow.SaveChangesAsync(cancellationToken);
+
             }
             catch (Exception ex)
             {

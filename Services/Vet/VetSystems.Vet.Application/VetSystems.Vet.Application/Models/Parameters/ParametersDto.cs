@@ -26,6 +26,7 @@ namespace VetSystems.Vet.Application.Models.Parameters
         public bool? IsFirstInspection { get; set; } = false;
         public string appointmentBeginDate { get; set; }
         public string appointmentEndDate { get; set; }
+        public bool? IsExaminationAmuntZero { get; set; }
 
     }
 }

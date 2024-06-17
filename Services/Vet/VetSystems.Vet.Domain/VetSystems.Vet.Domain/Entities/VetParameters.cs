@@ -30,6 +30,7 @@ namespace VetSystems.Vet.Domain.Entities
         public bool? IsFirstInspection { get; set; } = false;
         public string AppointmentBeginDate { get; set; }
         public string AppointmentEndDate { get; set; }
+        public bool? IsExaminationAmuntZero { get; set; } = false;
 
     }
 }

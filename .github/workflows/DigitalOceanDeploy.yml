@@ -3,7 +3,7 @@ name: Deploy to DigitalOcean with Docker Compose
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
@@ -16,16 +16,20 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
-    - name: Install SSH client
-      run: sudo apt-get install -y openssh-client
+    - name: Install doctl
+      run: sudo snap install doctl
+
+    - name: Authenticate with DigitalOcean
+      env:
+        DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      run: doctl auth init -t $DIGITALOCEAN_ACCESS_TOKEN
 
     - name: Deploy to DigitalOcean Droplet
       env:
         DIGITALOCEAN_IP: ${{ secrets.DIGITALOCEAN_DROPLET_IP }}
         DIGITALOCEAN_SSH_USER: ${{ secrets.DIGITALOCEAN_SSH_USER }}
-        DIGITALOCEAN_SSH_PASSWORD: ${{ secrets.DIGITALOCEAN_SSH_PASSWORD }}
       run: |
-        sshpass -p "${DIGITALOCEAN_SSH_PASSWORD}" ssh -o StrictHostKeyChecking=no ${DIGITALOCEAN_SSH_USER}@${DIGITALOCEAN_IP} << 'EOF'
+        ssh -o StrictHostKeyChecking=no ${DIGITALOCEAN_SSH_USER}@${DIGITALOCEAN_IP} << 'EOF'
           cd /path/to/your/project
           git pull origin main
           docker-compose down

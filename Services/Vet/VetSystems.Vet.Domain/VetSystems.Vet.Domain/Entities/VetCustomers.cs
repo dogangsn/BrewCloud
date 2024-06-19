@@ -29,6 +29,7 @@ namespace VetSystems.Vet.Domain.Entities
         public decimal DiscountRate { get; set; } = 0;
         public bool? IsEmail { get; set; } = true;
         public bool? IsPhone { get; set; } = true;
+        public bool? IsArchive { get; set; } = false;
         public VetAdress Adress { get; set; }
         public virtual ICollection<VetPatients> Patients { get; set; }
 

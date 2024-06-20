@@ -3,46 +3,46 @@ services:
     # vetsytemsdb:
     #     image: mcr.microsoft.com/mssql/server:2019-latest
         
-    gateway.api:
-        image:  gateway_api_image
-        build:
-            context: .
-            dockerfile: ApiGateways/VetSystems.Gateway/Dockerfile    
-    identityserver.api:
-        image: identityserver_api_image
-        build: 
-            context: .
-            dockerfile: Services/IdentityServer/VetSystems.IdentityServer/Dockerfile
-    account.api:
-        image: account_api_image
-        build: 
-            context: .
-            dockerfile: Services/Account/VetSystems.Account/Dockerfile
-    # vet.api:
-    #     image: vet_api_image
+    # gateway.api:
+    #     image:  gateway_api_image
     #     build:
     #         context: .
-    #         dockerfile: Services/Vet/VetSystems.Vet.Api/VetSystems.Vet.Api/Dockerfile
+    #         dockerfile: ApiGateways/VetSystems.Gateway/Dockerfile    
+    # identityserver.api:
+    #     image: identityserver_api_image
+    #     build: 
+    #         context: .
+    #         dockerfile: Services/IdentityServer/VetSystems.IdentityServer/Dockerfile
+    # account.api:
+    #     image: account_api_image
+    #     build: 
+    #         context: .
+    #         dockerfile: Services/Account/VetSystems.Account/Dockerfile
+    vet.api:
+        image: vet_api_image
+        build:
+            context: .
+            dockerfile: Services/Vet/VetSystems.Vet.Api/VetSystems.Vet.Api/Dockerfile
     # farm.api:
     #     image: farm_api_image
     #     build:
     #         context: .
     #         dockerfile: Services/Farm/VetSystems.Farm.Api/Dockerfile
-    # mail.api:
-    #     image: mail_api_iamge
-    #     build:
-    #         context: .
-    #         dockerfile: Services/Mail/VetSystems.Mail.Api/Dockerfile
-    # chat.api:
-    #     image: chat_api_image
-    #     build:
-    #         context: .
-    #         dockerfile: Services/Chat/VetSystems.Chat.Api/Dockerfile
-    # integrations.api:
-    #     image: integrations_api_image
-    #     build:
-    #         context: .
-    #         dockerfile: Services/Integrations/VetSystems.Integrations.Api/Dockerfile
+    mail.api:
+        image: mail_api_iamge
+        build:
+            context: .
+            dockerfile: Services/Mail/VetSystems.Mail.Api/Dockerfile
+    chat.api:
+        image: chat_api_image
+        build:
+            context: .
+            dockerfile: Services/Chat/VetSystems.Chat.Api/Dockerfile
+    integrations.api:
+        image: integrations_api_image
+        build:
+            context: .
+            dockerfile: Services/Integrations/VetSystems.Integrations.Api/Dockerfile
     # mobile.api:
     #     image: mobile_api_image
     #     build:

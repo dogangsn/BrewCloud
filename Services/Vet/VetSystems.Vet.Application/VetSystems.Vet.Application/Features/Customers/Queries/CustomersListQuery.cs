@@ -72,6 +72,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                     + "     Vc.deletedusers, "
                     + "     Vc.updateusers, "
                     + "     Vc.createusers,"
+                    + "     Vc.IsArchive, "
                     + "     (SELECT COUNT(*) FROM VetPatients Vp WHERE Vp.customerid = Vc.id AND Vp.deleted = 0) AS PetCount,"
                     + "     ISNULL((SELECT SUM(vsb.total) FROM VetSaleBuyOwner vsb WHERE vsb.customerid = Vc.id AND vsb.deleted = 0), 0) "
                     + "     - ISNULL((SELECT SUM(vpc.total) FROM VetPaymentCollection vpc WHERE vpc.customerid = Vc.id AND vpc.deleted = 0), 0) "
@@ -79,7 +80,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                     + " FROM "
                     + "     VetCustomers Vc "
                     + " WHERE "
-                    + "     Vc.Deleted = 0 "
+                    + "     Vc.Deleted = 0  and ISNULL(Vc.IsArchive, 0) = 0 "
                     + " ORDER BY "
                     + "     Vc.CreateDate;";
 

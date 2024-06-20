@@ -49,14 +49,28 @@ namespace VetSystems.Vet.Application.Features.Vaccine.Queries
             try
             {
                 List<VetVaccine> _vaccine = (await _vetVaccineRepository.GetAsync(x => x.Deleted == false)).ToList();
+                //List<Vet.Domain.Entities.VetVaccineMedicine> _medicine = (await _vetVaccineMedicineRepository.GetAsync(x => x.VaccineId == item.Id)).ToList();
+                List<Vet.Domain.Entities.VetVaccineMedicine> _allMedicines = (await _vetVaccineMedicineRepository.GetAsync(x => _vaccine.Select(v => v.Id).Contains(x.VaccineId))).ToList();
+                var medicineGroupedByVaccine = _allMedicines.GroupBy(m => m.VaccineId).ToDictionary(g => g.Key, g => g.ToList());
+
                 foreach (var item in _vaccine)
                 {
-                    List<Vet.Domain.Entities.VetVaccineMedicine> _medicine = (await _vetVaccineMedicineRepository.GetAsync(x => x.VaccineId == item.Id)).ToList();
-                    if (_medicine.Count > 0)
+                    if (medicineGroupedByVaccine.TryGetValue(item.Id, out var medicines))
                     {
-                        item.VetVaccineMedicine = _medicine;
+                        item.VetVaccineMedicine = medicines;
                     }
                 }
+
+                //foreach (var item in _vaccine)
+                //{
+
+                //    var medicineGroupedByVaccine = _allMedicines.GroupBy(m => m.VaccineId).ToDictionary(g => g.Key, g => g.ToList());
+
+                //    if (_medicine.Count > 0)
+                //    {
+                //        item.VetVaccineMedicine = _medicine;
+                //    }
+                //}
                 if (request.AnimalType>0)
                 {
                     _vaccine = _vaccine.Where(p => p.AnimalType == request.AnimalType).ToList();

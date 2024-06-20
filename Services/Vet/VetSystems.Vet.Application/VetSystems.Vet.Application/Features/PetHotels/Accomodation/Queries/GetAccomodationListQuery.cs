@@ -36,13 +36,29 @@ namespace VetSystems.Vet.Application.Features.PetHotels.Accomodation.Queries
             var response = Response<List<AccomodationListDto>>.Success(200);
             try
             {
-                string query = "SELECT        vetcustomers.firstname + ' ' + vetcustomers.lastname AS customerName, vetrooms.roomname, vetaccomodation.roomid, vetaccomodation.customerid, vetaccomodation.patientsid, vetaccomodation.checkindate,  "
-                            + "                          vetaccomodation.checkoutdate, vetaccomodation.accomodation, vetaccomodation.remark, vetaccomodation.createdate, vetaccomodation.updatedate, vetaccomodation.createusers, vetaccomodation.type,  "
-                            + "                          vetaccomodation.id "
-                            + " FROM            vetaccomodation LEFT OUTER JOIN "
-                            + "                          vetrooms ON vetaccomodation.roomid = vetrooms.id LEFT OUTER JOIN "
-                            + "                          vetcustomers ON vetaccomodation.customerid = vetcustomers.id "
-                            + " WHERE        (vetaccomodation.deleted = 0)";
+                #region old
+                //string query = "SELECT        vetcustomers.firstname + ' ' + vetcustomers.lastname AS customerName, vetrooms.roomname, vetaccomodation.roomid, vetaccomodation.customerid, vetaccomodation.patientsid, vetaccomodation.checkindate,  "
+                //                    + "                          vetaccomodation.checkoutdate, vetaccomodation.accomodation, vetaccomodation.remark, vetaccomodation.createdate, vetaccomodation.updatedate, vetaccomodation.createusers, vetaccomodation.type,  "
+                //                    + "                          vetaccomodation.id "
+                //                    + " FROM            vetaccomodation LEFT OUTER JOIN "
+                //                    + "                          vetrooms ON vetaccomodation.roomid = vetrooms.id LEFT OUTER JOIN "
+                //                    + "                          vetcustomers ON vetaccomodation.customerid = vetcustomers.id "
+                //                    + " WHERE        (vetaccomodation.deleted = 0)"; 
+                #endregion
+                string query = "SELECT        vetcustomers.firstname + ' ' + vetcustomers.lastname AS customerName, vetpatients.name as patientname,"
+                + " vetrooms.roomname, vetaccomodation.roomid, vetaccomodation.customerid, vetaccomodation.patientsid, "
+                + " vetaccomodation.checkindate, "
+                + "                          vetaccomodation.checkoutdate, vetaccomodation.accomodation, "
+                + " 						 vetaccomodation.remark, "
+                + " 						 vetaccomodation.createdate, "
+                + " 						 vetaccomodation.updatedate, vetaccomodation.createusers, "
+                + " 						 vetaccomodation.type, "
+                + "                          vetaccomodation.id, vetrooms.price, vetrooms.pricingtype"
+                + " FROM            vetaccomodation LEFT OUTER JOIN"
+                + "                          vetrooms ON vetaccomodation.roomid = vetrooms.id LEFT OUTER JOIN"
+                + "                          vetcustomers ON vetaccomodation.customerid = vetcustomers.id LEFT OUTER JOIN "
+                + " 						 vetpatients ON vetaccomodation.patientsid = vetpatients.id"
+                + " WHERE        (vetaccomodation.deleted = 0)";
                 if (request.CustomerId != Guid.Empty)
                 {
                     query += " and (vetaccomodation.customerid = @customerid)";

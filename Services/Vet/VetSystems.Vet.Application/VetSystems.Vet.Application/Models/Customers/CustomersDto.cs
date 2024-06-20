@@ -24,6 +24,7 @@ namespace VetSystems.Vet.Application.Models.Customers
         public string Province { get; set; } = string.Empty;
         public string District { get; set; } = string.Empty;
         public string LongAdress { get; set; } = string.Empty;
+        public bool IsArchive { get; set; }
         //public Guid FarmsId { get; set; }
         public  FarmsDto? FarmsDetail { get; set; }
         public List<PatientsDetailsDto> PatientDetails { get; set; }

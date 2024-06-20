@@ -13,11 +13,11 @@ services:
         build: 
             context: .
             dockerfile: Services/IdentityServer/VetSystems.IdentityServer/Dockerfile
-    # account.api:
-    #     image: account_api_image
-    #     build: 
-    #         context: .
-    #         dockerfile: Services/Account/VetSystems.Account/Dockerfile
+    account.api:
+        image: account_api_image
+        build: 
+            context: .
+            dockerfile: Services/Account/VetSystems.Account/Dockerfile
     # vet.api:
     #     image: vet_api_image
     #     build:

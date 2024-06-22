@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MediatR; 
 using VetSystems.Vet.Application.Features.Vaccine.Queries;
 using VetSystems.Vet.Application.Features.VaccineCalendar.Commands;
+using VetSystems.Vet.Application.Features.Vaccine.Commands;
 
 namespace VetSystems.Vet.Api.Controllers
 {
@@ -30,12 +31,12 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
-        //[HttpPost(Name = "UpdateVaccine")]
-        //public async Task<IActionResult> UpdateVaccine([FromBody] UpdateVaccineCommand command)
-        //{
-        //    var result = await _mediator.Send(command);
-        //    return Ok(result);
-        //}
+        [HttpPost(Name = "UpdateVaccineExamination")]
+        public async Task<IActionResult> UpdateVaccineExamination([FromBody] UpdateVaccineExaminationCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
         //[HttpPost(Name = "DeteleVaccine")]
         //public async Task<IActionResult> DeteleVaccine([FromBody] DeteleVaccineCommand command)

@@ -11,7 +11,6 @@ using VetSystems.Shared.Service;
 using VetSystems.Vet.Application.Features.Vaccine.Commands;
 using VetSystems.Vet.Application.Models.Definition.Taxis;
 using VetSystems.Vet.Application.Models.Vaccine;
-using VetSystems.Vet.Application.Models.Vaccine;
 using VetSystems.Vet.Domain.Contracts;
 using VetSystems.Vet.Domain.Entities;
 
@@ -20,6 +19,7 @@ namespace VetSystems.Vet.Application.Features.Vaccine.Queries
     public class VaccineListQuery : IRequest<Response<List<VaccineListDto>>>
     {
         public int? AnimalType { get; set; }
+        public Guid? Id { get; set; }
     }
     public class VaccineListQueryHandler : IRequestHandler<VaccineListQuery, Response<List<VaccineListDto>>>
     {
@@ -48,8 +48,15 @@ namespace VetSystems.Vet.Application.Features.Vaccine.Queries
             var response = Response<List<VaccineListDto>>.Success(200);
             try
             {
-                List<VetVaccine> _vaccine = (await _vetVaccineRepository.GetAsync(x => x.Deleted == false)).ToList();
-                //List<Vet.Domain.Entities.VetVaccineMedicine> _medicine = (await _vetVaccineMedicineRepository.GetAsync(x => x.VaccineId == item.Id)).ToList();
+                List<VetVaccine> _vaccine = new List<VetVaccine>();
+                if (!String.IsNullOrEmpty(request.Id.ToString()))
+                {
+                    _vaccine = (await _vetVaccineRepository.GetAsync(x => x.Deleted == false && x.Id == request.Id)).ToList();
+                }
+                else
+                {
+                    _vaccine = (await _vetVaccineRepository.GetAsync(x => x.Deleted == false)).ToList();
+                }
                 List<Vet.Domain.Entities.VetVaccineMedicine> _allMedicines = (await _vetVaccineMedicineRepository.GetAsync(x => _vaccine.Select(v => v.Id).Contains(x.VaccineId))).ToList();
                 var medicineGroupedByVaccine = _allMedicines.GroupBy(m => m.VaccineId).ToDictionary(g => g.Key, g => g.ToList());
 
@@ -60,23 +67,11 @@ namespace VetSystems.Vet.Application.Features.Vaccine.Queries
                         item.VetVaccineMedicine = medicines;
                     }
                 }
-
-                //foreach (var item in _vaccine)
-                //{
-
-                //    var medicineGroupedByVaccine = _allMedicines.GroupBy(m => m.VaccineId).ToDictionary(g => g.Key, g => g.ToList());
-
-                //    if (_medicine.Count > 0)
-                //    {
-                //        item.VetVaccineMedicine = _medicine;
-                //    }
-                //}
                 if (request.AnimalType>0)
                 {
                     _vaccine = _vaccine.Where(p => p.AnimalType == request.AnimalType).ToList();
                     var result = _mapper.Map<List<VaccineListDto>>(_vaccine.OrderBy(e => e.TimeDone));
                     response.Data = result;
-
                 }
                 else
                 {

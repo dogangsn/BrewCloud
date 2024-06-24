@@ -77,6 +77,13 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "UpdateCheckOut")]
+        public async Task<IActionResult> UpdateCheckOut([FromBody] UpdateCheckOutCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
 
         #endregion
     }

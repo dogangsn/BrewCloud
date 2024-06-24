@@ -26,6 +26,7 @@ namespace VetSystems.Vet.Infrastructure.Persistence
                 _tenant = tenantRepository.GetTenantById();
             }
         }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (_tenant == null)
@@ -66,11 +67,13 @@ namespace VetSystems.Vet.Infrastructure.Persistence
         {
             return Database.GetDbConnection().Execute(query, parameters);
         }
+
         public List<T> SQLQuery<T>(string query, object parameters)
         {
 
             return Database.GetDbConnection().Query<T>(query, param: parameters).ToList();
         }
+
         public List<T> SQLQuery<T>(string query)
         {
             return Database.GetDbConnection().Query<T>(query).ToList();

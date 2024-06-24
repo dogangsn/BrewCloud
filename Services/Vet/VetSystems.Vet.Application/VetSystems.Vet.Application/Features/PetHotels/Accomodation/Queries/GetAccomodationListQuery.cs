@@ -53,7 +53,7 @@ namespace VetSystems.Vet.Application.Features.PetHotels.Accomodation.Queries
                 + " 						 vetaccomodation.createdate, "
                 + " 						 vetaccomodation.updatedate, vetaccomodation.createusers, "
                 + " 						 vetaccomodation.type, "
-                + "                          vetaccomodation.id, vetrooms.price, vetrooms.pricingtype"
+                + "                          vetaccomodation.id, vetrooms.price, vetrooms.pricingtype, isnull(vetaccomodation.islogout, 0) as  islogout"
                 + " FROM            vetaccomodation LEFT OUTER JOIN"
                 + "                          vetrooms ON vetaccomodation.roomid = vetrooms.id LEFT OUTER JOIN"
                 + "                          vetcustomers ON vetaccomodation.customerid = vetcustomers.id LEFT OUTER JOIN "
@@ -62,6 +62,10 @@ namespace VetSystems.Vet.Application.Features.PetHotels.Accomodation.Queries
                 if (request.CustomerId != Guid.Empty)
                 {
                     query += " and (vetaccomodation.customerid = @customerid)";
+                }
+                else
+                {
+                    query += "  and (isnull(vetaccomodation.islogout, 0) = 0) ";
                 }
 
                 response.Data = _uow.Query<AccomodationListDto>(query , new { customerid = request.CustomerId});

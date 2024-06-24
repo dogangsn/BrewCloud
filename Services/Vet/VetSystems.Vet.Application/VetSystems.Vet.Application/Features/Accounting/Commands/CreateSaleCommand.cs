@@ -26,6 +26,7 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
         public Guid ExaminationId { get; set; }
         public bool? IsExaminations { get; set; } = false;
         public bool? IsAccomodation { get; set; } = false;
+        public Guid? AccomodationId { get; set; }
 
     }
 
@@ -104,7 +105,7 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
                 }
 
 
-                if (request.IsExaminations.GetValueOrDefault() && request.Price > 0)
+                if ((request.IsExaminations.GetValueOrDefault() || request.IsAccomodation.GetValueOrDefault()) && request.Price > 0)
                 {
                     var _trans = new Vet.Domain.Entities.VetSaleBuyTrans
                     {
@@ -139,12 +140,12 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
                     saleBuyOwner.ExaminationsId = request.ExaminationId;
                 }
 
-
-
-
-
-
-
+                if (request.IsAccomodation.GetValueOrDefault())
+                {
+                    saleBuyOwner.IsAccomodation = true;
+                    saleBuyOwner.AccomodationId = request.AccomodationId;
+                }
+                 
                 await _saleBuyOwnerRepository.AddAsync(saleBuyOwner);
                 await _uow.SaveChangesAsync(cancellationToken);
 

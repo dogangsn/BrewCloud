@@ -65,7 +65,7 @@ namespace VetSystems.Vet.Application.Features.PetHotels.Accomodation.Commands
                 DateTime _checkotDate = TimeZoneInfo.ConvertTime(Convert.ToDateTime(request.CheckOutDate), localTimeZone);
 
 
-                var _controlRoom = (await _vetAccomodationRepository.GetAsync(x => x.Deleted == false
+                var _controlRoom = (await _vetAccomodationRepository.GetAsync(x => x.Deleted == false && x.IsLogOut == false
                 && x.RoomId == request.RoomId
                 && ((x.CheckinDate <= _checkinDate && x.CheckOutDate >= _checkinDate)
                     || (x.CheckinDate <= _checkotDate && x.CheckOutDate >= _checkotDate)

@@ -25,5 +25,6 @@ namespace VetSystems.Vet.Application.Models.PetHotels.Accomodation
         public Guid Id { get; set; }
         public decimal Price { get; set; }
         public int PricingType { get; set; }
+        public bool? IsLogOut { get; set; }
     }
 }

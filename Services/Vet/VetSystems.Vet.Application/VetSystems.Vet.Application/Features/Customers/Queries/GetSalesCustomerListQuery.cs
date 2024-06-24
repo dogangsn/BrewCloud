@@ -62,7 +62,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                     + "     ISNULL(vetpaymentcollection.collectionid, '00000000-0000-0000-0000-000000000000') as CollectionId, "
                     + "                  CASE"
                     + "     WHEN vetsalebuyowner.examinationsid != '00000000-0000-0000-0000-000000000000' THEN 'MUAYENE SATIŞ'"
-                    + "     WHEN vetsalebuyowner.AccomodationId != '00000000-0000-0000-0000-000000000000' THEN 'Konaklama Bedeli'"
+                    + "     WHEN vetsalebuyowner.AccomodationId != '00000000-0000-0000-0000-000000000000' THEN 'KONAKLAMA BEDELİ'"
                     + "     ELSE STUFF(("
                     + "         SELECT ', ' + vetproducts.name"
                     + "         FROM vetsalebuytrans"

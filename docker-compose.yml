@@ -3,31 +3,31 @@ services:
     # vetsytemsdb:
     #     image: mcr.microsoft.com/mssql/server:2019-latest
         
-    # gateway.api:
-    #     image:  gateway_api_image
-    #     build:
-    #         context: .
-    #         dockerfile: ApiGateways/VetSystems.Gateway/Dockerfile    
-    # identityserver.api:
-    #     image: identityserver_api_image
-    #     build: 
-    #         context: .
-    #         dockerfile: Services/IdentityServer/VetSystems.IdentityServer/Dockerfile
-    # account.api:
-    #     image: account_api_image
-    #     build: 
-    #         context: .
-    #         dockerfile: Services/Account/VetSystems.Account/Dockerfile
+    gateway.api:
+        image:  gateway_api_image
+        build:
+            context: .
+            dockerfile: ApiGateways/VetSystems.Gateway/Dockerfile    
+    identityserver.api:
+        image: identityserver_api_image
+        build: 
+            context: .
+            dockerfile: Services/IdentityServer/VetSystems.IdentityServer/Dockerfile
+    account.api:
+        image: account_api_image
+        build: 
+            context: .
+            dockerfile: Services/Account/VetSystems.Account/Dockerfile
     vet.api:
         image: vet_api_image
         build:
             context: .
             dockerfile: Services/Vet/VetSystems.Vet.Api/VetSystems.Vet.Api/Dockerfile
-    # farm.api:
-    #     image: farm_api_image
-    #     build:
-    #         context: .
-    #         dockerfile: Services/Farm/VetSystems.Farm.Api/Dockerfile
+    farm.api:
+        image: farm_api_image
+        build:
+            context: .
+            dockerfile: Services/Farm/VetSystems.Farm.Api/Dockerfile
     mail.api:
         image: mail_api_iamge
         build:
@@ -43,11 +43,11 @@ services:
         build:
             context: .
             dockerfile: Services/Integrations/VetSystems.Integrations.Api/Dockerfile
-    # mobile.api:
-    #     image: mobile_api_image
-    #     build:
-    #         context: .
-    #         dockerfile: Services/Mobile/VetSystems.Mobile.Api/Dockerfile
+    mobile.api:
+        image: mobile_api_image
+        build:
+            context: .
+            dockerfile: Services/Mobile/VetSystems.Mobile.Api/Dockerfile
 
 volumes:
   identitydb_volume:

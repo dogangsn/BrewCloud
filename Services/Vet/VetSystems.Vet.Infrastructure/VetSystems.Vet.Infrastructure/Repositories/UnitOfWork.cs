@@ -20,59 +20,52 @@ namespace VetSystems.Vet.Infrastructure.Repositories
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
-        #region IDisposable Members
-        // Burada IUnitOfWork arayüzüne implemente ettiğimiz IDisposable arayüzünün Dispose Patternini implemente ediyoruz.
-        private bool disposed = false;
+        private bool _disposed = false;
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!this._disposed)
             {
                 if (disposing)
                 {
                     _dbContext.Dispose();
                 }
             }
-
-            this.disposed = true;
+            this._disposed = true;
         }
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-        #endregion
 
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             try
             {
-                // Transaction işlemleri burada ele alınabilir veya Identity Map kurumsal tasarım kalıbı kullanılarak
-                // sadece değişen alanları güncellemeyide sağlayabiliriz.
                 return await _dbContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {
-                // Burada DbEntityValidationException hatalarını handle edebiliriz.
                 throw;
             }
         }
-        public Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default)
-        {
-            throw new NotImplementedException();
-        }
+
         public List<T> Query<T>(string query, object parameters)
         {
             return _dbContext.SQLQuery<T>(query, parameters).ToList();
         }
+
         public List<T> Query<T>(string query)
         {
 
             return _dbContext.SQLQuery<T>(query).ToList();
         }
+
         public int Execute(string query, object parameters)
         {
             return _dbContext.Execute(query, parameters);
         }
+
         public void ChangeDbContext(string connection)
         {
             //var builder = new DbContextOptionsBuilder<ErpDbContext>();
@@ -87,16 +80,17 @@ namespace VetSystems.Vet.Infrastructure.Repositories
         {
             var builder = new DbContextOptionsBuilder<VetDbContext>();
             builder.UseSqlServer(connectionString);
-            using (var db = new VetDbContext(builder.Options, null))
+            using (var db = new VetDbContext(builder.Options, null, null))
             {
                 await db.Database.MigrateAsync();
             }
         }
+
         public async Task MigrateDatabase(string connectionString, string targetMigrationName, string historyTable)
         {
             var builder = new DbContextOptionsBuilder<VetDbContext>();
             builder.UseSqlServer(connectionString);
-            using (var db = new VetDbContext(builder.Options, null, historyTable))
+            using (var db = new VetDbContext(builder.Options, null, null, historyTable))
             {
                 if (string.IsNullOrEmpty(targetMigrationName))
                 {
@@ -109,11 +103,12 @@ namespace VetSystems.Vet.Infrastructure.Repositories
 
             }
         }
+
         public async Task MoveMigrationTable(string connectionString, string historyTable)
         {
             var builder = new DbContextOptionsBuilder<VetDbContext>();
             builder.UseSqlServer(connectionString);
-            using (var db = new VetDbContext(builder.Options, null, ""))
+            using (var db = new VetDbContext(builder.Options, null, null, ""))
             {
                 var migrations = await db.Database.GetAppliedMigrationsAsync();
                 foreach (var migration in migrations)
@@ -129,6 +124,7 @@ namespace VetSystems.Vet.Infrastructure.Repositories
                 }
             }
         }
+
         public void CreateTransaction()
         {
             // var connection = new NpgsqlConnection();

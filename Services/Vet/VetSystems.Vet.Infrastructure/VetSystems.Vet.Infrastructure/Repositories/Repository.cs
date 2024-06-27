@@ -122,7 +122,7 @@ namespace VetSystems.Vet.Infrastructure.Repositories
             var builder = new DbContextOptionsBuilder<VetDbContext>();
             builder.UseSqlServer(connection);
 
-            _dbContext = new VetDbContext(builder.Options, null);
+            _dbContext = new VetDbContext(builder.Options, null, null);
 
         }
 

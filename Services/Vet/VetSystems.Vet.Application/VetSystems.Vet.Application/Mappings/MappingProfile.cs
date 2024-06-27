@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VetSystems.Shared.Dtos;
 using VetSystems.Vet.Application.Models.Appointments;
 using VetSystems.Vet.Application.Models.Definition.AppointmentTypes;
 using VetSystems.Vet.Application.Models.Definition.Taxis;
@@ -24,6 +25,7 @@ namespace VetSystems.Vet.Application.Mappings
             CreateMap<VetVaccine, Models.Vaccine.VaccineListDto>().ReverseMap();
             CreateMap<VetVaccineMedicine, Models.Vaccine.VetVaccineMedicineListDto>().ReverseMap();
             CreateMap<VetRooms, Models.PetHotels.Rooms.RoomListDto>().ReverseMap();
+            CreateMap<VetLogs, LogDto>().ReverseMap();
         }
     }
 }

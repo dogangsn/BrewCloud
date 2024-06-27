@@ -8,6 +8,7 @@ using VetSystems.Vet.Application.Features.Settings.Parameters.Commands;
 using VetSystems.Vet.Application.Features.Settings.Parameters.Queries;
 using VetSystems.Vet.Application.Features.Settings.SmsParameters.Commands;
 using VetSystems.Vet.Application.Features.Settings.SmsParameters.Queries;
+using VetSystems.Vet.Application.Features.Settings.VetLog.Queries;
 
 namespace VetSystems.Vet.Api.Controllers
 {
@@ -64,5 +65,18 @@ namespace VetSystems.Vet.Api.Controllers
 
 
         #endregion
+
+        #region Logs
+
+ 
+        [HttpPost(Name = "GetLogs")]
+        public async Task<IActionResult> GetLogs([FromBody] GetLogsQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        #endregion
+
     }
 }

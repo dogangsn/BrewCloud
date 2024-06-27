@@ -45,7 +45,7 @@ namespace VetSystems.Vet.Application.Features.PetHotels.Rooms.Queries
             }
             catch (Exception ex)
             {
-
+                return Response<List<RoomListDto>>.Fail(ex.Message, 404);
             }
             return response;
 

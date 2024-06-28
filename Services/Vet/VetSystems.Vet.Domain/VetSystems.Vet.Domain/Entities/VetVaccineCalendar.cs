@@ -15,8 +15,8 @@ namespace VetSystems.Vet.Domain.Entities
         public int AnimalType { get; set; }
         public DateTime VaccineDate { get; set; }
         public DateTime? VaccinationDate { get; set; }
-        public bool IsDone { get; set; }
-        public bool IsAdd { get; set; }
+        public bool IsDone { get; set; } = false;
+        public bool IsAdd { get; set; } = false;
         public Guid PatientId { get; set; }
         public Guid CustomerId { get; set; }
         public Guid VaccineId { get; set; }

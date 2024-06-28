@@ -8,29 +8,26 @@ using System.Text;
 using System.Threading.Tasks;
 using VetSystems.Shared.Dtos;
 using VetSystems.Shared.Service;
-using VetSystems.Vet.Application.Models.Vaccine;
 using VetSystems.Vet.Domain.Contracts;
-using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Features.Vaccine.Commands
 {
-    public class UpdateVaccineExaminationCommand : IRequest<Response<bool>>
+    public class DeteleVaccineAppointmentCommand : IRequest<Response<bool>>
     {
         public Guid Id { get; set; }
-        public DateTime VaccinationDate { get; set; }
-        public DateTime NextVaccinationDate { get; set; }
     }
 
-    public class UpdateVaccineExaminationCommandHandler : IRequestHandler<UpdateVaccineExaminationCommand, Response<bool>>
+    public class DeteleVaccineAppointmentCommandHandler : IRequestHandler<DeteleVaccineAppointmentCommand, Response<bool>>
     {
         private readonly IUnitOfWork _uow;
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
-        private readonly ILogger<UpdateVaccineExaminationCommandHandler> _logger;
+        private readonly ILogger<DeteleVaccineAppointmentCommandHandler> _logger; 
         private readonly IIdentityRepository _identityRepository;
+
         private readonly IRepository<Vet.Domain.Entities.VetVaccineCalendar> _vetVaccineCalendarRepository;
 
-        public UpdateVaccineExaminationCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<UpdateVaccineExaminationCommandHandler> logger,
+        public DeteleVaccineAppointmentCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<DeteleVaccineAppointmentCommandHandler> logger,
            IIdentityRepository identityRepository, IRepository<Domain.Entities.VetVaccineCalendar> vetVaccineCalendarRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
@@ -41,7 +38,7 @@ namespace VetSystems.Vet.Application.Features.Vaccine.Commands
             _vetVaccineCalendarRepository = vetVaccineCalendarRepository;
         }
 
-        public async Task<Response<bool>> Handle(UpdateVaccineExaminationCommand request, CancellationToken cancellationToken)
+        public async Task<Response<bool>> Handle(DeteleVaccineAppointmentCommand request, CancellationToken cancellationToken)
         {
             var response = new Response<bool>
             {
@@ -54,32 +51,12 @@ namespace VetSystems.Vet.Application.Features.Vaccine.Commands
                 var _vaccine = await _vetVaccineCalendarRepository.GetByIdAsync(request.Id);
                 if (_vaccine == null)
                 {
-                    _logger.LogWarning($"Vaccine update failed. Id number: {request.Id}");
-                    return Response<bool>.Fail("Vaccine update failed", 404);
-                } 
-                
-                _vaccine.IsDone = true;
-                _vaccine.VaccinationDate = request.VaccinationDate;
-                _vaccine.UpdateDate = DateTime.Now;
-                _vaccine.UpdateUsers = _identityRepository.Account.UserName;
-
-
-                VetVaccineCalendar vetVaccineCalendar = new()
-                {
-                    Id = Guid.NewGuid(),
-                    IsDone = false,
-                    PatientId=_vaccine.PatientId,
-                    CustomerId =_vaccine.CustomerId,
-                    VaccineId = _vaccine.Id,
-                    IsAdd = true,
-                    VaccineName = _vaccine.VaccineName,
-                    VaccineDate = request.NextVaccinationDate,
-                    CreateDate = DateTime.Now,
-                    AnimalType = _vaccine.AnimalType,
-                    CreateUsers = _identityRepository.Account.UserName,
-                };
-
-                await _vetVaccineCalendarRepository.AddAsync(vetVaccineCalendar);
+                    _logger.LogWarning($"Vaccine Appointment update failed. Id number: {request.Id}");
+                    return Response<bool>.Fail("Vaccine Appointment update failed", 404);
+                }
+                _vaccine.Deleted = true;
+                _vaccine.DeletedDate = DateTime.Now;
+                _vaccine.DeletedUsers = _identityRepository.Account.UserName;
 
                 await _uow.SaveChangesAsync(cancellationToken);
             }
@@ -93,7 +70,6 @@ namespace VetSystems.Vet.Application.Features.Vaccine.Commands
 
         }
     }
-
 
 
 }

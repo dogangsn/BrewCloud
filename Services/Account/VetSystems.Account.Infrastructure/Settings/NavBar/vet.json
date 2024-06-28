@@ -205,11 +205,11 @@
 
     },
     {
-      "id": "filemanager",
+      "id": "file-manager",
       "title": "Dosya Yöneticisi",
       "type": "basic",
       "icon": "heroicons_outline:cloud",
-      "link": "/filemanager"
+      "link": "/file-manager"
     },
     {
       "id": "demands",

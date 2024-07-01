@@ -38,12 +38,12 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
-        //[HttpPost(Name = "DeteleVaccine")]
-        //public async Task<IActionResult> DeteleVaccine([FromBody] DeteleVaccineCommand command)
-        //{
-        //    var result = await _mediator.Send(command);
-        //    return Ok(result);
-        //}
+        [HttpPost(Name = "DeteleVaccineAppointment")]
+        public async Task<IActionResult> DeteleVaccineAppointment([FromBody] DeteleVaccineAppointmentCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
     }
 }

@@ -15,14 +15,14 @@ using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Features.Customers.Commands
 {
-    public class CreatePatientCommand : IRequest<Response<bool>>
+    public class CreatePatientCommand : IRequest<Response<string>>
     {
         public Guid CustomerId { get; set; }
         public PatientsDetailsDto PatientDetails { get; set; }
 
     }
 
-    public class CreatePatientCommandHandler : IRequestHandler<CreatePatientCommand, Response<bool>>
+    public class CreatePatientCommandHandler : IRequestHandler<CreatePatientCommand, Response<string>>
     {
         private readonly IUnitOfWork _uow;
         private readonly IIdentityRepository _identity;
@@ -42,12 +42,13 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
         }
 
 
-        public async Task<Response<bool>> Handle(CreatePatientCommand request, CancellationToken cancellationToken)
+        public async Task<Response<string>> Handle(CreatePatientCommand request, CancellationToken cancellationToken)
         {
-            var response = new Response<bool>
+            var response = new Response<string>
             {
                 ResponseType = ResponseType.Ok,
                 IsSuccessful = true,
+                Data = string.Empty
             };
             _uow.CreateTransaction(IsolationLevel.ReadCommitted);
 
@@ -58,7 +59,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                 if (customers == null)
                 {
                     _logger.LogWarning($"Not Foun number: {request.CustomerId}");
-                    return Response<bool>.Fail("Property update failed", 404);
+                    return Response<string>.Fail("Property update failed", 404);
                 }
 
 
@@ -90,6 +91,8 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                 
                 await _uow.SaveChangesAsync(cancellationToken);
                 _uow.Commit();
+
+                response.Data = patients.Id.ToString();
 
             }
             catch (Exception ex)

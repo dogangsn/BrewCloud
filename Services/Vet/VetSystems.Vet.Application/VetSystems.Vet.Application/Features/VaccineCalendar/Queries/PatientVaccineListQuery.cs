@@ -20,6 +20,7 @@ namespace VetSystems.Vet.Application.Features.Vaccine.Queries
     {
         public Guid? Id { get; set; }
         public Guid? PatientId { get; set; }
+        public Guid? CustomerId { get; set; }
     }
     public class PatientVaccineListQueryHandler : IRequestHandler<PatientVaccineListQuery, Response<List<VetVaccineCalendar>>>
     {
@@ -50,6 +51,10 @@ namespace VetSystems.Vet.Application.Features.Vaccine.Queries
                 if (!String.IsNullOrEmpty(request.PatientId.ToString()))
                 {
                     _vaccine = (await _vetVaccineCalendarRepository.GetAsync(x => x.Deleted == false && x.PatientId == request.PatientId && x.IsAdd == true)).ToList();                    
+                }
+                else if (!String.IsNullOrEmpty(request.CustomerId.ToString()))
+                {
+                    _vaccine = (await _vetVaccineCalendarRepository.GetAsync(x => x.Deleted == false && x.CustomerId == request.CustomerId && x.IsAdd == true)).ToList();
                 }
                 else if (!String.IsNullOrEmpty(request.Id.ToString()))
                 {

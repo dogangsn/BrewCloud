@@ -44,9 +44,17 @@ namespace VetSystems.Vet.Application.Features.Definition.PrintTemplate.Commands
             var response = Response<bool>.Success(200);
             try
             {
-
-
-
+                VetPrintTemplate vetPrintTemplate = new()
+                {
+                    CreateDate = DateTime.Now,
+                    CreateUsers = _identity.Account.UserName,
+                    HtmlContent = request.HtmlContent,
+                    Type = request.Type,
+                    TemplateName = request.TemplateName,
+                    Id = Guid.NewGuid(),
+                };
+                await _vetPrintTemplateRepository.AddAsync(vetPrintTemplate);
+                await _uow.SaveChangesAsync(cancellationToken);
 
             }
             catch (Exception ex)

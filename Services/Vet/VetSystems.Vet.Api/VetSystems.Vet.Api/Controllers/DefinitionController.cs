@@ -13,6 +13,8 @@ using VetSystems.Vet.Application.Features.Definition.CustomerGroup.Commands;
 using VetSystems.Vet.Application.Features.Definition.CustomerGroup.Queries;
 using VetSystems.Vet.Application.Features.Definition.PaymentMethods.Commands;
 using VetSystems.Vet.Application.Features.Definition.PaymentMethods.Queries;
+using VetSystems.Vet.Application.Features.Definition.PrintTemplate.Commands;
+using VetSystems.Vet.Application.Features.Definition.PrintTemplate.Queries;
 using VetSystems.Vet.Application.Features.Definition.ProductCategory.Commands;
 using VetSystems.Vet.Application.Features.Definition.ProductCategory.Queries;
 using VetSystems.Vet.Application.Features.Definition.ProductDescription.Commands;
@@ -413,6 +415,49 @@ namespace VetSystems.Vet.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
+
+        #endregion
+
+        #region PrintTemplate
+
+        [HttpGet(Name = "GetPrintTemplateList")]
+        public async Task<IActionResult> GetPrintTemplateList()
+        {
+            var command = new GetPrintTemplateListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "GetPrintTemplateFilterByType")]
+        public async Task<IActionResult> GetPrintTemplateFilterByType([FromBody] GetPrintTemplateFilterByTypeQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+
+        [HttpPost(Name = "CreatePrintTemplate")]
+        public async Task<IActionResult> CreatePrintTemplate([FromBody] CreatePrintTemplateCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "DeletePrintTemplate")]
+        public async Task<IActionResult> DeletePrintTemplate([FromBody] DeletePrintTemplateCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "UpdatePrintTemplate")]
+        public async Task<IActionResult> UpdatePrintTemplate([FromBody] UpdatePrintTemplateCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
 
 
         #endregion

@@ -99,13 +99,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Mail.Infrastruct
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Report", "Report", "{D861A9B0-ED20-4572-A966-9F7ED9D4E39B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Report.Api", "Services\Report\VetSystems.Report.Api\VetSystems.Report.Api.csproj", "{6CB368AC-88D4-4F3A-9C25-F08817055551}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Report.Api", "Services\Report\VetSystems.Report.Api\VetSystems.Report.Api.csproj", "{6CB368AC-88D4-4F3A-9C25-F08817055551}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Report.Application", "Services\Report\VetSystems.Report.Application\VetSystems.Report.Application.csproj", "{90E0ACFC-AB89-4F5B-AD2F-E6EBC5A3E6DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Report.Application", "Services\Report\VetSystems.Report.Application\VetSystems.Report.Application.csproj", "{90E0ACFC-AB89-4F5B-AD2F-E6EBC5A3E6DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Report.Domain", "Services\Report\VetSystems.Report.Domain\VetSystems.Report.Domain.csproj", "{D18BB098-FDA0-4EC2-ABDA-C21769295F56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Report.Domain", "Services\Report\VetSystems.Report.Domain\VetSystems.Report.Domain.csproj", "{D18BB098-FDA0-4EC2-ABDA-C21769295F56}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Report.Infrastructure", "Services\Report\VetSystems.Report.Infrastructure\VetSystems.Report.Infrastructure.csproj", "{B44B8C44-229E-484E-AE76-A6DE336AA3CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetSystems.Report.Infrastructure", "Services\Report\VetSystems.Report.Infrastructure\VetSystems.Report.Infrastructure.csproj", "{B44B8C44-229E-484E-AE76-A6DE336AA3CB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hubs", "Hubs", "{2588236E-1829-492B-AE48-35521A0F3B27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetSystems.Hubs.Api", "Services\Hubs\VetSystems.Hubs.Api\VetSystems.Hubs.Api.csproj", "{7C9FBD87-79C1-479A-863E-5F2A8F9923B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -261,6 +265,10 @@ Global
 		{B44B8C44-229E-484E-AE76-A6DE336AA3CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B44B8C44-229E-484E-AE76-A6DE336AA3CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B44B8C44-229E-484E-AE76-A6DE336AA3CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C9FBD87-79C1-479A-863E-5F2A8F9923B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C9FBD87-79C1-479A-863E-5F2A8F9923B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C9FBD87-79C1-479A-863E-5F2A8F9923B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C9FBD87-79C1-479A-863E-5F2A8F9923B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -311,6 +319,8 @@ Global
 		{90E0ACFC-AB89-4F5B-AD2F-E6EBC5A3E6DF} = {D861A9B0-ED20-4572-A966-9F7ED9D4E39B}
 		{D18BB098-FDA0-4EC2-ABDA-C21769295F56} = {D861A9B0-ED20-4572-A966-9F7ED9D4E39B}
 		{B44B8C44-229E-484E-AE76-A6DE336AA3CB} = {D861A9B0-ED20-4572-A966-9F7ED9D4E39B}
+		{2588236E-1829-492B-AE48-35521A0F3B27} = {09508787-B726-4595-AA04-FD652D0B4609}
+		{7C9FBD87-79C1-479A-863E-5F2A8F9923B0} = {2588236E-1829-492B-AE48-35521A0F3B27}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B7E68C2E-293C-48D7-A15C-6681682A0215}

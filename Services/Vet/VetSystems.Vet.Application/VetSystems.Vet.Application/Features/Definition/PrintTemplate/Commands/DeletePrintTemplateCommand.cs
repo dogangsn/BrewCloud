@@ -41,15 +41,15 @@ namespace VetSystems.Vet.Application.Features.Definition.PrintTemplate.Commands
             var response = Response<bool>.Success(200);
             try
             {
-                var appointmentTypes = await _vetPrintTemplateRepository.GetByIdAsync(request.Id);
-                if (appointmentTypes == null)
+                var printTemplate = await _vetPrintTemplateRepository.GetByIdAsync(request.Id);
+                if (printTemplate == null)
                 {
                     _logger.LogWarning($"printTemplate deleted failed. Id number: {request.Id}");
                     return Response<bool>.Fail("Çıktı Şablonu Bulunamadı", 404);
-                } 
-                appointmentTypes.Deleted = true;
-                appointmentTypes.DeletedDate = DateTime.Now;
-                appointmentTypes.DeletedUsers = _identity.Account.UserName;
+                }
+                printTemplate.Deleted = true;
+                printTemplate.DeletedDate = DateTime.Now;
+                printTemplate.DeletedUsers = _identity.Account.UserName;
 
                 await _uow.SaveChangesAsync(cancellationToken);
             }

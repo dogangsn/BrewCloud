@@ -22,5 +22,6 @@ namespace VetSystems.Vet.Application.Models.Customers
         public bool Sterilization { get; set; }
         public bool Active { get; set; }
         public string Thumbnail { get; set; } = string.Empty;
+        public bool? IsVaccineCalendarCreate { get; set; }
     }
 }

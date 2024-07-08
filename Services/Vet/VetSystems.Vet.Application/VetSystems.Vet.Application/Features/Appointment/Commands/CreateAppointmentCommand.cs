@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using VetSystems.Shared.Dtos;
 using VetSystems.Shared.Enums;
 using VetSystems.Shared.Service;
+using VetSystems.Vet.Application.Features.VaccineCalendar.Commands;
 using VetSystems.Vet.Application.Models.Appointments;
 using VetSystems.Vet.Application.Models.Customers;
 using VetSystems.Vet.Domain.Contracts;
@@ -35,14 +36,19 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
         private readonly IMapper _mapper;
         private readonly ILogger<CreateAppointmentHandler> _logger;
         private readonly IRepository<Vet.Domain.Entities.VetAppointments> _AppointmentRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetPatients> _PatientRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetVaccine> _vaccineRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetVaccineCalendar> _vaccineCalendarRepository;
 
-        public CreateAppointmentHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateAppointmentHandler> logger, IRepository<Domain.Entities.VetAppointments> AppointmentRepository)
+        public CreateAppointmentHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateAppointmentHandler> logger, IRepository<Domain.Entities.VetAppointments> AppointmentRepository, IRepository<Vet.Domain.Entities.VetPatients> PatientRepository, IRepository<VetVaccine> vaccineRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _AppointmentRepository = AppointmentRepository ?? throw new ArgumentNullException(nameof(AppointmentRepository));
+            _PatientRepository = PatientRepository ?? throw new ArgumentNullException(nameof(PatientRepository));
+            _vaccineRepository = vaccineRepository ?? throw new ArgumentNullException(nameof(vaccineRepository));
         }
 
         public async Task<Response<bool>> Handle(CreateAppointmentCommand request, CancellationToken cancellationToken)
@@ -57,10 +63,29 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
             {
                 TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
 
+                VetPatients patient = _PatientRepository.Get(p => p.Id == Guid.Parse(request.PatientId)).FirstOrDefault();
+
                 if (request.AppointmentType == (int)AppointmentType.AsiRandevusu)
                 {
+                    List<VetVaccineCalendar> vaccineCalendars = new List<VetVaccineCalendar>();
                     foreach (var item in request.VaccineItems)
                     {
+                        VetVaccine vetVaccine = _vaccineRepository.Get(p=>p.Id == item.Id).FirstOrDefault();
+                        VetVaccineCalendar vaccineAppointment = new()
+                        {
+                            IsAdd = true,
+                            PatientId = Guid.Parse(request.PatientId),
+                            CreateUsers = _identity.Account.UserName,
+                            VaccineDate = request.BeginDate,
+                            IsDone = false,
+                            CustomerId = Guid.Parse(request.CustomerId),
+                            VaccineId = item.Id,
+                            AnimalType = patient.AnimalType.Value,
+                            VaccineName = vetVaccine.VaccineName
+                        };
+
+                        await _vaccineCalendarRepository.AddAsync(vaccineAppointment);
+
                         Vet.Domain.Entities.VetAppointments Appointments = new()
                         {
                             BeginDate = TimeZoneInfo.ConvertTimeFromUtc(item.Date, localTimeZone),
@@ -78,6 +103,9 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
                             PatientsId = Guid.Parse(request.PatientId)
                            
                         };
+
+                                                
+
                         await _AppointmentRepository.AddAsync(Appointments);
                     }
                 }

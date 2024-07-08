@@ -44,6 +44,13 @@ namespace VetSystems.Vet.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+        [HttpGet(Name = "AllVaccineAppointmentsList")]
+        public async Task<IActionResult> AllVaccineAppointmentsList()
+        {
+            var command = new AllVaccineAppointmentsListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
     }
 }

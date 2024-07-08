@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using VetSystems.Shared.Dtos;
 using VetSystems.Shared.Service;
+using VetSystems.Vet.Application.Features.Customers.Commands;
+using VetSystems.Vet.Application.Models.Customers;
 using VetSystems.Vet.Application.Models.Vaccine;
 using VetSystems.Vet.Domain.Contracts;
 using VetSystems.Vet.Domain.Entities;
@@ -28,9 +30,10 @@ namespace VetSystems.Vet.Application.Features.VaccineCalendar.Commands
         private readonly IMapper _mapper;
         private readonly ILogger<CreateVaccineExaminationCommandHandler> _logger;
         private readonly IRepository<Vet.Domain.Entities.VetVaccineCalendar> _vetVaccineCalendarRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetPatients> _vetPatientsRepository;
         private readonly IMediator _mediator;
 
-        public CreateVaccineExaminationCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateVaccineExaminationCommandHandler> logger, IRepository<VetVaccineCalendar> vetVaccineCalendarRepository, IMediator mediator)
+        public CreateVaccineExaminationCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateVaccineExaminationCommandHandler> logger, IRepository<VetVaccineCalendar> vetVaccineCalendarRepository, IMediator mediator, IRepository<VetPatients> vetPatientsRepository)
         {
             _uow = uow;
             _identity = identity;
@@ -38,6 +41,7 @@ namespace VetSystems.Vet.Application.Features.VaccineCalendar.Commands
             _logger = logger;
             _vetVaccineCalendarRepository = vetVaccineCalendarRepository;
             _mediator = mediator;
+            _vetPatientsRepository = vetPatientsRepository;
         }
 
         public async Task<Response<string>> Handle(CreateVaccineExaminationCommand request, CancellationToken cancellationToken)
@@ -64,6 +68,27 @@ namespace VetSystems.Vet.Application.Features.VaccineCalendar.Commands
                 {
                     await _vetVaccineCalendarRepository.AddAsync(vaccineCalendar);
                 }
+                VetPatients patient = _vetPatientsRepository.Get(p => p.Id == request.VaccineCalendars[0].PatientId).FirstOrDefault();
+                PatientsDetailsDto patientsDetails = new()
+                {
+                    Id = patient.Id,
+                    Name = patient.Name,
+                    BirthDate = patient.BirthDate.ToString("yyyy-MM-dd"),
+                    ChipNumber = patient.ChipNumber ?? string.Empty,
+                    Sex = patient.Sex,
+                    AnimalType = patient.AnimalType,
+                    AnimalBreed = patient.AnimalBreed,
+                    AnimalColor = patient.AnimalColor,
+                    ReportNumber = patient.ReportNumber ?? string.Empty,
+                    SpecialNote = patient.SpecialNote ?? string.Empty,
+                    Sterilization = patient.Sterilization,
+                    Active = patient.Active ?? true,
+                    IsVaccineCalendarCreate = true,
+                };
+                UpdatePatientCommand updatePatient = new UpdatePatientCommand();
+                updatePatient.PatientDetails = patientsDetails;
+                updatePatient.CustomerId = request.VaccineCalendars.First().CustomerId;
+                var resp = await _mediator.Send(updatePatient);
 
                 await _uow.SaveChangesAsync(cancellationToken);
 

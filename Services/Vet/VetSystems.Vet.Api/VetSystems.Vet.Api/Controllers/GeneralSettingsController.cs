@@ -39,6 +39,21 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "DeleteShortCuts")]
+        public async Task<IActionResult> DeleteShortCuts([FromBody] DeleteShortCutsCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "UpdateShortCuts")]
+        public async Task<IActionResult> UpdateShortCuts([FromBody] UpdateShortCutsCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+
 
     }
 }

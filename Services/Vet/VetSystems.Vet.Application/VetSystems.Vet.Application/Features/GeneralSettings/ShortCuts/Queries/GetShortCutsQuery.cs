@@ -9,16 +9,17 @@ using VetSystems.Shared.Dtos;
 using VetSystems.Shared.Service;
 using VetSystems.Vet.Application.Models.Customers;
 using VetSystems.Vet.Application.Models.GeneralSettings.Users;
+using VetSystems.Vet.Application.Models.Vaccine;
 using VetSystems.Vet.Domain.Contracts;
 using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Features.GeneralSettings.Users.Queries
 {
-    public class GetShortCutsQuery : IRequest<Response<List<VetShortcut>>>
+    public class GetShortCutsQuery : IRequest<Response<List<ShortCutListDto>>>
     {
     }
 
-    public class GetShortCutsQueryHandler : IRequestHandler<GetShortCutsQuery, Response<List<VetShortcut>>>
+    public class GetShortCutsQueryHandler : IRequestHandler<GetShortCutsQuery, Response<List<ShortCutListDto>>>
     {
 
         private readonly IIdentityRepository _identityRepository;
@@ -32,15 +33,15 @@ namespace VetSystems.Vet.Application.Features.GeneralSettings.Users.Queries
             _mapper = mapper;
         }
 
-        public async Task<Response<List<VetShortcut>>> Handle(GetShortCutsQuery request, CancellationToken cancellationToken)
+        public async Task<Response<List<ShortCutListDto>>> Handle(GetShortCutsQuery request, CancellationToken cancellationToken)
         {
-             var response = new Response<List<VetShortcut>>();
+             var response = new Response<List<ShortCutListDto>>();
             try
             {
 
                 string query = "Select * from vetshortcut where Deleted = 0  order by CreateDate ";
-                var _data = _uow.Query<VetShortcut>(query).ToList();
-                response = new Response<List<VetShortcut>>
+                var _data = _uow.Query<ShortCutListDto>(query).ToList();
+                response = new Response<List<ShortCutListDto>>
                 {
                     Data = _data,
                     IsSuccessful = true,

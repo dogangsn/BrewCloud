@@ -48,6 +48,14 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
 
             try
             {
+
+                var shortCut = _shortCutRepository.Get(p => p.link == request.shortcut.link).FirstOrDefault();
+
+                if (shortCut != null) {
+                    response.IsSuccessful = false;
+                    response.ResponseType = ResponseType.Error;
+                    return response;
+                }
                 await _shortCutRepository.AddAsync(request.shortcut);
                 
                 await _uow.SaveChangesAsync(cancellationToken);

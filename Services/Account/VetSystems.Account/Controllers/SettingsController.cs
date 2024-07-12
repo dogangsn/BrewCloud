@@ -122,5 +122,15 @@ namespace VetSystems.Account.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+         
+        [HttpGet(Name = "GetActiveUser")]
+        public async Task<IActionResult> GetActiveUser()
+        {
+            var command = new GetActiveUserQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+
     }
 }

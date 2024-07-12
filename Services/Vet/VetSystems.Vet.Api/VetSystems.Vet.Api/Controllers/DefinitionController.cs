@@ -415,7 +415,13 @@ namespace VetSystems.Vet.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
-
+         
+        [HttpPost(Name = "GetSmsTemplateIdBy")]
+        public async Task<IActionResult> GetSmsTemplateIdBy([FromBody] GetSmsTemplateIdByQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
         #endregion
 

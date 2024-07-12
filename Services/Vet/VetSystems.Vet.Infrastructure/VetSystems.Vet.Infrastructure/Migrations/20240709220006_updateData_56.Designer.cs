@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VetSystems.Vet.Infrastructure.Persistence;
 
@@ -11,9 +12,10 @@ using VetSystems.Vet.Infrastructure.Persistence;
 namespace VetSystems.Vet.Infrastructure.Migrations
 {
     [DbContext(typeof(VetDbContext))]
-    partial class VetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240709220006_updateData_56")]
+    partial class updateData_56
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1540,86 +1542,6 @@ namespace VetSystems.Vet.Infrastructure.Migrations
                         .HasName("VetLogs_pkey");
 
                     b.ToTable("vetlogs", (string)null);
-                });
-
-            modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetMessageLogs", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("id");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("content");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("createdate");
-
-                    b.Property<string>("CreateUsers")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("createusers");
-
-                    b.Property<Guid>("CustomerId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("customerid");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasColumnName("deleted");
-
-                    b.Property<DateTime>("DeletedDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("deleteddate");
-
-                    b.Property<string>("DeletedUsers")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("deletedusers");
-
-                    b.Property<Guid>("IntegrationId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("integrationid");
-
-                    b.Property<int>("ItenrationType")
-                        .HasColumnType("int")
-                        .HasColumnName("itenrationtype");
-
-                    b.Property<int>("RecId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("recid");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RecId"), 1L, 1);
-
-                    b.Property<DateTime>("SendDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("senddate");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int")
-                        .HasColumnName("status");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("updatedate");
-
-                    b.Property<string>("UpdateUsers")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("updateusers");
-
-                    b.Property<Guid>("Userİd")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("userİd");
-
-                    b.HasKey("Id")
-                        .HasName("VetMessageLogs_pkey");
-
-                    b.ToTable("vetmessagelogs", (string)null);
                 });
 
             modelBuilder.Entity("VetSystems.Vet.Domain.Entities.VetParameters", b =>

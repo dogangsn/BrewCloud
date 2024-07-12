@@ -17,6 +17,7 @@ namespace VetSystems.Vet.Application.Features.Definition.SmsTemplate.Commands
     {
         public Guid Id { get; set; }
         public bool Active { get; set; }
+        public SmsType Type { get; set; }
         public string TemplateName { get; set; } = string.Empty;
         public string TemplateContent { get; set; } = string.Empty;
         public bool? EnableSMS { get; set; }
@@ -62,7 +63,7 @@ namespace VetSystems.Vet.Application.Features.Definition.SmsTemplate.Commands
                 smstemplate.EnableWhatsapp = request.EnableWhatsapp;
                 smstemplate.EnableSMS = request.EnableSMS;
                 smstemplate.EnableEmail = request.EnableEmail;
-
+                smstemplate.Type = request.Type;
 
 
                 await _uow.SaveChangesAsync(cancellationToken);

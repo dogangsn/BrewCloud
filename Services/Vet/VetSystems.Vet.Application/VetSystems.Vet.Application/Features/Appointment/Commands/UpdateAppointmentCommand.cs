@@ -98,6 +98,7 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
                         response.Data = "Kayıt Bulunamadı.";
                         return response;
                     }
+                    appointment.DoctorId = request.DoctorId;
                     appointment.BeginDate = TimeZoneInfo.ConvertTimeFromUtc(request.BeginDate, localTimeZone);
                     appointment.EndDate = TimeZoneInfo.ConvertTimeFromUtc(request.BeginDate.AddMinutes(10), localTimeZone);
                     appointment.Note = request.Note;

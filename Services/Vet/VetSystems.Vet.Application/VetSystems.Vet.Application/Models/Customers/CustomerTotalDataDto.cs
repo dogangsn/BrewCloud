@@ -12,5 +12,6 @@ namespace VetSystems.Vet.Application.Models.Customers
         public int TotalVisitCount { get; set; }
         public decimal? TotalEarnings { get; set; }
         public decimal? TotalCollection { get; set; }
+        public int? TotalMessageCount { get; set; }
     }
 }

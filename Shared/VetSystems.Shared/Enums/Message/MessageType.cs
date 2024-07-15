@@ -7,6 +7,8 @@ namespace VetSystems.Shared.Enums.Message
     public enum MessageType
     {
         Sms = 1,
-        Whatsapp = 2
+        Whatsapp = 2,
+        Mail = 3,
+        MobileApp = 4
     }
 }

@@ -23,9 +23,7 @@ namespace VetSystems.Vet.Domain.Entities
 
     public enum SmsType
     {
-        customer = 1,
-        patient = 2,
-        accomodation = 3,
-        appointment = 4
+        AppointmentReminder = 1,
+        PaymentReminder = 2,   
     }
 }

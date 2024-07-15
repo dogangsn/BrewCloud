@@ -15,6 +15,7 @@ using VetSystems.Shared.Accounts;
 using VetSystems.Shared.Service;
 using VetSystems.Vet.Application.Features.Account.Commands;
 using VetSystems.Vet.Application.GrpServices;
+using VetSystems.Vet.Application.Services.Hub;
 using VetSystems.Vet.Application.Services.Mails;
 using VetSystems.Vet.Application.Services.Message.Sms;
 
@@ -41,8 +42,13 @@ namespace VetSystems.Vet.Application
             {
                 c.BaseAddress = new Uri(configuration["ApiGatewayUrl"]);
             });
+            services.AddHttpClient("hubservice", c =>
+            {
+                c.BaseAddress = new Uri(configuration["HubService"]);
+            });
             services.AddScoped<IMailService, MailService>();
             services.AddScoped<ISmsService, SmsService>();
+            services.AddScoped<IHubService, HubService>();
 
             services.AddMassTransit(config =>
             {

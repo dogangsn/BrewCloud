@@ -1,6 +1,11 @@
+using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
+using VetSystems.Hubs.Api.Extentions;
 using VetSystems.Hubs.Api.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddApplicationServices(builder.Configuration);
 
 builder.Services.AddControllers();
 builder.Services.AddSignalR();

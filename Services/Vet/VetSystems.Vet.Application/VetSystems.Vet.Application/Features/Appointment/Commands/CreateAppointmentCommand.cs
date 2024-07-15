@@ -26,7 +26,7 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
         public int AppointmentType { get; set; }
         public int Status { get; set; }
         public string PatientId { get; set; }
-        public List<VaccineListDto>? VaccineItems { get; set; } 
+        public List<VaccineListDto>? VaccineItems { get; set; }
     }
 
     public class CreateAppointmentHandler : IRequestHandler<CreateAppointmentCommand, Response<bool>>
@@ -40,7 +40,7 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
         private readonly IRepository<Vet.Domain.Entities.VetVaccine> _vaccineRepository;
         private readonly IRepository<Vet.Domain.Entities.VetVaccineCalendar> _vaccineCalendarRepository;
 
-        public CreateAppointmentHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateAppointmentHandler> logger, IRepository<Domain.Entities.VetAppointments> AppointmentRepository, IRepository<Vet.Domain.Entities.VetPatients> PatientRepository, IRepository<VetVaccine> vaccineRepository)
+        public CreateAppointmentHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateAppointmentHandler> logger, IRepository<Domain.Entities.VetAppointments> AppointmentRepository, IRepository<Vet.Domain.Entities.VetPatients> PatientRepository, IRepository<VetVaccine> vaccineRepository, IRepository<Vet.Domain.Entities.VetVaccineCalendar> vaccineCalendarRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
@@ -49,6 +49,7 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
             _AppointmentRepository = AppointmentRepository ?? throw new ArgumentNullException(nameof(AppointmentRepository));
             _PatientRepository = PatientRepository ?? throw new ArgumentNullException(nameof(PatientRepository));
             _vaccineRepository = vaccineRepository ?? throw new ArgumentNullException(nameof(vaccineRepository));
+            _vaccineCalendarRepository = vaccineCalendarRepository ?? throw new ArgumentNullException(nameof(vaccineCalendarRepository));
         }
 
         public async Task<Response<bool>> Handle(CreateAppointmentCommand request, CancellationToken cancellationToken)
@@ -70,21 +71,24 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
                     List<VetVaccineCalendar> vaccineCalendars = new List<VetVaccineCalendar>();
                     foreach (var item in request.VaccineItems)
                     {
-                        VetVaccine vetVaccine = _vaccineRepository.Get(p=>p.Id == item.Id).FirstOrDefault();
-                        VetVaccineCalendar vaccineAppointment = new()
-                        {
-                            IsAdd = true,
-                            PatientId = Guid.Parse(request.PatientId),
-                            CreateUsers = _identity.Account.UserName,
-                            VaccineDate = request.BeginDate,
-                            IsDone = false,
-                            CustomerId = Guid.Parse(request.CustomerId),
-                            VaccineId = item.Id,
-                            AnimalType = patient.AnimalType.Value,
-                            VaccineName = vetVaccine.VaccineName
-                        };
+                        VetVaccine vetVaccine = _vaccineRepository.Get(p => p.Id == item.ProductId).FirstOrDefault();
+                        
+                            VetVaccineCalendar vaccineAppointment = new()
+                            {
+                                RecId = 0,
+                                IsAdd = true,
+                                PatientId = Guid.Parse(request.PatientId),
+                                CreateUsers = _identity.Account.UserName,
+                                VaccineDate = request.BeginDate,
+                                IsDone = false,
+                                CustomerId = Guid.Parse(request.CustomerId),
+                                VaccineId = item.Id,
+                                AnimalType = patient.AnimalType.Value,
+                                VaccineName = vetVaccine.VaccineName
+                            };
 
-                        await _vaccineCalendarRepository.AddAsync(vaccineAppointment);
+                            await _vaccineCalendarRepository.AddAsync(vaccineAppointment);
+                        
 
                         Vet.Domain.Entities.VetAppointments Appointments = new()
                         {
@@ -101,10 +105,10 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
                             CreateUsers = _identity.Account.UserName,
                             Status = (StatusType)request.Status,
                             PatientsId = Guid.Parse(request.PatientId)
-                           
+
                         };
 
-                                                
+
 
                         await _AppointmentRepository.AddAsync(Appointments);
                     }

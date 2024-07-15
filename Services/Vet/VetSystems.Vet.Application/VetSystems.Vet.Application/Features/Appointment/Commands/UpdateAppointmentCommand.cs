@@ -38,14 +38,16 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
         private readonly IMapper _mapper;
         private readonly ILogger<UpdateAppointmentCommandHandler> _logger;
         private readonly IRepository<Vet.Domain.Entities.VetAppointments> _appointmentRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetVaccine> _vaccineReposiory;
 
-        public UpdateAppointmentCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<UpdateAppointmentCommandHandler> logger, IRepository<Domain.Entities.VetAppointments> appointmentRepository)
+        public UpdateAppointmentCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<UpdateAppointmentCommandHandler> logger, IRepository<Domain.Entities.VetAppointments> appointmentRepository, IRepository<VetVaccine> vaccineReposiory)
         {
             _uow = uow;
             _identity = identity;
             _mapper = mapper;
             _logger = logger;
             _appointmentRepository = appointmentRepository;
+            _vaccineReposiory = vaccineReposiory;
         }
 
         public async Task<Response<string>> Handle(UpdateAppointmentCommand request, CancellationToken cancellationToken)
@@ -58,32 +60,33 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
             try
             {
                 TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
+                VetVaccine vetVaccine = new VetVaccine();
 
                 if (request.AppointmentType == (int)AppointmentType.AsiRandevusu)
                 {
                     foreach (var item in request.VaccineItems)
                     {
-
-                        var appointment = await _appointmentRepository.GetByIdAsync(item.Id);
-
-                        //Vet.Domain.Entities.VetAppointments Appointments = new()
-                        //{
-                        //    BeginDate = TimeZoneInfo.ConvertTimeFromUtc(item.Date, localTimeZone),
-                        //    EndDate = TimeZoneInfo.ConvertTimeFromUtc(item.Date.AddMinutes(10), localTimeZone),
-                        //    CustomerId = Guid.Parse(request.CustomerId),
-                        //    DoctorId = Guid.Parse(request.DoctorId),
-                        //    Note = request.Note,
-                        //    AppointmentType = request.AppointmentType,
-                        //    Deleted = false,
-                        //    CreateDate = DateTime.UtcNow,
-                        //    VaccineId = item.ProductId,
-                        //    IsCompleted = item.IsComplated,
-                        //    CreateUsers = _identity.Account.UserName,
-                        //    Status = (StatusType)request.Status,
-                        //    PatientsId = Guid.Parse(request.PatientId)
-                        //};
-                        //await _AppointmentRepository.AddAsync(Appointments);
+                        vetVaccine = _vaccineReposiory.Get(p=>p.Id == item.ProductId).FirstOrDefault();
                     }
+
+                    var appointment = await _appointmentRepository.GetByIdAsync(request.Id);
+                    if (appointment == null || appointment.Deleted)
+                    {
+                        response.IsSuccessful = false;
+                        response.ResponseType = ResponseType.Error;
+                        response.Data = "Kayıt Bulunamadı.";
+                        return response;
+                    }
+                    appointment.BeginDate = TimeZoneInfo.ConvertTimeFromUtc(request.BeginDate, localTimeZone);
+                    appointment.EndDate = TimeZoneInfo.ConvertTimeFromUtc(request.BeginDate.AddMinutes(10), localTimeZone);
+                    appointment.Note = request.Note;
+                    appointment.VaccineId = vetVaccine.Id == null ? Guid.Empty : vetVaccine.Id;
+                    appointment.AppointmentType = request.AppointmentType;
+                    appointment.UpdateDate = DateTime.Now;
+                    appointment.UpdateUsers = _identity.Account.UserName;
+                    appointment.Status = request.Status == null ? appointment.Status : (StatusType)request.Status;
+                    appointment.PatientsId = string.IsNullOrEmpty(request.PatientId) ? appointment.PatientsId : Guid.Parse(request.PatientId);
+                    await _uow.SaveChangesAsync(cancellationToken);
                 }
                 else
                 {
@@ -95,6 +98,7 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
                         response.Data = "Kayıt Bulunamadı.";
                         return response;
                     }
+                    appointment.DoctorId = request.DoctorId;
                     appointment.BeginDate = TimeZoneInfo.ConvertTimeFromUtc(request.BeginDate, localTimeZone);
                     appointment.EndDate = TimeZoneInfo.ConvertTimeFromUtc(request.BeginDate.AddMinutes(10), localTimeZone);
                     appointment.Note = request.Note;

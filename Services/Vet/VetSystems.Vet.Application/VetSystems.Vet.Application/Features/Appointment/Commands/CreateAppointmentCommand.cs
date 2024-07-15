@@ -55,7 +55,6 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
             _PatientRepository = PatientRepository ?? throw new ArgumentNullException(nameof(PatientRepository));
             _vaccineRepository = vaccineRepository ?? throw new ArgumentNullException(nameof(vaccineRepository));
             _hubService = hubService;
-            _vaccineCalendarRepository = vaccineCalendarRepository;
             _customerRepository = customerRepository;
             _vaccineCalendarRepository = vaccineCalendarRepository ?? throw new ArgumentNullException(nameof(vaccineCalendarRepository));
         }

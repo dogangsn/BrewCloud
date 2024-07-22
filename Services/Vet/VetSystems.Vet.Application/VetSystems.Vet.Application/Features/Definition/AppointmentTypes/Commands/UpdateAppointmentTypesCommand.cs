@@ -20,6 +20,7 @@ namespace VetSystems.Vet.Application.Features.Definition.AppointmentTypes.Comman
         public bool IsDefaultPrice { get; set; } = false;
         public decimal Price { get; set; }
         public Guid TaxisId { get; set; }
+        public string Colors { get; set; } = string.Empty;
     }
 
     public class UpdateAppointmentTypesCommandHandler : IRequestHandler<UpdateAppointmentTypesCommand, Response<bool>>
@@ -63,6 +64,7 @@ namespace VetSystems.Vet.Application.Features.Definition.AppointmentTypes.Comman
                 appointmentTypes.IsDefaultPrice = request.IsDefaultPrice;
                 appointmentTypes.TaxisId = request.TaxisId;
                 appointmentTypes.Remark = request.Remark;
+                appointmentTypes.Colors = request.Colors;
 
                 appointmentTypes.UpdateDate = DateTime.Now;
                 appointmentTypes.UpdateUsers = _identityRepository.Account.UserName;

@@ -31,6 +31,9 @@ namespace VetSystems.Vet.Domain.Entities
         public string AppointmentBeginDate { get; set; }
         public string AppointmentEndDate { get; set; }
         public bool? IsExaminationAmuntZero { get; set; } = false;
+        public int? DatetimeStatus { get; set; } = 0;
+        public int? AppointmentInterval { get; set; } = 0;
+        public int? AppointmentSeansDuration { get; set; } = 10; 
 
     }
 }

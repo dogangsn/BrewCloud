@@ -91,6 +91,13 @@ namespace VetSystems.Vet.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+         
+        [HttpPost(Name = "AppointmentDateCheckControl")]
+        public async Task<IActionResult> AppointmentDateCheckControl([FromBody] AppointmentDateCheckControlQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
     }
 }

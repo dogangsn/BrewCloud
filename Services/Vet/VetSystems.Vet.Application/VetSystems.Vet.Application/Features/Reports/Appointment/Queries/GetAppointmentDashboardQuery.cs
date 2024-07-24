@@ -52,11 +52,13 @@ namespace VetSystems.Vet.Application.Features.Reports.Appointment.Queries
                 var completedAppointments = _appointments.Count(x => x.IsCompleted.GetValueOrDefault());
 
                 var monthlyAppointmentCounts = new int[12];
+                var MonthlyAppointmentCompletedCounts = new int[12];
                 for (int i = 1; i <= 12; i++)
                 {
                     var startOfSpecifiedMonth = new DateTime(now.Year, i, 1);
                     var endOfSpecifiedMonth = startOfSpecifiedMonth.AddMonths(1).AddDays(-1);
                     monthlyAppointmentCounts[i - 1] = _appointments.Count(x => x.BeginDate >= startOfSpecifiedMonth && x.BeginDate <= endOfSpecifiedMonth);
+                    MonthlyAppointmentCompletedCounts[i - 1] = _appointments.Count(x => x.BeginDate >= startOfSpecifiedMonth && x.BeginDate <= endOfSpecifiedMonth && x.IsCompleted.GetValueOrDefault());
                 }
 
                 response.Data.TotalAppointmentWeek = appointmentsThisWeek;
@@ -64,6 +66,7 @@ namespace VetSystems.Vet.Application.Features.Reports.Appointment.Queries
                 response.Data.TotalAppointmentYear = appointmentsThisYear;
                 response.Data.TotalCompletedAppointments = completedAppointments;
                 response.Data.MonthlyAppointmentCounts = monthlyAppointmentCounts;
+                response.Data.MonthlyAppointmentCompletedCounts = MonthlyAppointmentCompletedCounts;
             }
             catch (Exception ex)
             {

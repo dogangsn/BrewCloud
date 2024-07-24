@@ -236,7 +236,7 @@ namespace VetSystems.Vet.Infrastructure.Persistence
 
                         if (property.Name == "CreateUsers" || property.Name == "CreateDate" 
                             || property.Name == "UpdateUsers" || property.Name == "UpdateDate"
-                            || property.Name == "DeletedBy" || property.Name == "DeletedDate") continue;
+                            || property.Name == "DeletedDate" || property.Name == "DeletedUsers") continue;
                         var originalValue = entity.OriginalValues[property];
                         var updatedValue = entity.CurrentValues[property];
                         if (!Object.Equals(originalValue, updatedValue) && !((updatedValue ?? false).GetType().IsGenericType))

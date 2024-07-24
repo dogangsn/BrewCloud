@@ -8,6 +8,7 @@ namespace VetSystems.Vet.Application.Models.Definition.CustomerGroup
 {
     public class CustomerGroupDefDto
     {
+        public Guid Id { get; set; }
         public string Code { get; set; } = string.Empty;
         public string Name { get; set; } = string.Empty;
     }

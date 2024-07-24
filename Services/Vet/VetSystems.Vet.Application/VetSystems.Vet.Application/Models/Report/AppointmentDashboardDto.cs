@@ -14,6 +14,7 @@ namespace VetSystems.Vet.Application.Models.Report
         public int? TotalAppointmentYear { get; set; }
         public int? TotalCompletedAppointments { get; set; }
         public int[] MonthlyAppointmentCounts { get; set; }
+        public int[] MonthlyAppointmentCompletedCounts { get; set; }
 
         public int TotalJanuary { get; } = 0;
         public int TotalFebruary { get; } = 0;

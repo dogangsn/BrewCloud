@@ -48,8 +48,8 @@ namespace VetSystems.Vet.Application.Features.Dashboards.Queries
             try
             {
                 response.Data = new DashboardsDto();
-
                 var dailyAppointments = await _vetAppointmentsRepository.GetAsync(x => x.Deleted == false && x.CreateDate.Date == DateTime.Today);
+
                 var _totalCount = new DashboardCountTotal();
                 _totalCount.DailyAddAppointmentCount = dailyAppointments.Count();
                 _totalCount.DailyAddAppointmentCompletedCount = dailyAppointments.Where(x => x.IsCompleted.GetValueOrDefault()).Count();

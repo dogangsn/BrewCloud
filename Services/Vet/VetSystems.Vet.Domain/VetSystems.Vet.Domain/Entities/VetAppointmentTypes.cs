@@ -18,6 +18,7 @@ namespace VetSystems.Vet.Domain.Entities
         public bool IsDefaultPrice { get; set; } = false;
         public decimal Price { get; set; }
         public Guid? TaxisId { get; set; }
+        public string Colors { get; set; } = string.Empty;
 
     }
 }

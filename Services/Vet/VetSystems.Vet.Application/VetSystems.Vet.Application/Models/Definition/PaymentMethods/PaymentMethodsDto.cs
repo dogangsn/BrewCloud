@@ -8,6 +8,7 @@ namespace VetSystems.Vet.Application.Models.Definition.PaymentMethods
 {
     public class PaymentMethodsDto
     {
+      
         public int RecId { get; set; }
         public string Name { get; set; }
         public string Remark { get; set; }

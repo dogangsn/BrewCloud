@@ -14,6 +14,7 @@ using VetSystems.Shared.Service;
 using VetSystems.Vet.Application.Features.VaccineCalendar.Commands;
 using VetSystems.Vet.Application.Models.Appointments;
 using VetSystems.Vet.Application.Models.Customers;
+using VetSystems.Vet.Application.Models.Parameters;
 using VetSystems.Vet.Application.Services.Hub;
 using VetSystems.Vet.Domain.Contracts;
 using VetSystems.Vet.Domain.Entities;
@@ -44,8 +45,9 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
         private readonly IRepository<Vet.Domain.Entities.VetVaccineCalendar> _vaccineCalendarRepository;
         private readonly IHubService _hubService;
         private readonly IRepository<Vet.Domain.Entities.VetCustomers> _customerRepository;
+        private readonly IRepository<Domain.Entities.VetParameters> _parametersRepository;
 
-        public CreateAppointmentHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateAppointmentHandler> logger, IRepository<Domain.Entities.VetAppointments> AppointmentRepository, IRepository<Vet.Domain.Entities.VetPatients> PatientRepository, IRepository<VetVaccine> vaccineRepository, IHubService hubService, IRepository<VetVaccineCalendar> vaccineCalendarRepository, IRepository<VetCustomers> customerRepository)
+        public CreateAppointmentHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateAppointmentHandler> logger, IRepository<Domain.Entities.VetAppointments> AppointmentRepository, IRepository<Vet.Domain.Entities.VetPatients> PatientRepository, IRepository<VetVaccine> vaccineRepository, IHubService hubService, IRepository<VetVaccineCalendar> vaccineCalendarRepository, IRepository<VetCustomers> customerRepository, IRepository<VetParameters> parametersRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
@@ -57,6 +59,7 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
             _hubService = hubService;
             _customerRepository = customerRepository;
             _vaccineCalendarRepository = vaccineCalendarRepository ?? throw new ArgumentNullException(nameof(vaccineCalendarRepository));
+            _parametersRepository = parametersRepository;
         }
 
         public async Task<Response<bool>> Handle(CreateAppointmentCommand request, CancellationToken cancellationToken)
@@ -69,6 +72,13 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
 
             try
             {
+                var parameters = await _parametersRepository.GetAllAsync();
+                if (!parameters.Any())
+                {
+                    return Response<bool>.Fail("Parametre Tanımı Bulunamadı", 404);
+                }
+
+
                 List<AppointmentCalendarDto> appointments = new List<AppointmentCalendarDto>();
                 Guid _id = Guid.NewGuid();
                 TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
@@ -101,7 +111,7 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
                         Vet.Domain.Entities.VetAppointments Appointments = new()
                         {
                             BeginDate = TimeZoneInfo.ConvertTimeFromUtc(item.Date, localTimeZone),
-                            EndDate = TimeZoneInfo.ConvertTimeFromUtc(item.Date.AddMinutes(10), localTimeZone),
+                            EndDate = TimeZoneInfo.ConvertTimeFromUtc(item.Date.AddMinutes(parameters.FirstOrDefault().AppointmentSeansDuration.GetValueOrDefault()), localTimeZone),
                             CustomerId = Guid.Parse(request.CustomerId),
                             DoctorId = Guid.Parse(request.DoctorId),
                             Note = request.Note,
@@ -130,7 +140,7 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
                     {
                         Id = _id,
                         BeginDate = TimeZoneInfo.ConvertTimeFromUtc(request.BeginDate, localTimeZone),
-                        EndDate = TimeZoneInfo.ConvertTimeFromUtc(request.BeginDate.AddMinutes(10), localTimeZone),
+                        EndDate = TimeZoneInfo.ConvertTimeFromUtc(request.BeginDate.AddMinutes(parameters.FirstOrDefault().AppointmentSeansDuration.GetValueOrDefault()), localTimeZone),
                         CustomerId = Guid.Parse(request.CustomerId),
                         DoctorId = Guid.Parse(request.DoctorId),
                         Note = request.Note,

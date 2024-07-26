@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using VetSystems.Vet.Application.Features.Clinicalstatistics.Queries;
+using VetSystems.Vet.Application.Features.Dashboards.Queries;
+using VetSystems.Vet.Application.Features.Reports.Appointment.Queries;
 using VetSystems.Vet.Application.Features.Reports.Commands;
 
 namespace VetSystems.Vet.Api.Controllers
@@ -19,16 +21,15 @@ namespace VetSystems.Vet.Api.Controllers
         {
             return Ok(await _mediator.Send(model));
         }
+
+        [HttpGet(Name = "GetAppointmentDashboard")]
+        public async Task<IActionResult> GetAppointmentDashboard()
+        {
+            var command = new GetAppointmentDashboardQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+
     }
 }
-    // [Route("api/[controller]/[action]")]
-    //[ApiController]
-    //public class ClinicalstatisticsController : ControllerBase
-    //{
-    //    private readonly IMediator _mediator;
-    //    public ClinicalstatisticsController(IMediator mediator)
-    //    {
-    //        _mediator = mediator;
-    //    }
-
-    //}

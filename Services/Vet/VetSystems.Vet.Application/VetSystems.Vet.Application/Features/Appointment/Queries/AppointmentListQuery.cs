@@ -55,9 +55,11 @@ namespace VetSystems.Vet.Application.Features.Appointment.Queries
                                                 "WHEN 5 THEN 'Tıraş'\r\n        " +
                                                 "WHEN 6 THEN 'Tedavi'\r\n        " +
                                                 "ELSE 'Diğer'\r\n    END AS text, " +
-                                                "vetappointments.begindate as startDate, vetappointments.enddate\r\n" +
+                                                "vetappointments.begindate as startDate, vetappointments.enddate, vetappointmenttypes.colors \r\n" +
                                                 "FROM            vetappointments INNER JOIN\r\n                         " +
-                                                    "  vetcustomers ON vetappointments.customerid = vetcustomers.id\r\n\t\t\t\t\t\t where vetappointments.deleted = 0 ";
+                                                    "  vetcustomers ON vetappointments.customerid = vetcustomers.id\r\n\t\t\t\t\t\t " +
+                                                    " Inner join vetappointmenttypes ON vetappointmenttypes.type = vetappointments.appointmenttype " +
+                                                    " where vetappointments.deleted = 0 ";
                 query += $" and {(request.AppointmentType == 0 ? " vetappointments.appointmenttype != 1 " : " vetappointments.appointmenttype = 1 ")} ";
                 if (!_isFirstInspection)
                 {

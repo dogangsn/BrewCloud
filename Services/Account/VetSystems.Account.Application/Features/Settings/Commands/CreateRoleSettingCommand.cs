@@ -19,6 +19,7 @@ namespace VetSystems.Account.Application.Features.Settings.Commands
         public string Rolecode { get; set; }
         public string MainPage { get; set; }
         public List<SelectedNavigationDto> SelectedNavigations { get; set; }
+        public List<SelectedActionsDto> SelectedActions { get; set; }
     }
 
     public class CreateRoleSettingCommandHandler : IRequestHandler<CreateRoleSettingCommand, Response<bool>>
@@ -63,7 +64,7 @@ namespace VetSystems.Account.Application.Features.Settings.Commands
                     CreateDate = DateTime.Now,
                     CreateUser = _identity.Account.UserName,
                     Target = SidebarNavigationDto.Target,
-                    Action = SidebarNavigationDto.Action ?? ""
+                    Action = request.SelectedActions.Where(p=>p.Target==SidebarNavigationDto.Target).Select(x=>x.Action).FirstOrDefault() ?? ""
                 });
             });
             await _uow.SaveChangesAsync(cancellationToken);

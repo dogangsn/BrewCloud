@@ -72,6 +72,14 @@ namespace VetSystems.Account.Api.Controllers
             return Ok(result);
         }
 
+        [HttpGet(Name = "GetUserRoleSettingList")]
+        public async Task<IActionResult> GetUserRoleSettingList()
+        {
+            var command = new GetUserRoleSettingListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
         [HttpPost(Name = "DeleteRoleSetting")]
         public async Task<IActionResult> DeleteRoleSetting([FromBody] DeleteRoleSettingCommand command)
         {

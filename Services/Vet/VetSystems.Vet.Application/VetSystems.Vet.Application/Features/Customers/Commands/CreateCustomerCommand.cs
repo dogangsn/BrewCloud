@@ -119,6 +119,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                     Adress = adress,
                     Deleted = false,
                     CreateDate = DateTime.Now,
+                    CustomerGroup = request.CreateCustomers.CustomerGroup,
                 };
                 if (request.CreateCustomers.FarmsDetail != null)
                 {

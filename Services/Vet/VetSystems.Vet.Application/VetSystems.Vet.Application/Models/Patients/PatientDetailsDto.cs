@@ -26,5 +26,6 @@ namespace VetSystems.Vet.Application.Models.Patients
         public string Thumbnail { get; set; } = string.Empty;
         public byte[] Images { get; set; }
         public bool? IsVaccineCalendarCreate { get; set; }
+        public int? AnimalColorId { get; set; }
     }
 }

@@ -27,11 +27,12 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
         public string VKNTCNo { get; set; } = string.Empty;
         public string Note { get; set; } = string.Empty;
         public decimal DiscountRate { get; set; } = 0;
-        public bool? IsEmail { get; set; } = false;
-        public bool? IsPhone { get; set; } = false;
+        public bool? emailNotification { get; set; } = false;
+        public bool? smsNotification { get; set; } = false;
         public string Province { get; set; } = string.Empty;
         public string District { get; set; } = string.Empty;
         public string LongAdress { get; set; } = string.Empty;
+        public Guid? CustomerGroup { get; set; }
     }
 
     public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, Response<bool>>
@@ -68,8 +69,8 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                     return Response<bool>.Fail("Property update failed", 404);
                 }
 
-                customers.IsEmail = request.IsEmail;
-                customers.IsPhone = request.IsPhone;
+                customers.IsEmail = request.emailNotification;
+                customers.IsPhone = request.smsNotification;
                 customers.DiscountRate = request.DiscountRate;
                 customers.FirstName = request.FirstName;
                 customers.LastName = request.LastName;
@@ -81,6 +82,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                 customers.UpdateDate = DateTime.Now;
                 customers.UpdateUsers = _identity.Account.UserName;
                 customers.EMail = request.EMail;
+                customers.CustomerGroup = request.CustomerGroup;
 
                 await _uow.SaveChangesAsync(cancellationToken);
                 response.IsSuccessful = true;

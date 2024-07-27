@@ -97,7 +97,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                                             vat.type as AnimalType,
                                             vabd.breedname as BreedType,
                                             vabd.RecId as AnimalBreed,
-                                            vacd.name as AnimalColor from vetpatients as vp
+                                            vacd.name as AnimalColor, vacd.RecId as AnimalColorId  from vetpatients as vp
                                                 left outer join vetanimalstype as vat on vp.animaltype = vat.type
                                                 left outer join vetanimalbreedsdef as vabd on vp.animalbreed = vabd.RecId
                                                 left outer join vetanimalcolorsdef as vacd on vp.animalcolor = vacd.RecId

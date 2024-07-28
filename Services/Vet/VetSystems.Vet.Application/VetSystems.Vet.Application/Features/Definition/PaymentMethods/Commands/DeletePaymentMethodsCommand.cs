@@ -18,7 +18,7 @@ namespace VetSystems.Vet.Application.Features.Definition.PaymentMethods.Commands
         public int RecId { get; set; }
     }
 
-    public class DeletePaymentMethodsCommandHandler : IRequestHandler<DeleteProductCategoriesCommand, Response<bool>>
+    public class DeletePaymentMethodsCommandHandler : IRequestHandler<DeletePaymentMethodsCommand, Response<bool>>
     {
         private readonly IUnitOfWork _uow;
         private readonly IIdentityRepository _identity;
@@ -37,7 +37,7 @@ namespace VetSystems.Vet.Application.Features.Definition.PaymentMethods.Commands
             _identityRepository = identityRepository ?? throw new ArgumentNullException(nameof(identityRepository));
         }
 
-        public async Task<Response<bool>> Handle(DeleteProductCategoriesCommand request, CancellationToken cancellationToken)
+        public async Task<Response<bool>> Handle(DeletePaymentMethodsCommand request, CancellationToken cancellationToken)
         {
             var response = new Response<bool>
             {
@@ -47,16 +47,16 @@ namespace VetSystems.Vet.Application.Features.Definition.PaymentMethods.Commands
             };
             try
             {
-                //var paymentMethods = await _paymentMethodsRepository.GetByIdAsync(request.RecId);
-                //if (paymentMethods == null)
-                //{
-                //    _logger.LogWarning($"Product update failed. Id number: {request.RecId}");
-                //    return Response<bool>.Fail("Property update failed", 404);
-                //}
+                var paymentMethods = await _paymentMethodsRepository.FirstOrDefaultAsync(x=> x.RecId == request.RecId);
+                if (paymentMethods == null)
+                {
+                    _logger.LogWarning($"Paymet Methots update failed. Id number: {request.RecId}");
+                    return Response<bool>.Fail("Paymet Methods update failed", 404);
+                }
 
-                //paymentMethods.Deleted = true;
-                //paymentMethods.DeletedDate = DateTime.Now;
-                //paymentMethods.DeletedUsers = _identityRepository.Account.Email;
+                paymentMethods.Deleted = true;
+                paymentMethods.DeletedDate = DateTime.Now;
+                paymentMethods.DeletedUsers = _identityRepository.Account.UserName;
 
                 await _uow.SaveChangesAsync(cancellationToken);
             }

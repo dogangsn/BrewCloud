@@ -16,6 +16,7 @@ namespace VetSystems.Vet.Application.Features.Appointment.Queries
     public class AppointmentFindByIdListQuery : IRequest<Response<List<AppointmentsDto>>>
     {
         public string CustomerId { get; set; }
+        public Guid? PatientId { get; set; }
     }
 
     public class AppointmentFindByIdListQueryHandler : IRequestHandler<AppointmentFindByIdListQuery, Response<List<AppointmentsDto>>>
@@ -52,9 +53,15 @@ namespace VetSystems.Vet.Application.Features.Appointment.Queries
                                             " ELSE 'Diğer'\r\n    END AS text  " +
                                             " FROM            vetappointments INNER JOIN\r\n                         " +
                                             " vetcustomers ON vetappointments.customerid = vetcustomers.id\r\n\t\t\t\t\t\t " +
-                                            " where vetappointments.deleted = 0 and vetappointments.customerid = @customerid and vetappointments.appointmenttype != 0 order by vetappointments.begindate desc";
+                                            " where vetappointments.deleted = 0 and vetappointments.customerid = @customerid and vetappointments.appointmenttype != 0 ";
+                                            
+                if (request.PatientId != Guid.Empty)
+                {
+                    query += "and vetappointments.patientsid = @patientid";
+                }
+                query += " order by vetappointments.begindate desc";
 
-                var _data = _uow.Query<AppointmentsDto>(query, new { customerid = Guid.Parse(request.CustomerId)}).ToList();
+                var _data = _uow.Query<AppointmentsDto>(query, new { customerid = Guid.Parse(request.CustomerId) , patientid  = request.PatientId }).ToList();
                 response.Data = _data;
             }
             catch (Exception ex)

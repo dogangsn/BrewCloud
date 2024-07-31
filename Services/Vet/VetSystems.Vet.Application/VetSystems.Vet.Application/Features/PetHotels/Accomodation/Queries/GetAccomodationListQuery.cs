@@ -45,7 +45,7 @@ namespace VetSystems.Vet.Application.Features.PetHotels.Accomodation.Queries
                 //                    + "                          vetcustomers ON vetaccomodation.customerid = vetcustomers.id "
                 //                    + " WHERE        (vetaccomodation.deleted = 0)"; 
                 #endregion
-                string query = "SELECT        vetcustomers.firstname + ' ' + vetcustomers.lastname AS customerName, vetpatients.name as patientname,"
+                string query = "SELECT        CASE WHEN vetaccomodation.customerid = '00000000-0000-0000-0000-000000000000' THEN 'Misafir' ELSE vetcustomers.firstname + ' ' + vetcustomers.lastname END AS customerName, vetpatients.name as patientname,"
                 + " vetrooms.roomname, vetaccomodation.roomid, vetaccomodation.customerid, vetaccomodation.patientsid, "
                 + " vetaccomodation.checkindate, "
                 + "                          vetaccomodation.checkoutdate, vetaccomodation.accomodation, "

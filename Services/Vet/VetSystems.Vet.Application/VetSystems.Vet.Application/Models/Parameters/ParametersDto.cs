@@ -30,5 +30,6 @@ namespace VetSystems.Vet.Application.Models.Parameters
         public int? datetimestatus { get; set; }
         public int? appointmentinterval { get; set; }
         public int? appointmentSeansDuration { get; set; }
+        public int? petHotelsDateTimeFormat { get; set; }
     }
 }

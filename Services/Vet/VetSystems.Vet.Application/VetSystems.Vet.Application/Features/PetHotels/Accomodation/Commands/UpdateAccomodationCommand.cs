@@ -73,7 +73,7 @@ namespace VetSystems.Vet.Application.Features.PetHotels.Accomodation.Commands
                 _accomodation.Accomodation = (AccomodationType)request.Accomodation;
                 _accomodation.Remark = request.Remark;
 
-
+                await _uow.SaveChangesAsync(cancellationToken);
 
             }
             catch (Exception ex)

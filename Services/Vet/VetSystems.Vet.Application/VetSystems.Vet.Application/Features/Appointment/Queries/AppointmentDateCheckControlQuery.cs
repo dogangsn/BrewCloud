@@ -45,12 +45,15 @@ namespace VetSystems.Vet.Application.Features.Appointment.Queries
             {
                 TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
 
-                var _appointments = await _AppointmentRepository.FirstOrDefaultAsync(x => x.BeginDate == TimeZoneInfo.ConvertTimeFromUtc(request.Date, localTimeZone));
+                var _appointments = await _AppointmentRepository.FirstOrDefaultAsync(x => x.BeginDate == TimeZoneInfo.ConvertTimeFromUtc(request.Date, localTimeZone) && x.Deleted == false);
                 if (_appointments != null)
                 {
                     response.Data = false;
                 }
-                response.Data = true;
+                else
+                {
+                    response.Data = true;
+                }
             }
             catch (Exception ex)
             {

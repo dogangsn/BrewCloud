@@ -59,6 +59,12 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "IsSaleProductControl")]
+        public async Task<IActionResult> IsSaleProductControl([FromBody] IsSaleProductControlQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
     }
 }

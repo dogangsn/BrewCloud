@@ -13,7 +13,7 @@ using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Features.Accounting.Commands
 {
-    public class CreateSaleCollectionCommand : IRequest<Response<bool>>
+    public class UpdateSaleCollectionCommand : IRequest<Response<bool>>
     {
         public Guid SaleOwnerId { get; set; }
         public Guid CustomerId { get; set; }
@@ -24,15 +24,15 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
         public Guid? CollectionId { get; set; }
     }
 
-    public class CreateSaleCollectionCommandHandler : IRequestHandler<CreateSaleCollectionCommand, Response<bool>>
+    public class UpdateSaleCollectionCommandHandler : IRequestHandler<UpdateSaleCollectionCommand, Response<bool>>
     {
         private readonly IUnitOfWork _uow;
         private readonly IIdentityRepository _identity;
         private readonly IMapper _mapper;
-        private readonly ILogger<CreateSaleCollectionCommandHandler> _logger;
+        private readonly ILogger<UpdateSaleCollectionCommandHandler> _logger;
         private readonly IRepository<VetPaymentCollection> _paymentCollectionRepository;
 
-        public CreateSaleCollectionCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateSaleCollectionCommandHandler> logger, IRepository<VetPaymentCollection> paymentCollectionRepository)
+        public UpdateSaleCollectionCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<UpdateSaleCollectionCommandHandler> logger, IRepository<VetPaymentCollection> paymentCollectionRepository)
         {
             _uow = uow;
             _identity = identity;
@@ -41,50 +41,27 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
             _paymentCollectionRepository = paymentCollectionRepository;
         }
 
-        public async Task<Response<bool>> Handle(CreateSaleCollectionCommand request, CancellationToken cancellationToken)
+        public async Task<Response<bool>> Handle(UpdateSaleCollectionCommand request, CancellationToken cancellationToken)
         {
             var response = Response<bool>.Success(200);
             try
             {
-
-                var _collection = await _paymentCollectionRepository.FirstOrDefaultAsync(x=> x.SaleBuyId == request.SaleOwnerId && x.Deleted == false);
+                var _collection = await _paymentCollectionRepository.FirstOrDefaultAsync(x => x.SaleBuyId == request.SaleOwnerId && x.Deleted == false);
                 if (_collection != null)
                 {
                     _collection.UpdateDate = DateTime.Now;
                     _collection.UpdateUsers = _identity.Account.UserName;
                     _collection.Date = request.Date;
                     _collection.Remark = request.Remark;
-                    _collection.Credit = request.Amount + _collection.Credit;
-                    _collection.Paid = request.Amount + _collection.Paid;
+                    _collection.Credit = request.Amount;
+                    _collection.Paid = request.Amount;
                     _collection.Debit = 0;
-                    _collection.Total = request.Amount + _collection.Total;
-                    _collection.TotalPaid = request.Amount + _collection.TotalPaid;
+                    _collection.Total = request.Amount;
+                    _collection.TotalPaid = request.Amount;
                     _collection.SaleBuyId = request.SaleOwnerId;
                     _collection.PaymetntId = request.PaymentId;
-
-                }
-                else
-                {
-                    VetPaymentCollection paymentCollection = new()
-                    {
-                        Id = Guid.NewGuid(),
-                        CreateDate = DateTime.Now,
-                        CreateUsers = _identity.Account.UserName,
-                        CustomerId = request.CustomerId,
-                        Date = request.Date,
-                        Remark = request.Remark,
-                        Credit = request.Amount,
-                        Paid = request.Amount,
-                        Debit = 0,
-                        Total = request.Amount,
-                        TotalPaid = request.Amount,
-                        SaleBuyId = request.SaleOwnerId,
-                        PaymetntId = request.PaymentId
-                    };
-                    await _paymentCollectionRepository.AddAsync(paymentCollection);
                 }
                 await _uow.SaveChangesAsync();
-
 
             }
             catch (Exception ex)
@@ -92,6 +69,7 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
                 return Response<bool>.Fail(ex.Message, 400);
             }
             return response;
+
         }
     }
 }

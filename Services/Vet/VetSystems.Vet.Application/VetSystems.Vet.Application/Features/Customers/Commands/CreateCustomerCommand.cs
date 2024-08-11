@@ -66,13 +66,13 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
             {
                 List<string> patientsIds = new List<string>();
                 //Silinen kayitlarin uzerinde islem yapılması
-                var recordControl = await _customerRepository.FirstOrDefaultAsync(x=>x.PhoneNumber.Trim() == request.CreateCustomers.PhoneNumber.Trim() && x.Deleted == false);
+                var recordControl = _customerRepository.FirstOrDefaultAsync(x=>x.PhoneNumber.Trim() == request.CreateCustomers.PhoneNumber.Trim() && x.Deleted == false).Result;
                 if (recordControl != null)
                 {
                     return Response<string>.Fail("Sistem Üzerinde Aynı Müşteri Bilgileri ile Kayıt Vardır.", 404);
                 }
 
-                VetParameters? _param = (await _parametersRepository.GetAllAsync()).FirstOrDefault();
+                VetParameters _param = _parametersRepository.FirstOrDefaultAsync(x=>x.Deleted == false).Result;
                 if (_param == null)
                 {
                     return Response<string>.Fail("Şirket Parametlerini Tamamlayınız.", 404);
@@ -135,8 +135,8 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                         CreateUsers = _identity.Account.UserName,
 
                     };
-                    await _farmsRepository.AddAsync(farms);
-                    await _uow.SaveChangesAsync(cancellationToken);
+                     _farmsRepository.AddAsync(farms);
+                     _uow.SaveChangesAsync(cancellationToken);
 
                 }
 
@@ -180,6 +180,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
           
                 await _customerRepository.AddAsync(customers);
                 await _uow.SaveChangesAsync(cancellationToken);
+
                 _uow.Commit();
                 if (request.IsCreateVaccine)
                 {

@@ -15,6 +15,11 @@ namespace VetSystems.Vet.Infrastructure.EntityConfigurations
         {
             entity.HasKey(e => e.Id)
                            .HasName("VetCustomers_pkey");
+
+            entity.Property(x => x.RecId)
+            .ValueGeneratedOnAdd()
+            .HasColumnName("recid")
+            .UseIdentityColumn(1000, 1);
         }
     }
 }

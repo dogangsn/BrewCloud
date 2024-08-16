@@ -95,6 +95,14 @@ namespace VetSystems.Account.Api.Controllers
         }
 
 
+        [HttpPost(Name = "GetRoleSettingById")]
+        public async Task<IActionResult> GetRoleSettingById([FromBody] GetRoleSettingByIdQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+
         [HttpPost(Name = "GetNavigation")]
         public async Task<IActionResult> GetNavigation([FromBody] GetNavigationQuery command)
         {

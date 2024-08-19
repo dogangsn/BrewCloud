@@ -37,8 +37,9 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Commands
         private readonly ILogger<CreateCustomerHandler> _logger;
         private readonly IRepository<Vet.Domain.Entities.VetSaleBuyOwner> _saleBuyOwnerRepository;
         private readonly IRepository<Vet.Domain.Entities.VetProducts> _productRepository;
+        private readonly IRepository<Vet.Domain.Entities.VetTaxis> _taxisRepository;
 
-        public CreateSaleBuyCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<Domain.Entities.VetSaleBuyOwner> salebuyownerRepository, IRepository<Vet.Domain.Entities.VetProducts> productRepository)
+        public CreateSaleBuyCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<CreateCustomerHandler> logger, IRepository<Domain.Entities.VetSaleBuyOwner> salebuyownerRepository, IRepository<Vet.Domain.Entities.VetProducts> productRepository, IRepository<Domain.Entities.VetTaxis> taxisRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
@@ -46,6 +47,7 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Commands
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _saleBuyOwnerRepository = salebuyownerRepository ?? throw new ArgumentNullException(nameof(salebuyownerRepository));
             _productRepository = productRepository;
+            _taxisRepository = taxisRepository;
         }
         public async Task<Response<bool>> Handle(CreateSaleBuyCommand request, CancellationToken cancellationToken)
         {
@@ -80,13 +82,14 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Commands
                 demandsGuidId = request.demandsGuidId,
             };
 
-            decimal vatAmaount = CalculateVatAmount((request.Type == (int)BuySaleType.Selling ? _product.SellingPrice : _product.BuyingPrice), request.Amount, _product.Ratio, (request.Type == (int)BuySaleType.Selling ? _product.SellingIncludeKDV.GetValueOrDefault() : _product.BuyingIncludeKDV.GetValueOrDefault()));
+            var taxis = await _taxisRepository.GetByIdAsync(_product.TaxisId.GetValueOrDefault());
+            decimal vatAmaount = CalculateVatAmount((request.Type == (int)BuySaleType.Selling ? _product.SellingPrice : _product.BuyingPrice), request.Amount, taxis.TaxRatio, (request.Type == (int)BuySaleType.Selling ? _product.SellingIncludeKDV.GetValueOrDefault() : _product.BuyingIncludeKDV.GetValueOrDefault()));
 
             saleBuyOwner.addSaleBuyTrans(new Vet.Domain.Entities.VetSaleBuyTrans
             {
                 Id = Guid.NewGuid(),
                 InvoiceNo = saleBuyOwner.InvoiceNo,
-                Ratio = _product.Ratio,
+                Ratio = taxis.TaxRatio,
                 ProductId = request.ProductId.GetValueOrDefault(),
                 CreateDate = DateTime.Now,
                 CreateUsers = _identity.Account.UserName,

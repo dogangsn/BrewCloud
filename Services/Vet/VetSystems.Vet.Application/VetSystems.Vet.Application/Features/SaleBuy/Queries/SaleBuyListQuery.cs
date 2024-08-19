@@ -91,7 +91,7 @@ namespace VetSystems.Vet.Application.Features.SaleBuy.Queries
                     + "     LEFT JOIN vetpaymentmethods ON vetsalebuyowner.paymenttype = vetpaymentmethods.RecId "
                     + "     LEFT JOIN vetproducts ON vetsalebuytrans.productid = vetproducts.id "
                     + " WHERE  "
-                    + "      (vetsalebuyowner.deleted = 0) and (vetsalebuyowner.type = @type) and (CONVERT(date, vetsalebuyowner.CreateDate) = CONVERT(date, @Date)) "
+                    + "      (vetsalebuyowner.deleted = 0) and  (vetsalebuytrans.deleted = 0) and (vetsalebuyowner.type = @type) and (CONVERT(date, vetsalebuyowner.CreateDate) = CONVERT(date, @Date)) "
                     + " ORDER BY "
                     + "     vetsalebuyowner.CreateDate DESC";
 

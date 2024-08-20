@@ -49,7 +49,8 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
             try
             {
 
-                string query = @"select 
+                string query = @"select  
+                                    '#' +  CAST(Vc.recid AS VARCHAR(MAX)) as recid,
                                     vc.id, 
                                     vc.firstname, 
                                     vc.lastname, 

@@ -17,6 +17,7 @@ namespace VetSystems.Vet.Application.Models.SaleBuy
         public string SupplierName { get; set; } = string.Empty;
         public string PaymentName { get; set; } = string.Empty;
         public decimal? NetPrice { get; set; }
+        public decimal? Price { get; set; }
         public decimal? KDV { get; set; }
         public decimal? Discount { get; set; }
         public decimal? Total { get; set; }
@@ -27,7 +28,7 @@ namespace VetSystems.Vet.Application.Models.SaleBuy
         public decimal? Amount { get; set; }
         public Guid ProductId { get; set; } 
         public string ProductName { get; set; } = string.Empty;
-        public int PaymentType { get; set; }
+        public int PaymentType { get; set; } 
 
 
     }

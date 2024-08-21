@@ -18,7 +18,8 @@ namespace VetSystems.Vet.Application.Features.Vaccine.Commands
     {
         public Guid Id { get; set; }
         public DateTime VaccinationDate { get; set; }
-        public DateTime NextVaccinationDate { get; set; }
+        public DateTime? NextVaccinationDate { get; set; }
+        public bool CreateNextAppointment { get; set; }
     }
 
     public class UpdateVaccineExaminationCommandHandler : IRequestHandler<UpdateVaccineExaminationCommand, Response<bool>>
@@ -51,6 +52,9 @@ namespace VetSystems.Vet.Application.Features.Vaccine.Commands
             };
             try
             {
+
+                VetVaccineCalendar vaccineCalendar = new VetVaccineCalendar();
+
                 var _vaccine = await _vetVaccineCalendarRepository.GetByIdAsync(request.Id);
                 if (_vaccine == null)
                 {
@@ -63,23 +67,28 @@ namespace VetSystems.Vet.Application.Features.Vaccine.Commands
                 _vaccine.UpdateDate = DateTime.Now;
                 _vaccine.UpdateUsers = _identityRepository.Account.UserName;
 
-
-                VetVaccineCalendar vetVaccineCalendar = new()
+                if (request.CreateNextAppointment == true)
                 {
-                    Id = Guid.NewGuid(),
-                    IsDone = false,
-                    PatientId=_vaccine.PatientId,
-                    CustomerId =_vaccine.CustomerId,
-                    VaccineId = _vaccine.Id,
-                    IsAdd = true,
-                    VaccineName = _vaccine.VaccineName,
-                    VaccineDate = request.NextVaccinationDate,
-                    CreateDate = DateTime.Now,
-                    AnimalType = _vaccine.AnimalType,
-                    CreateUsers = _identityRepository.Account.UserName,
-                };
+                    VetVaccineCalendar vetVaccineCalendar = new()
+                                        {
+                                            Id = Guid.NewGuid(),
+                                            IsDone = false,
+                                            PatientId = _vaccine.PatientId,
+                                            CustomerId = _vaccine.CustomerId,
+                                            VaccineId = _vaccine.Id,
+                                            IsAdd = true,
+                                            VaccineName = _vaccine.VaccineName,
+                                            VaccineDate = request.NextVaccinationDate?? new DateTime(2099, 1, 1),
+                                            CreateDate = DateTime.Now,
+                                            AnimalType = _vaccine.AnimalType,
+                                            CreateUsers = _identityRepository.Account.UserName,
+                                        };
 
-                await _vetVaccineCalendarRepository.AddAsync(vetVaccineCalendar);
+                    vaccineCalendar = vetVaccineCalendar;
+                    await _vetVaccineCalendarRepository.AddAsync(vaccineCalendar);
+                }
+
+
 
                 await _uow.SaveChangesAsync(cancellationToken);
             }

@@ -24,7 +24,7 @@ namespace VetSystems.Vet.Application.Models.FileManager
         public Guid FolderId { get; set; } = Guid.Empty;
         public string Name { get; set; } = string.Empty;
         public string CreatedBy { get; set; } = string.Empty;
-        public string CreatedAt { get; set; } = string.Empty;
+        public DateTime CreatedAt { get; set; } 
         public string ModifiedAt { get; set; } = string.Empty;
         public string Size { get; set; } = string.Empty;
         public string Type { get; set; } = string.Empty;

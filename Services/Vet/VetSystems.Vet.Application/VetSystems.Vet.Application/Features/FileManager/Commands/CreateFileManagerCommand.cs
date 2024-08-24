@@ -18,6 +18,7 @@ namespace VetSystems.Vet.Application.Features.FileManager.Commands
     {
         public IFormFile File { get; set; }
         public string FileName { get; set; }
+        public string Size { get; set; }
     }
 
     public class CreateFileManagerCommandHandler : IRequestHandler<CreateFileManagerCommand, Response<bool>>
@@ -54,6 +55,7 @@ namespace VetSystems.Vet.Application.Features.FileManager.Commands
                     SourceId = Guid.Empty,
                     FileName = request.FileName,
                     FileData = fileData,
+                    Size = request.Size,
                     CreateDate = DateTime.Now,
                     CreateUsers = _identity.Account.UserName
                 };

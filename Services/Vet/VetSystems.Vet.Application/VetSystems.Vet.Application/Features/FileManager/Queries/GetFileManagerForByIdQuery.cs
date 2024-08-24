@@ -46,11 +46,11 @@ namespace VetSystems.Vet.Application.Features.FileManager.Queries
                     Item _file = new Item();
                     _file.Id = _documents.Id;
                     _file.Name = _documents.FileName;
-                    _file.CreatedAt = _documents.CreateUsers;
+                    _file.CreatedBy = _documents.CreateUsers;
+                    _file.CreatedAt = _documents.CreateDate; 
                     _file.Type = ".txt";
-                    _file.Size = "0Mb";
+                    _file.Size = _documents.Size + "Mb";
                     _file.Contents = "";
-                    _file.CreatedBy = "";
                     _file.Description = "";
                     _file.FolderId = Guid.Empty;
                     response.Data.Files.Add(_file);

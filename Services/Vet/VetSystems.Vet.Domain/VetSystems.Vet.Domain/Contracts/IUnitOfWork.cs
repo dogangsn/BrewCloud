@@ -20,6 +20,7 @@ namespace VetSystems.Vet.Domain.Contracts
         void CreateTransaction(IsolationLevel level, bool useTransaction = true);
         void Commit(bool useTransaction = true);
         void Rollback(bool useTransaction = true);
+        Task CreateTransactionAsync(IsolationLevel level, bool useTransaction = true);
 
     }
 }

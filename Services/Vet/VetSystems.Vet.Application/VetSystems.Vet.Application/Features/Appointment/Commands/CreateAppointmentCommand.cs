@@ -97,7 +97,7 @@ namespace VetSystems.Vet.Application.Features.Appointment.Commands
                                 IsAdd = true,
                                 PatientId = Guid.Parse(request.PatientId),
                                 CreateUsers = _identity.Account.UserName,
-                                VaccineDate = request.BeginDate,
+                                VaccineDate = TimeZoneInfo.ConvertTimeFromUtc(item.Date, localTimeZone), //request.BeginDate,
                                 IsDone = false,
                                 CustomerId = Guid.Parse(request.CustomerId),
                                 VaccineId = item.Id,

@@ -138,8 +138,12 @@ namespace VetSystems.Vet.Infrastructure.Repositories
         {
             if (useTransaction)
                 _trans = _dbContext.Database.BeginTransaction(level);
+        }
 
-
+        public async Task CreateTransactionAsync(IsolationLevel level, bool useTransaction = true)
+        {
+            if (useTransaction)
+                _trans = await _dbContext.Database.BeginTransactionAsync(level);
         }
 
         public void Commit(bool useTransaction = true)

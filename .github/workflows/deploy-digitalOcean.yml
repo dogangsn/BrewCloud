@@ -27,7 +27,7 @@ jobs:
     - name: SSH into Droplet and deploy
       uses: appleboy/ssh-action@v0.1.6
       with:
-        host: 157.230.179.70
+        host: 165.22.90.165
         username: root
         key: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
         port: 22

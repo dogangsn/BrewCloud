@@ -108,6 +108,7 @@ namespace VetSystems.Vet.Application.Features.Demands.Demand.Commands
                         isActive = item.isActive,
                         Reserved = item.Reserved,
                         Barcode = item.Barcode,
+                        TaxisId = item.TaxisId,
                         CreateDate = DateTime.Now,
                     };
                     await _demandTransRepository.AddAsync(demandTrans);

@@ -18,5 +18,6 @@ namespace VetSystems.Vet.Application.Models.Demands.DemandProducts
         public int? isActive { get; set; }
         public decimal? Reserved { get; set; }
         public string Barcode { get; set; } = string.Empty;
+        public Guid? TaxisId { get; set; }
     }
 }

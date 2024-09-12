@@ -18,5 +18,6 @@ namespace VetSystems.Vet.Domain.Entities
         public int? isActive { get; set; }
         public decimal? Reserved { get; set; }
         public string Barcode { get; set; } 
+        public Guid? TaxisId { get; set; }
     }
 }

@@ -57,7 +57,7 @@ namespace VetSystems.Vet.Application.Features.Demands.DemandProducts.Commands
                 Vet.Domain.Entities.VetDemandProducts demandProducts = new()
                 {
                     Id = Guid.NewGuid(),
-                    OwnerId = null,
+                    OwnerId = Guid.Empty,
                     ProductId = request.ProductId,
                     Quantity = request.Quantity,
                     UnitPrice = request.UnitPrice,
@@ -67,6 +67,7 @@ namespace VetSystems.Vet.Application.Features.Demands.DemandProducts.Commands
                     Reserved = request.Reserved,
                     Barcode = request.Barcode,
                     CreateDate = DateTime.Now,
+                    TaxisId = Guid.Empty
                 };
                 await _demandProductsRepository.AddAsync(demandProducts);
                 await _uow.SaveChangesAsync(cancellationToken);

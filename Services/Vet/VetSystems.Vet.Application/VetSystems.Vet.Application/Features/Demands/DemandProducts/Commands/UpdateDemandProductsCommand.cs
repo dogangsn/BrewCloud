@@ -25,6 +25,7 @@ namespace VetSystems.Vet.Application.Features.Demands.DemandProducts.Commands
         public int? isActive { get; set; }
         public decimal? Reserved { get; set; }
         public string Barcode { get; set; } = string.Empty;
+        public Guid? TaxisId { get; set; }
     }
 
     public class UpdateDemandProductsCommandHandler : IRequestHandler<UpdateDemandProductsCommand, Response<bool>>
@@ -69,6 +70,7 @@ namespace VetSystems.Vet.Application.Features.Demands.DemandProducts.Commands
                 demandProducts.isActive = request.isActive;
                 demandProducts.Reserved = request.Reserved;
                 demandProducts.Barcode = request.Barcode;
+                demandProducts.TaxisId = request.TaxisId;
                 demandProducts.UpdateDate = DateTime.Now;
                 await _uow.SaveChangesAsync(cancellationToken);
             }

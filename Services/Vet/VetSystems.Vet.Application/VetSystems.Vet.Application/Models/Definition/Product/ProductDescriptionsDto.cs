@@ -30,6 +30,7 @@ namespace VetSystems.Vet.Application.Models.Definition.Product
         public Guid StoreId { get; set; } = Guid.Empty;
         public Guid? TaxisId { get; set; }
         public decimal? StockCount { get; set; } = 0;
+        public string UnitName { get; set; }
 
     }
 }

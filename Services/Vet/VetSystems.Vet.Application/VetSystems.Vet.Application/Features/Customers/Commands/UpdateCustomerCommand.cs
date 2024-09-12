@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using VetSystems.Shared.Dtos;
@@ -27,11 +28,12 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
         public string VKNTCNo { get; set; } = string.Empty;
         public string Note { get; set; } = string.Empty;
         public decimal DiscountRate { get; set; } = 0;
-        public bool? IsEmail { get; set; } = false;
-        public bool? IsPhone { get; set; } = false;
+        public bool? emailNotification { get; set; } = false;
+        public bool? smsNotification { get; set; } = false;
         public string Province { get; set; } = string.Empty;
         public string District { get; set; } = string.Empty;
         public string LongAdress { get; set; } = string.Empty;
+        public Guid? CustomerGroup { get; set; }
     }
 
     public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommand, Response<bool>>
@@ -41,14 +43,16 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
         private readonly IMapper _mapper;
         private readonly ILogger<UpdateCustomerCommandHandler> _logger;
         private readonly IRepository<Vet.Domain.Entities.VetCustomers> _customersRepository;
+        private readonly IRepository<VetAdress> _adressRepository;
 
-        public UpdateCustomerCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<UpdateCustomerCommandHandler> logger, IRepository<Domain.Entities.VetCustomers> customersRepository)
+        public UpdateCustomerCommandHandler(IUnitOfWork uow, IIdentityRepository identity, IMapper mapper, ILogger<UpdateCustomerCommandHandler> logger, IRepository<Domain.Entities.VetCustomers> customersRepository, IRepository<VetAdress> adressRepository)
         {
             _uow = uow ?? throw new ArgumentNullException(nameof(uow));
             _identity = identity ?? throw new ArgumentNullException(nameof(identity));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _customersRepository = customersRepository ?? throw new ArgumentNullException(nameof(customersRepository));
+            _adressRepository = adressRepository ?? throw new ArgumentNullException(nameof(adressRepository)); ;
         }
 
         public async Task<Response<bool>> Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
@@ -61,15 +65,20 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
             };
             try
             {
-                VetCustomers customers = await _customersRepository.GetByIdAsync(request.Id);
+
+                Expression<Func<VetCustomers, bool>> predicate = c => c.Id == request.Id;
+                string includeString = "Adress";
+
+                var customers = (await _customersRepository.GetAsync(predicate, null, includeString, false)).FirstOrDefault();
                 if (customers == null)
                 {
                     _logger.LogWarning($"Not Foun number: {request.Id}");
                     return Response<bool>.Fail("Property update failed", 404);
                 }
-
-                customers.IsEmail = request.IsEmail;
-                customers.IsPhone = request.IsPhone;
+                  
+  
+                customers.IsEmail = request.emailNotification;
+                customers.IsPhone = request.smsNotification;
                 customers.DiscountRate = request.DiscountRate;
                 customers.FirstName = request.FirstName;
                 customers.LastName = request.LastName;
@@ -81,6 +90,11 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                 customers.UpdateDate = DateTime.Now;
                 customers.UpdateUsers = _identity.Account.UserName;
                 customers.EMail = request.EMail;
+                customers.CustomerGroup = request.CustomerGroup;
+
+                customers.Adress.District = request.District;
+                customers.Adress.Province = request.Province;
+                customers.Adress.LongAdress = request.LongAdress;
 
                 await _uow.SaveChangesAsync(cancellationToken);
                 response.IsSuccessful = true;

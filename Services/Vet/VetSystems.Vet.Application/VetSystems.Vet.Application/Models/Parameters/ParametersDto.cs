@@ -27,6 +27,9 @@ namespace VetSystems.Vet.Application.Models.Parameters
         public string appointmentBeginDate { get; set; }
         public string appointmentEndDate { get; set; }
         public bool? IsExaminationAmuntZero { get; set; }
-
+        public int? datetimestatus { get; set; }
+        public int? appointmentinterval { get; set; }
+        public int? appointmentSeansDuration { get; set; }
+        public int? petHotelsDateTimeFormat { get; set; }
     }
 }

@@ -72,6 +72,14 @@ namespace VetSystems.Account.Api.Controllers
             return Ok(result);
         }
 
+        [HttpGet(Name = "GetUserRoleSettingList")]
+        public async Task<IActionResult> GetUserRoleSettingList()
+        {
+            var command = new GetUserRoleSettingListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
         [HttpPost(Name = "DeleteRoleSetting")]
         public async Task<IActionResult> DeleteRoleSetting([FromBody] DeleteRoleSettingCommand command)
         {
@@ -81,6 +89,14 @@ namespace VetSystems.Account.Api.Controllers
 
         [HttpPost(Name = "UpdateRoleSetting")]
         public async Task<IActionResult> UpdateRoleSetting([FromBody] UpdateRoleSettingCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+
+        [HttpPost(Name = "GetRoleSettingById")]
+        public async Task<IActionResult> GetRoleSettingById([FromBody] GetRoleSettingByIdQuery command)
         {
             var result = await _mediator.Send(command);
             return Ok(result);
@@ -122,5 +138,15 @@ namespace VetSystems.Account.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+         
+        [HttpGet(Name = "GetActiveUser")]
+        public async Task<IActionResult> GetActiveUser()
+        {
+            var command = new GetActiveUserQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+
     }
 }

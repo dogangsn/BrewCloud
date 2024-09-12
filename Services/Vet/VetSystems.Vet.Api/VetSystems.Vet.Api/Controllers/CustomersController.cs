@@ -18,11 +18,10 @@ namespace VetSystems.Vet.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet(Name = "CustomersList")]
-        public async Task<IActionResult> CustomersList()
-        {
-            var command = new CustomersListQuery();
-            var result = await _mediator.Send(command);
+        [HttpPost(Name = "CustomersList")]
+        public async Task<IActionResult> CustomersList([FromBody] CustomersListQuery query)
+        { 
+            var result = await _mediator.Send(query);
             return Ok(result);
         }
 
@@ -155,6 +154,15 @@ namespace VetSystems.Vet.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+
+        [HttpGet(Name = "GetFarmCustomersList")]
+        public async Task<IActionResult> GetFarmCustomersList()
+        {
+            var command = new GetFarmCustomersListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
 
     }
 }

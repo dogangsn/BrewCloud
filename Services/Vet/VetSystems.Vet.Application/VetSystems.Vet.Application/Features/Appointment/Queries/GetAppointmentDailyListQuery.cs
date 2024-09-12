@@ -10,6 +10,7 @@ using VetSystems.Shared.Service;
 using VetSystems.Vet.Domain.Contracts;
 using VetSystems.Vet.Domain.Entities;
 using AutoMapper;
+using VetSystems.Shared.Enums;
 
 
 namespace VetSystems.Vet.Application.Features.Appointment.Queries
@@ -59,12 +60,29 @@ namespace VetSystems.Vet.Application.Features.Appointment.Queries
                         + "                                                WHEN 6 THEN 'Tedavi' "
                         + "                                                ELSE 'Diğer' "
                         + " 												END AS services  , vetappointments.status, CASE vetappointments.status WHEN 1 THEN 'Bekliyor' WHEN 2 THEN 'Iptal Edildi' WHEN 3 THEN 'Görüşüldü' WHEN 4 THEN 'Gelmedi' ELSE '' END as StatusName "
+                        + " , vetappointments.customerid, vetappointments.doctorid, vetappointments.note, vetappointments.beginDate, vetappointments.endDate, vetappointments.appointmenttype, vetappointments.vaccineid,ISNULL(vetappointments.IsCompleted, 0) as IsComplated,vetappointments.patientsid, vetappointments.status "
                         + " FROM            vetappointments  "
                         + " INNER JOIN vetcustomers ON vetappointments.customerid = vetcustomers.id "
                         + " LEFT JOIN vetpatients ON vetappointments.patientsid = vetpatients.id "
                         + " where vetappointments.deleted = 0 and CAST(begindate as date) = CAST(GETDATE() AS DATE) ";
 
                 var _data = _uow.Query<AppointmentDailyListDto>(query).ToList();
+
+                foreach (var item in _data)
+                {
+                    if (item.AppointmentType == (int)AppointmentType.AsiRandevusu)
+                    {
+                        var model = new VaccineListDto()
+                        {
+                            Date = item.Date,
+                            Id = item.Id,
+                            IsComplated = item.IsComplated.GetValueOrDefault(),
+                            ProductId = item.VaccineId.GetValueOrDefault(),
+                        };
+                        item.VaccineItems.Add(model);
+                    }
+                }
+                 
                 response = new Response<List<AppointmentDailyListDto>>
                 {
                     Data = _data,

@@ -33,10 +33,13 @@ namespace VetSystems.Vet.Application.Features.Settings.Parameters.Commands
         public bool? autoSms { get; set; }
         public bool? IsAnimalsBreeds { get; set; }
         public bool? IsFirstInspection { get; set; }
-        public string AppointmentBeginDate { get; set; }
-        public string AppointmentEndDate { get; set; }
+        public string AppointmentBeginDate { get; set; } = string.Empty;
+        public string AppointmentEndDate { get; set; } = string.Empty; 
         public bool? IsExaminationAmuntZero { get; set; }
-
+        public int? datetimestatus { get; set; }
+        public int? appointmentinterval { get; set; }
+        public int? appointmentSeansDuration { get; set; }
+        public int? PetHotelsDateTimeFormat { get; set; }
     }
 
     public class UpdateParametersCommandHandler : IRequestHandler<UpdateParametersCommand, Response<bool>>
@@ -93,7 +96,11 @@ namespace VetSystems.Vet.Application.Features.Settings.Parameters.Commands
                         IsFirstInspection = request.IsFirstInspection.GetValueOrDefault(),
                         AppointmentBeginDate=request.AppointmentBeginDate,
                         AppointmentEndDate=request.AppointmentEndDate,
-                        IsExaminationAmuntZero = request.IsExaminationAmuntZero
+                        IsExaminationAmuntZero = request.IsExaminationAmuntZero,
+                        DatetimeStatus = request.datetimestatus,
+                        AppointmentInterval = request.appointmentinterval,
+                        AppointmentSeansDuration = request.appointmentSeansDuration,
+                        PetHotelsDateTimeFormat = request.PetHotelsDateTimeFormat
 
                     };
                     await _parametersRepository.AddAsync(crparameters);
@@ -128,7 +135,11 @@ namespace VetSystems.Vet.Application.Features.Settings.Parameters.Commands
                     parameters.AppointmentBeginDate = request.AppointmentBeginDate;
                     parameters.AppointmentEndDate = request.AppointmentEndDate;
                     parameters.IsExaminationAmuntZero = request.IsExaminationAmuntZero;
-                    
+                    parameters.DatetimeStatus = request.datetimestatus;
+                    parameters.AppointmentInterval = request.appointmentinterval;
+                    parameters.AppointmentSeansDuration = request.appointmentSeansDuration;
+                    parameters.PetHotelsDateTimeFormat = request.PetHotelsDateTimeFormat;
+
                     await _uow.SaveChangesAsync(cancellationToken);
                 }
 

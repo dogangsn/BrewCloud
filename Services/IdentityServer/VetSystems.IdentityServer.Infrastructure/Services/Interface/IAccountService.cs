@@ -31,9 +31,13 @@ namespace VetSystems.IdentityServer.Infrastructure.Services.Interface
         Task<Response<List<SafeListDto>>> GetSafeList(string companyId);
 
         Task<Response<bool>> UpdateTenantAsync(string recId, bool useSafeList);
+
         Task<Response<List<AccountDomainDto>>> GetAccountDomains(string companyId);
+
         Task<Response<bool>> CreateAccountDomain(AccountDomainDto model);
+
         Task<Response<bool>> UpdateAccountDomain(AccountDomainDto model);
+
         Task<Response<bool>> DeleteAccounDomain(string recId);
     }
 }

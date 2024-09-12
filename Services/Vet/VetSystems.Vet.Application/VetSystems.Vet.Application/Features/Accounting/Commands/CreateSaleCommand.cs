@@ -90,7 +90,7 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
                             ProductId = _product.Id,
                             CreateDate = DateTime.Now,
                             CreateUsers = _identity.Account.UserName,
-                            Amount = item.UnitPrice,
+                            Amount = item.Quantity,
                             VatIncluded = _product.SellingIncludeKDV,
                             VatAmount = vatAmaount,
                             Price = _product.SellingPrice,
@@ -115,7 +115,7 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
                         ProductId = Guid.Empty,
                         CreateDate = DateTime.Now,
                         CreateUsers = _identity.Account.UserName,
-                        Amount = request.Price,
+                        Amount = 1,
                         VatIncluded = false,
                         VatAmount = 0,
                         Price = request.Price,
@@ -131,7 +131,9 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
                 saleBuyOwner.KDV = Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.VatAmount.GetValueOrDefault()), 2, MidpointRounding.ToEven);
                 saleBuyOwner.NetPrice = Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.NetPrice.GetValueOrDefault()), 2, MidpointRounding.ToEven);
                 saleBuyOwner.Total = Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.NetPrice.GetValueOrDefault()), 2, MidpointRounding.ToEven)
-                                            + Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.VatAmount.GetValueOrDefault()), 2, MidpointRounding.ToEven);
+                                       + Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.VatAmount.GetValueOrDefault()), 2, MidpointRounding.ToEven)
+                                       - Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.Discount.GetValueOrDefault()), 2, MidpointRounding.ToEven);
+
                 saleBuyOwner.Discount = Math.Round(saleBuyOwner.VetSaleBuyTrans.Sum(x => x.Discount.GetValueOrDefault()), 2, MidpointRounding.ToEven);
 
                 if (request.IsExaminations.GetValueOrDefault())

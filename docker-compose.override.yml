@@ -24,7 +24,7 @@ services:
         restart: on-failure
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
-            - ConnectionStrings:DefaultConnection=Server=mssql-172240-0.cloudclusters.net,10023; Database=vet-5cdb0c05-0cc5-4bef-b28d-d27cc5b56017;User Id=vet;Password=123654Dg
+            - ConnectionStrings:DefaultConnection=Server=mssql-172240-0.cloudclusters.net,10023; Database=VetAdminIdentityDb;User Id=vet;Password=123654Dg
             - EventBusSettings:HostAddress=amqps://ebgfgaha:DCwUehyMQDtR0oeiqYJDCn-T4VEYhXY7@stingray.rmq.cloudamqp.com/ebgfgaha
             - VetDbSettings:ServerName=mssql-172240-0.cloudclusters.net,10023
             - VetDbSettings:User=vet

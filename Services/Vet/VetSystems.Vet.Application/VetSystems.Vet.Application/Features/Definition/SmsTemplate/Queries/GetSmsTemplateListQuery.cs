@@ -37,7 +37,7 @@ namespace VetSystems.Vet.Application.Features.Definition.SmsTemplate.Queries
             try
             {
                 string query = "SELECT        id, name as TemplateName, active, recid, [content] as TemplateContent, createdate, updatedate, deleteddate, "
-                                + " deleted, deletedusers, updateusers, createusers, enableappnotification, enableemail, enablesms, enablewhatsapp"
+                                + " deleted, deletedusers, updateusers, createusers, enableappnotification, enableemail, enablesms, enablewhatsapp, type as smsType"
                                 + " FROM            vetsmstemplate where deleted = 0";
 
                 var _data = _uow.Query<SmsTemplateListDto>(query).ToList();

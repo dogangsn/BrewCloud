@@ -18,6 +18,7 @@ namespace VetSystems.Vet.Application.Features.Definition.SmsTemplate.Commands
         public bool Active { get; set; }
         public string TemplateName { get; set; } = string.Empty;
         public string TemplateContent { get; set; } = string.Empty;
+        public SmsType Type { get; set; }
         public bool? EnableSMS { get; set; }
         public bool? EnableAppNotification { get; set; }
         public bool? EnableEmail { get; set; }
@@ -57,7 +58,8 @@ namespace VetSystems.Vet.Application.Features.Definition.SmsTemplate.Commands
                     EnableAppNotification = request.EnableAppNotification,
                     EnableEmail = request.EnableEmail,
                     EnableSMS = request.EnableSMS,
-                    EnableWhatsapp = request.EnableWhatsapp
+                    EnableWhatsapp = request.EnableWhatsapp,
+                    Type = request.Type
                 };
                 await _vetSmsTemplateRepository.AddAsync(_smsthemplate);
                 await _uow.SaveChangesAsync(cancellationToken);

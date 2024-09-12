@@ -29,8 +29,9 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
         private readonly IRepository<Vet.Domain.Entities.VetSaleBuyOwner> _saleBuyOwnerRepository;
         private readonly IRepository<Vet.Domain.Entities.VetAppointments> _AppointmentRepository;
         private readonly IRepository<VetPaymentCollection> _paymentCollectionRepository;
+        private readonly IRepository<VetMessageLogs> _messageLogsRepository;
 
-        public CustomersFindByIdQueryHandler(IIdentityRepository identityRepository, IUnitOfWork uow, IMapper mapper, IRepository<Domain.Entities.VetSaleBuyOwner> salebuyownerRepository, IRepository<Domain.Entities.VetAppointments> AppointmentRepository, IRepository<VetPaymentCollection> paymentCollectionRepository)
+        public CustomersFindByIdQueryHandler(IIdentityRepository identityRepository, IUnitOfWork uow, IMapper mapper, IRepository<Domain.Entities.VetSaleBuyOwner> salebuyownerRepository, IRepository<Domain.Entities.VetAppointments> AppointmentRepository, IRepository<VetPaymentCollection> paymentCollectionRepository, IRepository<VetMessageLogs> messageLogsRepository)
         {
             _identityRepository = identityRepository;
             _uow = uow;
@@ -38,6 +39,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
             _saleBuyOwnerRepository = salebuyownerRepository ?? throw new ArgumentNullException(nameof(salebuyownerRepository));
             _AppointmentRepository = AppointmentRepository ?? throw new ArgumentNullException(nameof(AppointmentRepository));
             _paymentCollectionRepository = paymentCollectionRepository;
+            _messageLogsRepository = messageLogsRepository;
         }
 
 
@@ -47,7 +49,8 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
             try
             {
 
-                string query = @"select 
+                string query = @"select  
+                                    '#' +  CAST(Vc.recid AS VARCHAR(MAX)) as recid,
                                     vc.id, 
                                     vc.firstname, 
                                     vc.lastname, 
@@ -95,7 +98,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                                             vat.type as AnimalType,
                                             vabd.breedname as BreedType,
                                             vabd.RecId as AnimalBreed,
-                                            vacd.name as AnimalColor from vetpatients as vp
+                                            vacd.name as AnimalColor, vacd.RecId as AnimalColorId  from vetpatients as vp
                                                 left outer join vetanimalstype as vat on vp.animaltype = vat.type
                                                 left outer join vetanimalbreedsdef as vabd on vp.animalbreed = vabd.RecId
                                                 left outer join vetanimalcolorsdef as vacd on vp.animalcolor = vacd.RecId
@@ -110,6 +113,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                     customerDetail.TotalData.TotalVisitCount = (await _AppointmentRepository.GetAsync(x => x.CustomerId == customerDetail.id && x.Deleted == false && x.EndDate <= DateTime.Now && x.IsCompleted == true)).Count();
                     customerDetail.TotalData.TotalEarnings = (await _saleBuyOwnerRepository.GetAsync(x => x.CustomerId == customerDetail.id && x.Deleted == false)).Sum(x => x.Total).GetValueOrDefault();
                     customerDetail.TotalData.TotalCollection = (await _paymentCollectionRepository.GetAsync(x => x.CustomerId == customerDetail.id && x.Deleted == false)).Sum(x=>x.Total).GetValueOrDefault();
+                    customerDetail.TotalData.TotalMessageCount = (await _messageLogsRepository.GetAsync(x => x.CustomerId == customerDetail.id && x.Deleted == false)).Count();
 
                     response = new Response<CustomerDetailsDto>
                     {

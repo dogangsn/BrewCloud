@@ -70,6 +70,13 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "UpdateAccomodation")]
+        public async Task<IActionResult> UpdateAccomodation([FromBody] UpdateAccomodationCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
         [HttpPost(Name = "DeleteAccomodation")]
         public async Task<IActionResult> DeleteAccomodation([FromBody] DeleteAccomodationCommand command)
         {

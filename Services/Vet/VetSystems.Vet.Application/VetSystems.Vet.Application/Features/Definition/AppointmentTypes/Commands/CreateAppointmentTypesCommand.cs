@@ -19,6 +19,7 @@ namespace VetSystems.Vet.Application.Features.Definition.AppointmentTypes.Comman
         public bool IsDefaultPrice { get; set; } = false;
         public decimal Price { get; set; }
         public Guid TaxisId { get; set; }
+        public string Colors { get; set; } = string.Empty;
     }
 
     public class CreateAppointmentTypesCommandHandler : IRequestHandler<CreateAppointmentTypesCommand, Response<bool>>
@@ -64,6 +65,7 @@ namespace VetSystems.Vet.Application.Features.Definition.AppointmentTypes.Comman
                     Price = request.Price,
                     TaxisId = request.TaxisId,
                     Type = _type,
+                    Colors = request.Colors
                 };
                 await _appointmentTypesRepository.AddAsync(appointmentTypes);
                 await _uow.SaveChangesAsync(cancellationToken);

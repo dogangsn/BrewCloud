@@ -49,6 +49,19 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "DownloadFileManager")]
+        public async Task<IActionResult> DownloadFileManager([FromBody] DownloadFileManagerCommand command)
+        {
+            var result = await _mediator.Send(command);
+            if (!result.IsSuccessful)
+            {
+                return BadRequest(result.Errors);
+            }
+            return File(result.Data, "", "");
+        }
+
+
+
         #endregion
 
 

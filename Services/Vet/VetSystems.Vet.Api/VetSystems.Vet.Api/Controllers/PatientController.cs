@@ -113,6 +113,13 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "GetExaminationsBySaleList")]
+        public async Task<IActionResult> GetExaminationsBySaleList([FromBody] GetExaminationsBySaleListQuery model)
+        {
+            var result = await _mediator.Send(model);
+            return Ok(result);
+        }
+
         #endregion
 
     }

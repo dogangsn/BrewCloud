@@ -20,6 +20,7 @@ namespace VetSystems.Vet.Application.Models.Patients.Examinations
         public string Symptoms { get; set; } //Semptomlar
         public string ComplaintStory { get; set; } = string.Empty; //SikayetHikaye
         public string TreatmentDescription { get; set; } = string.Empty; //TedaviAciklamasi
+        public Guid PatientId { get; set; }
 
     }
 }

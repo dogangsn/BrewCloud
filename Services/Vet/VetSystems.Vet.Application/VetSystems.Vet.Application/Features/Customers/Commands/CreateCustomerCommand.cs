@@ -61,18 +61,18 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                 IsSuccessful = true,
                 Data = string.Empty
             };
-            _uow.CreateTransaction(IsolationLevel.ReadCommitted);
+            await _uow.CreateTransactionAsync(IsolationLevel.ReadCommitted);
             try
             {
                 List<string> patientsIds = new List<string>();
-                //Silinen kayitlarin uzerinde islem yapılması
-                var recordControl = await _customerRepository.FirstOrDefaultAsync(x=>x.PhoneNumber.Trim() == request.CreateCustomers.PhoneNumber.Trim() && x.Deleted == false);
+
+                var recordControl = await _customerRepository.FirstOrDefaultAsync(x => x.PhoneNumber.Trim() == request.CreateCustomers.PhoneNumber.Trim() && x.Deleted == false);
                 if (recordControl != null)
                 {
                     return Response<string>.Fail("Sistem Üzerinde Aynı Müşteri Bilgileri ile Kayıt Vardır.", 404);
                 }
 
-                VetParameters? _param = (await _parametersRepository.GetAllAsync()).FirstOrDefault();
+                var _param = await _parametersRepository.FirstOrDefaultAsync(x => x.Deleted == false);
                 if (_param == null)
                 {
                     return Response<string>.Fail("Şirket Parametlerini Tamamlayınız.", 404);
@@ -85,7 +85,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
 
                 if (_param.IsAnimalsBreeds.GetValueOrDefault())
                 {
-                    if (request.CreateCustomers.PatientDetails.Any(x=>x.AnimalBreed.GetValueOrDefault() == 0))
+                    if (request.CreateCustomers.PatientDetails.Any(x => x.AnimalBreed.GetValueOrDefault() == 0))
                     {
                         return Response<string>.Fail("Hayvan Türünün Irkı Seçilmesi Zorunludur.", 404);
                     }
@@ -119,7 +119,9 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                     Adress = adress,
                     Deleted = false,
                     CreateDate = DateTime.Now,
+                    CustomerGroup = request.CreateCustomers.CustomerGroup,
                 };
+
                 if (request.CreateCustomers.FarmsDetail != null)
                 {
                     Vet.Domain.Entities.VetFarms farms = new()
@@ -132,11 +134,9 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                         Deleted = false,
                         CreateDate = DateTime.Now,
                         CreateUsers = _identity.Account.UserName,
-
                     };
                     await _farmsRepository.AddAsync(farms);
                     await _uow.SaveChangesAsync(cancellationToken);
-
                 }
 
                 if (request.CreateCustomers.PatientDetails.Any())
@@ -145,15 +145,15 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                     {
                         VetPatients patients = new()
                         {
-                            Active= item.Active,
-                            AnimalBreed =  item.AnimalBreed.GetValueOrDefault(),
+                            Active = item.Active,
+                            AnimalBreed = item.AnimalBreed.GetValueOrDefault(),
                             AnimalColor = item.AnimalColor.GetValueOrDefault(),
                             AnimalType = Convert.ToInt32(item.AnimalType),
                             BirthDate = string.IsNullOrEmpty(item.BirthDate) ? DateTime.Now : Convert.ToDateTime(item.BirthDate),
                             ChipNumber = item.ChipNumber,
-                            Name = item.Name ,
+                            Name = item.Name,
                             ReportNumber = item.ReportNumber,
-                            Sex  = item.Sex,
+                            Sex = item.Sex,
                             SpecialNote = item.SpecialNote,
                             Sterilization = item.Sterilization,
                             Id = Guid.NewGuid(),
@@ -175,10 +175,12 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                     Note = customers.Note,
                     DoctorId = "00000000-0000-0000-0000-000000000000"
                 };
-                var appointmentResponse = _mediator.Send(appointmentRecord);
-          
+
+                var appointmentResponse = await _mediator.Send(appointmentRecord); 
+
                 await _customerRepository.AddAsync(customers);
                 await _uow.SaveChangesAsync(cancellationToken);
+
                 _uow.Commit();
                 if (request.IsCreateVaccine)
                 {
@@ -186,12 +188,11 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                 }
                 else
                 {
-                    response.Data = customers.Id.ToString();                    
+                    response.Data = customers.Id.ToString();
                 }
 
                 if (_param.IsOtoCustomerWelcomeMessage.GetValueOrDefault() && !string.IsNullOrEmpty(request.CreateCustomers.EMail) && request.CreateCustomers.IsEmail.GetValueOrDefault())
                     SendMail(customers.EMail);
-
 
             }
             catch (Exception ex)
@@ -202,10 +203,9 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                 _logger.LogError($"Exception: {ex.Message}");
             }
             return response;
-
         }
 
-        
+
         public void SendMail(string emailToId)
         {
             try

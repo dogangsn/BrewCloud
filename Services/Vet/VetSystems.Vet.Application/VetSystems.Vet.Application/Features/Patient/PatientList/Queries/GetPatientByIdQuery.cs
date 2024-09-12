@@ -52,6 +52,7 @@ namespace VetSystems.Vet.Application.Features.Patient.PatientList.Queries
                                             vp.sterilization as Sterilization,
                                             vp.active as Active,
                                             vp.images as Images,
+                                            vp.isvaccinecalendarcreate,
                                             vat.name as AnimalTypeName,
                                             vat.type as AnimalType,
                                             vabd.breedname as BreedType,

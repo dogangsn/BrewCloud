@@ -1,0 +1,37 @@
+name: Deploy to DigitalOcean
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Install Docker Compose
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y docker-compose
+
+    - name: Build Docker images
+      run: docker-compose -f docker-compose.yml build
+
+    - name: SSH into Droplet and deploy
+      uses: appleboy/ssh-action@v0.1.6
+      with:
+        host: 165.22.90.165
+        username: root
+        key: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+        port: 22
+        script: |
+          git pull origin main
+          docker-compose pull
+          docker-compose up -d --remove-orphans

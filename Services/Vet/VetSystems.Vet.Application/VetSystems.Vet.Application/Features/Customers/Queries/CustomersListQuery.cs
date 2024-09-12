@@ -14,6 +14,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
 {
     public class CustomersListQuery : IRequest<Response<List<CustomersDto>>>
     {
+        public bool IsArchive { get; set; }
     }
 
     public class CustomersListQueryHandler : IRequestHandler<CustomersListQuery, Response<List<CustomersDto>>>
@@ -51,6 +52,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                 #endregion
 
                 string query = "SELECT "
+                    + "     '#' +  CAST(Vc.recid AS VARCHAR(MAX)) as recid, "
                     + "     Vc.id, "
                     + "     Vc.firstname, "
                     + "     Vc.lastname, "
@@ -80,11 +82,11 @@ namespace VetSystems.Vet.Application.Features.Customers.Queries
                     + " FROM "
                     + "     VetCustomers Vc "
                     + " WHERE "
-                    + "     Vc.Deleted = 0  and ISNULL(Vc.IsArchive, 0) = 0 "
+                    + "     Vc.Deleted = 0  and ISNULL(Vc.IsArchive, 0) = @xArchive "
                     + " ORDER BY "
                     + "     Vc.CreateDate;";
 
-                var _data = _uow.Query<CustomersDto>(query).ToList();
+                var _data = _uow.Query<CustomersDto>(query, new { xArchive = request.IsArchive }).ToList();
                 response = new Response<List<CustomersDto>>
                 {
                     Data = _data,

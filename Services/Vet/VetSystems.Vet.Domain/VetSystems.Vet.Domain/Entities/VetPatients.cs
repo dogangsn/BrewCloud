@@ -24,8 +24,9 @@ namespace VetSystems.Vet.Domain.Entities
         public string? ReportNumber { get; set; }
         public string? SpecialNote { get; set; }
         public bool Sterilization { get; set; }
-        public byte? Images { get; set; }
+        public byte? Images { get; set; }        
         public bool? Active { get; set; } = true;
         public VetCustomers Customers { get; set; }
+        public bool? IsVaccineCalendarCreate { get; set; }
     }
 }

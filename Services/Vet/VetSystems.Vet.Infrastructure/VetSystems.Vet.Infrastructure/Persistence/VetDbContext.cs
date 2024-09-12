@@ -236,7 +236,7 @@ namespace VetSystems.Vet.Infrastructure.Persistence
 
                         if (property.Name == "CreateUsers" || property.Name == "CreateDate" 
                             || property.Name == "UpdateUsers" || property.Name == "UpdateDate"
-                            || property.Name == "DeletedBy" || property.Name == "DeletedDate") continue;
+                            || property.Name == "DeletedDate" || property.Name == "DeletedUsers") continue;
                         var originalValue = entity.OriginalValues[property];
                         var updatedValue = entity.CurrentValues[property];
                         if (!Object.Equals(originalValue, updatedValue) && !((updatedValue ?? false).GetType().IsGenericType))
@@ -247,10 +247,10 @@ namespace VetSystems.Vet.Infrastructure.Persistence
                                 Date = logDate,
                                 UserId = _identityRepository.Account.UserId,
                                 UserName = _identityRepository.Account.UserName,
-                                OldValue = originalValue?.ToString(),
+                                OldValue = (originalValue == null ? string.Empty : originalValue?.ToString()),
                                 TableName = entity.Entity.GetType().Name,
                                 FieldName = property.Name,
-                                NewValue = updatedValue?.ToString(),
+                                NewValue =  (updatedValue == null ? string.Empty : updatedValue?.ToString()),
                                 MasterId = masterId,
                                 TenantId = _identityRepository.TenantId
                             });

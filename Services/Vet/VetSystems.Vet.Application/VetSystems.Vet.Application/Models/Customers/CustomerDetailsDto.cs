@@ -15,6 +15,7 @@ namespace VetSystems.Vet.Application.Models.Customers
         }
 
         public Guid id { get; set; }
+        public string recid { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
         public string phonenumber { get; set; }

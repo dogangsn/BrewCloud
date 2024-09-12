@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Models.Definition.SmsTemplate
 {
@@ -16,5 +17,6 @@ namespace VetSystems.Vet.Application.Models.Definition.SmsTemplate
         public bool? EnableAppNotification { get; set; }
         public bool? EnableEmail { get; set; }
         public bool? EnableWhatsapp { get; set; }
+        public SmsType SmsType { get; set; }
     }
 }

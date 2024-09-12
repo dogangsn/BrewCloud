@@ -21,6 +21,7 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
         public DateTime Date { get; set; }
         public decimal Amount { get; set; }
         public string Remark { get; set; } = string.Empty;
+        public Guid? CollectionId { get; set; }
     }
 
     public class CreateSaleCollectionCommandHandler : IRequestHandler<CreateSaleCollectionCommand, Response<bool>>
@@ -46,24 +47,44 @@ namespace VetSystems.Vet.Application.Features.Accounting.Commands
             try
             {
 
-                VetPaymentCollection paymentCollection = new()
+                var _collection = await _paymentCollectionRepository.FirstOrDefaultAsync(x=> x.SaleBuyId == request.SaleOwnerId && x.Deleted == false);
+                if (_collection != null)
                 {
-                    Id = Guid.NewGuid(),
-                    CreateDate = DateTime.Now,
-                    CreateUsers = _identity.Account.UserName,
-                    CustomerId = request.CustomerId,
-                    Date = request.Date,
-                    Remark = request.Remark,
-                    Credit = request.Amount,
-                    Paid = request.Amount,
-                    Debit = 0,
-                    Total = request.Amount,
-                    TotalPaid = request.Amount,
-                    SaleBuyId = request.SaleOwnerId,
-                    PaymetntId = request.PaymentId
-                };
-                await _paymentCollectionRepository.AddAsync(paymentCollection);
+                    _collection.UpdateDate = DateTime.Now;
+                    _collection.UpdateUsers = _identity.Account.UserName;
+                    _collection.Date = request.Date;
+                    _collection.Remark = request.Remark;
+                    _collection.Credit = request.Amount + _collection.Credit;
+                    _collection.Paid = request.Amount + _collection.Paid;
+                    _collection.Debit = 0;
+                    _collection.Total = request.Amount + _collection.Total;
+                    _collection.TotalPaid = request.Amount + _collection.TotalPaid;
+                    _collection.SaleBuyId = request.SaleOwnerId;
+                    _collection.PaymetntId = request.PaymentId;
+
+                }
+                else
+                {
+                    VetPaymentCollection paymentCollection = new()
+                    {
+                        Id = Guid.NewGuid(),
+                        CreateDate = DateTime.Now,
+                        CreateUsers = _identity.Account.UserName,
+                        CustomerId = request.CustomerId,
+                        Date = request.Date,
+                        Remark = request.Remark,
+                        Credit = request.Amount,
+                        Paid = request.Amount,
+                        Debit = 0,
+                        Total = request.Amount,
+                        TotalPaid = request.Amount,
+                        SaleBuyId = request.SaleOwnerId,
+                        PaymetntId = request.PaymentId
+                    };
+                    await _paymentCollectionRepository.AddAsync(paymentCollection);
+                }
                 await _uow.SaveChangesAsync();
+
 
             }
             catch (Exception ex)

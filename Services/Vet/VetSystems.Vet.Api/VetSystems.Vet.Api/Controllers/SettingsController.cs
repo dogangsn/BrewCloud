@@ -62,13 +62,21 @@ namespace VetSystems.Vet.Api.Controllers
             var result = await _mediator.Send(command);
             return Ok(result);
         }
+         
+        [HttpGet(Name = "GetSmsParametersList")]
+        public async Task<IActionResult> GetSmsParametersList()
+        {
+            var command = new GetSmsParametersListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
 
         #endregion
 
         #region Logs
 
- 
+
         [HttpPost(Name = "GetLogs")]
         public async Task<IActionResult> GetLogs([FromBody] GetLogsQuery command)
         {

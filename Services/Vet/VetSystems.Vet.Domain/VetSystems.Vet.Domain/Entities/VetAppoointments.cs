@@ -20,7 +20,8 @@ namespace VetSystems.Vet.Domain.Entities
         public bool? IsCompleted { get; set; } = false;
         public Guid? VaccineId { get; set; } = Guid.Empty;
         public bool? IsPaymentReceived { get; set; } = false;
-        public StatusType Status { get; set; } 
+        public StatusType Status { get; set; }
+        public bool? IsMessage { get; set; } = false;
     }
 
     public enum StatusType

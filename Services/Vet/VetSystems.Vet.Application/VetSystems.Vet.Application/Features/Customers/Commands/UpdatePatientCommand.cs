@@ -65,6 +65,7 @@ namespace VetSystems.Vet.Application.Features.Customers.Commands
                 patients.SpecialNote = request.PatientDetails.SpecialNote;
                 patients.Sterilization = request.PatientDetails.Sterilization;
                 patients.UpdateDate = DateTime.Now;
+                patients.IsVaccineCalendarCreate = request.PatientDetails.IsVaccineCalendarCreate;
                 patients.UpdateUsers = _identity.Account.UserName;
 
                 await _uow.SaveChangesAsync(cancellationToken);

@@ -45,7 +45,8 @@ namespace VetSystems.Vet.Application.Features.FileManager.Queries
                     Item _file = new Item();
                     _file.Id = item.Id;
                     _file.Name = item.FileName;
-                    _file.CreatedAt = item.CreateUsers;
+                    _file.CreatedBy = item.CreateUsers;
+                    _file.CreatedAt = item.CreateDate;
                     _file.Type = ".txt";
                     _file.Size = "0Mb";
                     response.Data.Files.Add(_file); 

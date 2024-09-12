@@ -56,12 +56,13 @@ namespace VetSystems.Vet.Application.Features.Definition.CustomerGroup.Commands
 
                 customerGroupDef.Deleted = true;
                 customerGroupDef.DeletedDate = DateTime.Now;
-                customerGroupDef.DeletedUsers = _identityRepository.Account.Email;
+                customerGroupDef.DeletedUsers = _identityRepository.Account.UserName;
 
                 await _uow.SaveChangesAsync(cancellationToken);
             }
             catch (Exception ex)
             {
+                return Response<bool>.Fail(ex.Message, 405);
             }
 
             return response;

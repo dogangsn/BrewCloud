@@ -46,7 +46,6 @@ namespace VetSystems.IdentityServer.Infrastructure.Services
             return Task.FromResult(0);
         }
 
-
         private List<Claim> CreateClaims()
         {
             List<Claim> claims = new List<Claim>();

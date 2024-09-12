@@ -68,7 +68,7 @@ namespace VetSystems.Vet.Application.Features.Patient.Commands
                 }
                 TimeZoneInfo localTimeZone = TimeZoneInfo.Local;
 
-                _examination.Date = TimeZoneInfo.ConvertTimeFromUtc(request.Date, localTimeZone);
+                _examination.Date = request.Date; // TimeZoneInfo.ConvertTimeFromUtc(request.Date, localTimeZone);
                 _examination.Pulse = request.Pulse;
                 _examination.PatientId = Guid.Parse(request.PatientId);
                 _examination.Status = request.Status == "Aktif" ? 0 : request.Status == "Tamamlandı" ? 1 : request.Status == "Bekliyor" ? 2 : 3;

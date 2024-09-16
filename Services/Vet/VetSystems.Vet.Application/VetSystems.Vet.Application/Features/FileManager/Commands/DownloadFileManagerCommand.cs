@@ -8,17 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using VetSystems.Shared.Dtos;
 using VetSystems.Shared.Service;
+using VetSystems.Vet.Application.Models.FileManager;
 using VetSystems.Vet.Domain.Contracts;
 using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Features.FileManager.Commands
 {
-    public class DownloadFileManagerCommand : IRequest<Response<byte[]>>
+    public class DownloadFileManagerCommand : IRequest<Response<FileManagerResponse>>
     {
         public Guid Id { get; set; }
     }
 
-    public class DownloadFileManagerCommandHandler : IRequestHandler<DownloadFileManagerCommand, Response<byte[]>>
+    public class DownloadFileManagerCommandHandler : IRequestHandler<DownloadFileManagerCommand, Response<FileManagerResponse>>
     {
 
         private readonly IUnitOfWork _uow;
@@ -36,22 +37,26 @@ namespace VetSystems.Vet.Application.Features.FileManager.Commands
             _vetDocumnetRepository = vetDocumnetRepository;
         }
 
-        public async Task<Response<byte[]>> Handle(DownloadFileManagerCommand request, CancellationToken cancellationToken)
+        public async Task<Response<FileManagerResponse>> Handle(DownloadFileManagerCommand request, CancellationToken cancellationToken)
         {
-            var response = Response<byte[]>.Success(200);
+            var response = Response<FileManagerResponse>.Success(200);
             try
             {
                 var document = await _vetDocumnetRepository.GetAsync(d => d.Id == request.Id);
                 if (document == null)
                 {
-                    return Response<byte[]>.Fail("Document Not Found", 400);
+                    return Response<FileManagerResponse>.Fail("Document Not Found", 400);
                 }
                 var _fileData = document.FirstOrDefault().FileData;
-                response.Data = _fileData;
+
+                response.Data = new FileManagerResponse();
+                response.Data.FileData = _fileData;
+                response.Data.FileName = document.FirstOrDefault().FileName;
+
             }
             catch (Exception ex)
             {
-                return Response<byte[]>.Fail(ex.Message, 400);
+                return Response<FileManagerResponse>.Fail(ex.Message, 400);
             }
 
             return response;

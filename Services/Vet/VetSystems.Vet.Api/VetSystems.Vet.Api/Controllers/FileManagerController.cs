@@ -57,7 +57,7 @@ namespace VetSystems.Vet.Api.Controllers
             {
                 return BadRequest(result.Errors);
             }
-            return File(result.Data, "", "");
+            return File(result.Data.FileData, "application/octet-stream", result.Data.FileName);
         }
 
 

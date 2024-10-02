@@ -10,6 +10,7 @@ using VetSystems.Shared.Service;
 using VetSystems.Vet.Application.Models.Customers;
 using VetSystems.Vet.Application.Models.Lab;
 using VetSystems.Vet.Domain.Contracts;
+using VetSystems.Vet.Domain.Entities;
 
 namespace VetSystems.Vet.Application.Features.Lab.Queries
 {
@@ -24,12 +25,14 @@ namespace VetSystems.Vet.Application.Features.Lab.Queries
         private readonly IIdentityRepository _identityRepository;
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
+        private readonly IRepository<VetLabDocument> _vetLabDocumentRepository;
 
-        public GetLabDocumentByIdQueryHandler(IIdentityRepository identityRepository, IUnitOfWork uow, IMapper mapper)
+        public GetLabDocumentByIdQueryHandler(IIdentityRepository identityRepository, IUnitOfWork uow, IMapper mapper, IRepository<VetLabDocument> vetLabDocumentRepository)
         {
             _identityRepository = identityRepository;
             _uow = uow;
             _mapper = mapper;
+            _vetLabDocumentRepository = vetLabDocumentRepository;
         }
 
         public async Task<Response<LabDocumentDetailDto>> Handle(GetLabDocumentByIdQuery request, CancellationToken cancellationToken)
@@ -37,14 +40,23 @@ namespace VetSystems.Vet.Application.Features.Lab.Queries
             var response = new Response<LabDocumentDetailDto>();
             try
             {
-                string query = "Select * from VetCustomers where Deleted = 0 and CAST(createdate AS DATE) = CAST(GETDATE() AS DATE)  order by CreateDate ";
-                var _data = _uow.Query<CustomersDto>(query).ToList();
-            
-                
+                string query = "SELECT        vetpatients.name as PatientName, vetpatients.id, vetpatients.customerid, (vetcustomers.firstname + ' ' + vetcustomers.lastname) as CustomerName ,  "
+                    + " vetcustomers.phonenumber as CustomerPhone, vetcustomers.email as CustomerEmail, "
+                    + "                          vetanimalstype.name AS PatientType, vetanimalbreedsdef.breedname as PatientBreed "
+                    + " FROM            vetanimalstype INNER JOIN"
+                    + "                          vetanimalbreedsdef INNER JOIN"
+                    + "                          vetpatients INNER JOIN"
+                    + "                          vetcustomers ON vetpatients.customerid = vetcustomers.id ON vetanimalbreedsdef.RecId = vetpatients.animalbreed ON vetanimalstype.RecId = vetpatients.animaltype"
+                    + " 						 where vetpatients.id = @patientId ";
+                var _data = _uow.Query<LabDocumentDetailDto>(query, new { patientId = request.PatientId }).FirstOrDefault();
 
+                if (_data != null)
+                {
+                    var _document = (await _vetLabDocumentRepository.GetAsync(x => x.PatientId == request.PatientId)).ToList();
+                    _data.LabDocuments = _mapper.Map<List<LabDocumentDto>>(_document);
 
-
-
+                }
+                response.Data = _data;
             }
             catch (Exception ex)
             {

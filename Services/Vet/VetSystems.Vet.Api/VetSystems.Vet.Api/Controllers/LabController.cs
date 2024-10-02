@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VetSystems.Vet.Application.Features.Customers.Queries;
+using VetSystems.Vet.Application.Features.FileManager.Queries;
 using VetSystems.Vet.Application.Features.Lab.Queries;
 
 namespace VetSystems.Vet.Api.Controllers
@@ -24,6 +25,12 @@ namespace VetSystems.Vet.Api.Controllers
             return Ok(result);
         }
 
+        [HttpPost(Name = "GetLabDocumentById")]
+        public async Task<IActionResult> GetLabDocumentById([FromBody] GetLabDocumentByIdQuery command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
 
     }
 }

@@ -13,13 +13,13 @@ namespace VetSystems.Vet.Application.Models.Lab
             LabDocuments = new List<LabDocumentDto>();
         }
         public Guid Id { get; set; }
-        public Guid CustomerId { get; set; }
-        public Guid PatientId { get; set; }
+        public Guid CustomerId { get; set; } 
         public string CustomerName { get; set; } = string.Empty;
         public string CustomerPhone { get; set; } = string.Empty;
         public string CustomerEmail { get; set; } = string.Empty;
         public string PatientName { get; set; } = string.Empty;
         public string PatientType { get; set; } = string.Empty;
+        public string PatientBreed { get; set; } = string.Empty;
         public List<LabDocumentDto> LabDocuments { get; set; }
     }
 

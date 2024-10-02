@@ -9,7 +9,7 @@ namespace VetSystems.Shared.Service.Nav
         public ModuleService()
         {
         }
-        private List<string> general = new List<string> { "vet", "farm" };
+        private List<string> general = new List<string> { "vet", "farm", "appoman", "beautycenter", "labman" , "gymman" };
 
         public List<string> GetModule()
         {

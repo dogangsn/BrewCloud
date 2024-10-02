@@ -8,13 +8,29 @@
 
   <ItemGroup>
     <None Remove="Scripts\UpdateData_TitleDefination.txt" />
+    <None Remove="Settings\NavBar\appoman.json" />
+    <None Remove="Settings\NavBar\beautycenter.json" />
     <None Remove="Settings\NavBar\farm.json" />
+    <None Remove="Settings\NavBar\gymman.json" />
+    <None Remove="Settings\NavBar\labman.json" />
     <None Remove="Settings\NavBar\vet.json" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Scripts\UpdateData_TitleDefination.txt" />
+    <EmbeddedResource Include="Settings\NavBar\appoman.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings\NavBar\beautycenter.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Settings\NavBar\farm.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings\NavBar\gymman.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings\NavBar\labman.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Settings\NavBar\vet.json">

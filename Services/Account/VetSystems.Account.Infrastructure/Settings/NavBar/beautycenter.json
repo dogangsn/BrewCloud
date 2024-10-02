@@ -1,0 +1,18 @@
+{
+  "id": "beautycenter",
+  "title": "EstetikZone",
+  "type": "collapsable",
+  "icon": "mat_outline:gite",
+  "targetname": "farm",
+  "actionname": null,
+  "children": [
+    {
+      "id": "beautycenterdashboards",
+      "title": "DashBoard",
+      "type": "basic",
+      "icon": "heroicons_outline:chart-pie",
+      "link": "/beautycenterdashboards"
+    }
+  ]
+
+}

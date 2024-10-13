@@ -2,7 +2,7 @@
   "id": "appoman",
   "title": "Randevu Yönetimi",
   "type": "collapsable",
-  "icon": "mat_outline:gite",
+  "icon": "calendar_today",
   "targetname": "farm",
   "actionname": null,
   "children": [

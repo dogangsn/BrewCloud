@@ -2,7 +2,7 @@
   "id": "beautycenter",
   "title": "EstetikZone",
   "type": "collapsable",
-  "icon": "mat_outline:gite",
+  "icon": "heroicons_outline:sparkles",
   "targetname": "farm",
   "actionname": null,
   "children": [

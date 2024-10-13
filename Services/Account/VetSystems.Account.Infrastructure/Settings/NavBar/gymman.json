@@ -2,7 +2,7 @@
   "id": "gymman",
   "title": "GYM Yönetim",
   "type": "collapsable",
-  "icon": "mat_outline:gite",
+  "icon": "directions_run",
   "targetname": "farm",
   "actionname": null,
   "children": [

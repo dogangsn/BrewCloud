@@ -2,7 +2,7 @@
   "id": "labman",
   "title": "Laboratuvar Yönetimi",
   "type": "collapsable",
-  "icon": "mat_outline:gite",
+  "icon": "heroicons_outline:beaker",
   "targetname": "farm",
   "actionname": null,
   "children": [

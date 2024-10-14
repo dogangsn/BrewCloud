@@ -7,47 +7,47 @@ services:
         image:  gateway_api_image
         build:
             context: .
-            dockerfile: ApiGateways/VetSystems.Gateway/Dockerfile    
+            dockerfile: ApiGateways/BrewCloud.Gateway/Dockerfile    
     identityserver.api:
         image: identityserver_api_image
         build: 
             context: .
-            dockerfile: Services/IdentityServer/VetSystems.IdentityServer/Dockerfile
+            dockerfile: Services/IdentityServer/BrewCloud.IdentityServer/Dockerfile
     account.api:
         image: account_api_image
         build: 
             context: .
-            dockerfile: Services/Account/VetSystems.Account/Dockerfile
+            dockerfile: Services/Account/BrewCloud.Account/Dockerfile
     vet.api:
         image: vet_api_image
         build:
             context: .
-            dockerfile: Services/Vet/VetSystems.Vet.Api/VetSystems.Vet.Api/Dockerfile
+            dockerfile: Services/Vet/BrewCloud.Vet.Api/BrewCloud.Vet.Api/Dockerfile
     farm.api:
         image: farm_api_image
         build:
             context: .
-            dockerfile: Services/Farm/VetSystems.Farm.Api/Dockerfile
+            dockerfile: Services/Farm/BrewCloud.Farm.Api/Dockerfile
     mail.api:
         image: mail_api_iamge
         build:
             context: .
-            dockerfile: Services/Mail/VetSystems.Mail.Api/Dockerfile
+            dockerfile: Services/Mail/BrewCloud.Mail.Api/Dockerfile
     chat.api:
         image: chat_api_image
         build:
             context: .
-            dockerfile: Services/Chat/VetSystems.Chat.Api/Dockerfile
+            dockerfile: Services/Chat/BrewCloud.Chat.Api/Dockerfile
     integrations.api:
         image: integrations_api_image
         build:
             context: .
-            dockerfile: Services/Integrations/VetSystems.Integrations.Api/Dockerfile
+            dockerfile: Services/Integrations/BrewCloud.Integrations.Api/Dockerfile
     mobile.api:
         image: mobile_api_image
         build:
             context: .
-            dockerfile: Services/Mobile/VetSystems.Mobile.Api/Dockerfile
+            dockerfile: Services/Mobile/BrewCloud.Mobile.Api/Dockerfile
 
 volumes:
   identitydb_volume:

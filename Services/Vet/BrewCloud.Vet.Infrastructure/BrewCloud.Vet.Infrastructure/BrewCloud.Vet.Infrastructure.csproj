@@ -1,0 +1,63 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts\UpdateData_AnimalBreedsDefInsert.txt" />
+    <None Remove="Scripts\UpdateData_AnimalTypeDefInsert.txt" />
+    <None Remove="Scripts\UpdateData_AppointmentTypes.txt" />
+    <None Remove="Scripts\UpdateData_Casingdefinition.txt" />
+    <None Remove="Scripts\UpdateData_CustomerGroupdef.txt" />
+    <None Remove="Scripts\UpdateData_Parameters.txt" />
+    <None Remove="Scripts\UpdateData_PaymentMethods.txt" />
+    <None Remove="Scripts\UpdateData_ProductCategories.txt" />
+    <None Remove="Scripts\UpdateData_Store.txt" />
+    <None Remove="Scripts\UpdateData_Symptoms.txt" />
+    <None Remove="Scripts\UpdateData_Taxis.txt" />
+    <None Remove="Scripts\UpdateData_Units.txt" />
+    <None Remove="Scripts\UpdateData_VaccineDef.txt" />
+    <None Remove="Scripts\Update_Data_CreateProcuderGetProductMovementList.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\UpdateData_AnimalBreedsDefInsert.txt" />
+    <EmbeddedResource Include="Scripts\UpdateData_AnimalTypeDefInsert.txt" />
+    <EmbeddedResource Include="Scripts\UpdateData_CustomerGroupdef.txt" />
+    <EmbeddedResource Include="Scripts\UpdateData_AppointmentTypes.txt" />
+    <EmbeddedResource Include="Scripts\UpdateData_PaymentMethods.txt" />
+    <EmbeddedResource Include="Scripts\UpdateData_ProductCategories.txt" />
+    <EmbeddedResource Include="Scripts\UpdateData_Casingdefinition.txt" />
+    <EmbeddedResource Include="Scripts\UpdateData_Symptoms.txt" />
+    <EmbeddedResource Include="Scripts\UpdateData_Store.txt" />
+    <EmbeddedResource Include="Scripts\UpdateData_Parameters.txt" />
+    <EmbeddedResource Include="Scripts\UpdateData_Taxis.txt" />
+    <EmbeddedResource Include="Scripts\Update_Data_CreateProcuderGetProductMovementList.txt" />
+    <EmbeddedResource Include="Scripts\UpdateData_VaccineDef.txt" />
+    <EmbeddedResource Include="Scripts\UpdateData_Units.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="EFCore.NamingConventions" Version="6.0.0" />
+    <PackageReference Include="MediatR" Version="11.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Shared\BrewCloud.Shared\BrewCloud.Shared.csproj" />
+    <ProjectReference Include="..\..\BrewCloud.Vet.Domain\BrewCloud.Vet.Domain\BrewCloud.Vet.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

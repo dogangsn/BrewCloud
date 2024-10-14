@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BrewCloud.Vet.Application.Models.Definition.AnimalColorsDef
+{
+    public class AnimalColorsDefListDto
+    {
+        public int RecId { get; set; }
+        public string Name { get; set; }
+    }
+}

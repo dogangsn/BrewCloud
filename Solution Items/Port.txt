@@ -7,6 +7,6 @@ Farm => 5016
 Chat => 5017
 Mail => 5018
 Report => 5019
-
+Gym => 5020
 
 GateWay => 5000

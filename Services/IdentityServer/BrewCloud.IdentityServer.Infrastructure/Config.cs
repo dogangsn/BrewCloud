@@ -20,6 +20,7 @@ namespace BrewCloud.IdentityServer.Infrastructure
             new ApiResource("resource_farm"){Scopes={"farmapi"}},
             new ApiResource("resource_chat"){Scopes={"chatapi"}},
             new ApiResource("resource_mail"){Scopes={"mailapi"}},
+            new ApiResource("resource_gym"){Scopes={"gymapi"}},
             new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
         };
 
@@ -42,6 +43,7 @@ namespace BrewCloud.IdentityServer.Infrastructure
                 new ApiScope("farmapi","Farm Api"),
                 new ApiScope("chatapi","Chat Api"),
                 new ApiScope("mailapi","Mail Api"),
+                new ApiScope("gymapi","Gym Api"),
                 new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
             };
 
@@ -55,7 +57,7 @@ namespace BrewCloud.IdentityServer.Infrastructure
                    ClientSecrets = { new Secret("secret".Sha256()) },
                    UpdateAccessTokenClaimsOnRefresh=true,
                    AllowedGrantTypes= GrantTypes.ClientCredentials,
-                   AllowedScopes = { "accountapi", "vetapi", "integrationapi", "farmapi", "chatapi" , "mailapi", IdentityServerConstants.LocalApi.ScopeName }
+                   AllowedScopes = { "accountapi", "vetapi", "integrationapi", "farmapi", "chatapi" , "mailapi", "gymapi", IdentityServerConstants.LocalApi.ScopeName }
                },
                new Client
                {
@@ -65,7 +67,7 @@ namespace BrewCloud.IdentityServer.Infrastructure
                    AllowOfflineAccess = true,
                    AlwaysIncludeUserClaimsInIdToken =true,
                    AllowedGrantTypes= GrantTypes.ResourceOwnerPassword,
-                   AllowedScopes = { "accountapi", "vetapi", "integrationapi", "farmapi", "chatapi", "mailapi", IdentityServerConstants.StandardScopes.Email, IdentityServerConstants.StandardScopes.OpenId, IdentityServerConstants.StandardScopes.Profile, IdentityServerConstants.StandardScopes.OfflineAccess, IdentityServerConstants.LocalApi.ScopeName },
+                   AllowedScopes = { "accountapi", "vetapi", "integrationapi", "farmapi", "chatapi", "mailapi", "gymapi", IdentityServerConstants.StandardScopes.Email, IdentityServerConstants.StandardScopes.OpenId, IdentityServerConstants.StandardScopes.Profile, IdentityServerConstants.StandardScopes.OfflineAccess, IdentityServerConstants.LocalApi.ScopeName },
                    AccessTokenLifetime=43200,
                    UpdateAccessTokenClaimsOnRefresh=true,
                    RefreshTokenExpiration=TokenExpiration.Absolute,
@@ -81,7 +83,7 @@ namespace BrewCloud.IdentityServer.Infrastructure
                     AlwaysIncludeUserClaimsInIdToken =true,
                     UpdateAccessTokenClaimsOnRefresh=true,
                     AllowedGrantTypes={ "delegation" },
-                    AllowedScopes={ "accountapi", "vetapi", "integrationapi", "mobile", "farmapi", "chatapi", "mailapi", IdentityServerConstants.LocalApi.ScopeName},
+                    AllowedScopes={ "accountapi", "vetapi", "integrationapi", "mobile", "farmapi", "chatapi", "mailapi", "gymapi", IdentityServerConstants.LocalApi.ScopeName},
                     AccessTokenLifetime=43200,
                     RefreshTokenExpiration=TokenExpiration.Absolute,
                     AbsoluteRefreshTokenLifetime= (int) (DateTime.Now.AddDays(30)- DateTime.Now).TotalSeconds,

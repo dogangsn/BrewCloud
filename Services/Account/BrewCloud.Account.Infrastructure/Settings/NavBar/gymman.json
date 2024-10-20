@@ -7,11 +7,48 @@
   "actionname": null,
   "children": [
     {
-      "id": "gymmandashboards",
+      "id": "gymdashboards",
       "title": "DashBoard",
       "type": "basic",
       "icon": "heroicons_outline:chart-pie",
-      "link": "/gymmandashboards"
+      "link": "/gymdashboards"
+    },
+    {
+      "id": "gymmember",
+      "title": "Mğşteri",
+      "type": "collapsable",
+      "icon": "heroicons_outline:collection",
+      "children": [
+        {
+          "id": "gymmemberadd",
+          "title": "Yeni Üye Ekle",
+          "type": "basic",
+          "icon": "heroicons_outline:cash",
+          "link": "/gymmemberadd"
+        },
+        {
+          "id": "gymmemberlist",
+          "title": "Üye Listesi",
+          "type": "basic",
+          "icon": "heroicons_outline:cash",
+          "link": "/gymmemberlist"
+        }
+      ]
+    },
+    {
+      "id": "gymdefinition",
+      "title": "Tanımlamalar",
+      "type": "collapsable",
+      "icon": "heroicons_outline:collection",
+      "children": [
+        {
+          "id": "subscriptionpackagedef",
+          "title": "Antreman Tanımları",
+          "type": "basic",
+          "icon": "heroicons_outline:cash",
+          "link": "/subscriptionpackagedef"
+        }
+      ]
     }
   ]
 }

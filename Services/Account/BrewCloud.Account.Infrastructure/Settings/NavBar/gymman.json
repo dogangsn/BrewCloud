@@ -15,7 +15,7 @@
     },
     {
       "id": "gymmember",
-      "title": "Mğşteri",
+      "title": "Müşteri",
       "type": "collapsable",
       "icon": "heroicons_outline:collection",
       "children": [

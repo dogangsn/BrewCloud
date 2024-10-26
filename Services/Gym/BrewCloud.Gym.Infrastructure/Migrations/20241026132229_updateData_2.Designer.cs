@@ -4,6 +4,7 @@ using BrewCloud.Gym.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BrewCloud.Gym.Infrastructure.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    partial class GymDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241026132229_updateData_2")]
+    partial class updateData_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,14 +122,15 @@ namespace BrewCloud.Gym.Infrastructure.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("address");
 
-                    b.Property<DateTime?>("BirthDate")
+                    b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("birthdate");
 
-                    b.Property<byte?>("BloopType")
+                    b.Property<byte>("BloopType")
                         .HasColumnType("tinyint")
                         .HasColumnName("blooptype");
 
@@ -136,6 +139,7 @@ namespace BrewCloud.Gym.Infrastructure.Migrations
                         .HasColumnName("branchid");
 
                     b.Property<string>("CardNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("cardnumber");
 
@@ -162,18 +166,22 @@ namespace BrewCloud.Gym.Infrastructure.Migrations
                         .HasColumnName("deletedusers");
 
                     b.Property<string>("District")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("district");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("email");
 
                     b.Property<string>("EmergencyPerson")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("emergencyperson");
 
                     b.Property<string>("EmergencyPersonPhone")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("emergencypersonphone");
 
@@ -182,11 +190,12 @@ namespace BrewCloud.Gym.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("firstname");
 
-                    b.Property<byte?>("Gender")
+                    b.Property<byte>("Gender")
                         .HasColumnType("tinyint")
                         .HasColumnName("gender");
 
                     b.Property<string>("IdentityNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("identitynumber");
 
@@ -199,6 +208,7 @@ namespace BrewCloud.Gym.Infrastructure.Migrations
                         .HasColumnName("ismember");
 
                     b.Property<string>("Job")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("job");
 
@@ -208,6 +218,7 @@ namespace BrewCloud.Gym.Infrastructure.Migrations
                         .HasColumnName("lastname");
 
                     b.Property<string>("Note")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("note");
 

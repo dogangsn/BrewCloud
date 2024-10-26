@@ -4,6 +4,7 @@ using BrewCloud.Gym.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BrewCloud.Gym.Infrastructure.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    partial class GymDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241026223823__updateData_4")]
+    partial class _updateData_4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -190,11 +192,11 @@ namespace BrewCloud.Gym.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("identitynumber");
 
-                    b.Property<bool>("IsMaried")
+                    b.Property<bool?>("IsMaried")
                         .HasColumnType("bit")
                         .HasColumnName("ismaried");
 
-                    b.Property<bool>("IsMember")
+                    b.Property<bool?>("IsMember")
                         .HasColumnType("bit")
                         .HasColumnName("ismember");
 

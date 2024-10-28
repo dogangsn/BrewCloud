@@ -77,7 +77,7 @@ namespace BrewCloud.Gym.Application.Features.Member.Commands
                     EmergencyPersonPhone = request.EmergencyPersonPhone,
                     Note = request.Note,
                     CardNumber = request.CardNumber,
-                    BranchId = _identity.Account.UserId,
+                    //BranchId = _identity.Account.UserId,
                     CreateDate = DateTime.Now,
                     CreateUsers = _identity.Account.UserName
                 };

@@ -1,6 +1,4 @@
 ﻿using MediatR;
-using MassTransit;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using BrewCloud.Account.Application.Features.Settings.Queries;
 using BrewCloud.Account.Application.Features.Settings.Commands;
@@ -144,6 +142,35 @@ namespace BrewCloud.Account.Api.Controllers
         {
             var command = new GetActiveUserQuery();
             var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "CreateBranch")]
+        public async Task<IActionResult> CreateBranch([FromBody] CreateBranchCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "UpdateBranch")]
+        public async Task<IActionResult> UpdateBranch([FromBody] UpdateBranchCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpPost(Name = "DeleteBranch")]
+        public async Task<IActionResult> DeleteBranch([FromBody] DeleteBranchCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+
+        [HttpGet(Name = "GetBranchList")]
+        public async Task<IActionResult> GetBranchList()
+        {
+            var query = new GetBranchListQuery();
+            var result = await _mediator.Send(query);
             return Ok(result);
         }
 

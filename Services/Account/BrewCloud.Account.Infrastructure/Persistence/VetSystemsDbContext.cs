@@ -49,6 +49,7 @@ namespace BrewCloud.Account.Infrastructure.Persistence
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<Message> Message { get; set; }
         public virtual DbSet<TitleDefinitions> TitleDefinitions { get; set; }
+        public virtual DbSet<Branch> Branch { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -17,6 +17,7 @@ namespace BrewCloud.Account.Application.Mappings
             CreateMap<Rolesetting, RoleSettingDto>().ReverseMap();
             CreateMap<RoleSettingDetail, RoleSettingDetailDto>().ReverseMap();
             CreateMap<TitleDefinitions, TitleDefinationDto>().ReverseMap();
+            CreateMap<Branch, BranchDto>().ReverseMap();
 
         }
     }

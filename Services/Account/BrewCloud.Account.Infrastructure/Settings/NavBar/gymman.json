@@ -17,22 +17,69 @@
       "id": "gymmember",
       "title": "Müşteri",
       "type": "collapsable",
-      "icon": "heroicons_outline:collection",
+      "icon": "heroicons_outline:user-group",
       "children": [
         {
           "id": "gymmemberadd",
           "title": "Yeni Üye Ekle",
           "type": "basic",
-          "icon": "heroicons_outline:cash",
+          "icon": "heroicons_outline:user-add",
           "link": "/gymmemberadd"
         },
         {
           "id": "gymmemberlist",
           "title": "Üye Listesi",
           "type": "basic",
-          "icon": "heroicons_outline:cash",
+          "icon": "heroicons_outline:clipboard-check",
           "link": "/gymmemberlist"
         }
+      ]
+    },
+    {
+      "id": "subscriptio",
+      "title": "Abonelik",
+      "type": "collapsable",
+      "icon": "heroicons_outline:identification",
+      "children": [
+        {
+          "id": "subscriptionpackagedef",
+          "title": "Abonelik Tanımları",
+          "type": "basic",
+          "icon": "heroicons_outline:cash",
+          "link": "/subscriptionpackagedef"
+        },
+        {
+          "id": "subscriptionpackagedef",
+          "title": "Müşteri Grupları",
+          "type": "basic",
+          "icon": "heroicons_outline:cash",
+          "link": "/subscriptionpackagedef"
+        },
+        {
+          "id": "subscriptionpackagedef",
+          "title": "Branş",
+          "type": "basic",
+          "icon": "heroicons_outline:cash",
+          "link": "/subscriptionpackagedef"
+        }
+
+
+      ]
+    },
+    {
+      "id": "subscriptio",
+      "title": "Antreman",
+      "type": "collapsable",
+      "icon": "heroicons_outline:bolt",
+      "children": [
+        {
+          "id": "subscriptionpackagedef",
+          "title": "Antreman Sihirbazı",
+          "type": "basic",
+          "icon": "heroicons_outline:sparkles",
+          "link": "/subscriptionpackagedef"
+        }
+
       ]
     },
     {
@@ -42,12 +89,41 @@
       "icon": "heroicons_outline:collection",
       "children": [
         {
-          "id": "subscriptionpackagedef",
-          "title": "Antreman Tanımları",
+          "id": "smsparameters",
+          "title": "SMS Ayarları",
+          "type": "basic",
+          "icon": "send_to_mobile",
+          "link": "/smsparameters"
+        },
+        {
+          "id": "parameters",
+          "title": "Şirket Parametreleri",
+          "type": "basic",
+          "icon": "heroicons_outline:adjustments",
+          "link": "/parameters"
+        },
+        {
+          "id": "paymentmethods",
+          "title": "Ödeme Yöntemleri",
           "type": "basic",
           "icon": "heroicons_outline:cash",
-          "link": "/subscriptionpackagedef"
+          "link": "/paymentmethods"
+        },
+        {
+          "id": "taxes",
+          "title": "KDV Oranı",
+          "type": "basic",
+          "icon": "mat_outline:exposure",
+          "link": "/taxes"
+        },
+        {
+          "id": "smstemplate",
+          "title": "Sms Şablonları",
+          "type": "basic",
+          "icon": "mat_outline:sms",
+          "link": "/smstemplate"
         }
+
       ]
     }
   ]

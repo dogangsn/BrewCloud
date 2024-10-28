@@ -45,32 +45,30 @@
           "id": "subscriptionpackagedef",
           "title": "Abonelik Tanımları",
           "type": "basic",
-          "icon": "heroicons_outline:cash",
+          "icon": "heroicons_outline:pencil",
           "link": "/subscriptionpackagedef"
         },
         {
           "id": "subscriptionpackagedef",
           "title": "Müşteri Grupları",
           "type": "basic",
-          "icon": "heroicons_outline:cash",
+          "icon": "heroicons_outline:pencil",
           "link": "/subscriptionpackagedef"
         },
         {
           "id": "subscriptionpackagedef",
           "title": "Branş",
           "type": "basic",
-          "icon": "heroicons_outline:cash",
+          "icon": "heroicons_outline:pencil",
           "link": "/subscriptionpackagedef"
         }
-
-
       ]
     },
     {
       "id": "subscriptio",
       "title": "Antreman",
       "type": "collapsable",
-      "icon": "heroicons_outline:bolt",
+      "icon": "heroicons_outline:rectangle-group",
       "children": [
         {
           "id": "subscriptionpackagedef",

@@ -11,6 +11,7 @@ namespace BrewCloud.Gym.Application.Features.Member.Commands
 {
     public class CreateGymMemberCommand : IRequest<Response<bool>>
     {
+        public Guid BranchId { get; set; }
         public required string FirstName { get; set; }
         public required string LastName { get; set; }
         public string? IdentityNumber { get; set; }
@@ -77,7 +78,7 @@ namespace BrewCloud.Gym.Application.Features.Member.Commands
                     EmergencyPersonPhone = request.EmergencyPersonPhone,
                     Note = request.Note,
                     CardNumber = request.CardNumber,
-                    //BranchId = _identity.Account.UserId,
+                    BranchId = request.BranchId,
                     CreateDate = DateTime.Now,
                     CreateUsers = _identity.Account.UserName
                 };

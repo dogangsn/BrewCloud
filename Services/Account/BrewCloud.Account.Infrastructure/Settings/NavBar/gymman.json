@@ -123,6 +123,35 @@
         }
 
       ]
+    },
+    {
+      "id": "gympersonnel",
+      "title": "Personel",
+      "type": "collapsable",
+      "icon": "heroicons_outline:user-group",
+      "children": [
+        {
+          "id": "gympersonneltrainer",
+          "title": "Personel Trainer",
+          "type": "basic",
+          "icon": "power_input",
+          "link": "/gympersonneltrainer"
+        },
+        {
+          "id": "gympersonnellist",
+          "title": "Personel Listesi",
+          "type": "basic",
+          "icon": "person_outline",
+          "link": "/gympersonnellist"
+        },
+        {
+          "id": "gympersonnelpermission",
+          "title": "Personel İzin",
+          "type": "basic",
+          "icon": "receipt",
+          "link": "/gympersonnelpermission"
+        }
+      ]
     }
   ]
 }

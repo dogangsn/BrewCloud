@@ -1,17 +1,14 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BrewCloud.Gym.Application.Models;
+using BrewCloud.Gym.Domain.Entities;
 
 namespace BrewCloud.Gym.Application.Mappings
 {
     public class MappingProfile : Profile
     {
-        public MappingProfile() 
+        public MappingProfile()
         {
-            
+            CreateMap<GymPersonnel, GymPersonnelDto>().ReverseMap();
         }
     }
 }

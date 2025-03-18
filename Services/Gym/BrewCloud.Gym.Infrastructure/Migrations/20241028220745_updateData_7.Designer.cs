@@ -4,6 +4,7 @@ using BrewCloud.Gym.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BrewCloud.Gym.Infrastructure.Migrations
 {
     [DbContext(typeof(GymDbContext))]
-    partial class GymDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241028220745_updateData_7")]
+    partial class updateData_7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -237,169 +239,6 @@ namespace BrewCloud.Gym.Infrastructure.Migrations
                         .HasName("GymMember_pkey");
 
                     b.ToTable("gymmember", (string)null);
-                });
-
-            modelBuilder.Entity("BrewCloud.Gym.Domain.Entities.GymPersonnel", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("id");
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("address");
-
-                    b.Property<Guid>("BranchId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("branchid");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("createdate");
-
-                    b.Property<string>("CreateUsers")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("createusers");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasColumnName("deleted");
-
-                    b.Property<DateTime>("DeletedDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("deleteddate");
-
-                    b.Property<string>("DeletedUsers")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("deletedusers");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("email");
-
-                    b.Property<string>("Graduate")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("graduate");
-
-                    b.Property<string>("IdentityNumber")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("identitynumber");
-
-                    b.Property<string>("ImageId")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("imageid");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("name");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("phonenumber");
-
-                    b.Property<string>("PhoneNumber2")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("phonenumber2");
-
-                    b.Property<int>("RecId")
-                        .HasColumnType("int")
-                        .HasColumnName("recid");
-
-                    b.Property<string>("SurName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("surname");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("updatedate");
-
-                    b.Property<string>("UpdateUsers")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("updateusers");
-
-                    b.HasKey("Id")
-                        .HasName("GymPersonnel_pkey");
-
-                    b.ToTable("gympersonnel", (string)null);
-                });
-
-            modelBuilder.Entity("BrewCloud.Gym.Domain.Entities.GymPersonnelPermission", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("id");
-
-                    b.Property<DateTime>("BeginDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("begindate");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("createdate");
-
-                    b.Property<string>("CreateUsers")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("createusers");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit")
-                        .HasColumnName("deleted");
-
-                    b.Property<DateTime>("DeletedDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("deleteddate");
-
-                    b.Property<string>("DeletedUsers")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("deletedusers");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("enddate");
-
-                    b.Property<bool>("IsApproved")
-                        .HasColumnType("bit")
-                        .HasColumnName("isapproved");
-
-                    b.Property<string>("Note")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("note");
-
-                    b.Property<int>("PermissionType")
-                        .HasColumnType("int")
-                        .HasColumnName("permissiontype");
-
-                    b.Property<Guid>("PersonnelId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("personnelid");
-
-                    b.Property<int>("RecId")
-                        .HasColumnType("int")
-                        .HasColumnName("recid");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("updatedate");
-
-                    b.Property<string>("UpdateUsers")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("updateusers");
-
-                    b.HasKey("Id")
-                        .HasName("GymPersonnelPermission_pkey");
-
-                    b.ToTable("gympersonnelpermission", (string)null);
                 });
 
             modelBuilder.Entity("BrewCloud.Gym.Domain.Entities.GymPersonnelTrainer", b =>

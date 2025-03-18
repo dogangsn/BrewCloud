@@ -8,8 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Definition\" />
-    <Folder Include="Features\Member\Queries\" />
-    <Folder Include="Models\" />
     <Folder Include="Protos\" />
   </ItemGroup>
 

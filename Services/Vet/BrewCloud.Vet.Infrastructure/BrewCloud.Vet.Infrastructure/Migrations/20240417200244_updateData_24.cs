@@ -13,15 +13,15 @@ namespace BrewCloud.Vet.Infrastructure.Migrations
             using (var service = new ConfigurationDatabaseService(Assembly.GetExecutingAssembly()))
             {
 
-                var files = new List<string> { "UpdateData_AppointmentTypes" };
-                foreach (var item in files)
-                {
-                    var query = service.GetSqlText(item);
-                    if (!string.IsNullOrEmpty(query))
-                    {
-                        migrationBuilder.Sql(query);
-                    }
-                }
+                //var files = new List<string> { "UpdateData_AppointmentTypes" };
+                //foreach (var item in files)
+                //{
+                //    var query = service.GetSqlText(item);
+                //    if (!string.IsNullOrEmpty(query))
+                //    {
+                //        migrationBuilder.Sql(query);
+                //    }
+                //}
             }
 
         }

@@ -1,4 +1,5 @@
 ﻿using BrewCloud.Gym.Application.Features.Member.Commands;
+using BrewCloud.Gym.Application.Features.Member.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,14 @@ namespace BrewCloud.Gym.Api.Controllers
         public MemberController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet(Name = "GetMembersList")]
+        public async Task<IActionResult> GetMembersList()
+        {
+            var command = new GetMembersListQuery();
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
 
         [HttpPost(Name = "CreateGymMember")]

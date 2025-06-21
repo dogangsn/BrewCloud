@@ -1,0 +1,46 @@
+{
+  "id": "connecthub",
+  "title": "Entegrasyon Yönetimi",
+  "type": "collapsable",
+  "icon": "calendar_today",
+  "targetname": "connecthub",
+  "actionname": null,
+  "children": [
+    {
+      "id": "connecthubdashboards",
+      "title": "DashBoard",
+      "type": "basic",
+      "icon": "heroicons_outline:chart-pie",
+      "link": "/connecthubdashboards"
+    },
+    {
+      "id": "connecthubconnect",
+      "title": "Bağlantılar",
+      "type": "basic",
+      "icon": "heroicons_outline:chart-pie",
+      "link": "/connecthubconnect"
+    },
+    {
+      "id": "datasynchronization",
+      "title": "Veri Senkronizasyonu",
+      "type": "basic",
+      "icon": "heroicons_outline:chart-pie",
+      "link": "/datasynchronization"
+    },
+    {
+      "id": "logsreport",
+      "title": "Log ve Raporlar",
+      "type": "basic",
+      "icon": "heroicons_outline:chart-pie",
+      "link": "/logsreport"
+    },
+    {
+      "id": "connecthupsettings",
+      "title": "Ayarlar",
+      "type": "basic",
+      "icon": "heroicons_outline:chart-pie",
+      "link": "/connecthupsettings"
+    }
+  ]
+
+}

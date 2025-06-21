@@ -9,7 +9,7 @@ namespace BrewCloud.Shared.Service.Nav
         public ModuleService()
         {
         }
-        private List<string> general = new List<string> { "vet", "farm", "appoman", "beautycenter", "labman" , "gymman" };
+        private List<string> general = new List<string> { "vet", "farm", "appoman", "beautycenter", "labman" , "gymman", "connecthub" };
 
         public List<string> GetModule()
         {

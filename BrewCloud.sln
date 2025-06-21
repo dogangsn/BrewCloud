@@ -121,6 +121,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrewCloud.Gym.Domain", "Ser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrewCloud.Gym.Infrastructure", "Services\Gym\BrewCloud.Gym.Infrastructure\BrewCloud.Gym.Infrastructure.csproj", "{1BA38C4D-CA14-4895-A702-0DD72AA1BA4B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConnectHub", "ConnectHub", "{7730B00C-C3C3-4EFF-80F8-F7386D4531A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrewCloud.ConnectHub.Api", "Services\ConnectHub\BrewCloud.ConnectHub.Api\BrewCloud.ConnectHub.Api.csproj", "{B3EDBEAD-DDAD-48D8-9B87-E96F464455F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrewCloud.ConnectHub.Application", "Services\ConnectHub\BrewCloud.ConnectHub.Application\BrewCloud.ConnectHub.Application.csproj", "{0853CEA3-DE5A-4354-89D3-0BD65013A43C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrewCloud.ConnectHub.Domain", "Services\ConnectHub\BrewCloud.ConnectHub.Domain\BrewCloud.ConnectHub.Domain.csproj", "{7902947E-881A-4337-8AEB-C1A022BB917A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrewCloud.ConnectHub.Infrastructure", "Services\ConnectHub\BrewCloud.ConnectHub.Infrastructure\BrewCloud.ConnectHub.Infrastructure.csproj", "{3E98C111-BA94-42EA-A629-8D47CAD71E98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -295,6 +305,22 @@ Global
 		{1BA38C4D-CA14-4895-A702-0DD72AA1BA4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BA38C4D-CA14-4895-A702-0DD72AA1BA4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BA38C4D-CA14-4895-A702-0DD72AA1BA4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3EDBEAD-DDAD-48D8-9B87-E96F464455F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3EDBEAD-DDAD-48D8-9B87-E96F464455F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3EDBEAD-DDAD-48D8-9B87-E96F464455F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3EDBEAD-DDAD-48D8-9B87-E96F464455F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0853CEA3-DE5A-4354-89D3-0BD65013A43C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0853CEA3-DE5A-4354-89D3-0BD65013A43C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0853CEA3-DE5A-4354-89D3-0BD65013A43C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0853CEA3-DE5A-4354-89D3-0BD65013A43C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7902947E-881A-4337-8AEB-C1A022BB917A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7902947E-881A-4337-8AEB-C1A022BB917A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7902947E-881A-4337-8AEB-C1A022BB917A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7902947E-881A-4337-8AEB-C1A022BB917A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E98C111-BA94-42EA-A629-8D47CAD71E98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E98C111-BA94-42EA-A629-8D47CAD71E98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E98C111-BA94-42EA-A629-8D47CAD71E98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E98C111-BA94-42EA-A629-8D47CAD71E98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -352,6 +378,11 @@ Global
 		{E49F893E-44EB-4E85-BAEF-53424D09CFE3} = {0EE772DB-3149-4ED6-8EEB-7CA794BA536C}
 		{76CEF3DB-C695-4618-BD6F-8CD19F181838} = {0EE772DB-3149-4ED6-8EEB-7CA794BA536C}
 		{1BA38C4D-CA14-4895-A702-0DD72AA1BA4B} = {0EE772DB-3149-4ED6-8EEB-7CA794BA536C}
+		{7730B00C-C3C3-4EFF-80F8-F7386D4531A3} = {09508787-B726-4595-AA04-FD652D0B4609}
+		{B3EDBEAD-DDAD-48D8-9B87-E96F464455F9} = {7730B00C-C3C3-4EFF-80F8-F7386D4531A3}
+		{0853CEA3-DE5A-4354-89D3-0BD65013A43C} = {7730B00C-C3C3-4EFF-80F8-F7386D4531A3}
+		{7902947E-881A-4337-8AEB-C1A022BB917A} = {7730B00C-C3C3-4EFF-80F8-F7386D4531A3}
+		{3E98C111-BA94-42EA-A629-8D47CAD71E98} = {7730B00C-C3C3-4EFF-80F8-F7386D4531A3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B7E68C2E-293C-48D7-A15C-6681682A0215}

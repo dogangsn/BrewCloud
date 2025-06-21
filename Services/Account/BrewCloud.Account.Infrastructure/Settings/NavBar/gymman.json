@@ -49,33 +49,33 @@
           "link": "/subscriptionpackagedef"
         },
         {
-          "id": "subscriptionpackagedef",
+          "id": "customergroubdef",
           "title": "Müşteri Grupları",
           "type": "basic",
           "icon": "heroicons_outline:pencil",
-          "link": "/subscriptionpackagedef"
+          "link": "/customergroubdef"
         },
         {
-          "id": "subscriptionpackagedef",
+          "id": "branchdef",
           "title": "Branş",
           "type": "basic",
           "icon": "heroicons_outline:pencil",
-          "link": "/subscriptionpackagedef"
+          "link": "/branchdef"
         }
       ]
     },
     {
-      "id": "subscriptio",
+      "id": "workout",
       "title": "Antreman",
       "type": "collapsable",
-      "icon": "heroicons_outline:rectangle-group",
+      "icon": "directions_run",
       "children": [
         {
-          "id": "subscriptionpackagedef",
+          "id": "workoutwizard",
           "title": "Antreman Sihirbazı",
           "type": "basic",
           "icon": "heroicons_outline:sparkles",
-          "link": "/subscriptionpackagedef"
+          "link": "/workoutwizard"
         }
 
       ]

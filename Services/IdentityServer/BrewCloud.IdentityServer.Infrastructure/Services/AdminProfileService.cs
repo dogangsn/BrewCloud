@@ -79,7 +79,7 @@ namespace BrewCloud.IdentityServer.Infrastructure.Services
 
             string connection = account.ConnectionDb;
 
-            string sql = "Server=DENIZCANCASPER;Database=VetAdminIdentityDb;User Id=sa;Password=Deniz.07;";
+            
             List<Claim> claims = new List<Claim>();
             claims.Add(new Claim("CompanyId", account.CompanyId));
             claims.Add(new Claim("FirstName", account.FirstName));

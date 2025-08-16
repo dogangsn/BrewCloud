@@ -9,5 +9,6 @@ Mail => 5018
 Report => 5019
 Hub => 5020
 Gym => 5021
+AppointmentMan => 5022
 
 GateWay => 5000

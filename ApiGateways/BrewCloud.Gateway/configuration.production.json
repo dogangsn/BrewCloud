@@ -191,7 +191,26 @@
           "PeriodTimespan": 1,
           "Limit": 10
         }
-      }
+      },
+      {
+        "DownstreamPathTemplate": "/api/{everything}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "appointmentman.api",
+            "Port": 80
+          }
+        ],
+        "UpstreamPathTemplate": "/services/appointmentman/{everything}",
+        "UpstreamHttpMethod": [ "Get", "Post", "Delete", "Put" ],
+        "UpstreamSchema": "http",
+        "RateLimitOptions": {
+          "ClientWhitelist": [],
+          "EnableRateLimiting": true,
+          "Period": "1s",
+          "PeriodTimespan": 1,
+          "Limit": 10
+        }
   ],
   "GlobalConfiguration": {
     "BaseUrl": "http://gateway.api",

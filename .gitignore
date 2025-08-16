@@ -425,3 +425,5 @@ BrewCloud/Services/Vet/BrewCloud.Vet.Api/BrewCloud.Vet.Api/appsettings.Developme
 /Services/Account/BrewCloud.Account/appsettings.Local.json
 /Services/Account/BrewCloud.Account/appsettings.Local.json
 /Services/Gym/BrewCloud.Gym.Api/appsettings.Local.json
+/Services/Hubs/BrewCloud.Hubs.Api/appsettings.Local.json
+/Services/AppointmentMan/BrewCloud.AppointmentMan.Api/appsettings.Local.json

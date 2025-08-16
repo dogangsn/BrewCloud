@@ -48,6 +48,16 @@ services:
         build:
             context: .
             dockerfile: Services/Mobile/BrewCloud.Mobile.Api/Dockerfile
+    gym.api:
+        image: gym_api_image
+        build:
+            context: .
+            dockerfile: Services/Gym/BrewCloud.Gym.Api/Dockerfile
+    hubs.api:
+        image: hubs_api_image
+        build:
+            context: .
+            dockerfile: Services/Hubs/BrewCloud.Hubs.Api/Dockerfile
 
 volumes:
   identitydb_volume:

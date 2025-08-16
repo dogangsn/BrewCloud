@@ -111,6 +111,22 @@ services:
             - ConnectionStrings:DefaultConnection=Server=mssql-172240-0.cloudclusters.net,10023; Database=vet-5cdb0c05-0cc5-4bef-b28d-d27cc5b56017;User Id=vet;Password=123654Dg
         ports:
             - "5014:80" 
+    gym.api:
+        container_name: gym.api
+        restart: on-failure
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Local
+            - ConnectionStrings:DefaultConnection=Server=mssql-172240-0.cloudclusters.net,10023; Database=vet-5cdb0c05-0cc5-4bef-b28d-d27cc5b56017;User Id=vet;Password=123654Dg
+        ports:
+            -  "5021:80"
+    hubs.api:
+        container_name: hubs.api
+        restart: on-failure
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Local
+        ports:
+            - "5020:80"
+  
 
             
 

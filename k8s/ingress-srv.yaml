@@ -1,0 +1,119 @@
+# apiVersşıbon: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: ingress-srv
+#   annotations:
+#     kubernetes.io/ingress.class: nginx
+#     nginx.ingress.kubernetes.io/use-regex: "true"
+# spec:
+#   rules:
+#   - host: example.com
+#     http:
+#       paths: acme.com
+#       http:
+#         paths:
+#           -path: /api/platforms
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: gateway-cluesterip-srv
+#                 port:
+#                   number: 80
+#           -path: /api/ingress
+#             pathType: Prefix
+#             backend:
+#               service:
+#                 name: gateway-cluesterip-srv
+#                 port:
+#                   number: 80        
+            
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: brewcloud-ingress
+  namespace: brewcloud
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: brewcloud.local
+      http:
+        paths:
+          - path: /gateway(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: gateway-api
+                port:
+                  number: 5000
+          - path: /account(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: account-api
+                port:
+                  number: 5012
+          - path: /chat(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: chat-api
+                port:
+                  number: 5017
+          - path: /gym(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: gym-api
+                port:
+                  number: 5021
+          - path: /hubs(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: hubs-api
+                port:
+                  number: 5020
+          - path: /vet(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: vet-api
+                port:
+                  number: 5013
+          - path: /mobile(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: mobile-api
+                port:
+                  number: 5014
+          - path: /integrations(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: integrations-api
+                port:
+                  number: 5015
+          - path: /identityserver(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: identityserver-api
+                port:
+                  number: 5001
+          - path: /mail(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: mail-api
+                port:
+                  number: 5018
+          - path: /farm(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: farm-api
+                port:
+                  number: 5016

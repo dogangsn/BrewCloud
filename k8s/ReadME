@@ -1,0 +1,23 @@
+# 1. Remove the broken repo file
+sudo rm /etc/apt/sources.list.d/kubernetes.list
+
+# 2. Create keyrings dir
+sudo mkdir -p -m 755 /etc/apt/keyrings
+
+# 3. Download the correct signing key (always from v1.31)
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.31/deb/Release.key \
+  | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+sudo chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
+# 4. Add the correct v1.33 repo
+echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] \
+https://pkgs.k8s.io/core:/stable:/v1.33/deb/ /" \
+| sudo tee /etc/apt/sources.list.d/kubernetes.list
+
+sudo chmod 644 /etc/apt/sources.list.d/kubernetes.list
+
+# 5. Update and install
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
